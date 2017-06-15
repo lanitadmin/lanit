@@ -1,0 +1,281 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.org/schema/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:a4j="http://richfaces.org/a4j">
+
+    <style type="text/css">
+        .value {
+            float: none;
+        }
+    </style>
+    <!-- Служит для выполнения первого запроса при загрузки страницы -->
+    #{myTaskAction.updateTasks()}
+
+    <!-- <s:link value="Старая страница" action="/member/myTasksOld.xhtml"></s:link> -->
+    <br />
+    <br />
+    <!-- <h:outputScript name="js/register-filter.js" /> -->
+    <h:outputScript name="js/jquery.register-filter.js" />
+    <h:outputScript name="js/json2.js" />
+    <h:outputScript name="js/jquery.select2/select2.js" />
+    <h:outputScript name="js/jquery.select2/select2_locale_ru.js" />
+    <!-- <script type="text/javascript" src="../js/registry-filter.js"></script> -->
+    <h:outputText id="filterBy" value="Фильтровать задачи по" />
+    <br />
+    <h:selectOneMenu id="add_filter_select">
+        <f:selectItem itemLabel="" itemValue="" />
+        <f:selectItems value="#{myTaskAction.filters}" var="_filter"
+                       itemValue="#{_filter.code}" itemLabel="#{_filter.label}" />
+    </h:selectOneMenu>
+    <h:commandButton id="add_filter_btn" value="Добавить фильтр" />
+    <br />
+    <br />
+    <h:form id="filter-form">
+        <h:commandLink class="filterActionLinks" style="margin-right:20px;"
+                       onclick="if ($('#filters-table').size() > 0) {
+                                    $('.load-filter-container').hide();
+                                    $('.save-filter-values').prop('disabled', $('.save-filter-values-input').val().length == 0);
+                                    $('.save-filter-container').toggle('slow');
+                                }
+                                return false;">
+            <h:graphicImage url="/img/new/mytask/save-filters.png" />
+            <h:outputText value="Сохранить настройки фильтрации" />
+        </h:commandLink>
+        <h:commandLink class="filterActionLinks"
+                       onclick="$('.save-filter-container').hide();
+                                $('.load-filter-container').toggle('slow');
+                                return false;">
+            <h:graphicImage url="/img/new/mytask/load-filters.png" />
+            <h:outputText value="Загрузить настройки фильтрации" />
+        </h:commandLink>
+        <h:outputText value="(#{myTaskAction.myFilters.size()})" />
+        <br />
+        <br />
+        <s:div styleClass="save-filter-container" style="display:none;">
+            <h:inputText class="save-filter-values-input"
+                         value="#{myTaskAction.filterName}"
+                         onkeyup="$('.save-filter-values').prop('disabled', $(this).val().length == 0);
+                                        "
+                         style="width: 300px; vertical-align:middle;" />
+            <h:commandButton action="#{myTaskAction.saveFilter}"
+                             styleClass="save-filter-values" style="vertical-align:middle;"
+                             onclick="$registerFilter.serialize();" value="Сохранить" />
+        </s:div>
+        <s:div styleClass="load-filter-container" style="display:none;">
+            <h:selectOneMenu value="#{myTaskAction.selectedFilterSettings}"
+                             style="width: 300px; vertical-align:middle;" onchange="$(this).val() != '' ? $('#filter-form\\:deleteFilter').show() : $('#filter-form\\:deleteFilter').hide();">
+                <f:selectItem itemLabel="[Не выбрано]" itemValue="" />
+                <f:selectItems value="#{myTaskAction.myFilters}" var="_myFilter"
+                               itemValue="#{_myFilter.id}" itemLabel="#{_myFilter.name}" />
+            </h:selectOneMenu>
+            <h:commandButton action="#{myTaskAction.selectFilterSettings}"
+                             style="vertical-align:middle;" class="filterActionLinks"
+                             onclick="$registerFilter.serialize();" value="Загрузить" />
+            <h:commandButton id="deleteFilter" action="#{myTaskAction.removeSelectedFilter}"
+                             style="vertical-align:middle; display: #{empty myTaskAction.selectedFilterSettings ? 'none' : ''};" styleClass="filterActionLinks"
+                             onclick="if (!window.confirm('Вы действительно хотите удалить сохраненный ранее фильтр?')) {
+                                            return false;
+                                        } else {
+                                            $registerFilter.serialize();
+                                        }" value="Удалить" />
+        </s:div>
+        <table id="filters-table" />
+        <h:inputHidden id="filter-values"
+                       value="#{myTaskAction.jsonFilter.selectedFilters}" />
+        <h:commandLink class="apply-filter-values" value="Применить"
+                       action="#{myTaskAction.applyFilterValues}"
+                       onclick="$registerFilter.serialize();" />
+        <h:commandLink class="clear-filter-values" value="Очистить"
+                       style="margin-left: 10px;"
+                       onclick="$registerFilter.clear();
+                                return false;" />
+        <br />
+        <br />
+        <br />
+        <a4j:commandButton value="Обработать запросы на простановку ЭП" oncomplete="#{rich:component('signTasksList')}.show(); return false;" render="signTasksListGroup" limitRender="true"
+                           execute="@this" action="#{signTaskList.setCreateList(true)}"/>
+        <br />
+        <br />
+        <br />
+                <!-- <a4j:commandLink value="Применить" action="#{myTaskAction.applyFilterValues()}" onclick="$registerFilter.serialize();" render="resultForm" /> -->
+    </h:form>
+    <h:form id="resultForm">
+        <s:button view="/bpms/sendToControl.xhtml"
+                  value="Отправить контролеру"
+                  rendered="#{false and (appSettMap.get('mass_distrib_cases') == '1' and s:hasPermission('Страница./bpms/sendToControl.xhtml','просмотр'))}">
+        </s:button>
+        <rich:dataTable id="resultTable" styleClass="richTableStyle"
+                        rowClasses="even-row, odd-row" rows="#{myTaskAction.maxRowCount}"
+                        var="_task" style="margin-top:20px; " rowKeyVar="rVar"
+                        value="#{myTaskAction.tasks}">
+            <c:forEach items="#{myTaskAction.visibleFields}" varStatus="iter"
+                       var="field" id="fieldColumns">
+                <rich:column
+                    style="#{(not empty _task[iter.index]) ? tableRowStyle.getStyle(field.name, _task[iter.index]): '' }">
+                    <f:facet name="header">
+                        <s:div>
+                            <h:outputText value="#{field.caption} " />
+                            <a4j:commandLink
+                                rendered="#{field.name == 'create' or field.name == 'started' or field.name == 'limit'}"
+                                action="#{myTaskAction.setParamsOrder(field.name)}"
+                                value="#{myTaskAction.orderType == 'asc' ? messages.down : 
+                                         ( myTaskAction.orderType=='desc' ? messages.up : messages.up_down)}"
+                                render="resultTable,navigation" />
+                        </s:div>
+                    </f:facet>
+                    <s:div>
+
+                        <c:choose>
+
+                            <c:when test="#{field.name.equals('statusicon')}">
+                                <h:commandLink id="statusIconLink">
+                                    <h:graphicImage value="/img/my/do_arr.png"
+                                                    rendered="#{_task[iter.index].equals('open.not_running.not_started')}" />
+                                    <h:graphicImage value="/img/silk/user.png"
+                                                    rendered="#{_task[iter.index].equals('open.running')}" />
+                                </h:commandLink>
+                                <rich:tooltip target="statusIconLink" showDelay="500"
+                                              value="#{_task[5].equals('open.running') ? 'Вы выполняете это задание. Продолжить?' : 'Вам назначено это задание. Приступить?'}" />
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('create')}">
+                                <h:outputText value="#{_task[iter.index]}">
+                                    <f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss"
+                                                       timeZone="#{userPrefs.timeZone}" />
+                                </h:outputText>
+
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('started')}">
+                                <h:outputText value="#{_task[iter.index]}">Количество дней до окончания срока исполнения задачи 
+                                    <f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss"
+                                                       timeZone="#{userPrefs.timeZone}" />
+                                </h:outputText>
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('proc_ident.lastSendSoap')}">
+                                <h:outputText value="#{_task[iter.index]}">
+                                    <f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss"
+                                                       timeZone="#{userPrefs.timeZone}" />
+                                </h:outputText>
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('process')}">
+                                <h:outputText value="#{_task[iter.index]}" />
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('docPackageComment')}">
+                                <h:outputText value="#{_task[iter.index]}" />
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('act')}">
+                                <h:commandLink
+                                    value="#{_task[iter.index].substring(_task[iter.index].indexOf('@')+1)}"
+                                    action="#{userPrefs.goOpenActivity(_task[iter.index].substring(0,_task[iter.index].indexOf('@')))}"
+                                    id="openWorkItemLink_#{rVar}" />
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('status')}">
+                                <h:outputText value="#{messages[_task[iter.index]]}" />
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('proc_ident.coreStatusSoap')}">
+                                <h:outputText value="#{_task[iter.index]}" />
+                                <!--
+                                <h:outputText value="Ошибка запроса" rendered="#{_task[iter.index]==1}"/>
+                                <h:outputText value="Ожидание ответа" rendered="#{_task[iter.index]==2}"/>
+                                <h:outputText value="Запрос выполнен" rendered="#{_task[iter.index]==3}"/>
+                                -->
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('limit')}">
+                                <h:outputText value="#{_task[iter.index]}"
+                                              style="#{tableRowStyle.getStyle(field.name, _task[iter.index])}">
+                                    <f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss"
+                                                       timeZone="#{userPrefs.timeZone}" />
+                                </h:outputText>
+                            </c:when>
+
+                            <c:when test="#{field.name.equals('test')}">
+                                <h:selectBooleanCheckbox value="#{_task[iter.index]}" disabled="true" />
+                            </c:when>
+                            <c:when test="#{field.name.equals('test')}">  
+                                <h:selectBooleanCheckbox value="#{_task[iter.index]}" disabled="true" />  
+                            </c:when>  
+                            <c:otherwise>
+                                <h:outputText
+                                    value="#{myTaskAction.getProcVaribleCaption(field.name,_task[iter.index],_task)}" />
+                            </c:otherwise>
+
+                        </c:choose>
+                    </s:div>
+                </rich:column>
+            </c:forEach>
+        </rich:dataTable>
+
+        <s:div id="navigation" style="width:100%; padding:0px;">
+            <ui:include src="/layout/datascroller.xhtml">
+                <ui:param name="been" value="#{myTaskAction}" />
+                <ui:param name="dataScroll" value="#{myTaskAction.dataScroll}" />
+                <ui:param name="idForm" value="resultForm" />
+                <ui:param name="updateElements" value="resultTable" />
+            </ui:include>
+        </s:div>
+        <s:div style="padding: 2px;">
+            <h:outputLink value="/rss/mytasks">
+                <h:graphicImage value="/img/silk/rss.png" />
+            </h:outputLink>
+        </s:div>
+
+        <h:commandLink styleClass="linkButton"
+                       action="#{myTaskAction.openSetting()}" style="margin-top:5px"
+                       value="Настроить" />
+
+    </h:form>
+    <h:outputText id="operatorByField"
+                  value="#{myTaskAction.jsonFilter.fieldOperators}"
+                  style="display:none;" />
+    <h:outputText id="operatorByType"
+                  value="#{myTaskAction.jsonFilter.typeOperators}" style="display:none;" />
+    <h:outputText id="availableFilters"
+                  value="#{myTaskAction.jsonFilter.availableFilters}"
+                  style="display:none;" />
+    <h:outputText id="operatorLabels"
+                  value="#{myTaskAction.jsonFilter.operatorLabels}"
+                  style="display:none;" />
+    <!-- <h:outputText id="appliedFilterValues"
+            value="#{myTaskAction.appliedFilterValues}"
+            style="display:none;" /> -->
+    <script type="text/javascript">
+        var filterValues = $("#filter-form\\:filter-values").val();
+        if (filterValues == '') {
+            filterValues = '{}';
+        }
+        var data = {
+            fieldOperators: jQuery.parseJSON($("#operatorByField").text()),
+            typeOperators: jQuery.parseJSON($("#operatorByType").text()),
+            operatorLabels: jQuery.parseJSON($("#operatorLabels").text()),
+            filters: jQuery.parseJSON($("#availableFilters").text()),
+            filterValues: jQuery.parseJSON(filterValues)
+        };
+        var $registerFilter = $("#filters-table").registerfilter(data, {
+            filterValuesHiddenId: "filter-form:filter-values"
+        });
+    </script>
+
+    <rich:popupPanel autosized="false" header="Запросы на простановку ЭП"  id="signTasksList" width="1000" height="700" >
+        <f:facet name="controls">
+            <h:graphicImage value="/img/close.png" id="hidelinkSignTasks"
+                            styleClass="hidelink"
+                            onclick="#{rich:component('signTasksList')}.hide();
+                return false;" />
+        </f:facet>
+        <ui:include src="/member/signTasks.xhtml"/>
+
+    </rich:popupPanel>
+
+</ui:composition>

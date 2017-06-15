@@ -1,0 +1,137 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:theme="http://jboss.com/products/seam/theme"
+                xmlns:s="http://jboss.org/schema/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:a4j="http://richfaces.org/a4j" >
+
+<h:form>
+<h:panelGroup id="signTasksListGroup">
+    <rich:panel rendered="#{not empty signTaskList.getContextList()}" id="soapRequestList">
+       <rich:panel  id= "soapRequestTable">
+           <a4j:commandLink value="Обновить список запросов" action="#{signTaskList.fillRequestSet()}" render="soapRequestList"/>
+        <a4j:repeat value="#{signTaskList.getRequestGroupList()}" varStatus="iter" var="group">
+            <rich:collapsiblePanel header="#{group}" expanded="false" switchType="client">
+
+                <rich:dataTable value="#{signTaskList.getContextByGroup(group)}" var="item">
+                    <rich:column>
+                        <a4j:region>
+                        <h:selectBooleanCheckbox value="#{item.selected}" disabled="#{item.value.uid==null}">
+                                <a4j:ajax event="change" execute="@region"/>
+                            </h:selectBooleanCheckbox>
+                        </a4j:region>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Дата запроса"/>
+                        </f:facet>
+                        <h:outputText value="#{item.value.runTime}"/>
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="UID запроса"/>
+                        </f:facet>
+                        <h:commandLink
+                            value="#{item.value.uid}"
+                            action="#{userPrefs.goOpenActivity(item.value.activityId)}"
+                            id="openWorkItemLink_#{rVar}" />
+                    </rich:column>
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Подписан или нет"/>
+                        </f:facet>
+                        <h:outputText value="#{!item.value.sign ? 'Подписан' : 'Ожидает подписи'}"  />
+                    </rich:column>
+                    
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Заявитель"/>
+                        </f:facet>
+                        <h:outputText value="#{item.value.applicantName}"/>
+                    </rich:column>
+                    
+                    <rich:column>
+                        <f:facet name="header">
+                            <h:outputText value="Услуга"/>
+                        </f:facet>
+                        <h:outputText value="#{item.value.serviceName}"/>
+                    </rich:column>
+                    
+                    <rich:column>
+                        <h:outputText value="#{item.value.infomsg}"/>
+                    </rich:column>
+                </rich:dataTable>
+            </rich:collapsiblePanel>
+        </a4j:repeat>
+        </rich:panel>
+    <s:div id="groupSignAppletPanel">
+    <h:panelGrid rendered="#{signTaskList.showApplet}">
+        <a4j:region>
+            <a4j:jsFunction name="sendSignatureFile" execute="@region"
+                            action="#{signTaskList.updateSignatureNew()}"
+                            oncomplete="document.fileSign.uploadedCallback()"
+                    render="soapRequestTable">
+                <a4j:param name="param1"
+                           assignTo="#{signTaskList.uid}" />
+                <a4j:param name="param2"
+                           assignTo="#{signTaskList.text}" />
+                <a4j:param name="param3"
+                           assignTo="#{signTaskList.begin}" />
+                <a4j:param name="param4"
+                           assignTo="#{signTaskList.end}" />
+                <a4j:param name="param5"
+                           assignTo="#{signTaskList.error}" />
+            </a4j:jsFunction>
+
+
+            <a4j:jsFunction name="renderApplet"
+                            action="#{signTaskList.updateRequestList()}"
+                            render="soapRequestList,soapRequestList2,groupSignAppletPanel"/>
+
+        </a4j:region>
+        <s:div id="scriptSignDocsParam">
+            <script type="text/javascript">
+                var jcrDocId = '#{signTaskList.tmpuids}';
+                var downloadUrl = "#{facesContext.externalContext.requestContextPath}/csresource/docpackdownload/";
+            </script>
+        </s:div>
+        <h:panelGroup>
+            <applet style="z-index:0;" code="org.cp.signtext.SignFileExt.class"
+                    archive="#{facesContext.externalContext.requestContextPath}/public/crypto-applet.jar"
+                    name="fileSign" width="600px" height="300px">
+                <param name="func" value="sendSignatureFile"/>
+                <param name="multiFile" value="3"/>
+                <param name="jcrDocId" value="jcrDocId"/>
+                <param name="downloadUrl" value="downloadUrl"/>
+                <param name = "renderFunc" value="renderApplet"/>
+            </applet>
+        </h:panelGroup>
+    </h:panelGrid>
+    </s:div>
+
+        <s:div styleClass="actionButtonsSignTasks">
+            <a4j:commandButton value="Очистить" action="#{signTaskList.clearSelected()}" render="soapRequestList,soapRequestList2,groupSignAppletPanel" limitRender="true"/>
+            <a4j:commandButton value="Отметить все" action="#{signTaskList.selectAll()}" render="soapRequestList,soapRequestList2,groupSignAppletPanel" limitRender="true"/>
+            <a4j:commandButton value="Подписать выбранные" id="signSelectedBtn" rendered="#{!signTaskList.showApplet}" action="#{signTaskList.prepareGroupSigner()}" render="groupSignAppletPanel,actionButtonsSignTasks">
+            </a4j:commandButton>
+            <h:commandButton value="Закрыть">
+                <a4j:ajax event="click" oncomplete="#{rich:component('signTasksList')}.hide(); return false;"/>
+            </h:commandButton>
+        </s:div>
+    </rich:panel>
+
+    <rich:panel rendered="#{empty signTaskList.getContextList()}" id="soapRequestList2">
+        <h:outputText value="Нет запросов, ожидающих подписания!"/>
+        <br></br>
+        <h:commandButton value="Закрыть">
+            <a4j:ajax event="click" oncomplete="#{rich:component('signTasksList')}.hide(); return false;"/>
+        </h:commandButton>
+            </rich:panel>
+</h:panelGroup>            
+</h:form>
+</ui:composition>

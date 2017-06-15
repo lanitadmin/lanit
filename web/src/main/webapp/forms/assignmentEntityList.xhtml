@@ -1,0 +1,399 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:s="http://jboss.org/schema/seam/taglib"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:rich="http://richfaces.org/rich"
+                xmlns:c="http://java.sun.com/jsp/jstl/core"
+                xmlns:util="http://java.sun.com/jsf/composite/util"
+                xmlns:a4j="http://richfaces.org/a4j">
+
+	<script type="text/javascript">
+		jQuery().ready(function(){		
+			jQuery("body").keypress(function(event) {
+			  if ( event.which == 13 ) {
+			     search();   
+			     event.preventDefault();
+			   }
+			});	
+		})
+	</script>
+
+	<h:form id="searchForm" >
+	
+		<a4j:jsFunction name ="search" action="#{assignmentEntityList.refresh}" render="resultTable,navigation" execute="@form"/>
+			
+		
+		<rich:collapsiblePanel id="assignmentEntityListFilterFrom" header="Сохраненные фильтры" switchType="client" expanded="true"
+			rendered="#{not empty assignmentEntityList.filters}">
+
+			<h:panelGrid columns="2">
+
+				<c:forEach var="filter" items="#{assignmentEntityList.filters}">
+					<a4j:commandLink action="#{assignmentEntityList.deleteFilter(filter)}" render="searchForm" >
+						<h:graphicImage  value="/img/delete.gif" styleClass="messages-control"/>
+					</a4j:commandLink>
+					<a4j:commandLink value="#{filter.name}" action="#{assignmentEntityList.applyFilter(filter)}" render="searchForm"/>
+				</c:forEach>
+
+			</h:panelGrid>
+		</rich:collapsiblePanel>
+
+		<rich:collapsiblePanel id="assignmentEntityListSearchForm" header="#{messages['search']}"
+			 expanded="true" switchType="ajax">
+			 <!-- opened="#{assignmentEntityList.viewOpenSearch}" -->
+			
+			<rich:collapsiblePanel header="Атрибуты поиска" styleClass="inner"
+                                   expanded="#{assignmentEntityList.isSearchAttrsPanelExpanded}"
+                                   switchType="ajax">
+			<script type="text/javascript">
+				jQuery().ready(function(){
+	         		jQuery(".rf-cal-inp").inputmask("d.m.y");
+				});	
+	        </script>
+
+			<h:panelGrid columns="1">
+			<a4j:region>
+				<s:decorate id="searchPackage" template="/layout/display.xhtml">
+					<ui:define name="label">Пакет</ui:define>
+					<h:selectOneMenu style="width:300px" value="#{assignmentEntityList.searchInstance.packageId}">
+						<f:selectItem itemLabel="[не выбрано]"/>
+						<f:selectItems value="#{assignmentEntityList.packageSelectList}" />
+						<a4j:ajax listener="#{assignmentEntityList.changePack}" event="change" limitRender="true" render="searchProcess,searchActivityDef" />
+					</h:selectOneMenu>
+<!--  				<h:panelGroup id="searchPackageVer">
+						<h:selectOneMenu style="width:200px"
+							value="#{assignmentEntityList.searchInstance.packageVersion}"
+							rendered="#{not empty assignmentEntityList.searchInstance.packageId}">
+							<f:selectItem itemLabel="[не выбрано]"/>
+							<f:selectItems value="#{assignmentEntityList.packageVersionSelectList}" />
+							<a4j:ajax event="change" limitRender="true"
+								render="searchProcess,searchActivityDef" />
+						</h:selectOneMenu>
+					</h:panelGroup> -->
+				</s:decorate>
+	
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Процесс</ui:define>
+					<h:selectOneMenu id="searchProcess" style="width:500px"
+						value="#{assignmentEntityList.searchInstance.processId}">
+						<f:selectItem itemLabel="[не выбрано]"/>
+						<f:selectItems value="#{assignmentEntityList.processSelectList}" />
+						<a4j:ajax event="change" listener="#{assignmentEntityList.changeProc}" render="searchActivityDef" limitRender="true"/>
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Шаг</ui:define>
+					<h:selectOneMenu id="searchActivityDef" style="width:500px"
+						value="#{assignmentEntityList.searchInstance.activityDef}">
+						<f:selectItem itemLabel="[не выбрано]"/>
+						<f:selectItems value="#{assignmentEntityList.activityDefSelectList}" />
+                        <a4j:ajax render="caseForRaspred" listener="#{assignmentEntityList.activityDefChanged}" event="valueChange"  limitRender="true" execute="@this"/>
+					</h:selectOneMenu>
+				</s:decorate>
+
+			</a4j:region>
+			<s:decorate template="/layout/display.xhtml">
+				<ui:define name="label">Создания</ui:define>
+				<h:outputText value=" с " />
+				<rich:calendar value="#{assignmentEntityList.searchInstance.createFrom}" buttonIcon="/img/my/calendar.png"
+					datePattern="dd.MM.yyyy" enableManualInput="true" />
+				<h:outputText value=" по " />
+				<rich:calendar value="#{assignmentEntityList.searchInstance.createTo}" buttonIcon="/img/my/calendar.png"
+					datePattern="dd.MM.yyyy" enableManualInput="true" />
+			</s:decorate>
+
+			<s:decorate template="/layout/display.xhtml">
+				<ui:define name="label">Принято к исполнению</ui:define>
+				<h:outputText value=" с " />
+				<rich:calendar value="#{assignmentEntityList.searchInstance.startedFrom}" buttonIcon="/img/my/calendar.png"
+					datePattern="dd.MM.yyyy" enableManualInput="true" />
+				<h:outputText value=" по " />
+				<rich:calendar value="#{assignmentEntityList.searchInstance.startedTo}" buttonIcon="/img/my/calendar.png"
+					datePattern="dd.MM.yyyy" enableManualInput="true" />
+			</s:decorate>
+
+			<s:decorate template="/layout/display.xhtml">
+				<ui:define name="label">Срок исполнения</ui:define>
+				<h:outputText value=" с " />
+				<rich:calendar value="#{assignmentEntityList.searchInstance.limitFrom}" buttonIcon="/img/my/calendar.png"
+					datePattern="dd.MM.yyyy" enableManualInput="true" id="test3"/>
+				<h:outputText value=" по " />
+				
+				
+				<rich:calendar value="#{assignmentEntityList.searchInstance.limitTo}" buttonIcon="/img/my/calendar.png"
+							   oncomplete="changeLimitToValue()"
+					           datePattern="dd.MM.yyyy"
+                               enableManualInput="true"
+                               id="limitToCalender" />
+                <a4j:jsFunction name="changeLimitToValue"
+                                action="#{assignmentEntityList.updateDeadline(assignmentEntityList.searchInstance.limitTo)}"
+                                render="countDaysBeforeDeadline"/>
+			</s:decorate>
+
+			<s:decorate template="/layout/display.xhtml">
+                <ui:define name="label">Количество дней до окончания срока исполнения задачи</ui:define>
+                <h:panelGrid columns="2">
+                <h:selectBooleanCheckbox value="#{assignmentEntityList.searchInstance.useDays}" id = "checkCountDay">
+                	<a4j:ajax listener="#{assignmentEntityList.caseForUseDays}" event="valueChange" execute="@this"/>
+                </h:selectBooleanCheckbox>
+	                <rich:inputNumberSpinner value="#{assignmentEntityList.searchInstance.countDaysBeforeDeadline}"
+	                                         id="countDaysBeforeDeadline"	                                         
+	                                         minValue="0"
+	                                         maxValue="100"	                                         
+	                                         style="width: 100px;">	
+	                  <a4j:ajax event="change" listener="#{assignmentEntityList.updateDeadline(assignmentEntityList.searchInstance.countDaysBeforeDeadline)}" render="limitToCalender"/>                                         
+	                </rich:inputNumberSpinner>
+                </h:panelGrid>
+            </s:decorate>			
+
+			<s:div id = "sourceTask">
+	            <s:decorate template="/layout/display.xhtml" rendered="#{!assignmentEntityList.searchInstance.inputRequest or assignmentEntityList.searchInstance.inputRequest==null}">
+						<ui:define name="label">Источник задачи</ui:define>
+						<h:selectOneMenu id="searchExtSys" style="width:500px"
+							value="#{assignmentEntityList.searchInstance.externalSystem}">
+							<f:selectItems value="#{assignmentEntityList.extSystemSelectList}" />
+							<a4j:ajax event="change" render="searchActivityDef" limitRender="true"/>
+						</h:selectOneMenu>
+			    </s:decorate>
+		    </s:div>
+		    
+		    <!-- эта настройка исключительно для глухих аулов Дагестана, для которых настройка 'Источник задачи' слишком сложная(тикет #14895) -->
+		    <s:decorate template="/layout/edit.xhtml" id="dagestanFishka" rendered = "#{appSettMap.get('region_num') == '05'}">
+			 	<ui:define name="label">Входящие запросы</ui:define>
+			 	<h:selectBooleanCheckbox id ="inputRequest" value="#{assignmentEntityList.searchInstance.inputRequest}">
+			 		<a4j:ajax event = "change" render = "sourceTask"/>
+			 	</h:selectBooleanCheckbox>
+			</s:decorate>
+		    
+		    <s:decorate template="/layout/edit.xhtml" id="testZayav">
+			 	<ui:define name="label">Отображать тестовые дела</ui:define>
+			 	<h:selectBooleanCheckbox id ="testDelo" value="#{assignmentEntityList.searchInstance.showTestZayavit}"/>
+			</s:decorate>
+
+		    <s:decorate template="/layout/edit.xhtml" id="myTasks">
+			 	<ui:define name="label">Отображать только мои задачи</ui:define>
+			 	<h:selectBooleanCheckbox id ="myDelo" value="#{assignmentEntityList.searchInstance.showMyTasks}"/>
+			</s:decorate>
+
+            <s:decorate template="/layout/edit.xhtml" rendered="#{appSettMap.get('use_case_for_raspred_filter') == '1'}">
+                <ui:define name="label">Отображать дела на распределении</ui:define>
+                <h:selectBooleanCheckbox id ="caseForRaspred" value="#{assignmentEntityList.searchInstance.caseForRaspred}"
+                                         disabled="#{assignmentEntityList.searchInstance.activityDef.contains('chooseResp1')}">
+                    <a4j:ajax render="searchActivityDef" listener="#{assignmentEntityList.caseForRaspredChanged}" event="valueChange" execute="@this"/>
+                </h:selectBooleanCheckbox>
+            </s:decorate>
+
+            <s:decorate template="/layout/display.xhtml">
+                <ui:define name="label">Атрибут в КД</ui:define>
+                <h:inputText value="#{assignmentEntityList.searchInstance.attrDoc}"/>
+            </s:decorate>
+
+            <s:decorate template="/layout/display.xhtml">
+				<ui:define name="label">Статус запроса</ui:define>
+				<h:selectOneMenu
+					value="#{assignmentEntityList.searchInstance.typeSoap}">
+					<f:selectItem itemLabel="[Не выбрано]" itemValue=""/>
+					<f:selectItems value="#{assignmentEntityList.searchInstance.listTypeSoap}" 
+						var="var" itemValue="#{var}" itemLabel="#{var.longName}"/>
+				</h:selectOneMenu>
+		    </s:decorate>
+
+			</h:panelGrid>
+            </rich:collapsiblePanel>
+			
+			<rich:collapsiblePanel header="Дополнительные атрибуты" styleClass="inner" rendered="#{not empty assignmentEntityList.visibleIdentitiesFull}"
+                                   expanded="#{assignmentEntityList.isAddAttrsPanelExpanded}"
+					switchType="ajax">
+					
+					<h:panelGrid columns="1">
+						<c:forEach var="ident" items="#{assignmentEntityList.visibleIdentitiesFull}">
+						
+							<s:decorate template="/layout/display.xhtml" id="#{ident.key}">
+								<ui:define name="label">#{ident.value.name}</ui:define>
+	
+								<h:inputText value="#{assignmentEntityList.getSearchInstance().identities[ident.key]}" 
+									id="#{ident.key}InputText" rendered="#{!ident.value.getCard() and ident.value.getVaribleType().toLowerCase() != 'datetime' and ident.value.getVaribleType().toLowerCase() != 'date'}"/>
+								
+								<rich:calendar id="#{ident.key}ParamDate" value="#{assignmentEntityList.getSearchInstance().identities[ident.key]}"
+									buttonIcon="/img/my/calendar.png"
+									datePattern="dd.MM.yyyy" enableManualInput="true" 
+									rendered="#{!ident.value.getCard() and (ident.value.getVaribleType().toLowerCase() == 'datetime' or ident.value.getVaribleType().toLowerCase() == 'date')}"/>
+
+								<util:autoComplete rendered="#{ident.value.getCard()}" entityHome="#{assignmentEntityList.visibleIdentitiesFull[ident.key]}"
+									key="#{assignmentEntityList.getSearchInstance().identities[ident.key]}" label="#{assignmentEntityList.getSearchInstance().identitiesLabel[ident.key]}"
+									search="#{value.getSuggestion}"
+									var="item" itemValue="#{item.value}" itemLabel="#{item.label}">
+								</util:autoComplete>
+	
+							</s:decorate>
+						
+						</c:forEach>
+					</h:panelGrid>
+
+				</rich:collapsiblePanel>
+
+
+			<div style="clear: both" />
+
+			<s:div styleClass="actionButtons">
+				<a4j:commandButton value="Очистить" action="#{assignmentEntityList.clearSearchForm}" render="searchForm" execute="@this"/>
+
+				<a4j:commandButton value="#{messages['search']}" action="#{assignmentEntityList.refresh}" render="resultTable,navigation" limitRender="true"/>
+
+                <a4j:commandButton value="Обработать запросы на простановку ЭЦП" oncomplete="#{rich:component('signTasksList')}.show(); return false;" render="signTasksListGroup" limitRender="true"
+                	execute="@this" action="#{signTaskList.setCreateList(true)}"
+                	rendered="#{appSettDefault.get('assignment_sign_tasks_list_group') != 1 or s:hasPermission('Мои_задачи','Вывод_кнопки_Обработать запросы на простановку ЭЦП')}"/>
+
+				<h:column rendered="false">
+					<h:inputText id="newFilterName" value="#{assignmentEntityList.newFilterName}" />
+					<a4j:commandButton value="Сохранить фильтр" action="#{assignmentEntityList.addFilter()}"
+						render="searchForm" />
+				</h:column>
+
+			</s:div>
+
+		</rich:collapsiblePanel>
+		
+	</h:form>
+		
+	<h:form id="resultForm">
+		
+		<s:button view="/bpms/sendToControl.xhtml" value="Отправить контролеру" rendered="#{false and (appSettMap.get('mass_distrib_cases') == '1' and s:hasPermission('Страница./bpms/sendToControl.xhtml','просмотр'))}">	
+		</s:button>
+
+		<rich:dataTable id="resultTable" styleClass="richTableStyle" rowClasses="even-row, odd-row" rows="25" var="result" style="margin-top:20px; " rowKeyVar="rVar"
+			value="#{assignmentEntityList.resultList2}">
+
+ 			<c:forEach items="#{assignmentEntityList.visibleFields}" varStatus="iter" var="field" id="fieldColumns">
+ 				<rich:column style="#{not empty result[iter.index] ? tableRowStyle.getStyle(field.name, result[iter.index]): '' }">
+				<f:facet name="header">
+				 	<s:div>
+				      <h:outputText value="#{field.caption} "/>         
+<!--                   	<s:link -->
+<!--                   		styleClass="columnHeader" -->
+<!--								value="#{assignmentEntityList.orderType=='asc' ? messages.down : -->
+<!--								        ( assignmentEntityList.orderType=='desc' ? messages.up : messages.up_down)}">			        -->
+<!--						<f:param name="order" -->
+<!--								value="#{assignmentEntityList.orderType=='asc' ? 'desc':'asc'}" />-->
+<!--						<f:param name="fieldName" -->
+<!--						        value="#{field.name}" />-->
+<!--					</s:link> -->
+					<a4j:commandLink rendered="#{field.name == 'create' or field.name == 'limit'}" action="#{assignmentEntityList.setParamsOrder(field.name)}" value="#{assignmentEntityList.searchInstance.orderType=='asc' ? messages.down : 
+								        ( assignmentEntityList.searchInstance.orderType=='desc' ? messages.up : messages.up_down)}" render="resultTable,navigation"/>
+					</s:div>						
+				</f:facet>
+				<s:div>
+				
+				<c:choose>
+
+					<c:when test="#{field.name.equals('statusicon')}">
+						<h:panelGrid id="statusIconImg">
+							<h:graphicImage value="/img/my/do_arr.png" rendered="#{result[iter.index].equals('open.not_running.not_started')}" />
+							<h:graphicImage value="/img/silk/user.png" rendered="#{result[iter.index].equals('open.running')}" />
+						</h:panelGrid>
+						<rich:tooltip target="statusIconImg" showDelay="500"
+							value="#{result[5].equals('open.running') ? 'Вы выполняете это задание. Продолжить?' : 'Вам назначено это задание. Приступить?'}" />
+					</c:when>
+
+					<c:when test="#{field.name.equals('create')}">
+						<h:outputText value="#{result[iter.index]}">
+							<f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss" timeZone="#{userPrefs.timeZone}" />
+						</h:outputText>
+
+					</c:when>
+
+					<c:when test="#{field.name.equals('started')}">
+						<h:outputText value="#{result[iter.index]}">Количество дней до окончания срока исполнения задачи 
+							<f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss" timeZone="#{userPrefs.timeZone}" />
+						</h:outputText>
+					</c:when>
+                    
+                    <c:when test="#{field.name.equals('proc_ident.lastSendSoap')}">
+						<h:outputText value="#{result[iter.index]}">
+							<f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss" timeZone="#{userPrefs.timeZone}" />
+						</h:outputText>
+					</c:when>
+
+                    <c:when test="#{field.name.equals('lastSendSoap')}">
+                        <h:outputText value="#{result[iter.index]}">
+                            <f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss" timeZone="#{userPrefs.timeZone}" />
+                        </h:outputText>
+                    </c:when>
+
+                    <c:when test="#{field.name.equals('proc_ident.coreStatusSoap')}">
+                        <h:outputText value="Ошибка запроса" rendered="#{result[iter.index]==1}"/>
+                        <h:outputText value="Ожидание ответа" rendered="#{result[iter.index]==2}"/>
+                        <h:outputText value="Запрос выполнен" rendered="#{result[iter.index]==3}"/>
+                    </c:when>
+
+                    <c:when test="#{field.name.equals('process')}">
+						<h:outputText value="#{result[iter.index]}" />
+					</c:when>
+
+					<c:when test="#{field.name.equals('act')}">
+						<h:commandLink value="#{result[iter.index].substring(result[iter.index].indexOf('@')+1)}"
+							action="#{assignmentEntityList.doing(result[iter.index].substring(0,result[iter.index].indexOf('@')))}" id="openWorkItemLink_#{rVar}" />
+					</c:when>
+
+					<c:when test="#{field.name.equals('status')}">
+						<h:outputText value="#{messages[result[iter.index]]}" />
+					</c:when>
+
+					<c:when test="#{field.name.equals('limit')}">
+						<h:outputText value="#{result[iter.index]}" style="#{not empty result[iter.index] ? tableRowStyle.getStyle(field.name, result[iter.index]): '' }">
+							<f:convertDateTime type="both" pattern="dd.MM.yyyy HH:mm:ss" timeZone="#{userPrefs.timeZone}" />
+						</h:outputText>
+					</c:when>
+
+					<c:when test="#{field.name.equals('test')}">
+						<h:selectBooleanCheckbox value="#{result[iter.index]}" disabled="true" />
+					</c:when>
+					
+					<c:when test="#{field.name.equals('docPackageComment')}">
+						<h:outputText value=""/>
+					</c:when>
+
+					<c:otherwise>
+						<h:outputText value="#{assignmentEntityList.getProcVaribleCaption(field.name,result[iter.index],result)}" />
+					</c:otherwise>
+					
+				</c:choose>
+				</s:div>
+				</rich:column>
+			</c:forEach>
+		</rich:dataTable>
+
+        <s:div id="navigation"
+               style="width:100%; padding:0px;">
+            <ui:include src="/layout/datascroller.xhtml">
+                <ui:param name="been" value="#{assignmentEntityList}" />
+                <ui:param name="dataScroll" value="#{assignmentEntityList.dataScroll}" />
+                <ui:param name="idForm" value="resultForm" />
+                <ui:param name="updateElements" value="resultTable" />
+            </ui:include>
+        </s:div>
+<!--    <s:div style="padding: 2px;">
+            <h:outputLink value="/rss/mytasks">
+                <h:graphicImage value="/img/silk/rss.png"/>
+            </h:outputLink>
+        </s:div> -->
+
+		<h:commandLink styleClass="linkButton" action="#{assignmentEntityList.openSetting()}" style="margin-top:5px" value="Настроить" />
+
+	</h:form>
+
+	<rich:popupPanel autosized="false" header="Запросы на простановку ЭЦП"  id="signTasksList" width="1000" height="700" >
+	    <f:facet name="controls">
+	        <h:graphicImage value="/img/close.png" id="hidelinkSignTasks"
+	                        styleClass="hidelink"
+	                        onclick="#{rich:component('signTasksList')}.hide(); return false;" />
+	    </f:facet>
+	    <ui:include src="/member/signTasks.xhtml"/>
+	
+	</rich:popupPanel>
+
+</ui:composition>

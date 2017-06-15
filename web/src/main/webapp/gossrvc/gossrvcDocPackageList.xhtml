@@ -1,0 +1,634 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:util="http://java.sun.com/jsf/composite/util"	
+	xmlns:a4j="http://richfaces.org/a4j" template="/layout/template.xhtml">
+
+	<ui:define name="title">
+	- Комплекты документов
+	</ui:define>
+
+	<ui:define name="body">
+        <style type="text/css">
+            .activity {
+                width: 100%;
+                height: 100%;
+            }
+            .actname {
+                width:45%;
+            }
+            .actuser {
+                width:45%;
+            }
+            .actdate {
+                width:10%;
+                text-align:center;
+            }
+        </style>
+        <script type="text/javascript">
+	        function checkAllPackDoc(element){
+	            var table = jQuery(element).parent().parent().parent().parent().parent().get(0);                 
+	            if (element.checked) {
+	                jQuery(table).find('input[type="checkbox"]').not('[disabled="disabled"]').attr("checked", true); 
+	            } else {
+	                jQuery(table).find('input[type="checkbox"]').not('[disabled="disabled"]').attr("checked", false);
+	            }
+	        }
+
+			function initFormSearch(){
+         		jQuery(".rf-cal-inp").unmask();
+         		jQuery(".rf-cal-inp").inputmask("d.m.y");
+                maskField('input[id$=snils]', '999-999-999 99');
+			}
+
+			jQuery().ready(function(){
+				initFormSearch();
+         		bindEnterSubmit();
+			});
+
+
+        </script>
+
+		<h:form id="searchForm">
+
+			<rich:panel>
+				<f:facet name="header">#{messages.menu_doc_packages}</f:facet>
+				<rich:collapsiblePanel id="searchPanel" styleClass="inner" header="#{messages['search']}" switchType="client">
+				  <h:panelGrid>
+
+					<s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">Номер комплекта документов</ui:define>
+						<h:inputText value="#{gossrvcDocPackageList.searchParameters['packNum']}"
+							size="20">
+							
+						</h:inputText>
+					</s:decorate>
+
+					<s:decorate template="/layout/display.xhtml">
+					   <ui:define name="label">Выбор услуги</ui:define>
+						<util:autoComplete key="#{gossrvcDocPackageList.searchParameters['serviceId']}" label="#{gossrvcDocPackageList.searchParameters['serviceId_label']}" id="suggestService"
+							search2="#{cardelementList.getSuggestion}" orderBy="cardElement.name"
+							var="item" itemValue="#{item.id}" itemLabel="#{item.name}" 
+							filter="cardElement.card.cardCode='SService' and [cardElementFieldValues].cardField.fieldName = 'ServiceType' and 
+							 (([cardElementFieldValues].fieldIntegerValue = null or [cardElementFieldValues].fieldIntegerValue = 0 ))"
+							maxResults="50" render="addAttrPnl">
+                            <a4j:ajax event="changeitem" listener="#{gossrvcDocPackageList.clearAddAttrsFilter()}"/>
+						</util:autoComplete>
+					</s:decorate>
+
+                    <s:decorate template="/layout/display.xhtml">
+                      <ui:define name="label">Выбор цели услуги</ui:define>
+                      <util:autoComplete key="#{gossrvcDocPackageList.searchParameters['docTypeId']}" label="#{gossrvcDocPackageList.searchParameters['docTypeId_label']}" id="suggestDocType"
+                          search="#{gossrvcDocPackageList.getGoalList}"
+                          var="item" itemValue="#{item.value}" itemLabel="#{item.label}"
+                                         maxResults="50" render="addAttrPnl">
+                        <a4j:ajax event="changeitem" listener="#{gossrvcDocPackageList.clearAddAttrsFilter()}"/>
+                      </util:autoComplete>
+                    </s:decorate>
+                                      
+                                      <s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">ИНН</ui:define>
+						<h:inputText value="#{gossrvcDocPackageList.searchParameters['inn']}"
+							size="20">
+							
+						</h:inputText>
+					</s:decorate>
+					
+
+					<s:decorate template="/layout/display.xhtml">
+					   <ui:define name="label">Ведомство, ответственное за оказание услуги</ui:define>
+					    <!-- 
+						<util:autoComplete key="#{gossrvcDocPackageList.searchParameters['gosOrgId']}" label="#{gossrvcDocPackageList.searchParameters['gosOrgId_label']}" id="suggestGosOrg"
+							search2="#{cardelementList.getSuggestion}" orderBy="cardElement.name"
+							var="item" itemValue="#{item.id}" itemLabel="#{item.name}" 
+							filter="cardElement.card.cardCode='SGosOrg'"
+							maxResults="50">
+						</util:autoComplete>
+						 -->
+						<util:autoComplete key="#{gossrvcDocPackageList.searchParameters['gosOrgId']}" label="#{gossrvcDocPackageList.searchParameters['gosOrgId_label']}"
+							search="#{gossrvcDocPackageList.getSuggestionOGV}"
+							var="item" itemValue="#{item.value}" itemLabel="#{item.label}">
+						</util:autoComplete>
+					</s:decorate>
+					
+					<s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">Код авторизации</ui:define>
+						<h:inputText value="#{gossrvcDocPackageList.searchParameters['authCode']}"
+							size="20">
+							
+						</h:inputText>
+					</s:decorate>
+					
+					<s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">Дата создания дела</ui:define>
+						<rich:panel>
+							<rich:column>
+								<h:outputText value="c" style="padding: 10px; font-weight: bold; "/>
+								<rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['beginDate']}" datePattern="dd.MM.yyyy" >
+									
+								</rich:calendar>
+							</rich:column>
+							<rich:column>
+								<h:outputText value="по" style="padding: 10px; font-weight: bold; "/>
+								<rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['endDate']}" datePattern="dd.MM.yyyy" >
+									
+								</rich:calendar>
+							</rich:column>	
+						</rich:panel>
+					</s:decorate>
+
+                    <s:decorate template="/layout/display.xhtml">
+                        <ui:define name="label">Дата окончания</ui:define>
+                        <rich:panel>
+                            <rich:column>
+                                <h:outputText value="c" style="padding: 10px; font-weight: bold; "/>
+                                <rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['beginDateComp']}" datePattern="dd.MM.yyyy" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="по" style="padding: 10px; font-weight: bold; "/>
+                                <rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['endDateComp']}" datePattern="dd.MM.yyyy" />
+                            </rich:column>
+                        </rich:panel>
+                    </s:decorate>
+
+                    <s:decorate template="/layout/display.xhtml">
+                        <ui:define name="label">Плановая дата оказания услуги</ui:define>
+                        <rich:panel>
+                            <rich:column>
+                                <h:outputText value="c" style="padding: 10px; font-weight: bold; "/>
+                                <rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['planDateBegin']}" datePattern="dd.MM.yyyy" />
+                            </rich:column>
+                            <rich:column>
+                                <h:outputText value="по" style="padding: 10px; font-weight: bold; "/>
+                                <rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['planDateEnd']}" datePattern="dd.MM.yyyy" />
+                            </rich:column>
+                        </rich:panel>
+                    </s:decorate>
+
+                    <s:decorate template="/layout/display.xhtml">
+                        <ui:define name="label">Просрочено дней свыше планового срока оказания услуги</ui:define>
+                        <h:inputText value="#{gossrvcDocPackageList.searchParameters['daysAfterDeadline']}" id="deadline" >   	
+                        	<f:validateLongRange minimum="1" />   
+                        	<rich:validator/>
+							<f:converter converterId="javax.faces.Integer"/>
+                        </h:inputText>
+                        <rich:message for="deadline" />
+                    </s:decorate>
+					
+					<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Заявитель</ui:define>
+					<rich:panel styleClass="clearfix-float">
+						<div style="float:left">
+						    <h:outputText value="Тип заявителя" style="padding: 10px; font-weight: bold; "/>
+						    <h:selectOneMenu value="#{gossrvcDocPackageList.searchParameters['applicantClass']}">
+								<f:selectItems value="#{gossrvcDocPackageList.applicantClassList}" />
+						    </h:selectOneMenu>
+						</div>
+					
+						<div style="float:left">
+						    <h:outputText value="ФИО / Наименованиe" style="padding: 10px; font-weight: bold;"/>
+						    <h:inputText value="#{gossrvcDocPackageList.searchParameters['applicant']}" size="20"/>
+						</div>
+
+                        <div style="float:left">
+                            <h:outputText value="СНИЛС" style="padding: 10px; font-weight: bold;"/>
+                            <!--<h:inputText value="#{gossrvcDocPackageList.searchParameters['snils']}" size="20" />-->
+                            <h:inputText id="snils" value="#{gossrvcDocPackageList.searchParameters['snils']}">
+                                <!-- <f:validator validatorId="snilsValidator"/>  -->
+                            </h:inputText>
+                        </div>
+					</rich:panel>
+					</s:decorate>
+ 					
+					<s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">Пользователь, имеющий задание по делу</ui:define>
+						<util:autoComplete key="#{gossrvcDocPackageList.searchParameters['workingUser']}" label="#{gossrvcDocPackageList.searchParameters['workingUser_label']}"
+							search="#{gossrvcDocPackageList.getListUser}"
+							var="item" itemValue="#{item.value}" itemLabel="#{item.label}">
+						</util:autoComplete>
+					</s:decorate>
+				  
+					
+					<s:decorate template="/layout/display.xhtml" rendered="#{not empty gossrvcDocPackageList.listOrgUnit}">
+						<ui:define name="label">Орг. единицы</ui:define>
+						<h:selectOneMenu value="#{gossrvcDocPackageList.searchParameters['owner']}" style="width:500px">
+							<f:selectItem itemLabel="[Все]" itemValue=""/>					
+							<f:selectItems value="#{gossrvcDocPackageList.listOrgUnit}"/>
+							
+						</h:selectOneMenu>
+					</s:decorate>
+                    
+                    <s:decorate template="/layout/display.xhtml">
+							<ui:define name="label">Статус (шаг, на котором находится услуга)</ui:define>
+							<util:autoComplete key="#{gossrvcDocPackageList.searchParameters['step']}" label="#{gossrvcDocPackageList.searchParameters['step_label']}"
+								search="#{gossrvcDocPackageList.getListStep}"
+								var="item" itemValue="#{item.value}" itemLabel="#{item.label}">
+							</util:autoComplete>
+				    </s:decorate>
+                    
+                    <s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">Регистратор</ui:define>
+						<h:selectOneMenu id="idRegistrator" style="width:500px"
+							value="#{gossrvcDocPackageList.searchParameters['registrator']}">
+							<f:selectItems
+							value="#{gossrvcregistratorjournalList.selectRegistratorList}" />
+							
+						</h:selectOneMenu>
+					</s:decorate>
+
+                      <s:decorate template="/layout/display.xhtml">
+                          <ui:define name="label">Ответственный контролер</ui:define>
+                          <h:selectOneMenu id = "idController" style="width:500px"
+                                           value="#{gossrvcDocPackageList.searchParameters['controller']}">
+                              <f:selectItems
+                                      value="#{gossrvcregistratorjournalList.selectRegistratorList}" />
+                          </h:selectOneMenu>
+                      </s:decorate>
+
+                    <s:decorate template="/layout/display.xhtml">
+						<ui:define name="label">Источник задачи</ui:define>
+							<h:selectOneMenu id="searchExtSys" style="width:500px"
+							value="#{gossrvcDocPackageList.searchParameters['extSystem']}">
+							<f:selectItems value="#{assignmentEntityList.extSystemSelectList}" />
+
+					</h:selectOneMenu>
+		    		</s:decorate>
+
+                    <s:decorate template="/layout/display.xhtml">
+                        <ui:define name="label">Дополнительные атрибуты</ui:define>
+                        <rich:panel id="addAttrPnl" styleClass="clearfix-float">
+                            <s:decorate template="/layout/display.xhtml">
+                              <ui:define name="label">Тип дополнительного атрибута</ui:define>
+                              <h:selectOneMenu id="addAttrType" style="width:500px" value="#{gossrvcDocPackageList.searchParameters['addAttrType']}"  render="addAttrPnl">
+                                  <f:selectItem itemLabel="[не выбрано]" itemValue=""/>
+                                  <f:selectItem itemLabel="Дата" itemValue="tdate"/>
+                                  <f:selectItem itemLabel="Логический" itemValue="tboolean"/>
+                                  <f:selectItem itemLabel="Справочник" itemValue="dictionary"/>
+                                  <a4j:ajax event="change" execute="#{gossrvcDocPackageList.clearAddAttrsFilter()}" render="addAttrPnl"/>
+                              </h:selectOneMenu>
+                          </s:decorate>
+                          <s:decorate id="addAttrName" template="/layout/edit.xhtml" rendered="#{not empty gossrvcDocPackageList.searchParameters['addAttrType']
+                          and not empty gossrvcDocPackageList.searchParameters['serviceId'] and not empty gossrvcDocPackageList.searchParameters['docTypeId']}">
+                              <ui:define name="label">Наименование дополнительного атрибута</ui:define>
+                              <h:selectOneMenu style="width:500px" value="#{gossrvcDocPackageList.searchParameters['addAttrName']}">
+                                  <f:selectItem itemLabel="[не выбрано]" itemValue=""/>
+                                  <f:selectItems value="#{gossrvcDocPackageList.addAttrNames}" var="attr" itemValue="#{attr.id}" itemLabel="{#{attr.code}} #{attr.name}"/>
+                                  <a4j:ajax event="change" execute="#{gossrvcDocPackageList.clearAddAttrValues()}" render="addAttrValDiv"/>
+                              </h:selectOneMenu>
+                          </s:decorate>
+                          <s:div id="addAttrValDiv">
+                            <s:decorate template="/layout/display.xhtml">
+                              <ui:define name="label">Значение дополнительного атрибута</ui:define>
+                              <h:inputText value="#{gossrvcDocPackageList.searchParameters['addAttr']}" rendered="#{empty gossrvcDocPackageList.searchParameters['addAttrType']}"/>
+                                <h:outputText styleClass="required" style="font-weight: bold;" value="Не выбрана услуга и/или цель!" rendered="#{gossrvcDocPackageList.searchParameters['addAttrType']=='dictionary' and (empty gossrvcDocPackageList.searchParameters['serviceId'] or empty gossrvcDocPackageList.searchParameters['docTypeId'])}"/>
+
+                                  <h:selectOneMenu style="width:500px" value="#{gossrvcDocPackageList.searchParameters['addAttr']}" rendered="#{gossrvcDocPackageList.searchParameters['addAttrType']=='tboolean' or (gossrvcDocPackageList.searchParameters['addAttrType']=='dictionary' and
+                                  not empty gossrvcDocPackageList.searchParameters['serviceId'] and not empty gossrvcDocPackageList.searchParameters['docTypeId'])}"
+                                          disabled="#{gossrvcDocPackageList.searchParameters['addAttrType']=='dictionary' and empty gossrvcDocPackageList.searchParameters['addAttrName']}">
+                                      <f:selectItem itemLabel="[не выбрано]" itemValue=""/>
+                                      <f:selectItems value="#{gossrvcDocPackageList.getAddAttrVals(gossrvcDocPackageList.searchParameters['addAttrName'])}" var="attrVal" itemValue="#{attr.code}" itemLabel="#{attr.name}"/>
+                                  </h:selectOneMenu>
+                                  <h:panelGrid columns="2" rendered="#{gossrvcDocPackageList.searchParameters['addAttrType']=='tdate'}">
+                                      <h:column>
+                                          <h:outputText value="c" style="padding: 10px; font-weight: bold; "/>
+                                          <rich:calendar id="begDateAddAttr" enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['begDateAddAttr']}" datePattern="dd.MM.yyyy" >
+                                          </rich:calendar>
+                                      </h:column>
+                                      <h:column>
+                                          <h:outputText value="по" style="padding: 10px; font-weight: bold; "/>
+                                          <rich:calendar enableManualInput="true" buttonIcon="/img/my/calendar.png" value="#{gossrvcDocPackageList.searchParameters['endDateAddAttr']}" datePattern="dd.MM.yyyy" >
+                                          </rich:calendar>
+                                      </h:column>
+                                      <script type="text/javascript">
+                                          initFormSearch();
+                                      </script>
+                                  </h:panelGrid>
+                            </s:decorate>
+                          </s:div>
+                      </rich:panel>
+                    </s:decorate>
+
+                      <s:decorate template="/layout/display.xhtml" rendered="#{appSettMap.get('characteristic_result') == '1'}">
+						<ui:define name="label">Характеристика результата</ui:define>
+							<h:selectOneMenu id="characterRes" style="width:500px"
+								value="#{gossrvcDocPackageList.currCharacteristic}">
+								<f:selectItem itemLabel="[не выбрано]" itemValue=""/>
+								<f:selectItems value="#{assignmentEntityList.characteristicList}" />
+							</h:selectOneMenu>
+		    		</s:decorate>
+
+
+                      <s:decorate template="/layout/display.xhtml">
+                          <ui:define name="label">Статус пакетов документов</ui:define>
+                          <h:selectOneMenu value="#{gossrvcDocPackageList.searchParameters['docPackagesState']}">
+                              <f:selectItem
+                                      itemValue="All"
+                                      itemLabel="Все"/>
+                              <f:selectItem
+                                      itemValue="Closed"
+                                      itemLabel="Закрытые"/>
+                              <f:selectItem
+                                      itemValue="Opened"
+                                      itemLabel="Открытые"/>
+                          </h:selectOneMenu>
+                      </s:decorate>
+
+                      <s:decorate template="/layout/display.xhtml">
+                          <ui:define name="label">Тип дела</ui:define>
+                          <h:selectOneMenu value="#{gossrvcDocPackageList.searchParameters['typeDelo']}"
+                                           style="width:500px">
+                              <f:selectItem itemLabel="[Не выбрано]" itemValue=""/>
+                              <f:selectItem itemLabel="Комплект документов" itemValue="1"/>
+                              <f:selectItem itemLabel="Карточка оценки" itemValue="2"/>
+                          </h:selectOneMenu>
+                      </s:decorate>
+
+                      <s:decorate template="/layout/display.xhtml">
+                        <ui:define name="label">Дополнительные параметры</ui:define>
+                        <h:panelGrid columns="2">
+                            <s:decorate template="/layout/display.xhtml">
+                                <ui:define name="label">Показывать тестовые пакеты документов</ui:define>
+                                <h:selectBooleanCheckbox value="#{gossrvcDocPackageList.searchParameters['showTestPack']}" />
+                                <h:outputText value="(созданы для тестового заявителя или в тестовом оргюните)" style="color:red; font-size: small"/>
+                            </s:decorate>
+                        </h:panelGrid>
+                    </s:decorate>
+
+
+					<div style="clear:both" />
+					
+					<s:div styleClass="actionButtons">
+						<a4j:commandButton id="search" value="#{messages['search']}" 
+										   render="navigationPanel,results" action="#{gossrvcDocPackageList.doRefresh}"
+                                           styleClass="actionButtonSearch"/>
+						<a4j:commandButton id="reset" value="#{messages['clear']}" onclick="$('#searchForm:searchPanel').find('input[type=text], textarea').val('');"
+                                           action="#{gossrvcDocPackageList.reset}" render="searchPanel,navigationPanel,results"
+                                           oncomplete="initFormSearch();"
+                                           styleClass="actionButtonReset"/>
+                        <a4j:commandButton id = "filters" value="Фильтры ▾"
+                                           styleClass="actionButtonFilter"/>
+					</s:div>
+
+                      <rich:contextMenu  id="filters-menu" target = "filters" showEvent="click" mode="client">
+					 	<rich:menuItem label="Сохранить настройки фильтрации"
+					 		render="filters-menu" onclick="var name=prompt('Введите название фильтра'); if (name=='') alert('Для сохранения фильтра необходимо ввести название!'); else funcSaveFilter(name); return false;"/>
+					 	<rich:menuSeparator rendered="#{not empty gossrvcDocPackageList.myFilters}"/>
+					    <c:forEach var="fil" items="#{gossrvcDocPackageList.myFilters}">
+					    	<rich:menuItem mode="client">
+					    		<h:panelGrid columns="2">
+					    			<a4j:commandLink value="#{fil.name}" action="#{gossrvcDocPackageList.loadUserFilter(fil.settings)}"
+					    				render="searchPanel,navigationPanel,results"/>
+					    			<a4j:commandLink value=" (-)" style="color:red" action="#{gossrvcDocPackageList.deleteUserFilter(fil)}"
+					    				render="filters-menu" execute="@this"
+					    				onclick="if(!window.confirm('Фильтр будет удален. Продолжить?')) {return false}"/>
+					    		</h:panelGrid>
+					    	</rich:menuItem>	
+					    </c:forEach>
+					  </rich:contextMenu>
+					  
+					  <a4j:jsFunction name="funcSaveFilter" action="#{gossrvcDocPackageList.saveUserFilter}"
+					  	execute="@form" render="filters-menu">
+							<a4j:param name="param1"
+								assignTo="#{gossrvcDocPackageList.filterName}" />					  	
+					  </a4j:jsFunction>
+					
+				</h:panelGrid>		
+				</rich:collapsiblePanel>
+
+				<h:panelGroup id="navigationPanel">
+                       <s:div id="navigation"
+                              style="width:100%; padding:0px;" rendered="#{not empty gossrvcDocPackageList.resultList}">
+                           <ui:include src="/layout/datascroller.xhtml">
+                               <ui:param name="been" value="#{gossrvcDocPackageList}" />
+                               <ui:param name="dataScroll" value="#{gossrvcDocPackageList.dataScroll}" />
+                               <ui:param name="idForm" value="searchForm" />
+                               <ui:param name="updateElements" value="results" />
+                           </ui:include>
+                       </s:div>
+				</h:panelGroup>
+				
+				<h:panelGrid id="results" width="100%">
+                    <s:div rendered="#{not empty gossrvcDocPackageList.resultList}">
+                    <rich:panel styleClass="inner">
+                        <a4j:commandButton
+                                value="#{gossrvcDocPackageList.extendedMode ? 'Перейти в обычный режим' : 'Перейти в расширенный режим'}"
+                                action="#{gossrvcDocPackageList.setExtendedMode(!gossrvcDocPackageList.extendedMode)}"
+                                render="results"
+                                />
+                        <rich:collapsiblePanel switchType="client" expanded="false" header="Групповые операции над пакетами документов"
+                                                rendered="#{gossrvcDocPackageList.extendedMode and s:hasPermission('Пакеты документов','Групповое завершение процессов пакетов документов')}">
+                            <h:panelGroup>
+                                <a4j:commandButton value="Завершить аварийно" render="navigationPanel,results" action="#{gossrvcDocPackageList.terminateCheckedProcess}" />
+                            </h:panelGroup>
+                            <h:panelGroup>
+                                <a4j:commandButton value="Завершить все дела" render="navigationPanel,results" action="#{gossrvcDocPackageList.terminateAll}"
+                                                   rendered="#{userPrefs.superAdmin and appSettMap.get('doc_package_terminate_enabled')=='1'}"
+                                                   onclick="if(!window.confirm('Вы действительно хотите добавить дела в очередь на удаление?')) {return false;}"/>
+                            </h:panelGroup>
+                        </rich:collapsiblePanel>
+                    </rich:panel>
+					
+					<s:div styleClass="results" >
+							
+						<rich:dataTable styleClass="richTableStyle"
+                                        rowClasses="even-row, odd-row"
+                                        id="docPackList"
+                                        var="pack"
+                                        rows="25"
+                                        value="#{gossrvcDocPackageList.resultList}">
+                            <f:facet name="header">
+                                <rich:columnGroup>
+                                    <rich:column rendered="#{gossrvcDocPackageList.extendedMode and s:hasPermission('Пакеты документов','Групповое завершение процессов пакетов документов')}">
+                                        <h:selectBooleanCheckbox id="checkAllPackDoc" value ="#{gossrvcDocPackageList.checkAllPackDoc}" onclick="checkAllPackDoc(this)"/>
+                                    </rich:column>                                    
+                                    <rich:column rendered="#{gossrvcDocPackageList.returnObj != null}" style="text-align:center">
+                                        <h:outputText value="#{messages['choose']}" />
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Орг. единица"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Номер комплекта документов"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Заявитель"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Регистратор"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Ответственный контролер"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Услуга"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Дата создания"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Дата окончания"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Дата планового оказания услуги"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Доступные шаги"/>
+                                    </rich:column>
+                                    <rich:column>
+                                        <h:outputText value="Пользователи, имеющие задания по делу"/>
+                                    </rich:column>
+                                    <rich:column rendered="#{gossrvcDocPackageList.returnObj == null}">
+                                        <h:outputText value="Действие"/>
+                                    </rich:column>
+									<rich:column rendered="#{appSettMap.get('characteristic_result') == '1'}">
+                                        <h:outputText value="Результат"/>
+                                    </rich:column>
+                                </rich:columnGroup>
+                            </f:facet>
+                            <c:set value="#{gossrvcDocPackageList.getActivities(pack.id)}" var="activities"/>
+                            <rich:columnGroup rendered="#{empty activities}">
+                                <rich:column rendered="#{gossrvcDocPackageList.extendedMode and s:hasPermission('Пакеты документов','Групповое завершение процессов пакетов документов')}">
+                                    <h:selectBooleanCheckbox rendered="#{gossrvcDocPackageList.extendedMode and s:hasPermission('Пакеты документов','Групповое завершение процессов пакетов документов')}"
+                                        value="#{gossrvcDocPackageList.checked[pack.procInstId]}"
+                                                             disabled="#{! ((gossrvcDocPackageList.getProcessInstanceById(pack.procInstId).state.toString().indexOf('closed.') == -1)
+                                                             and s:hasPermission(utils.concat('Процесс.',
+                                                             gossrvcDocPackageList.getProcessDefinition(gossrvcDocPackageList.getProcessInstanceById(pack.procInstId)).pkgId,
+                                                             '.', gossrvcDocPackageList.getProcessInstanceById(pack.procInstId).processDefinitionId),
+                                                             'прерывание'))}" />
+                                </rich:column>
+
+                                <rich:column rendered="#{gossrvcDocPackageList.returnObj != null}" style="text-align:center">
+                                    <h:commandButton value="#{messages['choose']}"
+                                        action="#{gossrvcDocPackageList.doSelect(pack.id)}" />
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{gossrvcDocPackageList.orgUnits[pack.owner].name}" />
+                                </rich:column>
+                                <rich:column style="text-align:center">
+                                    <a4j:commandLink value="#{pack.packNum}" rendered="#{gossrvcDocPackageList.returnObj == null}"
+                                        action="#{userPrefs.initPackDoc(pack.id)}" />
+                                    <h:outputText value="#{pack.packNum}"
+                                                  rendered="#{gossrvcDocPackageList.returnObj != null}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{gossrvcDocPackageList.getApplicant(pack.id)}" />
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{pack.registrator}" />
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{gossrvcDocPackageList.getKontroller(pack.id)}" />
+                                </rich:column>
+                                <rich:column>
+                                    <h:outputText value="#{gossrvcDocPackageList.getElementName(pack.serviceId)}" />
+                                </rich:column>
+                                <rich:column style="text-align:center">
+                                    <h:outputText value="#{pack.packDate}"/>
+                                </rich:column>
+                                <rich:column style="text-align:center">
+                                    <h:outputText value="#{pack.completedDate}"/>
+                                </rich:column>
+                                <rich:column style="text-align:center">
+                                    <h:outputText value="#{pack.planDate}"/>
+                                </rich:column>
+                                <rich:column>
+                                </rich:column>
+                                <rich:column>
+                                </rich:column>
+                                <rich:column rendered="#{gossrvcDocPackageList.returnObj == null}">
+                                    <a4j:commandButton value="Процесс…" rendered="#{not empty pack.procInstId}"
+                                                       action="#{processController.selectProcess(pack.procInstId)}" />
+                                </rich:column>
+                                <rich:column rendered="#{appSettMap.get('characteristic_result') == '1'}">
+                                    <h:outputText value="#{pack.characterRes.longName}"/>
+                                </rich:column>
+                            </rich:columnGroup>
+
+                            <rich:collapsibleSubTable value="#{activities}"
+                                                      var="activityItem"
+                                                      rowKeyVar="activityIndex" rendered="#{not empty activities}">
+                                <rich:column rowspan="#{activities.size}" rendered="#{(empty activityIndex or activityIndex eq 0) and (gossrvcDocPackageList.extendedMode and s:hasPermission('Пакеты документов','Групповое завершение процессов пакетов документов'))}">
+                                    <h:selectBooleanCheckbox rendered="#{gossrvcDocPackageList.extendedMode and s:hasPermission('Пакеты документов','Групповое завершение процессов пакетов документов')}"
+                                                             value="#{gossrvcDocPackageList.checked[pack.procInstId]}"
+                                                             disabled="#{! ((gossrvcDocPackageList.getProcessInstanceById(pack.procInstId).state.toString().indexOf('closed.') == -1)
+                                                             and s:hasPermission(utils.concat('Процесс.',
+                                                             gossrvcDocPackageList.getProcessDefinition(gossrvcDocPackageList.getProcessInstanceById(pack.procInstId)).pkgId,
+                                                             '.', gossrvcDocPackageList.getProcessInstanceById(pack.procInstId).processDefinitionId),
+                                                             'прерывание'))}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{(gossrvcDocPackageList.returnObj != null) and (empty activityIndex or activityIndex eq 0)}" style="text-align:center">
+                                    <h:commandButton value="#{messages['choose']}"
+                                                     action="#{gossrvcDocPackageList.doSelect(pack.id)}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}">
+                                    <h:outputText value="#{gossrvcDocPackageList.orgUnits[pack.owner].name}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}" style="text-align:center">
+                                    <a4j:commandLink value="#{pack.packNum}" rendered="#{gossrvcDocPackageList.returnObj == null}"
+                                                     action="#{userPrefs.initPackDoc(pack.id)}" />
+                                    <h:outputText value="#{pack.packNum}"
+                                                  rendered="#{gossrvcDocPackageList.returnObj != null}"/>
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}">
+                                    <h:outputText value="#{gossrvcDocPackageList.getApplicant(pack.id)}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}">
+                                    <h:outputText value="#{pack.registrator}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}">
+                                    <h:outputText value="#{gossrvcDocPackageList.getKontroller(pack.id)}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}">
+                                    <h:outputText value="#{gossrvcDocPackageList.getElementName(pack.serviceId)}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}" style="text-align:center">
+                                    <h:outputText value="#{pack.packDate}"/>
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}" style="text-align:center">
+                                    <h:outputText value="#{pack.completedDate}"/>
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{empty activityIndex or activityIndex eq 0}" style="text-align:center">
+                                    <h:outputText value="#{pack.planDate}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <a4j:commandLink value="#{activityItem[1]}"
+                                                     rendered="#{gossrvcDocPackageList.isActivityOnMe(activityItem[0]) and gossrvcDocPackageList.returnObj == null}"
+                                                     action="#{userPrefs.goOpenActivity(activityItem[0])}" />
+                                    <h:outputText value="#{activityItem[1]}" rendered="#{!gossrvcDocPackageList.isActivityOnMe(activityItem[0]) or gossrvcDocPackageList.returnObj != null}"/>
+                                </rich:column>
+                                <rich:column>
+                                    <s:div style="max-height: 50px; overflow: auto;">
+                                        <h:outputText value="#{gossrvcDocPackageList.getUsersOnActivity(activityItem[0])}"/>
+                                    </s:div>
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{(empty activityIndex or activityIndex eq 0) and (gossrvcDocPackageList.returnObj == null)}">
+                                    <a4j:commandButton value="Процесс…"
+                                                       action="#{processController.selectProcess(pack.procInstId)}" />
+                                </rich:column>
+                                <rich:column rowspan="#{activities.size}" rendered="#{(empty activityIndex or activityIndex eq 0) and (appSettMap.get('characteristic_result') == '1')}">
+                                    <h:outputText value="#{pack.characterRes.longName}"/>
+                                </rich:column>
+                            </rich:collapsibleSubTable>
+
+						</rich:dataTable>
+
+					</s:div>
+					<h:commandButton value="#{messages.Done}"
+						rendered="#{gossrvcDocPackageList.returnObj != null}"
+						action="#{gossrvcDocPackageList.doCancel}" />
+                    </s:div>
+				</h:panelGrid>
+			</rich:panel>
+		</h:form>
+
+	</ui:define>
+
+	
+
+</ui:composition>
