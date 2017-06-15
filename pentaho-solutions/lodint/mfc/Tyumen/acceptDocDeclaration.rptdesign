@@ -1,0 +1,3229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="processId" id="210">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="211">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="user" id="212">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="49"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="50">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">p_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">p_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">p_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">p_passNo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">a_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">a_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">a_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">service</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">app_date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ddline</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">u_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">u_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">PROCESS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">AUTH_CODE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">PACK_NUM</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">p_passSer</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">ap_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">ap_passSer</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">ap_passNo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">returnPlace</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">serviceGovLevel</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">dateServEnd</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">ogv_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">ogv_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">ogv_region</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">ogv_name_acronym</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">issuePlace</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">current_time</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">name_subject</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">adress_subject</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">kadastrov_number</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">p_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">p_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">p_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">p_passNo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service</property>
+                </structure>
+                <structure>
+                    <property name="columnName">app_date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ddline</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROCESS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AUTH_CODE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PACK_NUM</property>
+                </structure>
+                <structure>
+                    <property name="columnName">p_passSer</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ap_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ap_passSer</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ap_passNo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">returnPlace</property>
+                </structure>
+                <structure>
+                    <property name="columnName">serviceGovLevel</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateServEnd</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_region</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_name_acronym</property>
+                </structure>
+                <structure>
+                    <property name="columnName">issuePlace</property>
+                </structure>
+                <structure>
+                    <property name="columnName">current_time</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name_subject</property>
+                </structure>
+                <structure>
+                    <property name="columnName">adress_subject</property>
+                </structure>
+                <structure>
+                    <property name="columnName">kadastrov_number</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">p_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">p_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">p_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">p_passNo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">a_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">a_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">a_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">service</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">app_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ddline</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">u_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">u_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">PROCESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">AUTH_CODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">PACK_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">p_passSer</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">ap_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">ap_passSer</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">ap_passNo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">returnPlace</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">serviceGovLevel</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">dateServEnd</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">ogv_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">ogv_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">ogv_region</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">ogv_name_acronym</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">issuePlace</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">current_time</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">name_subject</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">adress_subject</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">kadastrov_number</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzShark = new Packages.org.cp.birt.plugins.HibernateUtil("entityManagerNoFilter");
+result2 = clazz.getActivityVariableValue
+	(
+		"Zayavitel,Komplekt_doc,Service,Zayavlenie,selectOwner,dateServEnd",
+		params["processId"],
+		params["activityId"]
+	);
+
+Zayavitel = result2[0];
+Komplekt_doc = result2[1];
+Service = result2[2];
+Zayavlenie = result2[3];
+
+dateServEnd = result2[5];
+
+if (Service!=null){
+	try {
+		serviceGovLevel = clazz.getEntityManagerLod().createQuery
+		(
+			" select ce1.name from  CardElementFieldValue cefv, CardElement ce1 "+
+			" where cefv.cardElement.id = :serv "+
+			" and cefv.cardField.fieldName = 'serviceGovLevel' and cefv.fieldStringValue like ce1.id "
+
+		).setParameter("serv", Service)
+		.getSingleResult();
+		if (serviceGovLevel.contains("муницип")){
+			serviceGovLevel="муниципальной";
+		}else if (serviceGovLevel.contains("регионал")){
+			serviceGovLevel="региональной";
+		}else if (serviceGovLevel.contains("федерал")){
+			serviceGovLevel="государственной";
+		}else if (serviceGovLevel.contains("республик")){
+			serviceGovLevel="государственной";
+		}else{
+			serviceGovLevel="";
+		}
+	} catch (exception) {
+		serviceGovLevel = "[не выбрано]";
+	}
+}
+
+if (result2[4]==null) {
+	ReturnPlace= null;
+}else{
+	ReturnPlace = clazz.getEntityManagerLod().createQuery
+	(
+		" select ou.name from OrgUnit ou where ou.id = :retPl"
+	).setParameter("retPl", result2[4])
+	.getSingleResult();
+}
+
+owners = clazzShark.getEntityManagerShark().createQuery(
+" select u.owner from User u where u.login = :user "
+)
+.setParameter("user", params["user"])
+.getResultList();
+
+owner_where = "";
+if (!owners.isEmpty()) {
+	owner = owners.get(0);
+	if (owner != null) {
+		owner_where = " and a1.owner = '" + owner + "'";
+	}
+}
+
+result = clazz.getEntityManagerLod().createQuery(
+" SELECT "+
+
+" (SELECT P FROM Person as P " +
+"	WHERE ogi.objectClass='org.cp.model.common.Person' AND P.id = ogi.objectId ), " +
+
+" (SELECT A " +
+"	FROM Agent AS A " +
+"	WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId ), " +
+
+"	ce1.name, " +
+
+"	CEFV.fieldIntegerValue, " +
+
+"	u1, " +
+
+" (SELECT PP.portalProcessId FROM PortalProcess as PP " +
+" 	WHERE PP.docPackageId = dp1.id), " +
+
+" 	dp1 " +
+
+" FROM "+
+"	User u1,"+
+"	CardElement ce1, "+
+"	ObjectGroupItem ogi, "+
+" 	CardElementFieldValue as CEFV,  "+
+"	GossrvcDocPackage dp1 "+
+
+" WHERE "+
+"	u1.login = :login "+
+"	AND ce1.id = :Service "+
+"	AND ogi.objectGroup.id = :Zayavitel and ogi.selected = TRUE "+
+"	AND CEFV.cardElement = CE1 "+
+"	AND CEFV.cardField.fieldName = 'ddlSrv'"+
+"	AND dp1.id = :Komplekt_doc "
+)
+.setParameter("login", params["user"])
+.setParameter("Zayavitel", Zayavitel)
+.setParameter("Service", Service)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[function getAppSettingValue(id){
+	try{
+		appS = clazz.getEntityManagerLod().createQuery(
+			" SELECT a0.value " +
+			" FROM AppSetting a0, User u " +
+			" WHERE a0.code = '" + id + "' " +
+			" 	AND a0.owner = u.owner " +
+			"	AND u.login = '" + params["user"] + "'"
+		).getResultList();
+		if (appS.size() > 1){
+			return appS[0];
+		} else if(appS.size() == 0) {
+			appSet = clazz.getEntityManagerLod().createQuery(
+				" SELECT a0.value " +
+				" FROM AppSetting a0 " +
+				" WHERE a0.code = '" + id + "' " +
+				" 	AND a0.owner = null"
+			).getSingleResult();
+			return appSet
+		}
+	}
+	catch (e) {appS = "[не найдено]";}
+	return appS[0];
+}
+row["ogv_name"] = getAppSettingValue("ogv_name");
+row["ogv_address"] = getAppSettingValue("ogv_address");
+row["ogv_name_acronym"] = getAppSettingValue("ogv_name_acronym");
+row["ogv_region"] = getAppSettingValue("ogv_region");
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = result.get(currentrow);
+
+
+
+
+p = rowValue[0];
+if(p != null) {
+	row["p_name"] = p.getLastName() + " " + p.getFirstName() + " " + p.getMiddleName();
+	row["p_address"] = p.getAddress();
+	row["p_phone"] = p.getPhone();
+	row["p_passSer"] = p.getPassSeria();
+	row["p_passNo"] = p.getPassNo();
+}
+a = rowValue[1];
+if(a != null) {
+	row["a_name"] = a.getName();
+	row["a_address"] = a.getAddress();
+	row["a_phone"] = a.getPhone();
+	ap = a.getPerson();
+	if(ap != null) {
+		row["ap_name"] = ap.getLastName() + " " + ap.getFirstName() + " " + ap.getMiddleName();
+		row["ap_passSer"] = ap.getPassSeria();
+		row["ap_passNo"] = ap.getPassNo();
+	}
+}
+row["service"] = rowValue[2];
+row["serviceGovLevel"] = serviceGovLevel;
+row["app_date"] = new Date();
+row["current_time"] = new Packages.java.text.SimpleDateFormat("HH:mm:ss").format(new Date());
+row["ddline"] = rowValue[3];
+u = rowValue[4];
+if(u != null) {
+	row["u_name"] = u.getLastName() + " " + u.getFirstName() + " " + u.getMiddleName();
+	row["u_phone"] = u.getPhone();
+}
+row["PROCESS"] = rowValue[5];
+row["AUTH_CODE"] = rowValue[6].getAuthCode();
+row["PACK_NUM"] = rowValue[6].getPackNum();
+
+row["name_subject"] = "";
+row["adress_subject"] = "";
+row["kadastrov_number"] = "";
+if(rowValue[6].getAttrVals() != null &amp;&amp; rowValue[6].getAttrVals().size() > 0){
+	for(ident = 0; ident < rowValue[6].getAttrVals().size(); ident++){
+	    if("AdressSubject".equals(rowValue[6].getAttrVals()[ident].getAttr().getCode())){
+            row["adress_subject"] = rowValue[6].getAttrVals()[ident].getStringValue();
+	    }
+	    if("KadastrovNumber".equals(rowValue[6].getAttrVals()[ident].getAttr().getCode())){
+	        row["kadastrov_number"] = rowValue[6].getAttrVals()[ident].getStringValue();
+	    }
+	    if("NameSubject".equals(rowValue[6].getAttrVals()[ident].getAttr().getCode())){
+            restrictIdx = parseInt(rowValue[6].getAttrVals()[ident].getStringValue()) - 1;
+            restrictList = rowValue[6].getAttrVals()[ident].getAttr().getRestrictList().split(";");
+            row["name_subject"] = restrictList[restrictIdx].split(",")[1];
+	    }
+	}
+}
+
+ogvId = rowValue[6].getOgv().getId();
+res = clazz.getEntityManagerLod().createQuery(
+"SELECT oucn.name FROM OrgUnitCasedName oucn WHERE oucn.orgUnit.owner = :ogvId AND oucn.declension = 3").setParameter("ogvId", ogvId).getResultList();
+if(res.size() > 0  &amp;&amp; res.get(0) != null &amp;&amp; !"".equals(res.get(0)) &amp;&amp; "1".equals(getAppSettingValue("use_cased_org_unit_names"))){
+    row["ogv"] = res.get(0);
+} else {
+    row["ogv"] = rowValue[6].getOgv().getName();
+}
+
+
+if(rowValue[6].getApplicantGroup().getSelectedItem().getIssuePlace() != null) {
+	issuePlace = rowValue[6].getApplicantGroup().getSelectedItem().getIssuePlace().toString();
+	if(issuePlace != null &amp;&amp; issuePlace.equals("MFC")) {
+	row["issuePlace"] = getAppSettingValue("ogv_name_acronym") + ", " + getAppSettingValue("ogv_address");
+	} else if(issuePlace != null &amp;&amp; issuePlace.equals("OGV")) {
+		cardElementId = rowValue[6].getApplicantGroup().getSelectedItem().getIssuePlaceOgv().getId();
+		cardElementName = rowValue[6].getApplicantGroup().getSelectedItem().getIssuePlaceOgv().getName();
+	    row["issuePlace"] = cardElementName + ", " +
+	    clazz.getEntityManagerLod().createQuery(
+			" SELECT cefv.fieldStringValue " +
+			" FROM CardElementFieldValue cefv " +
+			" WHERE cefv.cardElement.id = :cardElementId " +
+			"	AND cefv.cardField.fieldName = 'addressOGV'"
+		).setParameter("cardElementId", cardElementId).getSingleResult();
+	}
+}
+row["returnPlace"] = ReturnPlace;
+row["dateServEnd"] = dateServEnd;
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;
+result2 = null;
+
+]]></method>
+        </script-data-set>
+        <script-data-set name="needDocs" id="294">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">needDocs</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">needDocs</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">needDocs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+needDocs = clazz.getEntityManagerLod().createQuery
+(
+" select distinct "+
+"	ce1.name "+
+" from "+
+"	GossrvcDocPackageItem gdpi1, CardElement ce1 "+
+" where "+
+"	gdpi1.required = true and "+
+"   ce1.id  = gdpi1.docTypeId and "+
+"	gdpi1.isResult = false and "+
+"	gdpi1.gossrvcDocPackage.id = :Komplekt_doc"
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+totalrows = needDocs.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[function getTypeIdName(typeId){
+
+}
+
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = needDocs.get(currentrow);
+row["needDocs"] = rowValue;
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[needDocs=null;]]></method>
+        </script-data-set>
+        <script-data-set name="takenDocs" id="295">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">docTitle</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">docClass</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">pageCount</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">countListPr</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">countDocPr</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">docInstanceCount</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">countList</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">countDoc</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">docTitle</property>
+                </structure>
+                <structure>
+                    <property name="columnName">docClass</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pageCount</property>
+                </structure>
+                <structure>
+                    <property name="columnName">countListPr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">countDocPr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">docInstanceCount</property>
+                </structure>
+                <structure>
+                    <property name="columnName">countList</property>
+                </structure>
+                <structure>
+                    <property name="columnName">countDoc</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">docTitle</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">docClass</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">pageCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">countListPr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">countDocPr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">docInstanceCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">countList</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">countDoc</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+rus = new Packages.org.cp.birt.plugins.convert.Russian();
+importPackage(Packages.org.jboss.seam);
+importPackage(Packages.java.lang);
+listGSDT = new Packages.java.util.ArrayList;
+importPackage(Packages.org.cp.gossrvc);
+
+
+result2 = clazz.getActivityVariableValue
+	(
+		"Komplekt_doc",
+		params["processId"],
+		params["activityId"]
+	);
+
+Komplekt_doc = result2[0];
+
+takenDocs = clazz.getEntityManagerLod().createQuery(
+" SELECT i.title, ce.name, i.pageCount, i, i.documentInstanceCount, 0" +
+" FROM GossrvcDocPackageItem i, CardElement ce" +
+" WHERE i.docValue = TRUE " +
+" 	AND (i.passive IS NULL or i.passive = FALSE) " +
+" 	AND	i.childs.size = 0 " +
+"	AND i.isResult = FALSE " +
+"	AND i.docClassId = ce.id " +
+"	AND	i.gossrvcDocPackage.id = :Komplekt_doc " +
+"   AND i.title NOT LIKE '%Межведомственный запрос%'"
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+for(i = 0; i < takenDocs.size(); i++) {
+	if (takenDocs.get(i)[2] != null &amp;&amp; takenDocs.get(i)[4] != null){
+		takenDocs.get(i)[5] = takenDocs.get(i)[2] * takenDocs.get(i)[4];
+	}
+}
+
+dp = clazz.getEntityManagerLod().createQuery(
+" SELECT dp" +
+" FROM GossrvcDocPackage dp " +
+" WHERE dp.id = :Komplekt_doc "
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getSingleResult();
+
+listItems = dp.getGossrvcDocPackageItemsNotParent();
+entityToolsBean = Component.getInstance("entityToolsBean",true);
+mapDocClass = GossrvcDocPackageHome.getMapDocClassWithWeight(dp.getEntityManager());
+entityToolsBean.getRequestForRequiredGroupDoc(listItems,listItems, mapDocClass,true,false);
+if(listGSDT != null &amp;&amp; listGSDT.size() > 0) {
+	megVedDocsTempl = clazz.getEntityManagerLod().createQuery(
+	" SELECT i.title, 'Межведомст- венный запрос', i.pageCount, i" +
+	" FROM GossrvcDocPackageItem i, CardElement ce" +
+	" WHERE (i.docValue = FALSE OR i.docValue = NULL) AND i.docClassId = ce.id " +
+	"	AND	i.gossrvcDocPackage.id = :Komplekt_doc "
+	)
+	.setParameter("Komplekt_doc", Komplekt_doc)
+	.getResultList();
+	for(i = 0; i < listGSDT.size(); i ++) {
+		for(j = 0; j < megVedDocsTempl.size(); j ++) {
+			gsdt = megVedDocsTempl.get(j)[3].getGossrvcServiceDocTree();
+			if(gsdt != null &amp;&amp; gsdt == listGSDT.get(i)) {
+				takenDocs.add(megVedDocsTempl.get(j));
+			}
+		}
+	}
+}
+
+megVedDocs = clazz.getEntityManagerLod().createQuery(
+" SELECT i.title, 'Межведомст- венный запрос', i.pageCount, i" +
+" FROM GossrvcDocPackageItem i, CardElement ce" +
+" WHERE (i.docValue = FALSE OR i.docValue = NULL) " +
+" 	AND (i.passive IS NULL or i.passive = FALSE) " +
+" 	AND	i.childs.size = 0 " +
+"	AND i.isResult = FALSE " +
+"	AND i.docClassId = ce.id " +
+"	AND	i.gossrvcDocPackage.id = :Komplekt_doc " +
+"   AND i.title NOT LIKE '%Межведомственный запрос%'"
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+for(i = 0; i < megVedDocs.size(); i++) {
+	if (megVedDocs.get(i)[3].getGossrvcServiceDocTree() != null &amp;&amp;
+		megVedDocs.get(i)[3].getGossrvcServiceDocTree().getOgvs() != null &amp;&amp;
+		megVedDocs.get(i)[3].getGossrvcServiceDocTree().getOgvs().size() > 0){
+		takenDocs.add(megVedDocs.get(i));
+	}
+}
+
+
+countDoc = 0;
+for(i = 0; i < takenDocs.size(); i++) {
+	if (takenDocs.get(i)[4] != null){
+		countDoc = countDoc + parseInt(takenDocs.get(i)[4]);
+	} else {
+		// #22898 - закоментил ниже ибо неправильно считает. На всякий случай оставил))
+		//countDoc = countDoc + 1;
+	}
+}
+
+
+countList = 0;
+totalrows = takenDocs.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = takenDocs.get(currentrow);
+row["docTitle"] = rowValue[0];
+row["docClass"] = rowValue[1];
+row["pageCount"] = rowValue[2];
+row["docInstanceCount"] = rowValue[4];
+
+if (rowValue[2] == null) {rowValue[2] = 0;}
+countList = parseInt(countList) + parseInt(rowValue[5]);
+currentrow = currentrow + 1;
+
+row["countList"] = countList;
+row["countListPr"] = rus.formatImpl(countList);
+row["countDoc"] = countDoc;
+row["countDocPr"] = rus.formatImpl(countDoc);
+
+return(true);]]></method>
+            <method name="close"><![CDATA[takenDocs=null;]]></method>
+        </script-data-set>
+        <script-data-set name="allDocs" id="296">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">allDocs</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">allDocs</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">allDocs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+allDocs = clazz.getEntityManagerLod().createQuery
+(
+" select distinct "+
+"	ce3.name "+
+" from "+
+"	GossrvcDocPackageItem gdpi3, CardElement ce3 "+
+" where "+
+"	gdpi3.isResult = false and "+
+"	gdpi3.docValue = false and "+
+" (gdpi3.passive is null or gdpi3.passive = false) and "+
+" 	gdpi3.childs.size = 0 and "+
+"   ce3.id  = gdpi3.docTypeId and "+
+"   gdpi3.docTypeId in (select docTypeId from GossrvcOgvDoc where serviceDoc.serviceId = :service) and "+
+"	gdpi3.gossrvcDocPackage.id = :Komplekt_doc"
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.setParameter("service", Service)
+.getResultList();
+
+
+totalrows = allDocs.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = allDocs.get(currentrow);
+row["allDocs"] = rowValue;
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[allDocs=null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">5mm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">5mm</property>
+            <property name="rightMargin">1cm</property>
+            <property name="showHeaderOnFirst">true</property>
+            <property name="footerHeight">0.33in</property>
+            <page-footer>
+                <auto-text id="635">
+                    <property name="fontFamily">"Roman Unicode"</property>
+                    <property name="fontSize">12pt</property>
+                    <property name="textAlign">right</property>
+                    <property name="type">page-number</property>
+                </auto-text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="1275">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="width">7.46875in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <text-property name="displayName">p_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <text-property name="displayName">p_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <text-property name="displayName">p_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passNo</property>
+                    <text-property name="displayName">p_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <text-property name="displayName">a_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <text-property name="displayName">a_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <text-property name="displayName">a_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <text-property name="displayName">app_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <text-property name="displayName">ddline</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <text-property name="displayName">PROCESS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <text-property name="displayName">AUTH_CODE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <text-property name="displayName">PACK_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passSer</property>
+                    <text-property name="displayName">p_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_name</property>
+                    <text-property name="displayName">ap_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passSer</property>
+                    <text-property name="displayName">ap_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passNo</property>
+                    <text-property name="displayName">ap_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">returnPlace</property>
+                    <text-property name="displayName">returnPlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name</property>
+                    <text-property name="displayName">ogv_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_region</property>
+                    <text-property name="displayName">ogv_region</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_region"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1297">
+                <property name="width">3.40625in</property>
+            </column>
+            <column id="1298">
+                <property name="width">0.14583333333333334in</property>
+            </column>
+            <column id="1299">
+                <property name="width">0.19791666666666666in</property>
+            </column>
+            <column id="1300">
+                <property name="width">1.71875in</property>
+            </column>
+            <column id="1301">
+                <property name="width">1.6458333333333333in</property>
+            </column>
+            <column id="1302">
+                <property name="width">0.3541666666666667in</property>
+            </column>
+            <footer>
+                <row id="1303">
+                    <cell id="1304">
+                        <property name="colSpan">6</property>
+                        <property name="rowSpan">1</property>
+                        <text id="735">
+                            <property name="fontFamily">"C39HrP36DlTt"</property>
+                            <property name="fontSize">36pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="textLineThrough">none</property>
+                            <property name="textAlign">center</property>
+                            <property name="display">block</property>
+                            <structure name="toc"/>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[*<VALUE-OF>if (row["PROCESS"]!=null) row["PROCESS"]; else row["PACK_NUM"]</VALUE-OF>$<VALUE-OF>row["AUTH_CODE"]</VALUE-OF>*]]></text-property>
+                        </text>
+                        <text id="1378">
+                            <property name="fontSize">14pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<DIV>&amp;nbsp;</DIV>
+<DIV>&amp;nbsp;</DIV>
+<DIV>Расписка</DIV>
+о приеме документов на предоставление услуги <VALUE-OF>if(row["service"] != null) {'«' + row["service"] + '»'}</VALUE-OF>
+в <VALUE-OF>row["ogv"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <text id="1656">
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#7F7F7F</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<VALUE-OF>row["ogv_name"]</VALUE-OF>
+<VALUE-OF>row["ogv_region"]</VALUE-OF>]]></text-property>
+        </text>
+        <table id="1616">
+            <property name="fontSize">12pt</property>
+            <property name="width">7.395833333333333in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">row["name_subject"] == "" &amp;&amp; row["adress_subject"] == ""</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <text-property name="displayName">p_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <text-property name="displayName">p_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <text-property name="displayName">p_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passNo</property>
+                    <text-property name="displayName">p_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <text-property name="displayName">a_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <text-property name="displayName">a_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <text-property name="displayName">a_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <text-property name="displayName">app_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <text-property name="displayName">ddline</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <text-property name="displayName">PROCESS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <text-property name="displayName">AUTH_CODE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <text-property name="displayName">PACK_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passSer</property>
+                    <text-property name="displayName">p_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_name</property>
+                    <text-property name="displayName">ap_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passSer</property>
+                    <text-property name="displayName">ap_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passNo</property>
+                    <text-property name="displayName">ap_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">returnPlace</property>
+                    <text-property name="displayName">returnPlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name</property>
+                    <text-property name="displayName">ogv_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_address</property>
+                    <text-property name="displayName">ogv_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_region</property>
+                    <text-property name="displayName">ogv_region</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_region"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name_acronym</property>
+                    <text-property name="displayName">ogv_name_acronym</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name_acronym"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">issuePlace</property>
+                    <text-property name="displayName">issuePlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["issuePlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">current_time</property>
+                    <text-property name="displayName">current_time</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["current_time"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name_subject</property>
+                    <text-property name="displayName">name_subject</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name_subject"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">adress_subject</property>
+                    <text-property name="displayName">adress_subject</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["adress_subject"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">kadastrov_number</property>
+                    <text-property name="displayName">kadastrov_number</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["kadastrov_number"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1632">
+                <property name="width">2.3958333333333335in</property>
+            </column>
+            <column id="1633">
+                <property name="width">5in</property>
+            </column>
+            <detail>
+                <row id="1620">
+                    <cell id="1621">
+                        <text id="1637">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Наименование объекта:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1622">
+                        <data id="1640">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="dataSet">Data Set</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">issuePlace</property>
+                                    <text-property name="displayName">name_subject</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["name_subject"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">issuePlace</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="1623">
+                    <cell id="1624">
+                        <text id="1638">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Адрес объекта:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1625">
+                        <data id="1641">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="dataSet">Data Set</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">issuePlace</property>
+                                    <text-property name="displayName">adress_subject</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["adress_subject"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">issuePlace</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="1626">
+                    <cell id="1627">
+                        <text id="1639">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["kadastrov_number"] == ""</expression>
+                                </structure>
+                            </list-property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Кадастровый	(условный) номер:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1628">
+                        <data id="1642">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="dataSet">Data Set</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["kadastrov_number"] == ""</expression>
+                                </structure>
+                            </list-property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">issuePlace</property>
+                                    <text-property name="displayName">kadastrov_number</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["kadastrov_number"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">issuePlace</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="1643">
+                    <cell id="1644">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <text id="1655">
+                            <property name="fontSize">14pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<DIV>&amp;nbsp;</DIV>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <table id="1422">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <text-property name="displayName">p_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <text-property name="displayName">p_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <text-property name="displayName">p_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passNo</property>
+                    <text-property name="displayName">p_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <text-property name="displayName">a_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <text-property name="displayName">a_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <text-property name="displayName">a_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <text-property name="displayName">app_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <text-property name="displayName">ddline</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <text-property name="displayName">PROCESS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <text-property name="displayName">AUTH_CODE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <text-property name="displayName">PACK_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passSer</property>
+                    <text-property name="displayName">p_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_name</property>
+                    <text-property name="displayName">ap_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passSer</property>
+                    <text-property name="displayName">ap_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passNo</property>
+                    <text-property name="displayName">ap_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">returnPlace</property>
+                    <text-property name="displayName">returnPlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name</property>
+                    <text-property name="displayName">ogv_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1435"/>
+            <column id="1436"/>
+            <column id="1437"/>
+            <header>
+                <row id="1423">
+                    <cell id="1424">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <text id="1438">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Заявитель,  <VALUE-OF>
+                                if(row["a_name"]!=null &amp;&amp; row["ap_name"]!=null) {
+                                    row["a_name"] + ', в лице представителя ' + row["ap_name"];
+                                } else {
+                                    if(row["a_name"]!=null &amp;&amp; row["ap_name"]==null){
+                                        row["a_name"] + ', в лице представителя _________________________________________________'
+                                    } else {
+                                        row["p_name"]
+                                    }
+                                 }
+                            </VALUE-OF>&amp;nbsp;
+<VALUE-OF>if (row["a_name"]!=null) {
+	if (row["ap_passSer"]!=null){
+		' паспорт серия: '+row["ap_passSer"];
+	}
+}else {
+	if (row["p_passSer"]!=null){
+		' паспорт серия: '+row["p_passSer"];
+	}
+}</VALUE-OF>&amp;nbsp;
+<VALUE-OF>if (row["a_name"]!=null) {
+	if (row["ap_passNo"]!=null){
+		' номер: '+row["ap_passNo"];
+	}
+}else {
+	if (row["p_passNo"]!=null ){
+		' номер: '+row["p_passNo"];
+	}
+}</VALUE-OF>
+<DIV>действующий(-ая) на основании ________________________________________________</DIV>
+(контактный телефон <VALUE-OF>if (row["p_phone"]!=null &amp;&amp; !BirtComp.compareString('',row["p_phone"])){
+	row["p_phone"];
+}else if (row["a_phone"]!=null &amp;&amp; !BirtComp.compareString('',row["a_phone"])){
+	row["a_phone"];
+}else{
+	' ____________________'
+}</VALUE-OF>), сдал(-а), а оператор <VALUE-OF>row["MFC_ABRV"]</VALUE-OF><I> </I><VALUE-OF>row["u_name"]</VALUE-OF> (контактный телефон: <VALUE-OF>if (row["u_phone"]!=null &amp;&amp; !BirtComp.compareString('',row["u_phone"])) row["u_phone"]; else '_______________'</VALUE-OF>) принял(-a) для предоставления услуги «<VALUE-OF>row["service"]</VALUE-OF>», следующие документы:]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <table id="653">
+            <property name="backgroundAttachment">scroll</property>
+            <property name="backgroundPositionX">0%</property>
+            <property name="backgroundPositionY">0%</property>
+            <property name="backgroundRepeat">repeat</property>
+            <property name="backgroundSizeHeight">auto</property>
+            <property name="backgroundSizeWidth">auto</property>
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">normal</property>
+            <property name="fontStyle">normal</property>
+            <property name="fontVariant">normal</property>
+            <property name="color">black</property>
+            <property name="textLineThrough">none</property>
+            <property name="textOverline">none</property>
+            <property name="textUnderline">none</property>
+            <property name="borderBottomColor">black</property>
+            <property name="borderBottomStyle">none</property>
+            <property name="borderBottomWidth">medium</property>
+            <property name="borderLeftColor">black</property>
+            <property name="borderLeftStyle">none</property>
+            <property name="borderLeftWidth">medium</property>
+            <property name="borderRightColor">black</property>
+            <property name="borderRightStyle">none</property>
+            <property name="borderRightWidth">medium</property>
+            <property name="borderTopColor">black</property>
+            <property name="borderTopStyle">none</property>
+            <property name="borderTopWidth">medium</property>
+            <property name="marginTop">0pt</property>
+            <property name="marginLeft">0pt</property>
+            <property name="marginBottom">0pt</property>
+            <property name="marginRight">0pt</property>
+            <property name="paddingTop">1pt</property>
+            <property name="paddingLeft">1pt</property>
+            <property name="paddingBottom">1pt</property>
+            <property name="paddingRight">1pt</property>
+            <property name="textIndent">0em</property>
+            <property name="letterSpacing">normal</property>
+            <property name="lineHeight">normal</property>
+            <property name="orphans">2</property>
+            <property name="textTransform">none</property>
+            <property name="verticalAlign">middle</property>
+            <property name="whiteSpace">normal</property>
+            <property name="widows">2</property>
+            <property name="wordSpacing">normal</property>
+            <property name="display">block</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="pageBreakBefore">auto</property>
+            <property name="pageBreakInside">auto</property>
+            <property name="showIfBlank">false</property>
+            <property name="canShrink">false</property>
+            <property name="width">7.427083333333333in</property>
+            <property name="dataSet">takenDocs</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">docTitle</property>
+                    <expression name="expression" type="javascript">dataSetRow["docTitle"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">docClass</property>
+                    <expression name="expression" type="javascript">dataSetRow["docClass"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pageCount</property>
+                    <expression name="expression" type="javascript">dataSetRow["pageCount"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">RUNNINGCOUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["docTitle"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["pageCount"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["docTitle"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">countListPr</property>
+                    <text-property name="displayName">countListPr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countListPr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">countDocPr</property>
+                    <text-property name="displayName">countDocPr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countDocPr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">docInstanceCount</property>
+                    <text-property name="displayName">docInstanceCount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["docInstanceCount"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <structure name="toc"/>
+            <property name="repeatHeader">false</property>
+            <column id="670">
+                <property name="width">0.3958333333333333in</property>
+            </column>
+            <column id="671">
+                <property name="width">4.291666666666667in</property>
+            </column>
+            <column id="672">
+                <property name="width">0.8854166666666666in</property>
+                <property name="textAlign">center</property>
+            </column>
+            <column id="673">
+                <property name="width">0.9270833333333334in</property>
+            </column>
+            <column id="1612">
+                <property name="width">0.9270833333333334in</property>
+            </column>
+            <header>
+                <row id="654">
+                    <cell id="655">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="656">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<DIV>N</DIV>
+<DIV>п/п</DIV>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="657">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="658">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Документ]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="659">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="660">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<DIV>Вид документа</DIV>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="661">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="662">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<DIV>Кол-во листов</DIV>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1610">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="1613">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<DIV>Кол-во экземпляров</DIV>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="663">
+                    <cell id="664">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="794">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                    <cell id="666">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="667">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["docTitle"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="668">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="708">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="paddingLeft">5pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["docClass"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="669">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="709">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>if(row["pageCount"] != null) {row["pageCount"]} else {' — '}</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1611">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <text id="1615">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>if(row["docInstanceCount"] != null) {row["docInstanceCount"]} else {' — '}</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <table id="1470">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="width">7.46875in</property>
+            <property name="dataSet">takenDocs</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">docTitle</property>
+                    <text-property name="displayName">docTitle</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["docTitle"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">docClass</property>
+                    <text-property name="displayName">docClass</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["docClass"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pageCount</property>
+                    <text-property name="displayName">pageCount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pageCount"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">countListPr</property>
+                    <text-property name="displayName">countListPr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countListPr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">countDocPr</property>
+                    <text-property name="displayName">countDocPr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countDocPr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["pageCount"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["docTitle"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">countList</property>
+                    <text-property name="displayName">countList</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countList"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">countDoc</property>
+                    <text-property name="displayName">countDoc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countDoc"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="1486">
+                <property name="width">0.7708333333333334in</property>
+            </column>
+            <column id="1488">
+                <property name="width">4.229166666666667in</property>
+            </column>
+            <column id="1489">
+                <property name="width">1.5in</property>
+            </column>
+            <footer>
+                <row id="1481">
+                    <cell id="1482">
+                        <label id="1490">
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">Итого</text-property>
+                        </label>
+                    </cell>
+                    <cell id="1484">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <text id="1492">
+                            <property name="fontSize">11pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["countList"] + '  (' + row["countListPr"] + ')'</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1485">
+                        <label id="1498">
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">листов</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="1493">
+                    <cell id="1494"/>
+                    <cell id="1496">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <text id="1505">
+                            <property name="fontSize">11pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["countDoc"] + '  (' + row["countDocPr"] + ')'</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1497">
+                        <label id="1506">
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">документов</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <text id="1591">
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[ ]]></text-property>
+        </text>
+        <table id="1507">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="width">7.46875in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <text-property name="displayName">p_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <text-property name="displayName">p_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <text-property name="displayName">p_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passNo</property>
+                    <text-property name="displayName">p_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <text-property name="displayName">a_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <text-property name="displayName">a_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <text-property name="displayName">a_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <text-property name="displayName">app_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <text-property name="displayName">ddline</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <text-property name="displayName">PROCESS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <text-property name="displayName">AUTH_CODE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <text-property name="displayName">PACK_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passSer</property>
+                    <text-property name="displayName">p_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_name</property>
+                    <text-property name="displayName">ap_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passSer</property>
+                    <text-property name="displayName">ap_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passNo</property>
+                    <text-property name="displayName">ap_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">returnPlace</property>
+                    <text-property name="displayName">returnPlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_address</property>
+                    <text-property name="displayName">ogv_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name</property>
+                    <text-property name="displayName">ogv_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name_acronym</property>
+                    <text-property name="displayName">ogv_name_acronym</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name_acronym"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">current_time</property>
+                    <text-property name="displayName">current_time</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["current_time"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1517">
+                <property name="width">4.25in</property>
+            </column>
+            <column id="1518">
+                <property name="width">3.21875in</property>
+            </column>
+            <header>
+                <row id="1508">
+                    <cell id="1509">
+                        <text id="1522">
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Дата выдачи расписки:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1510">
+                        <text id="1524">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<U>«<VALUE-OF>BirtDateTime.day(row["app_date"])</VALUE-OF>»  </U> <U><VALUE-OF>BirtDateTime.month(row["app_date"],2)</VALUE-OF></U><I>  </I><U><VALUE-OF>BirtDateTime.year(row["app_date"])</VALUE-OF> г. <VALUE-OF>row["current_time"]</VALUE-OF></U>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="1594">
+                    <cell id="1595">
+                        <text id="1597">
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Место выдачи расписки:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1596">
+                        <text id="1609">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["ogv_name_acronym"] + ', ' + row["ogv_address"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="1519">
+                    <cell id="1520">
+                        <text id="1523">
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Ориентировочная дата выдачи итогового(-ых) документа(-ов):]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1521">
+                        <text id="1525">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<U>«<VALUE-OF>BirtDateTime.day(row["dateServEnd"])</VALUE-OF>»  </U> <U><VALUE-OF>BirtDateTime.month(row["dateServEnd"],2)</VALUE-OF></U><I>  </I><U><VALUE-OF>BirtDateTime.year(row["dateServEnd"])</VALUE-OF> г.</U>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="1602">
+                    <cell id="1603">
+                        <text id="1605">
+                            <property name="fontSize">10pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Место выдачи итогового(-ых) документа(-ов):]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1604">
+                        <data id="1608">
+                            <property name="textAlign">center</property>
+                            <property name="display">block</property>
+                            <property name="dataSet">Data Set</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">issuePlace</property>
+                                    <text-property name="displayName">issuePlace</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["issuePlace"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <structure name="toc"/>
+                            <property name="resultSetColumn">issuePlace</property>
+                        </data>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <text id="1592">
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[ ]]></text-property>
+        </text>
+        <table id="1526">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="width">7.46875in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <text-property name="displayName">p_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <text-property name="displayName">p_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <text-property name="displayName">p_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passNo</property>
+                    <text-property name="displayName">p_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <text-property name="displayName">a_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <text-property name="displayName">a_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <text-property name="displayName">a_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <text-property name="displayName">app_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <text-property name="displayName">ddline</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <text-property name="displayName">PROCESS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <text-property name="displayName">AUTH_CODE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <text-property name="displayName">PACK_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passSer</property>
+                    <text-property name="displayName">p_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_name</property>
+                    <text-property name="displayName">ap_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passSer</property>
+                    <text-property name="displayName">ap_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passNo</property>
+                    <text-property name="displayName">ap_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">returnPlace</property>
+                    <text-property name="displayName">returnPlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1542">
+                <property name="width">1.5in</property>
+            </column>
+            <column id="1543">
+                <property name="width">1.8958333333333333in</property>
+            </column>
+            <column id="1544">
+                <property name="width">1.5104166666666667in</property>
+            </column>
+            <column id="1545">
+                <property name="width">2.5625in</property>
+            </column>
+            <header>
+                <row id="1527">
+                    <cell id="1528">
+                        <text id="1551">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Номер комплекта документов:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1529">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <text id="1552">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>if (row["PROCESS"]!=null) row["PROCESS"],row["PACK_NUM"]; else row["PACK_NUM"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1530">
+                        <text id="1553">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Код авторизации:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1531">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <text id="1554">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["AUTH_CODE"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+        </table>
+        <text id="1593">
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[ ]]></text-property>
+        </text>
+        <table id="1555">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="width">7.46875in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <text-property name="displayName">p_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <text-property name="displayName">p_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <text-property name="displayName">p_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passNo</property>
+                    <text-property name="displayName">p_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <text-property name="displayName">a_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <text-property name="displayName">a_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <text-property name="displayName">a_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <text-property name="displayName">app_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <text-property name="displayName">ddline</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <text-property name="displayName">PROCESS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <text-property name="displayName">AUTH_CODE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <text-property name="displayName">PACK_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_passSer</property>
+                    <text-property name="displayName">p_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_name</property>
+                    <text-property name="displayName">ap_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passSer</property>
+                    <text-property name="displayName">ap_passSer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ap_passNo</property>
+                    <text-property name="displayName">ap_passNo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">returnPlace</property>
+                    <text-property name="displayName">returnPlace</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name_acronym</property>
+                    <text-property name="displayName">ogv_name_acronym</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name_acronym"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1568">
+                <property name="width">2.7708333333333335in</property>
+            </column>
+            <column id="1569">
+                <property name="width">2.7916666666666665in</property>
+            </column>
+            <column id="1570">
+                <property name="width">1.90625in</property>
+            </column>
+            <header>
+                <row id="1556">
+                    <cell id="1557">
+                        <text id="1579">
+                            <property name="textAlign">left</property>
+                            <property name="dataSet">Data Set</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">p_name</property>
+                                    <text-property name="displayName">p_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["p_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">p_address</property>
+                                    <text-property name="displayName">p_address</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["p_address"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">p_phone</property>
+                                    <text-property name="displayName">p_phone</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["p_phone"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">p_passNo</property>
+                                    <text-property name="displayName">p_passNo</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["p_passNo"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">a_name</property>
+                                    <text-property name="displayName">a_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["a_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">a_address</property>
+                                    <text-property name="displayName">a_address</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["a_address"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">a_phone</property>
+                                    <text-property name="displayName">a_phone</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["a_phone"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">service</property>
+                                    <text-property name="displayName">service</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">app_date</property>
+                                    <text-property name="displayName">app_date</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["app_date"]</expression>
+                                    <property name="dataType">date</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ddline</property>
+                                    <text-property name="displayName">ddline</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ddline"]</expression>
+                                    <property name="dataType">integer</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">u_name</property>
+                                    <text-property name="displayName">u_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">u_phone</property>
+                                    <text-property name="displayName">u_phone</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">PROCESS</property>
+                                    <text-property name="displayName">PROCESS</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["PROCESS"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">AUTH_CODE</property>
+                                    <text-property name="displayName">AUTH_CODE</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["AUTH_CODE"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">PACK_NUM</property>
+                                    <text-property name="displayName">PACK_NUM</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["PACK_NUM"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">p_passSer</property>
+                                    <text-property name="displayName">p_passSer</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["p_passSer"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ap_name</property>
+                                    <text-property name="displayName">ap_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ap_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ap_passSer</property>
+                                    <text-property name="displayName">ap_passSer</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ap_passSer"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ap_passNo</property>
+                                    <text-property name="displayName">ap_passNo</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ap_passNo"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">returnPlace</property>
+                                    <text-property name="displayName">returnPlace</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["returnPlace"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">serviceGovLevel</property>
+                                    <text-property name="displayName">serviceGovLevel</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">dateServEnd</property>
+                                    <text-property name="displayName">dateServEnd</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                                    <property name="dataType">date</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ogv</property>
+                                    <text-property name="displayName">ogv</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ogv_name</property>
+                                    <text-property name="displayName">ogv_name</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ogv_address</property>
+                                    <text-property name="displayName">ogv_address</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ogv_address"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ogv_region</property>
+                                    <text-property name="displayName">ogv_region</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ogv_region"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                                <structure>
+                                    <property name="name">ogv_name_acronym</property>
+                                    <text-property name="displayName">ogv_name_acronym</text-property>
+                                    <expression name="expression" type="javascript">dataSetRow["ogv_name_acronym"]</expression>
+                                    <property name="dataType">string</property>
+                                </structure>
+                            </list-property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Оператор <VALUE-OF>row["ogv_name_acronym"]</VALUE-OF>: ]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1558">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <text id="1584">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["u_name"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1559">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                    </cell>
+                </row>
+                <row id="1571">
+                    <cell id="1572"/>
+                    <cell id="1573">
+                        <text id="1585">
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="fontStyle">italic</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[(Фамилия, инициалы)]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1574">
+                        <text id="1586">
+                            <property name="fontSize">8pt</property>
+                            <property name="fontStyle">italic</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[(подпись)]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="1575">
+                    <cell id="1576">
+                        <text id="1587">
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Заявитель]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1577">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <text id="1590">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>row["p_name"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1578">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                    </cell>
+                </row>
+                <row id="1580">
+                    <cell id="1581"/>
+                    <cell id="1582">
+                        <text id="1588">
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="fontStyle">italic</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[(Фамилия, инициалы)]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="1583">
+                        <text id="1589">
+                            <property name="fontSize">8pt</property>
+                            <property name="fontStyle">italic</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[(подпись)]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+        </table>
+    </body>
+</report>

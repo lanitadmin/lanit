@@ -1,0 +1,2 @@
+insert into app_setting (id, owner,setting_id,setting_name, setting_value,is_pass)
+values(hibernate_sequence.nextval, null,'period_selection_index_popular_service','Период выборки дел для расчета индекса популярности услуг (в месецах)', '3', null);

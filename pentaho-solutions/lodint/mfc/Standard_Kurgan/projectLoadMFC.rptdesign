@@ -1,0 +1,504 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="49">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="50">
+            <text-property name="helpText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="42"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="DateData" id="54">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["startDate"],params["endDate"]);
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+}
+else{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetNew" id="151">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">regCNT</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">requestCNT</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">packCNT</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">regCNT</property>
+                </structure>
+                <structure>
+                    <property name="columnName">requestCNT</property>
+                </structure>
+                <structure>
+                    <property name="columnName">packCNT</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">regCNT</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">requestCNT</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">packCNT</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+//stDate = clazzConvert.getStringFormat(params["startDate"]);
+//edDate = clazzConvert.getStringFormat(params["endDate"]);
+stDate = clazzConvert.getOutDate(params["startDate"]);
+edDate = clazzConvert.getOutDate(params["endDate"]);
+
+
+//Packages.java.lang.System.out.println("---1---"+new Date()); 
+
+regQuer=" select count(ps2.id) from PackStatus ps2, PackStatusCode psc2 "+
+" where  "+
+" psc2.code ='regKomplDoc' and "+ 
+" ps2.status = psc2 and "+
+" ps2.ends between :stDate and :edDate ";
+
+requestQuer=" select count(ps1.id) from PackStatus ps1, PackStatusCode psc1 "+
+" where  "+
+" psc1.code ='requestKomplDoc' and  "+
+" ps1.status = psc1 and "+
+" ps1.ends between :stDate and :edDate "; 
+
+packQuer=" select count( DISTINCT ps1.gossrvcDocPackage.id) from PackStatus ps1, PackStatusCode psc1 "+
+" where  "+
+" psc1.code ='requestKomplDoc' and "+ 
+" ps1.status = psc1 and "+
+" ps1.ends between :stDate and :edDate "; 
+
+regCnt = clazz.getEntityManagerLod().createQuery(regQuer).setParameter("stDate", stDate)
+	.setParameter("edDate", edDate).getResultList();
+requestCnt = clazz.getEntityManagerLod().createQuery(requestQuer).setParameter("stDate", stDate)
+	.setParameter("edDate", edDate).getResultList();
+packCNT = clazz.getEntityManagerLod().createQuery(packQuer).setParameter("stDate", stDate)
+	.setParameter("edDate", edDate).getResultList();
+
+//Packages.java.lang.System.out.println("---ss---"+ ss);
+//Packages.java.lang.System.out.println("---result.size()---"+result.size()); 
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+Packages.java.lang.System.out.println("---currentrow---"+currentrow);
+Packages.java.lang.System.out.println("---regCnt---"+regCnt);
+Packages.java.lang.System.out.println("---requestCnt---"+requestCnt);
+Packages.java.lang.System.out.println("---packCNT---"+packCNT);
+row["regCNT"] =regCnt[0];
+row["requestCNT"] = requestCnt[0];
+row["packCNT"] = packCNT[0];
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">portrait</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">0.5cm</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="7">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">Проектная загруженность МФЦ</text-property>
+        </label>
+        <label id="8">
+            <property name="fontSize">24pt</property>
+            <text-property name="text">        </text-property>
+        </label>
+        <text id="11">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">12pt</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<DIV>Информация подготовлена за период с <U><B><VALUE-OF>row["startDate"]</VALUE-OF> г.</B></U> по <U><B><VALUE-OF>row["endDate"]</VALUE-OF> г.</B></U> </DIV>]]></text-property>
+        </text>
+        <label id="12">
+            <property name="fontSize">14pt</property>
+            <text-property name="text">      </text-property>
+        </label>
+        <table id="258">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="verticalAlign">middle</property>
+            <property name="dataSet">DataSetNew</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">regCNT</property>
+                    <expression name="expression" type="javascript">dataSetRow["regCNT"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">requestCNT</property>
+                    <expression name="expression" type="javascript">dataSetRow["requestCNT"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">packCNT</property>
+                    <expression name="expression" type="javascript">dataSetRow["packCNT"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="271"/>
+            <column id="272"/>
+            <column id="280"/>
+            <column id="273"/>
+            <header>
+                <row id="259">
+                    <cell id="260">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="274">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Количество дел прошедших регистрацию]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="261">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="275">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Количество дел, по которым велись работы на контроле (завершены процессы запросов)]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="277">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="281">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Количество завершенных запросов (с ожиданием результата и без него)]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="262">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="276">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Относительная загрузка контролеров]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="263">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <cell id="264">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="287">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">regCNT</property>
+                        </data>
+                    </cell>
+                    <cell id="265">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="289">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">packCNT</property>
+                        </data>
+                    </cell>
+                    <cell id="278">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="288">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">requestCNT</property>
+                        </data>
+                    </cell>
+                    <cell id="266">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="285">
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>if (row["regCNT"]==row["packCNT"]){
+0}else {
+(100*BirtMath.roundUp((row["regCNT"]-row["packCNT"]))/row["packCNT"])}</VALUE-OF>%]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+        <label id="286">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <text-property name="text">Оптимальная работа при значениях от 0 до 100%. Отрицательное значение параметра "Относительная загрузка контролеров" говорит об избытке контролеров. Значение этого параметра превышающего 100% говорит о их недостатке в МФЦ, так как количество дел поступающих с регистрации начинает превышать 2-х дневную норму.</text-property>
+        </label>
+    </body>
+</report>

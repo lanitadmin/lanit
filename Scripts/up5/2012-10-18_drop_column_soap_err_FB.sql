@@ -1,0 +1,1 @@
+alter table SOAP_CONTEXT drop column lastError;

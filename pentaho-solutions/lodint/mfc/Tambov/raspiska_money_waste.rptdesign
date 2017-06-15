@@ -1,0 +1,1549 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.20" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.1.v20090903 Build &lt;2.5.1.v20090917-1447></property>
+    <property name="units">cm</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="processId" id="426">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">3_MFC_plus_Priem</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="427">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">16_3_MFC_plus_Priem_createApplication</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="user" id="428">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">max</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="26"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="50">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">p_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">a_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">service</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">u_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">MFC_ADDRESS</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">p_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_ADDRESS</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">p_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">a_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">service</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">u_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">MFC_ADDRESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.lanit.samara.birt.plugins.Shark();
+
+result2 = clazz.getActivityVariableValue
+	(
+		"Zayavitel,Service",
+		params["processId"],
+		params["activityId"]
+	);	
+
+Zayavitel = result2[0];
+Service = result2[1];
+
+result = clazz.getEntityManagerLod().createQuery
+(
+
+" select "+
+
+" ( "+
+"	select P.lastName || ' ' || "+
+"		P.firstName || ' ' || "+
+"		P.middleName from Person as P "+ 
+"	where ogi.objectClass='org.comsoft.model.common.Person' and P.id = ogi.objectId "+
+"  ) as P_NAME, "+
+
+" ( "+
+"	select A.name "+ 
+"	from Agent as A "+ 
+"	where ogi.objectClass='org.comsoft.lodent.Agent' and A.id = ogi.objectId "+
+" ) as A_NAME, "+ 
+
+"	ce1.name as SERVICE, "+
+
+"	u1.lastName || ' ' || u1.firstName || ' ' || u1.middleName as U_NAME, "+
+
+
+"	aps1.value as MFC_ADDRESS "+
+
+
+" from "+
+"	User u1,"+
+"	CardElement ce1, "+
+"	ObjectGroupItem ogi, "+
+"	AppSetting aps1 "+
+
+" where "+
+"	u1.login = :login "+
+"	and ce1.id = :Service "+
+
+"	and ogi.objectGroup.id = :Zayavitel and ogi.selected = 1 "+
+
+"	and aps1.code='ogv_address' "
+//"	and dp1.id = :Komplekt_doc "
+
+
+)
+.setParameter("login", params["user"])
+.setParameter("Zayavitel", Zayavitel)
+.setParameter("Service", Service)
+.getResultList();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = result.get(currentrow);
+row["p_name"] = rowValue[0];
+row["a_name"] = rowValue[1];
+row["service"] = rowValue[2];
+row["u_name"] = rowValue[3];
+row["MFC_ADDRESS"] = rowValue[4];
+
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;
+result2 = null;
+
+]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">2cm</property>
+            <property name="leftMargin">3cm</property>
+            <property name="bottomMargin">2cm</property>
+            <property name="rightMargin">1.5cm</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">true</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0.31in</property>
+            <page-footer>
+                <auto-text id="756">
+                    <property name="fontFamily">"Roman Unicode"</property>
+                    <property name="fontSize">11pt</property>
+                    <property name="textAlign">right</property>
+                    <property name="type">page-number</property>
+                </auto-text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <expression name="expression">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <expression name="expression">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <expression name="expression">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <expression name="expression">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ADDRESS</property>
+                    <expression name="expression">dataSetRow["MFC_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="8"/>
+            <row id="11">
+                <cell id="12">
+                    <text id="25">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">11pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[ОТЧЕТ О РАСХОДАХ]]></text-property>
+                    </text>
+                    <label id="782">
+                        <property name="fontSize">5pt</property>
+                        <text-property name="text">     </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="13">
+                <cell id="14">
+                    <grid id="474">
+                        <property name="width">16.801041666666666cm</property>
+                        <column id="475">
+                            <property name="width">6.217708333333333cm</property>
+                        </column>
+                        <column id="476">
+                            <property name="width">6.641041666666667cm</property>
+                        </column>
+                        <column id="477">
+                            <property name="width">3.9422916666666667cm</property>
+                        </column>
+                        <row id="478">
+                            <cell id="479">
+                                <text id="482">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["MFC_ADDRESS"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="480"/>
+                            <cell id="481">
+                                <text id="483">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<U>«<VALUE-OF>BirtDateTime.day(BirtDateTime.today())</VALUE-OF>»  </U> <U><VALUE-OF>BirtDateTime.month(BirtDateTime.today(),2)</VALUE-OF></U><I>  </I><U><VALUE-OF>BirtDateTime.year(BirtDateTime.today())</VALUE-OF> г.</U>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                    <label id="465">
+                        <property name="fontSize">8pt</property>
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="431">
+                <cell id="432">
+                    <text id="484">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">11pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>Наименование комплексной услуги «МФЦ – Одно окно»: «<VALUE-OF>row["service"]</VALUE-OF>»</DIV>]]></text-property>
+                    </text>
+                    <label id="778">
+                        <property name="fontSize">4pt</property>
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="467">
+                <cell id="468">
+                    <text id="485">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">11pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>Доверенность  от  «_____»_________________201____г., реестр. №__________</DIV>]]></text-property>
+                    </text>
+                    <label id="779">
+                        <property name="fontSize">4pt</property>
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <text id="486">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">11pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>Получено от заявителя по распискам ___________________ руб.</DIV>]]></text-property>
+                    </text>
+                    <label id="780">
+                        <property name="fontSize">4pt</property>
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <text id="487">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">11pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>Расходы по комплексной услуге:</DIV>]]></text-property>
+                    </text>
+                    <label id="781">
+                        <property name="fontSize">4pt</property>
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="768">
+                <cell id="769">
+                    <grid id="671">
+                        <property name="width">100%</property>
+                        <column id="672">
+                            <property name="width">1.1641666666666666cm</property>
+                        </column>
+                        <column id="673">
+                            <property name="width">2.9897916666666666cm</property>
+                        </column>
+                        <column id="674">
+                            <property name="width">10.477500000000001cm</property>
+                        </column>
+                        <column id="675">
+                            <property name="width">2.354791666666667cm</property>
+                        </column>
+                        <row id="676">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="677">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="741">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<DIV>N</DIV>
+<DIV>п/п</DIV>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="678">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="658">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Дата платежа]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="679">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <property name="verticalAlign">middle</property>
+                                <text id="742">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Наименование платежа]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="680">
+                                <property name="verticalAlign">middle</property>
+                                <text id="743">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Сумма платежа, руб.]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="681">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="682">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">top</property>
+                                <text id="744">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[1.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="683">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="758">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="684">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="685"/>
+                        </row>
+                        <row id="686">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="687">
+                                <property name="backgroundAttachment">scroll</property>
+                                <property name="backgroundPositionX">0%</property>
+                                <property name="backgroundPositionY">0%</property>
+                                <property name="backgroundRepeat">repeat</property>
+                                <property name="fontFamily">"Roman Unicode"</property>
+                                <property name="fontSize">11pt</property>
+                                <property name="fontWeight">normal</property>
+                                <property name="fontStyle">normal</property>
+                                <property name="fontVariant">normal</property>
+                                <property name="color">black</property>
+                                <property name="textLineThrough">none</property>
+                                <property name="textOverline">none</property>
+                                <property name="textUnderline">none</property>
+                                <property name="borderBottomColor">black</property>
+                                <property name="borderBottomStyle">none</property>
+                                <property name="borderBottomWidth">medium</property>
+                                <property name="borderLeftColor">black</property>
+                                <property name="borderLeftStyle">none</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <property name="borderTopColor">black</property>
+                                <property name="borderTopStyle">none</property>
+                                <property name="borderTopWidth">medium</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="marginLeft">0pt</property>
+                                <property name="marginBottom">0pt</property>
+                                <property name="marginRight">0pt</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">1pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">1pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="textIndent">0em</property>
+                                <property name="letterSpacing">normal</property>
+                                <property name="lineHeight">normal</property>
+                                <property name="orphans">2</property>
+                                <property name="textTransform">none</property>
+                                <property name="whiteSpace">normal</property>
+                                <property name="widows">2</property>
+                                <property name="wordSpacing">normal</property>
+                                <property name="display">block</property>
+                                <property name="pageBreakAfter">auto</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <property name="showIfBlank">false</property>
+                                <property name="canShrink">false</property>
+                                <text id="745">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[2.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="688">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="759">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="689">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="690"/>
+                        </row>
+                        <row id="691">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="692">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="746">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[3.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="693">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="760">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="694">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="695"/>
+                        </row>
+                        <row id="696">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="697">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="747">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[4.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="698">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="761">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="699">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="700"/>
+                        </row>
+                        <row id="701">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="702">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="748">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[5.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="703">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="762">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="704">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="705"/>
+                        </row>
+                        <row id="706">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="707">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="749">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[6.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="708">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="763">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="709">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="710"/>
+                        </row>
+                        <row id="711">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="712">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="750">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[7.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="713">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="764">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="714">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="715"/>
+                        </row>
+                        <row id="716">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="717">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="751">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[8.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="718">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="765">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="719">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="720"/>
+                        </row>
+                        <row id="721">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="722">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="752">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[9.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="723">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="766">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="724">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="725"/>
+                        </row>
+                        <row id="726">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="727">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="753">
+                                    <property name="backgroundAttachment">scroll</property>
+                                    <property name="backgroundPositionX">0%</property>
+                                    <property name="backgroundPositionY">0%</property>
+                                    <property name="backgroundRepeat">repeat</property>
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="fontStyle">normal</property>
+                                    <property name="fontVariant">normal</property>
+                                    <property name="color">black</property>
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textOverline">none</property>
+                                    <property name="textUnderline">none</property>
+                                    <property name="borderBottomColor">black</property>
+                                    <property name="borderBottomStyle">none</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">black</property>
+                                    <property name="borderLeftStyle">none</property>
+                                    <property name="borderLeftWidth">medium</property>
+                                    <property name="borderRightColor">black</property>
+                                    <property name="borderRightStyle">none</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="borderTopColor">black</property>
+                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopWidth">medium</property>
+                                    <property name="marginTop">0pt</property>
+                                    <property name="marginLeft">0pt</property>
+                                    <property name="marginBottom">0pt</property>
+                                    <property name="marginRight">0pt</property>
+                                    <property name="paddingTop">1pt</property>
+                                    <property name="paddingLeft">1pt</property>
+                                    <property name="paddingBottom">1pt</property>
+                                    <property name="paddingRight">1pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="textIndent">0em</property>
+                                    <property name="letterSpacing">normal</property>
+                                    <property name="lineHeight">normal</property>
+                                    <property name="orphans">2</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="widows">2</property>
+                                    <property name="wordSpacing">normal</property>
+                                    <property name="display">block</property>
+                                    <property name="pageBreakAfter">auto</property>
+                                    <property name="pageBreakBefore">auto</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="showIfBlank">false</property>
+                                    <property name="canShrink">false</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[10.]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="728">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <label id="767">
+                                    <property name="fontSize">30pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="729">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="730"/>
+                        </row>
+                        <row id="731">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="732">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="733">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="754">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="paddingLeft">5pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Итого:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="734">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="735"/>
+                        </row>
+                        <row id="736">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                            <cell id="737">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="738">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                                <text id="755">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="paddingLeft">5pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Остаток:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="739">
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">1px</property>
+                            </cell>
+                            <cell id="740"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="770">
+                <cell id="771">
+                    <grid id="488">
+                        <property name="pageBreakInside">avoid</property>
+                        <property name="width">17.012708333333336cm</property>
+                        <column id="489">
+                            <property name="width">5.609166666666667cm</property>
+                        </column>
+                        <column id="492">
+                            <property name="width">11.403541666666666cm</property>
+                        </column>
+                        <row id="493">
+                            <cell id="494">
+                                <text id="518">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Юрисконсульт ТОГУ «МФЦ»: ]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="497">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">1px</property>
+                                <text id="519">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["u_name"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="772">
+                            <cell id="773">
+                                <label id="775">
+                                    <property name="fontSize">20pt</property>
+                                    <text-property name="text">    </text-property>
+                                </label>
+                            </cell>
+                            <cell id="774"/>
+                        </row>
+                        <row id="498">
+                            <cell id="499">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <text id="520">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Остаток денежных средств в сумме ___________ (_______________________________________) руб.]]></text-property>
+                                </text>
+                                <label id="776">
+                                    <property name="fontSize">4pt</property>
+                                    <text-property name="text">     </text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="503">
+                            <cell id="504">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <text id="521">
+                                    <property name="fontFamily">"Roman Unicode"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[мной, <VALUE-OF>if (row["p_name"]!=null) row["p_name"]; else row["a_name"]</VALUE-OF>, получен. Претензий не имею.]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="508">
+                            <cell id="509">
+                                <label id="668">
+                                    <property name="fontSize">18pt</property>
+                                    <text-property name="text">   </text-property>
+                                </label>
+                            </cell>
+                            <cell id="512"/>
+                        </row>
+                        <row id="513">
+                            <cell id="514">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <grid id="608">
+                                    <property name="pageBreakInside">avoid</property>
+                                    <property name="width">16.8275cm</property>
+                                    <column id="609">
+                                        <property name="width">2.1166666666666667cm</property>
+                                    </column>
+                                    <column id="610">
+                                        <property name="width">9.8425cm</property>
+                                    </column>
+                                    <column id="625">
+                                        <property name="width">1.8520833333333333cm</property>
+                                    </column>
+                                    <column id="611">
+                                        <property name="width">3.01625cm</property>
+                                    </column>
+                                    <row id="612">
+                                        <cell id="613">
+                                            <text id="256">
+                                                <property name="fontFamily">"Roman Unicode"</property>
+                                                <property name="fontSize">11pt</property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[Заявитель: ]]></text-property>
+                                            </text>
+                                        </cell>
+                                        <cell id="614">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">1px</property>
+                                            <text id="526">
+                                                <property name="fontFamily">"Roman Unicode"</property>
+                                                <property name="fontSize">11pt</property>
+                                                <property name="textAlign">center</property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[<VALUE-OF>row["p_name"]</VALUE-OF>]]></text-property>
+                                            </text>
+                                        </cell>
+                                        <cell id="623">
+                                            <text id="626">
+                                                <property name="fontFamily">"Roman Unicode"</property>
+                                                <property name="fontSize">11pt</property>
+                                                <property name="contentType">auto</property>
+                                                <text-property name="content"><![CDATA[(Подпись)]]></text-property>
+                                            </text>
+                                        </cell>
+                                        <cell id="615">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">1px</property>
+                                            <label id="667">
+                                                <text-property name="text">   </text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                        <row id="627">
+                            <cell id="628"/>
+                            <cell id="629">
+                                <grid id="630">
+                                    <property name="width">10.874375cm</property>
+                                    <column id="631">
+                                        <property name="width">10.239375cm</property>
+                                    </column>
+                                    <column id="632">
+                                        <property name="width">0.635cm</property>
+                                    </column>
+                                    <row id="633">
+                                        <cell id="634">
+                                            <label id="777">
+                                                <text-property name="text">    </text-property>
+                                            </label>
+                                            <text id="636">
+                                                <property name="fontFamily">"Roman Unicode"</property>
+                                                <property name="fontSize">11pt</property>
+                                                <property name="textAlign">right</property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[Дата  «_____» _________________201___ г.]]></text-property>
+                                            </text>
+                                        </cell>
+                                        <cell id="635">
+                                            <label id="666">
+                                                <text-property name="text">   </text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

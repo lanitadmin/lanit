@@ -1,0 +1,31 @@
+					<c:if test="#{!var.writable}">
+						<div class="suggestion-readonly">
+							<span>
+								#{var.value==null ? '[не выбрано]' : var.caption}
+							</span> 
+						</div>
+					</c:if>	
+
+					<c:if test="#{(appSettMap.get('searchable_select_entity') != '1' || 'org.cp.common.ObjectSelection'.equals(var.attributes['entityClass']) || 'org.cp.sed.Department'.equals(var.attributes['entityClass'])) and var.writable}">
+						<h:panelGrid columns="2">
+							<h:inputTextarea id="entselectRO#{var.id}"
+								value="#{var.value==null ? '[не выбрано]' : var.caption}"
+								readonly="true" styleClass="readonly" style="width:500px">
+								<a4j:ajax event="dblclick" listener="#{controller.selectEntityVar(var.id)}" />
+							</h:inputTextarea>								
+							<a4j:commandButton value="#{messages['choose']}" id="entselectBTN_RO#{var.id}"
+								action="#{controller.selectEntityVar(var.id)}"
+								rendered="#{var.writable}"  />
+						</h:panelGrid>		
+					</c:if>		
+					<c:if test="#{(appSettMap.get('searchable_select_entity') == '1' and  !'org.cp.common.ObjectSelection'.equals(var.attributes['entityClass']) and !'org.cp.sed.Department'.equals(var.attributes['entityClass'])) and var.writable}" >
+
+						<util:autoComplete key="#{var.value}" label="#{var.caption}" id="suggest#{var.id}"
+							entityHome="#{controller.getEntityVarController(var.id, false)}"
+							search2="#{entity.getSuggestion}" 
+							var="item" itemValue="#{item.id}" itemLabel="#{entity.getEntityLabel(item)}"
+							filter="#{controller.getEntityVarFilter(var.id)}"
+							filterData="#{controller.getEntityVarFilterData(var.id)}"
+							maxResults="50">
+						</util:autoComplete>
+					</c:if>

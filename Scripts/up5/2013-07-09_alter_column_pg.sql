@@ -1,0 +1,2 @@
+--прогонять _перед_ деплоем новой сборки
+ALTER TABLE REASSIGNS_INFO RENAME COLUMN EXCLUSIVE TO EXCLUSIVE_ASSIGN;

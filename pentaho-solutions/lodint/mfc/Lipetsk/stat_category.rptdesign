@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.20" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.1.v20090903 Build &lt;2.5.1.v20090917-1447></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="183">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="184">
+            <text-property name="helpText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="72"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="73">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">NAME_OGV</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">SERVICE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">CATEGORY</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">NAME_OGV</property>
+                </structure>
+                <structure>
+                    <property name="columnName">SERVICE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CATEGORY</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">NAME_OGV</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">SERVICE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">CATEGORY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.lanit.samara.birt.plugins.Shark();
+clazzConvert = new Packages.org.lanit.samara.birt.plugins.Converter();
+
+stDate = clazzConvert.getStringFormat(params["startDate"]);
+edDate = clazzConvert.getStringFormat(params["endDate"]);
+
+/*
+result = clazz.getEntityManagerLod().createQuery
+	(
+" select "+
+
+"	ce.name as NAME_OGV, "+
+"	ce1.name as SERVICE, "+
+"	afv.field.caption as CATEGORY "+
+
+" from "+
+
+"	CardElement ce, "+
+"	CardElement ce1, "+
+"	GossrvcDocPackageItem dpi, "+
+"	GossrvcRequest gr, "+
+"	AdditionalFieldValue afv, "+
+"	ObjectGroupItem ogi "+
+" where "+
+
+"	dpi.gossrvcRequest is not null and "+
+"	dpi.gossrvcRequest = gr and "+
+"	gr.ogvId = ce.id and "+
+"	ce1.id = dpi.gossrvcDocPackage.serviceId and  "+
+"	dpi.gossrvcDocPackage.applicantGroup = ogi.objectGroup and "+
+"	afv.booleanValue = 1 and "+
+"	ogi.objectClass = afv.field.model and afv.itemId = ogi.objectId and "+
+"	gr.requestDate <= '"+edDate+"' and gr.requestDate >= '"+stDate+"' "
+	)
+	.getResultList();
+*/	
+
+result = clazz.getEntityManagerLod().createQuery
+(
+" select "+
+	" ce.name as NAME_OGV, "+
+	" ce1.name as SERVICE, "+
+	" afv.field.caption as CATEGORY "+
+" from "+
+	" CardElement ce, "+
+	" CardElement ce1, "+
+	" GossrvcRequest gr, "+
+	" AdditionalFieldValue afv, "+
+	" ObjectGroupItem ogi "+
+" where "+
+	" gr.gossrvcDocPackage.applicantGroup = ogi.objectGroup and "+
+	" afv.booleanValue = 1 and "+
+	" ogi.objectClass = afv.field.model and "+
+	" afv.itemId = ogi.objectId and "+
+	" gr.ogvId = ce.id and "+
+	" gr.gossrvcDocPackage.serviceId = ce1.id and "+
+	" gr.requestDate <= '"+edDate+"' and gr.requestDate >= '"+stDate+"' "
+)
+.getResultList();
+	
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+
+var rowValue = result.get(currentrow);
+
+
+row["NAME_OGV"] = rowValue[0];
+row["SERVICE"] = rowValue[1];
+row["CATEGORY"] = rowValue[2];
+
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DateData" id="54">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.lanit.samara.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["startDate"],params["endDate"]);
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+}
+else{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">2cm</property>
+            <property name="leftMargin">3cm</property>
+            <property name="bottomMargin">2cm</property>
+            <property name="rightMargin">1.5cm</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="45">
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">14pt</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[СТАТИСТИКА ОБРАЩЕНИЙ ПО КАТЕГОРИЯМ ГРАЖДАН]]></text-property>
+        </text>
+        <label id="70">
+            <text-property name="text">     </text-property>
+        </label>
+        <text id="181">
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">12pt</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<DIV>Информация подготовлена за период с <U><B><VALUE-OF>row["startDate"]</VALUE-OF> г.</B></U> по <U><B><VALUE-OF>row["endDate"]</VALUE-OF> г.</B></U> </DIV>]]></text-property>
+        </text>
+        <label id="182">
+            <text-property name="text">     </text-property>
+        </label>
+        <table id="9">
+            <property name="width">6.5in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">NAME_OGV</property>
+                    <text-property name="displayName">NAME_OGV</text-property>
+                    <expression name="expression">dataSetRow["NAME_OGV"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SERVICE</property>
+                    <text-property name="displayName">SERVICE</text-property>
+                    <expression name="expression">dataSetRow["SERVICE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CATEGORY</property>
+                    <text-property name="displayName">CATEGORY</text-property>
+                    <expression name="expression">dataSetRow["CATEGORY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">C</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>GROUP_OGV</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">RUNNINGCOUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["NAME_OGV"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="25">
+                <property name="width">0.3023255813953488in</property>
+            </column>
+            <column id="26">
+                <property name="width">2.46875in</property>
+            </column>
+            <column id="27">
+                <property name="width">1.90625in</property>
+            </column>
+            <column id="28">
+                <property name="width">1.813953488372093in</property>
+            </column>
+            <header>
+                <row id="10">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="11">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <label id="29">
+                            <property name="fontFamily">"Roman Unicode"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">№ п/п</text-property>
+                        </label>
+                    </cell>
+                    <cell id="12">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <label id="30">
+                            <property name="fontFamily">"Roman Unicode"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Орган, предоставляющий услугу</text-property>
+                        </label>
+                    </cell>
+                    <cell id="13">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <label id="31">
+                            <property name="fontFamily">"Roman Unicode"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Наименование услуги</text-property>
+                        </label>
+                    </cell>
+                    <cell id="14">
+                        <label id="32">
+                            <property name="fontFamily">"Roman Unicode"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Категории обратившихся граждан за получением услуги</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="88">
+                <property name="groupName">GROUP_OGV</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["NAME_OGV"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["NAME_OGV"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="89">
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <property name="verticalAlign">middle</property>
+                        <cell id="90">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <data id="112">
+                                <property name="fontFamily">"Roman Unicode"</property>
+                                <property name="fontSize">12pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">C</property>
+                            </data>
+                        </cell>
+                        <cell id="91">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <data id="99">
+                                <property name="fontFamily">"Roman Unicode"</property>
+                                <property name="fontSize">12pt</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="paddingTop">3pt</property>
+                                <property name="paddingLeft">3pt</property>
+                                <property name="paddingBottom">3pt</property>
+                                <property name="paddingRight">3pt</property>
+                                <property name="textAlign">left</property>
+                                <property name="resultSetColumn">NAME_OGV</property>
+                            </data>
+                        </cell>
+                        <cell id="92">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                        <cell id="93"/>
+                    </row>
+                </header>
+                <footer>
+                    <row id="176">
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <cell id="177">
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">1px</property>
+                        </cell>
+                        <cell id="178"/>
+                        <cell id="179"/>
+                        <cell id="180"/>
+                    </row>
+                </footer>
+            </group>
+            <group id="100">
+                <property name="groupName">GROUP_SERVICE</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["SERVICE"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["SERVICE"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="101">
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <cell id="102">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                        <cell id="103">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                        <cell id="104">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                            <data id="111">
+                                <property name="fontFamily">"Roman Unicode"</property>
+                                <property name="fontSize">12pt</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="paddingTop">3pt</property>
+                                <property name="paddingLeft">3pt</property>
+                                <property name="paddingBottom">3pt</property>
+                                <property name="paddingRight">3pt</property>
+                                <property name="textAlign">left</property>
+                                <property name="resultSetColumn">SERVICE</property>
+                            </data>
+                        </cell>
+                        <cell id="105"/>
+                    </row>
+                </header>
+                <footer>
+                    <row id="166">
+                        <cell id="167">
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                        </cell>
+                        <cell id="168">
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                        </cell>
+                        <cell id="169">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                        </cell>
+                        <cell id="170">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">1px</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">1px</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <group id="114">
+                <property name="groupName">GROUP_CATEGORY</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["CATEGORY"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["CATEGORY"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="115">
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <cell id="116">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                        <cell id="117">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                        <cell id="118">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">1px</property>
+                        </cell>
+                        <cell id="119">
+                            <data id="125">
+                                <property name="fontFamily">"Roman Unicode"</property>
+                                <property name="fontSize">12pt</property>
+                                <property name="paddingTop">2pt</property>
+                                <property name="paddingLeft">2pt</property>
+                                <property name="paddingBottom">2pt</property>
+                                <property name="paddingRight">2pt</property>
+                                <property name="resultSetColumn">CATEGORY</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
+        </table>
+    </body>
+</report>

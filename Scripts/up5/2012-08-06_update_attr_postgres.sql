@@ -1,0 +1,1 @@
+update gossrvc_service_attr set archive=true where parent_id is null;

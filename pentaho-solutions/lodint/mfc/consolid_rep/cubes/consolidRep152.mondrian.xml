@@ -1,0 +1,751 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema name="consolidRep152">
+  <Dimension name="org_unit">
+    <Hierarchy name="Name" hasAll="true" primaryKey="id"  caption="Филиал" allMemberCaption="Все филиалы">
+      <Table name="&quot;org_unit&quot;" schema="&quot;mfc&quot;"/>
+      <Level name="Name" column="id" nameColumn="name"  type="Numeric" uniqueMembers="true" parentColumn="parent_id">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+<!--  <Dimension name="Report param">
+    <Hierarchy name="Param name" hasAll="true" primaryKey="id" caption="Показатель" allMemberCaption="Все показатели">
+      <Table name="&quot;report_param&quot;" schema="&quot;mfc&quot;"/>
+      <Level name="Param name" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>-->
+
+    <Dimension name="param_time">
+    <Hierarchy name="Показатель" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="PARAM_TIME_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.report_param WHERE id<8]]>
+	 </SQL>
+         </View>
+      <Level name="Param time" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+<!--    <Dimension name="param">
+    <Hierarchy name="Показатель" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="PARAM_VIEW">
+          <SQL dialect="generic">
+	    <![CDATA[select * from report_param WHERE id >=8 ]]>
+	 </SQL>
+         </View>
+      <Level name="Dimension data" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>-->
+  
+  <Dimension name="countsOfRequestsToMFC">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToMFC">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =8 ]]>
+	 </SQL>
+         </View>
+      <Level name="Param requests to mfc" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="countsOfRequestsToServices">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToServices">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =9 ]]>
+	 </SQL>
+         </View>
+      <Level name="Param requests to services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="countsOfRequestsToOperators">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToOperators">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =10 ]]>
+	 </SQL>
+         </View>
+      <Level name="Param requests to operators" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  
+    <Dimension name="countsOfRequestsToConsult">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToConsult">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =11 ]]>
+	 </SQL>
+         </View>
+      <Level name="Params requests to consult" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="countsOfInteractions">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToConsult">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =12 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of interactions " column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="countsOfOutOfDatePacks">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =13 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of out of date packs" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="countsOfRefuses">
+    <Hierarchy name="countsOfRefuses" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =14 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of refuses" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="countsOfPerformedServices">
+    <Hierarchy name="countsOfPerformedServices" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =15 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of performed services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="CountsOfDocPacksByCategs">
+    <Hierarchy name="CountsOfDocPacksByCategs" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =21 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of performed services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="CountsOfServicesByCategs">
+    <Hierarchy name="CountsOfServicesByCategs" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =22 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of performed services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+
+  
+  <Dimension name="rep_dim_time">
+    <Hierarchy name="Year id" hasAll="true" primaryKey="time_id" caption="Время" allMemberCaption="За все время">
+      <Table name="&quot;report_dimension_time&quot;" schema="&quot;mfc&quot;"/>
+      <Level name="Year id" column="year_id" type="Numeric" uniqueMembers="false">
+      </Level>
+      <Level name="Month desc" column="month_desc" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  
+    <Dimension name="dim_gosOrgGovLevel">
+    <Hierarchy name="ОГВ" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="gosOrgGovLevel_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='gosOrgGovLevel']]>
+	 </SQL>
+         </View>
+      <Level name="Dimension data" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+      <Dimension name="dim_typeRefuses">
+    <Hierarchy name="Тип отказа" hasAll="true" primaryKey="id"  allMemberCaption="По всем">
+       <View alias="typeRefuses_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='typeRefuses']]>
+	 </SQL>
+         </View>
+      <Level name="typeRefuses" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_operator_name">
+    <Hierarchy name="ФИО оператора" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="dim_operator_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='operatorName']]>
+	 </SQL>
+         </View>
+      <Level name="operator" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="dim_service_name">
+    <Hierarchy name="Имя услуги" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="sevice_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='serviceName']]>
+	 </SQL>
+         </View>
+      <Level name="serviceName" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_renderedService">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="renderedService_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='renderedService']]>
+	 </SQL>
+         </View>
+      <Level name="renderedService" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+    <Dimension name="dim_mfcStateColumns">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="mfcStateColumns_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='mfcStateColumns']]>
+	 </SQL>
+         </View>
+      <Level name="mfcStateColumns" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+    <Dimension name="dim_consultForPeriod">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="consultForPeriod_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='consultForPeriod']]>
+	 </SQL>
+         </View>
+      <Level name="consultForPeriod" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="dim_statePartOfDay">
+    <Hierarchy name="Время суток" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="statePartOfDay_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='statePartOfDay']]>
+	 </SQL>
+         </View>
+      <Level name="statePartOfDay" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="dim_stateDayOfWeek">
+    <Hierarchy name="День недели" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="stateDayOfWeek_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='stateDayOfWeek']]>
+	 </SQL>
+         </View>
+      <Level name="stateDayOfWeek" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+      <Dimension name="dim_oper2Columns">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="oper2Columns_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='oper2Columns']]>
+	 </SQL>
+         </View>
+      <Level name="oper2Columns" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+
+  <Dimension name="dim_column_cat">
+    <Hierarchy name="Категории" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_cat_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='serviceCat']]>
+	 </SQL>
+         </View>
+      <Level name="column_cat" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_column_ogv">
+    <Hierarchy name="ОГВ" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_ogv_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='ogv']]>
+	 </SQL>
+         </View>
+      <Level name="column_ogv" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_column_ogv_name">
+    <Hierarchy name="Ведомство" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_ogv_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='ogvName']]>
+	 </SQL>
+         </View>
+      <Level name="column_ogv" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_column_qeustion_name">
+    <Hierarchy name="Критерий" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_qeustion_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='qeustionName']]>
+	 </SQL>
+         </View>
+      <Level name="column_ogv" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+
+<!-- <Cube name="Показатели по времени (средн.)">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="param_time" source="param_time" foreignKey="param_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    
+    <Measure name="Показатели по времени (средние)" aggregator="avg" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>
+  </Cube>-->
+ 
+   <Cube name="Показатели по времени">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="param_time" source="param_time" foreignKey="param_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+
+ <Measure name="Минимальное" aggregator="min" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>    
+
+ <Measure name="Суммарное" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>
+    
+    <Measure name="Среднее" aggregator="avg" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>
+
+ <Measure name="Максимальное" aggregator="max" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>
+    
+ </Cube>
+ 
+ 
+ <Cube name="Показатели по времени (макс.)">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="param_time" source="param_time" foreignKey="param_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+   
+    <Measure name="Максимальное" aggregator="max" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>
+
+    
+    <Measure name="Минимальное" column="measure" aggregator="min" formatString="#"/>
+    <Measure name="Суммарное" column="measure" aggregator="sum" formatString="#"/>
+    <Measure name="Среднее" column="measure" aggregator="avg" formatString="#"/>
+ </Cube>
+
+ <Cube name="Показатель - Количество дел по категориям">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_column_cat" source="dim_column_cat" foreignKey="dimension1"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 21
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+ </Cube>
+
+  <Cube name="Показатель - Количество услуг по категориям">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_column_cat" source="dim_column_cat" foreignKey="dimension1"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 22
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+ </Cube>
+
+ 
+ <Cube name="Показатель - Количество обращений заявителей по МФЦ"> 
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 8
+	then report_fact_param.measure else 0  end)
+    </SQL>
+  </MeasureExpression>
+</Measure>
+ </Cube>
+ 
+<Cube name="Показатель - Количество обращений заявителей по услугам">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension1"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 9
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+ </Cube>
+
+  <Cube name="Показатель - Количество обращений заявителей по операторам">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_operator_name" source="dim_operator_name" foreignKey="dimension1"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 10
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+<Cube name="Показатель - Количество обращений заявителей на консультацию">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество обращений заявителей на консультацию" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 11
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+  <Cube name="Показатель - Количество межведомственных взаимодействий">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+       <DimensionUsage name="dim_gosOrgGovLevel" source="dim_gosOrgGovLevel" foreignKey="dimension1"/> 
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество межведомственных взаимодействий" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 12
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+  <Cube name="Показатель - Количество просроченных дел">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 13
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+  <Cube name="Показатель - Количество отказов (среди них - мотивированных)">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_typeRefuses" source="dim_typeRefuses" foreignKey="dimension1"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 14
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+  <Cube name="Показатель - Количество предоставленных услуг">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 15
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+
+
+ <Cube name="Количество оказанных услуг за период">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_column_cat" source="dim_column_cat" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension2"/>
+    <DimensionUsage name="dim_renderedService" source="dim_renderedService" foreignKey="dimension3"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 16
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+  
+      <Measure name="Сум. кол." aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 16
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+
+  
+    <Measure name="Сред. кол." aggregator="avg" formatString="#">
+          <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 16 and dimension
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+
+    <Measure name="Макс. кол." aggregator="max" formatString="#">
+          <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 16
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+
+    <Measure name="Мин. кол." aggregator="min" formatString="#">
+          <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 16
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+
+
+  
+</Cube>
+
+  <Cube name="Количество консультаций за период">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_column_cat" source="dim_column_cat" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension2"/>
+    <DimensionUsage name="dim_consultForPeriod" source="dim_consultForPeriod" foreignKey="dimension3"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 17
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+  
+  <Cube name="Текущее состояние по МФЦ">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_column_cat" source="dim_column_cat" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension2"/>
+    <DimensionUsage name="dim_column_ogv" source="dim_column_ogv" foreignKey="dimension3"/>
+    <DimensionUsage name="dim_mfcStateColumns" source="dim_mfcStateColumns" foreignKey="dimension4"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 18
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+
+  <Cube name="Отчет по операторам">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_operator_name" source="dim_operator_name" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension3"/>
+    <DimensionUsage name="dim_oper2Columns" source="dim_oper2Columns" foreignKey="dimension4"/>  
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 19
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>    
+  </Measure>
+  
+  <Measure name="Мин." aggregator="min" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 19
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>    
+  </Measure>
+  
+    <Measure name="Средн." aggregator="avg" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 19
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>   
+  </Measure>
+
+   <Measure name="Макс." aggregator="max" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 19
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+  
+</Cube> 
+
+
+  <Cube name="Востребованность услуг по периодам времени">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="dim_column_cat" source="dim_column_cat" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension2"/>
+    <DimensionUsage name="dim_statePartOfDay" source="dim_statePartOfDay" foreignKey="dimension3"/>  
+    <DimensionUsage name="dim_stateDayOfWeek" source="dim_stateDayOfWeek" foreignKey="dimension4"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 20
+	then report_fact_param.measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+  </Cube>
+  
+  <Cube name="Общий отчет о качестве работы МФЦ">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="dim_column_ogv_name" source="dim_column_ogv_name" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_service_name" source="dim_service_name" foreignKey="dimension2"/>
+    <DimensionUsage name="dim_column_qeustion_name" source="dim_column_qeustion_name" foreignKey="dimension3"/>  
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="avg" formatString="#0.00">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 30
+	then report_fact_param.float_measure else null  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+  </Cube>
+  
+ 
+</Schema>

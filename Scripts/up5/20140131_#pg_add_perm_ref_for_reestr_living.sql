@@ -1,0 +1,15 @@
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'insert', null, 'entity.PersonCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'update', null, 'entity.PersonCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'delete', null, 'entity.PersonCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'insert', null, 'entity.ApartmentCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'update', null, 'entity.ApartmentCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'delete', null, 'entity.ApartmentCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'insert', null, 'entity.PersonLiveApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'update', null, 'entity.PersonLiveApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'delete', null, 'entity.PersonLiveApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'insert', null, 'entity.PersonOwnApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'update', null, 'entity.PersonOwnApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'delete', null, 'entity.PersonOwnApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'insert', null, 'entity.DocumentOrderApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'update', null, 'entity.DocumentOrderApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (nextval('hibernate_sequence'), 'delete', null, 'entity.DocumentOrderApartment');

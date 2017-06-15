@@ -1,0 +1,2 @@
+insert into app_setting (ID, OWNER, SETTING_ID, SETTING_NAME, SETTING_VALUE) 
+values (gen_id(hibernate_sequence, 1), ???,  'kontroler_role', 'Код роли ответственного за контроль исполнения услуги (на данном филиале)', ???)

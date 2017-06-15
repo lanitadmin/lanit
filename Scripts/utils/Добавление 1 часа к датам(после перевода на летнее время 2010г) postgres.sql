@@ -1,0 +1,1 @@
+update gossrvc_doc_package_attr_val set datevalue = datevalue + 1*interval '1 hour' where extract(hour from datevalue) = 23 and extract(minute from datevalue) = 0

@@ -1,0 +1,10 @@
+--1)
+--необходимо удалить обязательность поля
+update RDB$RELATION_FIELDS set
+RDB$NULL_FLAG = NULL
+where (RDB$FIELD_NAME = 'PARENT_ID') and
+(RDB$RELATION_NAME = 'GOSSRVC_SERVICE_ATTR'); 
+ 
+--2)
+update RDB$FIELDS set RDB$FIELD_LENGTH = 50, RDB$CHARACTER_LENGTH = 50
+where RDB$FIELD_NAME = (select RDB$FIELD_SOURCE from RDB$RELATION_FIELDS where (RDB$RELATION_NAME = 'NODE') and (RDB$FIELD_NAME = 'CODE'));

@@ -1,0 +1,1 @@
+ALTER TABLE gossrvc_doc_package ALTER COLUMN senderpacknum TYPE varchar(50);

@@ -1,0 +1,1 @@
+alter table GOSSRVC_SERVICE_ATTR alter COLUMN RESTRICTLIST type varchar(2000);

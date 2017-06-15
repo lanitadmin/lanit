@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://samara.lanit.ru/gossrvc/schemas/ArendaRequest" xmlns:tns="http://samara.lanit.ru/gossrvc/schemas/ArendaRequest" elementFormDefault="qualified" xmlns:Q1="http://samara.lanit.ru/gossrvc/schemas/ServiceRequest">
+
+    <xs:import schemaLocation="ServiceRequest.xsd" namespace="http://samara.lanit.ru/gossrvc/schemas/ServiceRequest"></xs:import>
+    <xs:element name="request" type="tns:ArendaRequest"></xs:element>
+
+    <xs:complexType name="ArendaRequest">
+    	<xs:complexContent>
+    		<xs:extension base="Q1:ServiceRequest">
+    			<xs:sequence>
+    				<xs:element minOccurs="1" name="serviceAttributes"
+    					type="tns:ServiceArendaAttributes">
+    					<xs:annotation>
+    						<xs:documentation>
+    							Дополнительные параметры по услуге
+    							(аренда)
+    						</xs:documentation>
+    					</xs:annotation>
+    				</xs:element>
+
+    			</xs:sequence>
+
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+   <xs:complexType name="ServiceArendaAttributes">
+    <xs:sequence>
+     <xs:element name="area" type="xs:double" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Площадь участка в кв. метрах</xs:documentation>
+     	</xs:annotation></xs:element>
+                    <xs:element name="period" type="xs:long" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Срок аренды в месяцах</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element name="purpose" type="xs:string" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Цель использования</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element name="location" type="xs:string" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Местонахождение участка</xs:documentation>
+     	</xs:annotation></xs:element>     
+    </xs:sequence>
+   </xs:complexType>
+
+    
+</xs:schema>

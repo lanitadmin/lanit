@@ -1,0 +1,1580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <data-sources>
+        <script-data-source name="Data Source" id="63"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="64">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ogv_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">service_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">avg_service_wait</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">consult</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">accepted_doc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">issue_doc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">service_count</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">avg_eq_wait</property>
+                    <property name="dataType">time</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">complicant</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ogv_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">avg_service_wait</property>
+                </structure>
+                <structure>
+                    <property name="columnName">consult</property>
+                </structure>
+                <structure>
+                    <property name="columnName">accepted_doc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">issue_doc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service_count</property>
+                </structure>
+                <structure>
+                    <property name="columnName">avg_eq_wait</property>
+                </structure>
+                <structure>
+                    <property name="columnName">complicant</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ogv_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">service_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">avg_service_wait</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">consult</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">accepted_doc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">issue_doc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">service_count</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">avg_eq_wait</property>
+                        <property name="dataType">time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">complicant</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[timeFormat = new Packages.java.text.SimpleDateFormat("HH:mm:ss");
+timeFormat.setTimeZone(Packages.java.util.TimeZone.getTimeZone("0"));
+
+clazzShark = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+serviceCount = clazzShark.getEntityManagerShark().createQuery(
+"SELECT  " +
+	"ogv.name AS OGV_NAME, " +
+	"service.name AS service_name,   " +
+	"COUNT(DISTINCT gdp.id) AS service_count,  " +
+	"0 AS avg_service_wait,  " +
+	"0 AS consult,  " +
+	"0 AS accepted_doc,  " +
+	"0 AS issue_doc,  " +
+	"0 AS avg_eq_wait,  " +
+    "0 AS complicant  " +
+"FROM   " +
+	"CardElement service, " +
+	"CardElement ogv,   " +
+	"GossrvcDocPackage gdp, " +
+	"GossrvcServiceDocTree setting " +
+"JOIN  " +
+	"setting.ogvs ogvs_list " +
+"WHERE   " +
+	"gdp.serviceId = service   " +
+	"AND setting.serviceId = service " +
+	"AND setting.parent is null " +
+	"AND ogv.id = ogvs_list.id " +
+	"AND (gdp.packStatus.status.code = 'resultToZayav' " +
+		"or gdp.packStatus.status.code = 'delegirMV'  " +
+		"or gdp.completedDate is not null)  " +
+"GROUP BY  " +
+	"service.id, " +
+	"ogv.id " +
+"ORDER BY " +
+	"ogv.name, " +
+	"service.name " 
+).getResultList();
+
+serviceWait = clazzShark.getEntityManagerShark().createQuery(
+"SELECT  " +
+"	ogv.name AS OGV_NAME, " +
+"	service.name AS service_name,   " +
+"	0 AS service_count,  " +
+"	AVG(ps.delta)  AS avg_service_wait,  " +
+"	0 AS consult,  " +
+"	0 AS accepted_doc,  " +
+"	0 AS issue_doc,  " +
+"	0 AS avg_eq_wait,  " +
+"   0 AS complicant  " +
+"FROM   " +
+"	CardElement service, " +
+"	CardElement ogv,   " +
+"	GossrvcDocPackage gdp, " +
+"	GossrvcServiceDocTree setting, " +
+"	PackStatus ps " +
+"JOIN  " +
+"	setting.ogvs ogvs_list " +
+"WHERE   " +
+"	gdp.serviceId = service   " +
+"	AND setting.serviceId = service " +
+"	AND setting.parent is null " +
+"	AND ogv.id = ogvs_list.id " +
+"	AND ps.status.code = 'serviceExec' " +
+"	AND ps.gossrvcDocPackage = gdp " +
+"GROUP BY  " +
+"	service.id, " +
+"	ogv.id " +
+"ORDER BY " +
+"	ogv.name, " +
+"	service.name " 
+).getResultList();
+
+consult = clazzShark.getEntityManagerShark().createQuery(
+"SELECT  " +
+"	ogv.name AS OGV_NAME, " +
+"	service.name AS service_name,   " +
+"	0 AS service_count,  " +
+"	0 AS avg_service_wait,  " +
+"	COUNT(DISTINCT ps.id) AS consult,  " +
+"	0 AS accepted_doc,  " +
+"	0 AS issue_doc,  " +
+"	0 AS avg_eq_wait,  " +
+"   0 AS complicant  " +
+"FROM   " +
+"	CardElement service, " +
+"	CardElement ogv,   " +
+"	GossrvcServiceDocTree setting, " +
+"	PackStatus ps, " +
+"	PackVariable pv " +
+"JOIN  " +
+"	setting.ogvs ogvs_list " +
+"WHERE   " +
+"	pv.packStatus = ps " +
+"	AND pv.stringValue = service.id " +
+"	AND setting.serviceId = service " +
+"	AND setting.parent is null " +
+"	AND ogv.id = ogvs_list.id " +
+"	AND ps.status.code = 'consult' " +
+"GROUP BY  " +
+"	service.id, " +
+"	ogv.id " +
+"ORDER BY " +
+"	ogv.name, " +
+"	service.name " 
+).getResultList();
+
+accepted = clazzShark.getEntityManagerShark().createQuery(
+"SELECT  " +
+"	ogv.name AS OGV_NAME, " +
+"	service.name AS service_name,   " +
+"	0 AS service_count,  " +
+"	0 AS avg_service_wait,  " +
+"	0 AS consult,  " +
+"	COUNT(DISTINCT gdp.id) AS accepted_doc,  " +
+"	0 AS issue_doc,  " +
+"	0 AS avg_eq_wait,  " +
+"   0 AS complicant  " +
+"FROM   " +
+"	CardElement service, " +
+"	CardElement ogv,   " +
+"	GossrvcServiceDocTree setting, " +
+"	GossrvcDocPackage gdp " +
+"JOIN  " +
+"	setting.ogvs ogvs_list " +
+"WHERE  " +
+"	gdp.serviceId = service   " +
+"	AND setting.serviceId = service " +
+"	AND setting.parent is null " +
+"	AND ogv.id = ogvs_list.id " +
+"GROUP BY  " +
+"	service.id, " +
+"	ogv.id " +
+"ORDER BY " +
+"	ogv.name, " +
+"	service.name " 
+).getResultList();
+
+finished = clazzShark.getEntityManagerShark().createQuery(
+"SELECT  " +
+"	ogv.name AS OGV_NAME, " +
+"	service.name AS service_name,   " +
+"	0 AS service_count,  " +
+"	0 AS avg_service_wait,  " +
+"	0 AS consult,  " +
+"	0 AS accepted_doc,  " +
+"	COUNT(DISTINCT gdp.id) AS issue_doc,  " +
+"	0 AS avg_eq_wait,  " +
+"   0 AS complicant  " +
+"FROM   " +
+"	CardElement service, " +
+"	CardElement ogv,   " +
+"	GossrvcServiceDocTree setting, " +
+"	GossrvcDocPackage gdp " +
+"JOIN  " +
+"	setting.ogvs ogvs_list " +
+"WHERE  " +
+"	gdp.serviceId = service   " +
+"	AND setting.serviceId = service " +
+"	AND setting.parent is null " +
+"	AND ogv.id = ogvs_list.id " +
+"	AND (gdp.packStatus.status.code = 'resultToZayav' or gdp.completedDate is not null) " +
+"GROUP BY  " +
+"	service.id, " +
+"	ogv.id " +
+"ORDER BY " +
+"	ogv.name, " +
+"	service.name "
+).getResultList();
+
+eqWait = clazzShark.getEntityManagerShark().createQuery(
+"SELECT  " +
+"	ogv.name AS OGV_NAME, " +
+"	service.name AS service_name,   " +
+"	0 AS service_count,  " +
+"	0 AS avg_service_wait,  " +
+"	0 AS consult,  " +
+"	0 AS accepted_doc,  " +
+"	0 AS issue_doc,  " +
+"	AVG(es.timeInQueue) AS avg_eq_wait,  " +
+"   0 AS complicant  " +
+"FROM   " +
+"	CardElement service, " +
+"	CardElement ogv,   " +
+"	GossrvcServiceDocTree setting, " +
+"	EqStatistic es " +
+"JOIN  " +
+"	setting.ogvs ogvs_list " +
+"WHERE  " +
+"	service = es.serviceId " +
+"	AND setting.serviceId = service " +
+"	AND setting.parent is null " +
+"	AND ogv.id = ogvs_list.id " +
+"GROUP BY  " +
+"	service.id, " +
+"	ogv.id " +
+"ORDER BY " +
+"	ogv.name, " +
+"	service.name " 
+).getResultList();
+
+complicant = clazzShark.getEntityManagerShark().createQuery(
+"SELECT   " +
+"	ogv.name AS OGV_NAME, " +
+"	service.name AS service_name,   " +
+"	0 AS service_count,  " +
+"	0 AS avg_service_wait,  " +
+"	0 AS consult,  " +
+"	0 AS accepted_doc,  " +
+"	0 AS issue_doc,  " +
+"	0 AS avg_eq_wait,  " +
+"   COUNT(DISTINCT ps.id) AS complicant  " +
+"FROM    " +
+	"CardElement service,  " +
+	"CardElement ogv,    " +
+	"GossrvcServiceDocTree setting,  " +
+	"PackStatus ps,  " +
+	"PackVariable pv  " +
+"JOIN   " +
+	"setting.ogvs ogvs_list  " +
+"WHERE    " +
+	"pv.packStatus = ps  " +
+	"AND pv.stringValue is not null " +
+	"AND pv.stringValue != ''" +
+	"AND pv.stringValue = service.id  " +
+	"AND setting.serviceId = service  " +
+	"AND setting.parent is null  " +
+	"AND ogv.id = ogvs_list.id  " +
+	"AND ps.status.code = 'complicant'  " +
+"GROUP BY   " +
+	"service.id,  " +
+	"ogv.id  " +
+"ORDER BY  " +
+	"ogv.name,  " +
+	"service.name  "
+).getResultList(); 
+
+serviceCount.addAll(serviceWait);
+serviceCount.addAll(consult);
+serviceCount.addAll(accepted);
+serviceCount.addAll(finished);
+serviceCount.addAll(eqWait);
+serviceCount.addAll(complicant);
+
+result = serviceCount;
+
+totalrow = result.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrow) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+row["ogv_name"] = rowValue[0];
+row["service_name"] = rowValue[1];
+row["service_count"] = rowValue[2];
+
+smp = new Packages.java.text.SimpleDateFormat("d");
+smp.setTimeZone(Packages.java.util.TimeZone.getTimeZone("0"));
+if ((rowValue[3] != null) &amp;&amp; (rowValue[3] / (1000 * 60 * 60 * 60)) > 10) {
+	smp = new Packages.java.text.SimpleDateFormat("dd");
+	row["avg_service_wait"] = smp.format(new Packages.java.util.Date(Packages.java.lang.Math.round(rowValue[3])));
+	smp = new Packages.java.text.SimpleDateFormat("d");
+}
+
+if (rowValue[3] != null) {
+	row["avg_service_wait"] = smp.format(new Packages.java.util.Date(Packages.java.lang.Math.round(rowValue[3])));
+}
+
+row["consult"] = rowValue[4];
+row["accepted_doc"] = rowValue[5];
+row["issue_doc"] = rowValue[6];
+
+if (rowValue[7] != null  &amp;&amp; rowValue[7] != 0) {	
+	row["avg_eq_wait"] = new Packages.java.util.Date(Packages.java.lang.Math.round(rowValue[7]));
+} else {
+	rowValue[7] = null;
+}
+
+row["complicant"] = rowValue[8];
+
+currentrow = currentrow + 1;
+return(true)]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <text id="175">
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<CENTER><B>Сводный отчет по услугам</B></CENTER>]]></text-property>
+        </text>
+        <table id="250">
+            <property name="width">7.947916666666667in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ogv_name</property>
+                    <text-property name="displayName">ogv_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service_name</property>
+                    <text-property name="displayName">service_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">avg_service_wait</property>
+                    <text-property name="displayName">avg_service_wait</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["avg_service_wait"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">consult</property>
+                    <text-property name="displayName">consult</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["consult"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">accepted_doc</property>
+                    <text-property name="displayName">accepted_doc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["accepted_doc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">issue_doc</property>
+                    <text-property name="displayName">issue_doc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["issue_doc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service_count</property>
+                    <text-property name="displayName">service_count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service_count"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">consult_agr</property>
+                    <text-property name="displayName">consult_agr</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["consult"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">accepted_doc_agr</property>
+                    <text-property name="displayName">accepted_doc_agr</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["accepted_doc"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">issue_doc_agr</property>
+                    <text-property name="displayName">issue_doc_agr</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["issue_doc"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">service_count_agr</property>
+                    <text-property name="displayName">service_count_agr</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["service_count_"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">avg_service_wait_agr</property>
+                    <text-property name="displayName">avg_service_wait_agr</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">MEDIAN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["avg_service_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">consult_agr_ogv</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["consult_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">accepted_doc_agr_ogv</property>
+                    <text-property name="displayName">accepted_doc_agr_ogv</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["accepted_doc_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">ssue_doc_agr_ogv</property>
+                    <text-property name="displayName">ssue_doc_agr_ogv</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["issue_doc_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">service_count_</property>
+                    <text-property name="displayName">service_count_</text-property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["service_count"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">service_count_all</property>
+                    <text-property name="displayName">service_count_all</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["service_count_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">consult_all</property>
+                    <text-property name="displayName">consult_all</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["consult_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">accepted_doc_all</property>
+                    <text-property name="displayName">accepted_doc_all</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["accepted_doc_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">issue_doc_all</property>
+                    <text-property name="displayName">issue_doc_all</text-property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["issue_doc_agr"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">agv_service_wait_agr</property>
+                    <text-property name="displayName">avg_eq_wait</text-property>
+                    <property name="dataType">string</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">MEDIAN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">agv_service_wait_all</property>
+                    <text-property name="displayName">agv_service_wait_all</text-property>
+                    <property name="dataType">time</property>
+                    <property name="aggregateFunction">AVE</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">AVE</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">timeFormat.format(new Date(row["avg_eq_wait"]))</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">AVE</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">string</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">AVE</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">timeFormat.format(new Date(row["avg_eq_wait"]))</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">AVE</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">avg_eq_wait</property>
+                    <text-property name="displayName">avg_eq_wait</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["avg_eq_wait"]</expression>
+                    <property name="dataType">time</property>
+                </structure>
+                <structure>
+                    <property name="name">agr_ser_eq_time</property>
+                    <property name="dataType">time</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">MEDIAN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">agr_ogv_eq_time</property>
+                    <text-property name="displayName">agr_ogv_eq_time</text-property>
+                    <property name="dataType">time</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">MEDIAN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">agr_all_eq_time</property>
+                    <property name="dataType">time</property>
+                    <property name="aggregateFunction">MEDIAN</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["avg_eq_wait"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">complicant</property>
+                    <text-property name="displayName">complicant</text-property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["complicant"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">complicant_1</property>
+                    <text-property name="displayName">complicant</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["complicant"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_complicant</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>ogvGroup</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["complicant"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">all_complicant</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["complicant"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <structure name="toc"/>
+            <column id="278">
+                <property name="width">1.9583333333333333in</property>
+            </column>
+            <column id="279">
+                <property name="width">0.8854166666666666in</property>
+            </column>
+            <column id="280">
+                <property name="width">1in</property>
+            </column>
+            <column id="281">
+                <property name="width">0.90625in</property>
+            </column>
+            <column id="282">
+                <property name="width">0.8854166666666666in</property>
+            </column>
+            <column id="283">
+                <property name="width">0.78125in</property>
+            </column>
+            <column id="284">
+                <property name="width">0.7083333333333334in</property>
+            </column>
+            <column id="285">
+                <property name="width">0.8229166666666666in</property>
+            </column>
+            <header>
+                <row id="251">
+                    <cell id="252">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="298">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Наименование услуги</text-property>
+                        </label>
+                    </cell>
+                    <cell id="253">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="308">
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Оказание услуг</text-property>
+                        </label>
+                    </cell>
+                    <cell id="256">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="309">
+                            <text-property name="text">Обращения заявителей</text-property>
+                        </label>
+                    </cell>
+                    <cell id="259">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="310">
+                            <text-property name="text">Среднее время ожидания в очереди по услуге</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="299">
+                    <cell id="301">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="311">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Кол-во оказанных услуг</text-property>
+                        </label>
+                    </cell>
+                    <cell id="302">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="312">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Средний срок предоставления услуги (дней)</text-property>
+                        </label>
+                    </cell>
+                    <cell id="303">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="313">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Кол-во жалоб на оказание услуги</text-property>
+                        </label>
+                    </cell>
+                    <cell id="304">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="396">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Консульти
+<BR>рование]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="305">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="315">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Принято документов</text-property>
+                        </label>
+                    </cell>
+                    <cell id="306">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="316">
+                            <property name="textAlign">left</property>
+                            <text-property name="text">Выдано документов</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="317">
+                <property name="groupName">ogvGroup</property>
+                <expression name="keyExpr" type="javascript">row["ogv_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["ogv_name"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="318">
+                        <cell id="319">
+                            <property name="colSpan">8</property>
+                            <property name="rowSpan">1</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="336">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">ogv_name</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="327">
+                        <cell id="328">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="370">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[Итого по <VALUE-OF>row["ogv_name"]</VALUE-OF>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="329">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="372">
+                                <property name="resultSetColumn">service_count_agr</property>
+                            </data>
+                        </cell>
+                        <cell id="330">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="373">
+                                <property name="resultSetColumn">avg_service_wait_agr</property>
+                            </data>
+                        </cell>
+                        <cell id="331">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="438">
+                                <property name="resultSetColumn">ogv_complicant</property>
+                            </data>
+                        </cell>
+                        <cell id="332">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="374">
+                                <property name="resultSetColumn">consult_agr_ogv</property>
+                            </data>
+                        </cell>
+                        <cell id="333">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="376">
+                                <property name="resultSetColumn">accepted_doc_agr_ogv</property>
+                            </data>
+                        </cell>
+                        <cell id="334">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="377">
+                                <property name="resultSetColumn">ssue_doc_agr_ogv</property>
+                            </data>
+                        </cell>
+                        <cell id="335">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="433">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<VALUE-OF>if (row["agr_ogv_eq_time"]) {timeFormat.format(row["agr_ogv_eq_time"])}</VALUE-OF>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <group id="337">
+                <property name="groupName">serviceGroup</property>
+                <expression name="keyExpr" type="javascript">row["service_name"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["service_name"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="338">
+                        <cell id="339">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="356">
+                                <property name="resultSetColumn">service_name</property>
+                            </data>
+                        </cell>
+                        <cell id="340">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="379">
+                                <property name="resultSetColumn">service_count_</property>
+                            </data>
+                        </cell>
+                        <cell id="341">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="364">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<VALUE-OF>row["avg_service_wait"]</VALUE-OF>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="342">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="437">
+                                <property name="resultSetColumn">complicant</property>
+                            </data>
+                        </cell>
+                        <cell id="343">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="365">
+                                <property name="resultSetColumn">consult_agr</property>
+                            </data>
+                        </cell>
+                        <cell id="344">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="366">
+                                <property name="resultSetColumn">accepted_doc_agr</property>
+                            </data>
+                        </cell>
+                        <cell id="345">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="367">
+                                <property name="resultSetColumn">issue_doc_agr</property>
+                            </data>
+                        </cell>
+                        <cell id="346">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="432">
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<VALUE-OF>if (row["agr_ser_eq_time"]) {timeFormat.format(row["agr_ser_eq_time"])}</VALUE-OF>]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                </header>
+            </group>
+            <footer>
+                <row id="269">
+                    <cell id="270">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="380">
+                            <text-property name="text">ИТОГО по филиалу</text-property>
+                        </label>
+                    </cell>
+                    <cell id="271">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="389">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Всего оказано услуг за период]]></text-property>
+                        </text>
+                        <data id="381">
+                            <property name="resultSetColumn">service_count_all</property>
+                        </data>
+                    </cell>
+                    <cell id="272">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <label id="382">
+                            <text-property name="text">---</text-property>
+                        </label>
+                    </cell>
+                    <cell id="273">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="390">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Всего кол-во жалоб на оказание услуг]]></text-property>
+                        </text>
+                        <data id="439">
+                            <property name="resultSetColumn">all_complicant</property>
+                        </data>
+                    </cell>
+                    <cell id="274">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="391">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Всего обращений заявителей по консультированию]]></text-property>
+                        </text>
+                        <data id="383">
+                            <property name="resultSetColumn">consult_all</property>
+                        </data>
+                    </cell>
+                    <cell id="275">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="392">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Всего обращений заявителей по приему документов]]></text-property>
+                        </text>
+                        <data id="384">
+                            <property name="resultSetColumn">accepted_doc_all</property>
+                        </data>
+                    </cell>
+                    <cell id="276">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="393">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Всего обращений заявителей за выдачей документов]]></text-property>
+                        </text>
+                        <data id="385">
+                            <property name="resultSetColumn">issue_doc_all</property>
+                        </data>
+                    </cell>
+                    <cell id="277">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="394">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Среднее время ожидания в очереди по услугам]]></text-property>
+                        </text>
+                        <text id="434">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<VALUE-OF>if (row["agr_all_eq_time"]) {timeFormat.format(row["agr_all_eq_time"])}</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

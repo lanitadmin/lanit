@@ -1,0 +1,1 @@
+ALTER TABLE gossrvc_doc_package MODIFY senderpacknum VARCHAR2(50);

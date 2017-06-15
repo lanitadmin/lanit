@@ -1,0 +1,1 @@
+ALTER TABLE gossrvc_doc_package ALTER COLUMN completed_date TYPE timestamp;

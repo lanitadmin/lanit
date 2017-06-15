@@ -1,0 +1,1 @@
+UPDATE SETTING_TABLE_FIELD SET name = 'lastSendSoap' WHERE name = 'proc_ident.lastSendSoap';

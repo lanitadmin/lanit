@@ -1,0 +1,1 @@
+insert into permission_ref (id, aobject, aaction) values (nextval('hibernate_sequence'),'Пакеты документов', 'Групповое аварийное завершение процессов пакетов документов');

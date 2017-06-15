@@ -1,0 +1,2 @@
+insert into PACK_STATUS_CODE(id, code, name)  values(hibernate_sequence.nextval,'forRaspred','Дело отправлено на распределение');
+insert into PACK_STATUS_CODE(id, code, name)  values(hibernate_sequence.nextval,'consult','Консультация');

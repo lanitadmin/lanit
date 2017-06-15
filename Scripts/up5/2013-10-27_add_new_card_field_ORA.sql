@@ -1,0 +1,2 @@
+INSERT INTO CARD_FIELD (FIELD_ID,FIELD_NAME,FIELD_TYPE,FIELD_VISIBLE,FIELD_CAPTION,FIELD_SIZE,FIELD_IDENT,CARD_CODE)
+VALUES (hibernate_sequence.nextval,'typeResult', 'list:integer=0,не выбрано;1,отказ;2,положительный;',1,'Тип результата',1,null,'SDocType');

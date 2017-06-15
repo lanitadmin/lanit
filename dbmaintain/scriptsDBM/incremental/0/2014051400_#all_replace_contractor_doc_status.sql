@@ -1,0 +1,1 @@
+update contractor_doc set status = 'CREATED' where status = 'ONCREATE';

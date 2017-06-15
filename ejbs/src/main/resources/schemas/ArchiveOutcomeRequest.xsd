@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="archiveResponce" type="archiveOutcomeRequest"/>
+
+  <xs:complexType name="jcrCardAttach">
+    <xs:sequence>
+      <xs:element name="attachData" type="xs:base64Binary" minOccurs="0"/>
+      <xs:element name="attachName" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="document">
+    <xs:sequence>
+      <xs:element name="actualDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="archiveCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="attachList" type="jcrCardAttach" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="cardNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="collection" type="xs:string" minOccurs="0"/>
+      <xs:element name="description" type="xs:string" minOccurs="0"/>
+      <xs:element name="docDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="docNumber" type="xs:string" minOccurs="0"/>
+      <xs:element name="docType" type="xs:string" minOccurs="0"/>
+      <xs:element name="enterType" type="xs:string" minOccurs="0"/>
+      <xs:element name="hasPaper" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="increateDate" type="xs:dateTime" minOccurs="0"/>
+      <xs:element name="increateNum" type="xs:string" minOccurs="0"/>
+      <xs:element name="pageCount" type="xs:long" minOccurs="0"/>
+      <xs:element name="pageCountApp" type="xs:long" minOccurs="0"/>
+      <xs:element name="restoreDate" type="xs:dateTime" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="archiveOutcomeRequest">
+    <xs:sequence>
+      <xs:element name="requestDate" type="xs:date" minOccurs="0"/>
+      <xs:element name="archiveCard" type="document" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+

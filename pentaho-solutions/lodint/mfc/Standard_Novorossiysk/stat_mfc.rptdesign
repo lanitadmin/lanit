@@ -1,0 +1,915 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.21" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.2.v20100208 Build &lt;2.5.2.v20100210-0630></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="checkPeriod" id="79">
+            <property name="hidden">false</property>
+            <text-property name="promptText">Выберите период, за который необходимо выпустить отчет</text-property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">checkYear</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">checkYear</property>
+                    <property name="label">Год</property>
+                </structure>
+                <structure>
+                    <property name="value">checkQuart</property>
+                    <property name="label">Квартал</property>
+                </structure>
+                <structure>
+                    <property name="value">checkMonth</property>
+                    <property name="label">Месяц</property>
+                </structure>
+                <structure>
+                    <property name="value">checkDay</property>
+                    <property name="label">Сутки</property>
+                </structure>
+                <structure>
+                    <property name="value">checkRandom</property>
+                    <property name="label">Произвольный период</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <parameter-group name="period" id="140">
+            <text-property name="displayName">Выбор фиксированного периода для отчета:</text-property>
+            <parameters>
+                <scalar-parameter name="comboYear" id="80">
+                    <property name="hidden">false</property>
+                    <text-property name="promptText">Выберите год (если отчет требуется вывести за год, за квартал, за месяц или за сутки)</text-property>
+                    <property name="valueType">dynamic</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataSetName">GetYear_DataSet</property>
+                    <expression name="valueExpr" type="javascript">dataSetRow["YEARS"]</expression>
+                    <expression name="sortByColumn">dataSetRow["YEARS"]</expression>
+                    <property name="sortDirection">desc</property>
+                    <property name="dataType">integer</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">2011</value>
+                    </simple-property-list>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="alignment">auto</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">false</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="comboQuart" id="83">
+                    <property name="hidden">false</property>
+                    <text-property name="promptText">Выберите квартал (если отчет требуется вывести за квартал)</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">1</value>
+                    </simple-property-list>
+                    <list-property name="selectionList">
+                        <structure>
+                            <property name="value">1</property>
+                            <property name="label">1</property>
+                        </structure>
+                        <structure>
+                            <property name="value">2</property>
+                            <property name="label">2</property>
+                        </structure>
+                        <structure>
+                            <property name="value">3</property>
+                            <property name="label">3</property>
+                        </structure>
+                        <structure>
+                            <property name="value">4</property>
+                            <property name="label">4</property>
+                        </structure>
+                    </list-property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="comboDate" id="81">
+                    <property name="hidden">false</property>
+                    <text-property name="promptText">Выберите число (если отчет требуется вывести за конкретные сутки)</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">01</value>
+                    </simple-property-list>
+                    <list-property name="selectionList">
+                        <structure>
+                            <property name="value">01</property>
+                            <property name="label">01</property>
+                        </structure>
+                        <structure>
+                            <property name="value">02</property>
+                            <property name="label">02</property>
+                        </structure>
+                        <structure>
+                            <property name="value">03</property>
+                            <property name="label">03</property>
+                        </structure>
+                        <structure>
+                            <property name="value">04</property>
+                            <property name="label">04</property>
+                        </structure>
+                        <structure>
+                            <property name="value">05</property>
+                            <property name="label">05</property>
+                        </structure>
+                        <structure>
+                            <property name="value">06</property>
+                            <property name="label">06</property>
+                        </structure>
+                        <structure>
+                            <property name="value">07</property>
+                            <property name="label">07</property>
+                        </structure>
+                        <structure>
+                            <property name="value">08</property>
+                            <property name="label">08</property>
+                        </structure>
+                        <structure>
+                            <property name="value">09</property>
+                            <property name="label">09</property>
+                        </structure>
+                        <structure>
+                            <property name="value">10</property>
+                            <property name="label">10</property>
+                        </structure>
+                        <structure>
+                            <property name="value">11</property>
+                            <property name="label">11</property>
+                        </structure>
+                        <structure>
+                            <property name="value">12</property>
+                            <property name="label">12</property>
+                        </structure>
+                        <structure>
+                            <property name="value">13</property>
+                            <property name="label">13</property>
+                        </structure>
+                        <structure>
+                            <property name="value">14</property>
+                            <property name="label">14</property>
+                        </structure>
+                        <structure>
+                            <property name="value">15</property>
+                            <property name="label">15</property>
+                        </structure>
+                        <structure>
+                            <property name="value">16</property>
+                            <property name="label">16</property>
+                        </structure>
+                        <structure>
+                            <property name="value">17</property>
+                            <property name="label">17</property>
+                        </structure>
+                        <structure>
+                            <property name="value">18</property>
+                            <property name="label">18</property>
+                        </structure>
+                        <structure>
+                            <property name="value">19</property>
+                            <property name="label">19</property>
+                        </structure>
+                        <structure>
+                            <property name="value">20</property>
+                            <property name="label">20</property>
+                        </structure>
+                        <structure>
+                            <property name="value">21</property>
+                            <property name="label">21</property>
+                        </structure>
+                        <structure>
+                            <property name="value">22</property>
+                            <property name="label">22</property>
+                        </structure>
+                        <structure>
+                            <property name="value">23</property>
+                            <property name="label">23</property>
+                        </structure>
+                        <structure>
+                            <property name="value">24</property>
+                            <property name="label">24</property>
+                        </structure>
+                        <structure>
+                            <property name="value">25</property>
+                            <property name="label">25</property>
+                        </structure>
+                        <structure>
+                            <property name="value">26</property>
+                            <property name="label">26</property>
+                        </structure>
+                        <structure>
+                            <property name="value">27</property>
+                            <property name="label">27</property>
+                        </structure>
+                        <structure>
+                            <property name="value">28</property>
+                            <property name="label">28</property>
+                        </structure>
+                        <structure>
+                            <property name="value">29</property>
+                            <property name="label">29</property>
+                        </structure>
+                        <structure>
+                            <property name="value">30</property>
+                            <property name="label">30</property>
+                        </structure>
+                        <structure>
+                            <property name="value">31</property>
+                            <property name="label">31</property>
+                        </structure>
+                    </list-property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="comboMonth" id="82">
+                    <property name="hidden">false</property>
+                    <text-property name="promptText">Выберите месяц (если отчет требуется вывести за месяц или за сутки)</text-property>
+                    <property name="valueType">static</property>
+                    <property name="isRequired">true</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">01</value>
+                    </simple-property-list>
+                    <list-property name="selectionList">
+                        <structure>
+                            <property name="value">01</property>
+                            <property name="label">Январь</property>
+                        </structure>
+                        <structure>
+                            <property name="value">02</property>
+                            <property name="label">Февраль</property>
+                        </structure>
+                        <structure>
+                            <property name="value">03</property>
+                            <property name="label">Март</property>
+                        </structure>
+                        <structure>
+                            <property name="value">04</property>
+                            <property name="label">Апрель</property>
+                        </structure>
+                        <structure>
+                            <property name="value">05</property>
+                            <property name="label">Май</property>
+                        </structure>
+                        <structure>
+                            <property name="value">06</property>
+                            <property name="label">Июнь</property>
+                        </structure>
+                        <structure>
+                            <property name="value">07</property>
+                            <property name="label">Июль</property>
+                        </structure>
+                        <structure>
+                            <property name="value">08</property>
+                            <property name="label">Август</property>
+                        </structure>
+                        <structure>
+                            <property name="value">09</property>
+                            <property name="label">Сентябрь</property>
+                        </structure>
+                        <structure>
+                            <property name="value">10</property>
+                            <property name="label">Октябрь</property>
+                        </structure>
+                        <structure>
+                            <property name="value">11</property>
+                            <property name="label">Ноябрь</property>
+                        </structure>
+                        <structure>
+                            <property name="value">12</property>
+                            <property name="label">Декабрь</property>
+                        </structure>
+                    </list-property>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">list-box</property>
+                    <property name="mustMatch">true</property>
+                    <property name="fixedOrder">true</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+        <parameter-group name="randomPeriod" id="141">
+            <text-property name="displayName">Ввод произвольного периода:</text-property>
+            <parameters>
+                <scalar-parameter name="randomStartDate" id="138">
+                    <text-property name="helpText">Введите дату</text-property>
+                    <text-property name="promptText">Введите начало периода в формате ДД.ММ.ГГГГ</text-property>
+                    <property name="valueType">static</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">01.01.2000</value>
+                    </simple-property-list>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="randomEndDate" id="139">
+                    <text-property name="promptText">Введите конец периода в формате ДД.ММ.ГГГГ</text-property>
+                    <property name="valueType">static</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <simple-property-list name="defaultValue">
+                        <value type="constant">01.01.2000</value>
+                    </simple-property-list>
+                    <property name="paramType">simple</property>
+                    <property name="concealValue">false</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="42"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="GetYear_DataSet" id="131">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">YEARS</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">YEARS</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">YEARS</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <method name="afterClose"><![CDATA[	]]></method>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[currentYear = BirtDateTime.year(new Date());
+countYears = 1;
+currentrow = 1;
+totalrows = 10;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+countYears = countYears+1;
+years = (currentYear-10 + countYears);
+row["YEARS"] = years;
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetNew" id="142">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SERVICE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">GET_DOC</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">PERIOD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">numWindow</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SERVICE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">GET_DOC</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PERIOD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">numWindow</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SERVICE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">GET_DOC</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">PERIOD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">numWindow</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+//---ФОРМИРУЕМ НАЧАЛЬНУЮ И КОНЕЧНУЮ ДАТУ, ЗА КОТОРЫЙ ВЫВОДИТСЯ ОТЧЕТ---/
+if (params["checkPeriod"] != "checkRandom"){					//Если отчет НЕ за произвольный период
+	if (params["checkPeriod"] == "checkDay"){					//Если отчет за DAY
+		startDay 	= params["comboDate"];
+		startMonth 	= params["comboMonth"];
+		startYear 	= params["comboYear"];
+		endDay 		= startDay;
+		endMonth 	= startMonth;
+		endYear 	= startYear;
+	}
+	if (params["checkPeriod"] == "checkMonth"){					//Если отчет за MONTH
+		startDay = "01";
+		if (params["comboMonth"] == 1 ||						//месяц с 31-м днем 
+			params["comboMonth"] == 3 || 
+			params["comboMonth"] == 5 || 
+			params["comboMonth"] == 7 || 
+			params["comboMonth"] == 8 || 
+			params["comboMonth"] == 10 || 
+			params["comboMonth"] == 12 )
+			endDay = "31";
+		else
+		if (params["comboMonth"] == 2) {						//Февраль?
+			if (params["comboYear"] % 4 == 0 &amp;&amp; 				//Високосный год?
+				params["comboYear"] % 100 != 0 || 
+				params["comboYear"] % 400 == 0)
+				endDay = "29";
+			else												//Невисокосный год
+				endDay = "28";
+		}
+		else													//Остальные месяца (с 30-ю днями)
+			endDay = "30";
+		startMonth = params["comboMonth"];
+		endMonth = startMonth;
+		startYear = params["comboYear"];
+		endYear = startYear;
+	}
+	if (params["checkPeriod"] == "checkQuart") {				//Если отчет за QUART
+		startDay = "01";
+		startYear = params["comboYear"];
+		endYear = startYear;
+		if (params["comboQuart"] == "1") {						//1-ый квартал
+			startMonth = "01";
+			endMonth = "03";
+			endDay = "31";
+		}
+		else
+		if (params["comboQuart"] == "2") {						//2-ой квартал
+			startMonth = "04";
+			endMonth = "06";
+			endDay = "30";
+		}
+		else
+		if (params["comboQuart"] == "3") {						//3-ий квартал
+			startMonth = "07";
+			endMonth = "09";
+			endDay = "30";
+		}
+		else
+		if (params["comboQuart"] == "4") {						//4-ый квартал
+			startMonth = "10";
+			endMonth = "12";
+			endDay = "31";
+		}
+	}
+	if (params["checkPeriod"] == "checkYear") {					//Если отчет за YEAR
+		startYear = params["comboYear"];
+		endYear = startYear;
+		startDay = "01";
+		endDay = "31";
+		startMonth = "01";
+		endMonth = "12";
+	}
+	startDate = startYear + "-" + startMonth + "-" + startDay;	//Формируется начальная дата
+	endDate = endYear + "-" + endMonth + "-" + endDay;			//Формируется конечная дата
+}
+else{															//Если отчет за произвольный период
+	resultDate = clazzConvert.dateIsValid(params["randomStartDate"],params["randomEndDate"]);	//Проверяем корректность введенных дат
+	if (resultDate == 1) {										//Корректна?
+		startDate = clazzConvert.getStringFormat(params["randomStartDate"]);	//Формируется начальная дата
+		endDate = clazzConvert.getStringFormat(params["randomEndDate"]);		//Формируется конечная дата
+	}
+	else{														//Некорректна?
+		startDate = "1900-01-01";								//Формируется начальная дата (не содержащая данные)
+		endDate = "1900-01-01";									//Формируется конечная дата (не содержащая данные)			
+	}
+}
+
+//------ФОРМИРУЕМ НАБОР ДАННЫХ------//
+result = clazz.getEntityManagerLod().createQuery(
+	
+" select  "+
+" ce.name, "+
+" count(ps.id), "+
+" qi.numberPass "+
+" from PackStatus ps, GossrvcDocPackage gdp, CardElement ce , QueueItem qi"+
+" where  "+
+" ps.status.code = 'requestKomplDoc'  "+
+" and ps.gossrvcDocPackage.id = gdp.id "+
+" and gdp.serviceId = ce.id "+
+" and qi.serviceId = ce.id "+
+" and ps.begins between :stDate and :edDate "+
+" group by ce.name, qi.numberPass"
+
+).setParameter("stDate", stDate)
+ .setParameter("edDate", edDate).getResultList();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = result.get(currentrow);
+
+row["SERVICE"] = rowValue[0];
+row["GET_DOC"] = rowValue[1];
+row["numWindow"] = rowValue[2];
+
+//---ФОРМИРУЕМ ВЫВОД НАЗВАНИЯ ВЫБРАННОГО ПЕРИОДА---//
+if (currentrow == 0) {										//Делаем 1 раз
+	if (params["checkPeriod"] == "checkRandom"){
+		if(resultDate == 1)
+			row["PERIOD"] = params["randomStartDate"] + " г. - " + params["randomEndDate"] + " г.";
+		else
+			row["PERIOD"] = "Неправильно определен формат даты";
+	}
+	else{
+	if (params["checkPeriod"] == "checkDay") {				//Если выбран за день
+		switch (params["comboMonth"].value)						//Месяц в родительном падеже
+		{
+			case "01": promptMonth = "января";break;
+			case "02": promptMonth = "февраля";break;
+			case "03": promptMonth = "марта";break;
+			case "04": promptMonth = "апреля";break;
+			case "05": promptMonth = "мая";break;
+			case "06": promptMonth = "июня";break;
+			case "07": promptMonth = "июля";break;
+			case "08": promptMonth = "августа";break;
+			case "09": promptMonth = "сентября";break;
+			case "10": promptMonth = "октября";break;
+			case "11": promptMonth = "ноября";break;
+			case "12": promptMonth = "декабря";break;
+		}
+		row["PERIOD"] = params["comboDate"] + " " + promptMonth + " " + params["comboYear"] + " года";	//заполняем период - "ДД месяца ГГГГ года"
+	}
+	if (params["checkPeriod"] == "checkMonth") {			//Если выбран за месяц
+		switch (params["comboMonth"].value)						//Месяц в именительном падеже
+		{
+			case "01": promptMonth = "январь";break;
+			case "02": promptMonth = "февраль";break;
+			case "03": promptMonth = "март";break;
+			case "04": promptMonth = "апрель";break;
+			case "05": promptMonth = "май";break;
+			case "06": promptMonth = "июнь";break;
+			case "07": promptMonth = "июль";break;
+			case "08": promptMonth = "август";break;
+			case "09": promptMonth = "сентябрь";break;
+			case "10": promptMonth = "октябрь";break;
+			case "11": promptMonth = "ноябрь";break;
+			case "12": promptMonth = "декабрь";break;
+		}
+		row["PERIOD"] = promptMonth + " " + params["comboYear"] + " года"	//заполняем период - "месяц ГГГГ года"
+	}
+	if (params["checkPeriod"] == "checkQuart")				//Если выбран за квартал
+		row["PERIOD"] = params["comboQuart"] + " квартал  " + params["comboYear"] + " года"	//заполняем период - "№ квартал ГГГГ года"
+	if (params["checkPeriod"] == "checkYear")				//Если выбран год
+		row["PERIOD"] = params["comboYear"] + " год"		//заполняем период - "ГГГГ год"
+	}
+}	
+
+//Packages.java.lang.System.out.println(row["PERIOD"]); 
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">2cm</property>
+            <property name="leftMargin">3cm</property>
+            <property name="bottomMargin">1.27cm</property>
+            <property name="rightMargin">1.5cm</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="13">
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="verticalAlign">middle</property>
+            <property name="pageBreakAfter">auto</property>
+            <property name="height">100%</property>
+            <property name="width">100%</property>
+            <property name="dataSet">DataSetNew</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">SERVICE</property>
+                    <expression name="expression">dataSetRow["SERVICE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">GET_DOC</property>
+                    <expression name="expression">dataSetRow["GET_DOC"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">PERIOD</property>
+                    <expression name="expression">dataSetRow["PERIOD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["GET_DOC"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <property name="pageBreakInterval">400</property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["SERVICE"]</expression>
+                    <property name="direction">asc</property>
+                </structure>
+            </list-property>
+            <column id="32">
+                <property name="width">70%</property>
+            </column>
+            <column id="33">
+                <property name="width">30%</property>
+            </column>
+            <header>
+                <row id="94">
+                    <property name="height">10mm</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="95">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <text id="78">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Статистика работы МФЦ за <VALUE-OF>row["PERIOD"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="14">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="15">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <label id="37">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Наименование услуги</text-property>
+                        </label>
+                    </cell>
+                    <cell id="16">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <label id="38">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Принято дел</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="87">
+                    <property name="pageBreakInside">avoid</property>
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">all</property>
+                            <expression name="valueExpr" type="javascript">row["GET_DOC"]==0</expression>
+                        </structure>
+                    </list-property>
+                    <cell id="88">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="44">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="paddingTop">3pt</property>
+                            <property name="paddingLeft">3pt</property>
+                            <property name="paddingBottom">3pt</property>
+                            <property name="paddingRight">3pt</property>
+                            <property name="resultSetColumn">SERVICE</property>
+                        </data>
+                    </cell>
+                    <cell id="89">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="97">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">GET_DOC</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="107">
+                    <cell id="108">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="111">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">right</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Всего принято дел:]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="109">
+                        <property name="fontWeight">bold</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="textAlign">center</property>
+                        <data id="143">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="resultSetColumn">Aggregation</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

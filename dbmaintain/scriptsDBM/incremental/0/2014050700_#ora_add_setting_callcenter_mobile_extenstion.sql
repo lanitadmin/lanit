@@ -1,0 +1,2 @@
+insert into app_setting (id, owner,setting_id,setting_name, setting_value,is_pass) values(hibernate_sequence.nextval, null,'callcenter_mobile_out_call_extension','extension диал плана исходящего звонка моб. приложения', 'ais_direct', 0);
+ 

@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[function log(str) {
+	Packages.java.lang.System.out.println(str);
+}
+reportContext.setPersistentGlobalVariable("log", log);]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="71">
+            <text-property name="helpText">Дата начала периода (в формате ДД.ММ.ГГГГ)</text-property>
+            <text-property name="promptText">Дата начала периода (в формате ДД.ММ.ГГГГ)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="72">
+            <text-property name="helpText">Дата конца периода, не включительно (в формате ДД.ММ.ГГГГ)</text-property>
+            <text-property name="promptText">Дата конца периода, не включительно (в формате ДД.ММ.ГГГГ)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ogv" id="74">
+            <text-property name="helpText">Ведомство получатель</text-property>
+            <text-property name="promptText">Ведомство получатель</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">Data Select</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["ogv_code"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["ogv_name"]</expression>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">[не выбран]</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="65"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="66">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">docDetail</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">srcOgv</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">dstOgv</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">countDocs</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">docDetail</property>
+                </structure>
+                <structure>
+                    <property name="columnName">srcOgv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dstOgv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">countDocs</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">docDetail</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">srcOgv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">dstOgv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">countDocs</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+countDocs = 0;
+srcOgv = "n/a";
+dstOgv = "n/a";
+
+startDate = clazzConvert.getOutDate(params["startDate"]);
+endDate = clazzConvert.getOutDate(params["endDate"]);
+
+result = clazzShark.getEntityManagerShark().createQuery(
+" select ps.gossrvcDocPackage.applicantGroup.id, ps.gossrvcDocPackage.id, ps.gossrvcDocPackage.packNum, ogv.name, ps.gossrvcDocPackage.owner" +
+" from PackStatus ps join ps.vars pv, CardElement ogv" + 
+" where ps.status.code = 'reqRegKomplDoc' and pv.definitionId = 'Gos_Org'" +
+" and ogv.id = pv.stringValue" +
+" and exists(" +
+" from GossrvcDocPackageItem item" +
+" where item.gossrvcDocPackage = ps.gossrvcDocPackage" +
+" and item.docValue = true and item.docToTransfer = true)" +
+" and ogv.id = :ogv" +
+" and ps.begins between :startDate and :endDate")
+.setParameter("ogv", params["ogv"])
+.setParameter("startDate", startDate)
+.setParameter("endDate", endDate)
+.getResultList();
+
+log("result.size(): " + result.size());
+
+if (!result.isEmpty()) {
+	settings = clazzShark.getEntityManagerShark().createQuery(
+	" select app.value" +
+	" from AppSetting app" + 
+	" where app.owner = :owner" +
+	" and app.code = 'ogv_name'")
+	.setParameter("owner", result.get(0)[4])
+	.getResultList();
+
+	if (!settings.isEmpty()) {
+		srcOgv = settings.get(0);	
+		dstOgv = result.get(0)[3];
+	}
+	
+	log("settings.size(): " + settings.size());	
+	
+	for(i = 0; i < result.size(); i++) {
+		items = clazzShark.getEntityManagerShark().createQuery(
+		" select count(item.title)" + 
+		" from GossrvcDocPackageItem item" +
+		" where item.gossrvcDocPackage.id = :docPackageId and item.docValue = true" +
+		" and item.docToTransfer = true")	
+		.setParameter("docPackageId", result.get(i)[1])
+		.getResultList();
+		if (!items.isEmpty()) {
+			countDocs = countDocs + parseInt(items.get(0));
+		}
+	}	
+}
+
+totalrow = result.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[// functions
+
+function getListDocs(docPackageId) {
+	var listDocs = "";
+	docPackageItems = clazzShark.getEntityManagerShark().createQuery(
+	" select item.title, docClass.name, count(item.title)" + 
+	" from GossrvcDocPackageItem item, CardElement docClass" +
+	" where item.gossrvcDocPackage.id = :docPackageId and item.docValue = true" +
+	" and item.docToTransfer = true and docClass.id = item.docClassId group by item.title, docClass.name")	
+	.setParameter("docPackageId", docPackageId)
+	.getResultList();	
+	for(i = 0; i < docPackageItems.size(); i++) {
+		if (listDocs != "") {
+			listDocs = listDocs + ", ";
+		}
+		listDocs = listDocs + docPackageItems.get(i)[0] + " (" + docPackageItems.get(i)[1] + ") - " + docPackageItems.get(i)[2] + " шт.";
+	}
+	return listDocs;
+}
+
+function getApplicant(objectGroupId) {	
+	var applicant = "n/a";
+	objectGroupItems = clazzShark.getEntityManagerShark().createQuery(
+	" select ogi.objectId, ogi.objectClass" +
+	" from ObjectGroupItem ogi" +
+	" where ogi.objectGroup.id = :objectGroupId and ogi.selected = true") 
+	.setParameter("objectGroupId", objectGroupId)
+	.getResultList();
+	if (!objectGroupItems.isEmpty()) {		
+		objectId = objectGroupItems.get(0)[0];
+		objectClass = objectGroupItems.get(0)[1];
+		if (objectClass.equals("org.cp.model.common.Person")) {			
+			persons = clazzShark.getEntityManagerShark().createQuery(
+			" select p.lastName || ' ' ||" +
+			" SUBSTRING(p.firstName, 1, 1) || '. ' ||" + 
+			" SUBSTRING(p.middleName, 1, 1) || '.'" + 
+			" from org.cp.model.common.Person p where p.id = :objectId") 
+			.setParameter("objectId", objectId)
+			.getResultList();
+			if (!persons.isEmpty()) {				
+				applicant = persons.get(0);				
+			}
+		} else if (objectClass.equals("org.cp.lodent.Agent")) {
+			agents = clazzShark.getEntityManagerShark().createQuery(
+			" select a.name" + 
+			" from org.cp.lodent.Agent a where a.id = :objectId") 
+			.setParameter("objectId", objectId)
+			.getResultList();
+			if (!agents.isEmpty()) {
+				applicant = agents.get(0);
+			}
+		}
+	}		
+	return applicant;
+}
+
+// fetching
+
+if (currentrow > totalrow) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["srcOgv"] = srcOgv;	
+row["dstOgv"] = dstOgv;	
+row["docDetail"] = getApplicant(rowValue[0]) + " (Дело № " + rowValue[2] + "): " + getListDocs(rowValue[1]);
+row["countDocs"] = countDocs;
+
+currentrow++;
+
+return(true)]]></method>
+        </script-data-set>
+        <script-data-set name="Data Select" id="73">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">0</property>
+                    <property name="name">ogv_code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ogv_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ogv_code</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_name</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ogv_code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">ogv_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+
+result = clazzShark.getEntityManagerShark().createQuery(
+"select ogv.id, ogv.name from CardElement ogv where ogv.card.cardCode = 'SGosOrg' order by ogv.name")
+.getResultList();
+
+totalrow = result.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrow) {
+	return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["ogv_code"] = rowValue[0];
+row["ogv_name"] = rowValue[1];
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">docDetail</property>
+                    <text-property name="displayName">docDetail</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["docDetail"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">RUNNINGCOUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["docDetail"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">countDocs</property>
+                    <text-property name="displayName">countDocs</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["countDocs"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">srcOgv</property>
+                    <text-property name="displayName">srcOgv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["srcOgv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dstOgv</property>
+                    <text-property name="displayName">dstOgv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dstOgv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="8"/>
+            <row id="9">
+                <cell id="10">
+                    <property name="fontFamily">"Linux Libertine"</property>
+                    <label id="13">
+                        <property name="fontSize">16pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Ведомость приема-передачи</text-property>
+                    </label>
+                    <grid id="14">
+                        <property name="marginTop">20pt</property>
+                        <column id="15"/>
+                        <column id="16"/>
+                        <row id="17">
+                            <cell id="18">
+                                <text id="43">
+                                    <property name="fontSize">14pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="textAlign">left</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[г. Курган]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="19">
+                                <text id="44">
+                                    <property name="fontSize">14pt</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF format="dd MMM YYYY г.">BirtDateTime.now()</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="20">
+                        <property name="marginTop">20pt</property>
+                        <column id="21">
+                            <property name="width">3cm</property>
+                        </column>
+                        <column id="22"/>
+                        <row id="23">
+                            <cell id="24">
+                                <label id="38">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Отправитель:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="25">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="39">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["srcOgv"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="26">
+                            <cell id="27"/>
+                            <cell id="28">
+                                <label id="40">
+                                    <property name="fontStyle">normal</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(наименование учреждения)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="29">
+                        <property name="marginTop">10pt</property>
+                        <column id="30">
+                            <property name="width">3cm</property>
+                        </column>
+                        <column id="31"/>
+                        <row id="32">
+                            <cell id="33">
+                                <label id="42">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Приемщик:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="34">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="45">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["dstOgv"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="35">
+                            <cell id="36"/>
+                            <cell id="37">
+                                <label id="41">
+                                    <property name="fontStyle">normal</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(наименование учреждения)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <table id="46">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="marginTop">20pt</property>
+                        <column id="59">
+                            <property name="width">1cm</property>
+                        </column>
+                        <column id="60"/>
+                        <column id="61">
+                            <property name="width">6cm</property>
+                        </column>
+                        <header>
+                            <row id="47">
+                                <cell id="48">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="62">
+                                        <property name="fontWeight">bold</property>
+                                        <text-property name="text">№</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="49">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="63">
+                                        <property name="fontWeight">bold</property>
+                                        <text-property name="text">Документы</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="50">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">medium</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="64">
+                                        <property name="fontWeight">bold</property>
+                                        <text-property name="text">Примечания</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="51">
+                                <cell id="52">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="69">
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<VALUE-OF>row.__rownum + 1</VALUE-OF>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="53">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="67">
+                                        <property name="resultSetColumn">docDetail</property>
+                                    </data>
+                                </cell>
+                                <cell id="54">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <text id="70"/>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                    <grid id="76">
+                        <property name="marginTop">20pt</property>
+                        <column id="77">
+                            <property name="width">2cm</property>
+                        </column>
+                        <column id="78"/>
+                        <column id="79">
+                            <property name="width">3cm</property>
+                        </column>
+                        <row id="80">
+                            <cell id="81">
+                                <label id="88">
+                                    <property name="fontSize">12pt</property>
+                                    <text-property name="text">Итого:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="82">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="135">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>new Packages.org.cp.birt.plugins.convert.Russian().formatImpl(row["countDocs"])</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="83">
+                                <label id="89">
+                                    <property name="fontSize">12pt</property>
+                                    <text-property name="text">документов</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="84">
+                            <cell id="85"/>
+                            <cell id="86">
+                                <label id="90">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(прописью)</text-property>
+                                </label>
+                            </cell>
+                            <cell id="87"/>
+                        </row>
+                    </grid>
+                    <grid id="91">
+                        <property name="marginTop">20pt</property>
+                        <column id="92">
+                            <property name="width">6cm</property>
+                        </column>
+                        <column id="93"/>
+                        <column id="94">
+                            <property name="width">0.5cm</property>
+                        </column>
+                        <column id="95"/>
+                        <column id="96">
+                            <property name="width">0.5cm</property>
+                        </column>
+                        <row id="97">
+                            <cell id="98">
+                                <label id="109">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Подпись отправителя:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="99">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="100">
+                                <label id="111">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">/</text-property>
+                                </label>
+                            </cell>
+                            <cell id="101">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="102">
+                                <label id="112">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">/</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="103">
+                            <cell id="104"/>
+                            <cell id="105">
+                                <label id="110">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">м.п.</text-property>
+                                </label>
+                            </cell>
+                            <cell id="106"/>
+                            <cell id="107"/>
+                            <cell id="108"/>
+                        </row>
+                    </grid>
+                    <grid id="113">
+                        <property name="marginTop">10pt</property>
+                        <column id="114">
+                            <property name="width">6cm</property>
+                        </column>
+                        <column id="115"/>
+                        <column id="116">
+                            <property name="width">0.5cm</property>
+                        </column>
+                        <column id="117"/>
+                        <column id="118">
+                            <property name="width">0.5cm</property>
+                        </column>
+                        <row id="119">
+                            <cell id="120">
+                                <label id="121">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Подпись приемщика:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="122">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="123">
+                                <label id="124">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">/</text-property>
+                                </label>
+                            </cell>
+                            <cell id="125">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="126">
+                                <label id="127">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">/</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="128">
+                            <cell id="129"/>
+                            <cell id="130">
+                                <label id="131">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">м.п.</text-property>
+                                </label>
+                            </cell>
+                            <cell id="132"/>
+                            <cell id="133"/>
+                            <cell id="134"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

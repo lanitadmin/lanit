@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Информация о начисленных суммах доходов, сборов</title>
+  <version>1</version>
+  <documentation> 
+    <author>Хренов А.В.</author>  
+    <description>Информация о начисленных (предъявленных) суммах доходов, сборов</description>  
+    <icon>PentahoReporting.png</icon>  
+    <help>Информация о начисленных (предъявленных) суммах доходов, сборов</help>  
+    <result-type>report</result-type> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">PDF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Excel</entry>  
+          <entry key="report-output-type-id">xls</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Word</entry>  
+          <entry key="report-output-type-id">rtf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Web Page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Comma Separated Value</entry>  
+          <entry key="report-output-type-id">csv</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <date_begin type="string"> 
+      <sources> 
+        <request>date_begin</request> 
+      </sources>  
+      <default-value/> 
+    </date_begin>  
+    <date_end type="string"> 
+      <sources> 
+        <request>date_end</request> 
+      </sources>  
+      <default-value/> 
+    </date_end>  
+    <sql type="string-list"> 
+      <default-value type="string-list"/> 
+    </sql> 
+  </inputs>
+
+  <outputs> 
+    <content type="content"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </content> 
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>PayReestr.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <parameter-template> 
+      <solution-file> 
+        <location>PayReest_par.html</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </parameter-template> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Promt params for Report</action-type>
+      <action-inputs> 
+        <outputTypeList type="property-map-list"/>  
+        <outputType type="string"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <outputType style="select"> 
+            <title>Формат вывода:</title>  
+            <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter> 
+          </outputType> 
+        </selections>  
+        <target><![CDATA[Report_Window]]></target>  
+        <xsl>parameter-template</xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript-Correct Date</action-type>
+      <action-inputs> 
+        <date_begin type="string"/>  
+        <date_end type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <date1 type="string"/>  
+        <date2 type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var date_template=/(\d\d)\.(\d\d)\.(\d{4})/;
+var res1=date_begin.match(date_template);
+date1=res1[3]+'-'+res1[2]+'-'+res1[1];
+var res2=date_end.match(date_template);
+date2=res2[3]+'-'+res2[2]+'-'+res2[1];]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript-Create EJBQL</action-type>
+      <action-inputs> 
+        <sql type="string-list"/>  
+        <date1 type="string"/>  
+        <date2 type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <sql type="string-list"/>  
+        <fields type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[beenName="CORE_PROCESS_FACTORY_FOR_PENTAHO";
+method="getEJBQLTest";
+sql.add(
+	"select POS.head.company.name,POS.head.date,POS.comment,POS.summa,POS.code,POS.head.number "+
+"from PaymentOrderSpec as POS where POS.head.date between '{date1}' and '{date2}'"
+);
+
+
+fields="COMPANY,DATE,VIDDE,SUMMA,KBK,POH_NUM";]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+      <action-type>Custom</action-type>
+      <action-inputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <sql type="string-list"/>  
+        <fields type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <dsResult type="result-set"/>  
+        <dsMetaColumn type="string"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JFreeReportComponent</component-name>
+      <action-type>report</action-type>
+      <action-inputs> 
+        <output-type type="string" mapping="outputType"/>  
+        <date_begin type="string"/>  
+        <date_end type="string"/>  
+        <data type="result-set" mapping="dsResult"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <action-outputs> 
+        <report-output type="content" mapping="content"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

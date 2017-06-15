@@ -1,0 +1,1 @@
+update app_setting set setting_name = 'Код субъекта РФ' where setting_id = 'ogv_region'

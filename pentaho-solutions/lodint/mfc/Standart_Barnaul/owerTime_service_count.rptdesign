@@ -1,0 +1,1260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.20" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.1.v20090903 Build &lt;2.5.1.v20090917-1447></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="422">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="423">
+            <text-property name="helpText">Дата конца (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата конца (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="7"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="caseInfoDataSet" id="116">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ogvName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">komplDoc</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">serviceName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ddl</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">time</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ogvName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">komplDoc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">serviceName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ddl</property>
+                </structure>
+                <structure>
+                    <property name="columnName">time</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ogvName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">komplDoc</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">serviceName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ddl</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">time</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConv = new Packages.org.cp.birt.plugins.Converter();
+
+valid= clazzConv.dateIsValid(params["startDate"],params["endDate"]);
+	if (valid){
+		dStartLong = clazzConv.getLongDate(params["startDate"]);
+		if(dStartLong==null) dStartLong=0;
+		dEndLong = clazzConv.getLongDate(params["endDate"]);
+		if(dEndLong==null) dEndLong=0;
+	}
+
+result = clazz.getEntityManagerShark().createQuery(
+"  select " +
+	"  pevService.stringValue, "+
+	"  pevKomplDoc.longValue, "+
+	"  pevDDL.longValue, " +
+	"  (pe.lastStateTime- pe.startedTime) "+
+	"  from ProcessEntity pe, ProcessVariableEntity pevDDL,ProcessVariableEntity pevService, ProcessVariableEntity pevKomplDoc " +
+	"  where pe.id like '%MFC_plus_MFC_Service' "+
+	"  and pe.state like '%closed%' "+
+	"  and pevService.processId = pe.id"+
+	"  and pevDDL.processId = pe.id"+
+	"  and pevKomplDoc.processId = pe.id"+
+	"  and pevService.definitionId = 'Service'"+
+	"  and pevDDL.definitionId = 'ddl'"+
+	"  and pe.createdTime >= "+dStartLong+
+	"  and pe.createdTime <= "+dEndLong+
+	"  and pevKomplDoc.definitionId = 'Komplekt_doc'"
+).getResultList();
+ 
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[clazzMath = new Packages.org.cp.birt.plugins.Math();
+
+
+function getCeName(serviceId){
+result5 = clazz.getEntityManagerLod().createQuery(
+"select name from CardElement "+
+" 		where id = :service "
+).setParameter("service", serviceId).getSingleResult();
+return result5;
+}
+
+function detDDL(service){
+try{
+result6 = clazz.getEntityManagerLod().createQuery(
+" select cefv.fieldIntegerValue from CardElementFieldValue cefv, CardField cf "+ 
+" where "+
+" cefv.cardField.fieldId = cf.fieldId "+
+" and cf.fieldName = 'ddlSrv' "+
+" and cefv.cardElement.id = :service"
+).setParameter("service", service).getSingleResult();}
+catch (e) {
+result6=0;
+}
+return result6;
+
+}
+
+function getOgvName(kompldocId){
+try{
+result5 = clazz.getEntityManagerLod().createQuery(
+"   select "+
+"  ce.name  "+
+" from GossrvcDocPackageItem as dpi1,CardElement ce,GossrvcRequest as gr "+
+" where dpi1.gossrvcRequest is not null and"+
+" dpi1.gossrvcRequest.id = gr.id and dpi1.gossrvcDocPackage.id = :kompldocId and"+
+" gr.ogvId = ce.id "
+).setParameter("kompldocId", kompldocId).getSingleResult();}
+catch (e) {
+result5="[не найдено]";
+}
+return result5;
+}
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+ogvName_if = getOgvName(rowValue[1]);
+if (!ogvName_if.equals("[не найдено]")){
+row["ogvName"] = ogvName_if;
+row["komplDoc"] = rowValue[1];
+row["serviceName"] = getCeName(rowValue[0]);
+row["ddl"] = detDDL(rowValue[0]);
+time = rowValue[3]/(3600000*24)
+if (time>0 &amp;&amp; time<1) time = 1;
+row["time"] = time;
+//clazzMath.roundUp(rowValue[3] / "86400000", 2);//
+}
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="overTimeDataSet" id="117">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">serviceName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">avgTime</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">stopedCnt</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">opendCnt</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">finishedCnt</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">interuptedCnt</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">serviceName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">avgTime</property>
+                </structure>
+                <structure>
+                    <property name="columnName">stopedCnt</property>
+                </structure>
+                <structure>
+                    <property name="columnName">opendCnt</property>
+                </structure>
+                <structure>
+                    <property name="columnName">finishedCnt</property>
+                </structure>
+                <structure>
+                    <property name="columnName">interuptedCnt</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">serviceName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">avgTime</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">stopedCnt</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">opendCnt</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">finishedCnt</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">interuptedCnt</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+
+datecurr = new Date();
+
+services = clazz.getEntityManagerLod().createQuery(
+"select "+
+" ce.id,  "+
+" ce.name  "+
+" from CardElement ce "+
+" where ce.card.cardCode = 'SService'  "
+).getResultList();
+
+totalrows = services.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[clazzConv = new Packages.org.cp.birt.plugins.Converter();
+
+valid= clazzConv.dateIsValid(params["startDate"],params["endDate"]);
+	if (valid){
+		dStartLong = clazzConv.getLongDate(params["startDate"]);
+		if(dStartLong==null) dStartLong=0;
+		dEndLong = clazzConv.getLongDate(params["endDate"]);
+		if(dEndLong==null) dEndLong=0;
+		dStartFormated = clazzConv.getStringFormat(params["startDate"]);
+		if(dStartFormated==null) dStartFormated=0;
+		dEndFormated = clazzConv.getStringFormat(params["endDate"]);
+		if(dEndFormated==null) dEndFormated=0;
+	}	
+
+function getAvgReqTime(serviceId){
+result1 = clazz.getEntityManagerShark().createQuery(
+"  select " +
+"  avg(pe.lastStateTime- pe.startedTime) "+
+"  from ProcessEntity pe,ProcessVariableEntity pev " +
+"  where pe.id like '%MFC_plus_Reg_lichno' and pev.processId = pe.id"+
+	"  and pe.createdTime >= "+dStartLong+
+	"  and pe.createdTime <= "+dEndLong+
+"  and pe.state like '%closed%' and pev.definitionId='Service' and pev.stringValue=:service "
+).setParameter("service", serviceId).getSingleResult();
+return result1;
+}
+function getStopedCnt(serviceId){
+result2 = clazz.getEntityManagerShark().createQuery(
+"select distinct peStoped.id as cnt from ProcessEntity peStoped,ProcessVariableEntity pevStoped, ActivityEntity pa "+
+"	where pevStoped.processId = peStoped.id and pevStoped.definitionId='Service' "+
+	"  and peStoped.createdTime >= "+dStartLong+
+	"  and peStoped.createdTime <= "+dEndLong+
+"	and pevStoped.stringValue=:service and pa.processId=peStoped.id and pa.id like '%Priem_waitDopDoc' "
+).setParameter("service", serviceId).getResultList();
+return result2;
+}
+function getOpendCnt(serviceId){
+result3 = clazz.getEntityManagerLod().createQuery(
+"select dp.id from GossrvcDocPackage dp"+
+"	where dp.completedDate is null and dp.serviceId=:service and dp.packDate<= '"+
+								dEndFormated+"' and dp.packDate>= '"+dStartFormated+"'"
+).setParameter("service", serviceId).getResultList();
+
+return result3.size();
+}
+function getFinishedCnt(serviceId){
+result4 = clazz.getEntityManagerShark().createQuery(
+"select distinct peFinished.id as cnt from ProcessEntity peFinished,ProcessVariableEntity pevFinished, ActivityEntity pa"+
+" 		where pevFinished.processId = peFinished.id and peFinished.state like '%close%' and pevFinished.definitionId='Service' "+
+	"  and peFinished.createdTime >= "+dStartLong+
+	"  and peFinished.createdTime <= "+dEndLong+
+"		and pevFinished.stringValue=:service and pa.processId=peFinished.id and pa.id like '%serviceProcess'"
+).setParameter("service", serviceId).getResultList();
+return result4;
+}
+function getInteruptedCnt(serviceId){
+result5 = clazz.getEntityManagerShark().createQuery(
+"select distinct peInterupted.id as cnt from ProcessEntity peInterupted,ProcessVariableEntity pevInterupted, ActivityEntity pa"+
+" 		where pevInterupted.processId = peInterupted.id and peInterupted.state like '%close%' and pevInterupted.definitionId='Service' "+
+	"  and peInterupted.createdTime >= "+dStartLong+
+	"  and peInterupted.createdTime <= "+dEndLong+
+"		and pevInterupted.stringValue=:service and pa.processId=peInterupted.id and pa.id like '%Priem_otkazSubscr1'"
+).setParameter("service", serviceId).getResultList();
+return result5;
+}
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = services.get(currentrow);
+
+avgTime=getAvgReqTime(rowValue[0])/(3600000*24);
+stopedCnt=getStopedCnt(rowValue[0]).size();
+opendCnt=getOpendCnt(rowValue[0]);
+finishedCnt=getFinishedCnt(rowValue[0]).size();
+interuptedCnt=getInteruptedCnt(rowValue[0]).size();
+if (avgTime!=0 || stopedCnt!=0 || opendCnt!=0 || finishedCnt!=0 || interuptedCnt!=0){
+row["serviceName"] = rowValue[1];
+if (avgTime>0 &amp;&amp; avgTime<1) avgTime = 1;
+row["avgTime"] = avgTime;
+row["stopedCnt"] = stopedCnt;
+row["opendCnt"] = opendCnt;
+row["finishedCnt"] = finishedCnt;
+row["interuptedCnt"] = interuptedCnt;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DateData" id="421">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["startDate"],params["endDate"]);
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+}
+else{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="orientation">landscape</property>
+            <property name="topMargin">0.5cm</property>
+            <property name="leftMargin">3cm</property>
+            <property name="bottomMargin">0.5cm</property>
+            <property name="rightMargin">1cm</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="9">
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">11pt</property>
+            <column id="10"/>
+            <column id="11"/>
+            <column id="12"/>
+            <row id="13">
+                <cell id="14">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="25">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Количество и время превышения регламента предоставления услуги</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="417">
+                <cell id="418">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="513">
+                        <property name="fontSize">14pt</property>
+                        <text-property name="text"> </text-property>
+                    </label>
+                    <text id="416">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="dataSet">DateData</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">startDate</property>
+                                <expression name="expression">dataSetRow["startDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">endDate</property>
+                                <expression name="expression">dataSetRow["endDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">valid</property>
+                                <expression name="expression">dataSetRow["valid"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>Информация подготовлена за период с <U><B><VALUE-OF>row["startDate"]</VALUE-OF> г.</B></U> по <U><B><VALUE-OF>row["endDate"]</VALUE-OF> г.</B></U> </DIV>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="17">
+                <cell id="18">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="26">
+                        <property name="fontSize">16pt</property>
+                        <text-property name="text"> </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="21">
+                <cell id="22">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="27">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">caseInfoDataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ogvName</property>
+                                <expression name="expression">dataSetRow["ogvName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">komplDoc</property>
+                                <expression name="expression">dataSetRow["komplDoc"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">serviceName</property>
+                                <expression name="expression">dataSetRow["serviceName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ddl</property>
+                                <expression name="expression">dataSetRow["ddl"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">time</property>
+                                <expression name="expression">dataSetRow["time"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>NewTableGroup1</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">COUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["serviceName"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">ogvName_concat</property>
+                                <property name="dataType">string</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>NewTableGroup1</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">CONCATENATE</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["ogvName"]</expression>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">Separator</property>
+                                        <expression name="value" type="javascript">", "</expression>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">Max length</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">Show all values</property>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation_1</property>
+                                <property name="dataType">float</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>NewTableGroup1</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">AVE</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["time"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                        </list-property>
+                        <column id="46"/>
+                        <column id="40"/>
+                        <column id="50"/>
+                        <column id="41"/>
+                        <column id="42"/>
+                        <header>
+                            <row id="28">
+                                <cell id="43">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="51">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Наименование ведомства]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="29">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="52">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Наименование услуги]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="47">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="53">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Время предоставление услуги (по регламенту) (дн)]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="30">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="54">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Среднее время превышения предоставления услуги (дн)]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="31">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="55">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Количество фактов превышения время предоставления услуги]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="377">
+                            <property name="groupName">NewTableGroup1</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">asc</property>
+                            <expression name="keyExpr" type="javascript">row["serviceName"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue" type="javascript">row["serviceName"]</expression>
+                            </structure>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <property name="pageBreakInside">auto</property>
+                            <header>
+                                <row id="378">
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["ogvName"]==null</expression>
+                                        </structure>
+                                    </list-property>
+                                    <cell id="379">
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#000000</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <data id="465">
+                                            <property name="paddingTop">2pt</property>
+                                            <property name="paddingLeft">2pt</property>
+                                            <property name="paddingBottom">2pt</property>
+                                            <property name="paddingRight">2pt</property>
+                                            <property name="resultSetColumn">ogvName_concat</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="380">
+                                        <property name="colSpan">1</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#000000</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <data id="404">
+                                            <property name="paddingTop">2pt</property>
+                                            <property name="paddingLeft">2pt</property>
+                                            <property name="paddingBottom">2pt</property>
+                                            <property name="paddingRight">2pt</property>
+                                            <property name="resultSetColumn">serviceName</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="424">
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#000000</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <data id="405">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">ddl</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="425">
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#000000</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <data id="512">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Aggregation_1</property>
+                                        </data>
+                                    </cell>
+                                    <cell id="426">
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderTopColor">#000000</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <property name="verticalAlign">middle</property>
+                                        <data id="407">
+                                            <property name="textAlign">center</property>
+                                            <property name="resultSetColumn">Aggregation</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
+                    </table>
+                </cell>
+            </row>
+            <row id="56">
+                <cell id="57">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="60">
+                        <text-property name="text"> </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="61">
+                <cell id="62">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="81">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <property name="dataSet">overTimeDataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">serviceName</property>
+                                <text-property name="displayName">serviceName</text-property>
+                                <expression name="expression">dataSetRow["serviceName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">avgTime</property>
+                                <text-property name="displayName">avgTime</text-property>
+                                <expression name="expression">dataSetRow["avgTime"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">stopedCnt</property>
+                                <text-property name="displayName">stopedCnt</text-property>
+                                <expression name="expression">dataSetRow["stopedCnt"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">opendCnt</property>
+                                <text-property name="displayName">opendCnt</text-property>
+                                <expression name="expression">dataSetRow["opendCnt"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">finishedCnt</property>
+                                <text-property name="displayName">finishedCnt</text-property>
+                                <expression name="expression">dataSetRow["finishedCnt"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">interuptedCnt</property>
+                                <text-property name="displayName">interuptedCnt</text-property>
+                                <expression name="expression">dataSetRow["interuptedCnt"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <column id="103"/>
+                        <column id="104"/>
+                        <column id="105"/>
+                        <column id="106"/>
+                        <column id="107"/>
+                        <column id="108"/>
+                        <header>
+                            <row id="82">
+                                <cell id="83">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="109">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Наименование услуги]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="84">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="110">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Среднее время подготовки ответа заявителю (дн)]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="85">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="111">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Количество приостановлений оказания услуги]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="86">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="112">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Количество «открытых» дел]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="87">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="113">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Количество дел отправленных в архив со статусом «Исполнено»]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="88">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="114">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Количество дел отправленных в архив со статусом «Прервано»]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="89">
+                                <list-property name="visibility">
+                                    <structure>
+                                        <property name="format">all</property>
+                                        <expression name="valueExpr" type="javascript">row["serviceName"]==null</expression>
+                                    </structure>
+                                </list-property>
+                                <cell id="90">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="410">
+                                        <property name="paddingTop">2pt</property>
+                                        <property name="paddingLeft">2pt</property>
+                                        <property name="paddingBottom">2pt</property>
+                                        <property name="paddingRight">2pt</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">serviceName</property>
+                                    </data>
+                                </cell>
+                                <cell id="91">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="411">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">avgTime</property>
+                                    </data>
+                                </cell>
+                                <cell id="92">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="412">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">stopedCnt</property>
+                                    </data>
+                                </cell>
+                                <cell id="93">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="413">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">opendCnt</property>
+                                    </data>
+                                </cell>
+                                <cell id="94">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="414">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">finishedCnt</property>
+                                    </data>
+                                </cell>
+                                <cell id="95">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="415">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">interuptedCnt</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

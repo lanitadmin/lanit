@@ -1,0 +1,1 @@
+CREATE INDEX gossrvc_doc_package_item_idx_3 ON gossrvc_doc_package_item  USING btree (parent_id);

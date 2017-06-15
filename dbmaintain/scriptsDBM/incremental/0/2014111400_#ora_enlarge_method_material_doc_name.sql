@@ -1,0 +1,2 @@
+ALTER TABLE method_material MODIFY doc_name varchar2(2000);
+ALTER TABLE METHOD_EVENT MODIFY COMMENT_EVENT varchar2(2300);

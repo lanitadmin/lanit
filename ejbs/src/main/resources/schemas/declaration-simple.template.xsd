@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:include schemaLocation="declaration-types.xsd"/>
+
+    <xs:element name="declaration" type="declarationType">
+      <xs:unique name="uniqueItem">
+        <xs:selector xpath="declarationItems"/>
+        <xs:field xpath="prodId"/>
+      </xs:unique>
+    </xs:element>
+		
+    <xs:complexType name="declarationType">
+		<xs:sequence>
+			<xs:element name="agent" type="agentType" minOccurs="1" maxOccurs="1"/>
+			<xs:element name="declarationPeriod" type="declarationPeriodType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="license" type="licenseType" minOccurs="1" maxOccurs="1"/>
+            <xs:element name="declarationItems" type="declarationItemType" minOccurs="1"/>
+		</xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="declarationItemType">
+		<xs:sequence>
+      		<xs:element name="prodId" type="prodIdType" minOccurs="1"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="beginValueX"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="beginValueXL"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="endValueX"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="endValueXL"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="totalInputX"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="totalInputXL"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="totalOutputX"/>
+            <xs:element type="xs:decimal" minOccurs="1" name="totalOutputXL"/>
+      	</xs:sequence>
+    </xs:complexType>
+
+	<xs:complexType name="licObjectType">
+    	<xs:sequence>
+      		<xs:element name="id" type="xs:long" minOccurs="0"/>
+      		<xs:element name="objType" type="xs:string" minOccurs="0"/>
+      		<xs:element name="phone" type="xs:string" minOccurs="0"/>
+      		<xs:element name="kladr" type="xs:string" minOccurs="0"/>
+			<xs:element name="name" type="xs:string" minOccurs="0"/>
+			<xs:element name="isHeavyAlc" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+  	</xs:complexType>		
+
+    <xs:complexType name="licenseType">
+    	<xs:sequence>
+    		<xs:element name="id" type="xs:long" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="licenseNumber" type="xs:string" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="licenseDate" type="xs:dateTime" maxOccurs="1" minOccurs="1"></xs:element>
+    		<xs:element name="licenseEndDate" type="xs:dateTime" maxOccurs="1" minOccurs="1"></xs:element>
+    	</xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType name="prodIdType">
+      <xs:restriction base="xs:string"/>
+    </xs:simpleType>
+
+	<xs:complexType name="agentType">
+    	<xs:sequence>
+      		<xs:element name="address" type="xs:string" minOccurs="1"/>
+			<xs:element name="agentType" type="xs:int" minOccurs="1"/>
+			<xs:element name="email" type="xs:string" minOccurs="1"/>
+			<xs:element name="govRegDoc" type="xs:string" minOccurs="1"/>
+			<xs:element name="id" type="xs:long" minOccurs="0"/>
+			<xs:element name="inn" type="xs:string" minOccurs="1"/>
+			<xs:element name="kpp" type="xs:string" minOccurs="1"/>
+			<xs:element name="name" type="xs:string" minOccurs="1"/>
+			<xs:element name="ogrn" type="xs:string" minOccurs="1"/>
+			<xs:element name="phone" type="xs:string" minOccurs="1"/>
+			<xs:element name="postAddress" type="xs:string" minOccurs="1"/>
+			<xs:element name="taxRegDoc" type="xs:string" minOccurs="1"/>
+		</xs:sequence>
+  	</xs:complexType>		
+
+	<xs:complexType name="declarationPeriodType">
+    	<xs:sequence>
+      		<xs:element name="periodRef" type="periodType" minOccurs="1"/>
+      		<xs:element name="lastDate" type="xs:string" minOccurs="0"/>
+			<xs:element name="noticeDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="isActive" type="xs:boolean" minOccurs="1"/>
+		</xs:sequence>
+  	</xs:complexType>
+  	
+ 	<xs:complexType name="periodType">
+    	<xs:all>
+      		<xs:element name="id" type="xs:string" minOccurs="1"/>
+      		<xs:element name="name" type="xs:string" minOccurs="1"/>
+      		<xs:element name="type" type="xs:string" minOccurs="1"/>
+			<xs:element name="beginDate" type="xs:dateTime" minOccurs="1"/>
+			<xs:element name="endDate" type="xs:dateTime" minOccurs="1"/>
+		</xs:all>
+  	</xs:complexType> 	
+
+</xs:schema>
+

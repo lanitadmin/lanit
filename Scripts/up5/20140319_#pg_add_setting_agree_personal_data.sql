@@ -1,0 +1,2 @@
+INSERT INTO APP_SETTING (SETTING_ID, SETTING_NAME, SETTING_VALUE, ID, OWNER)
+VALUES ('agree_personal_data', 'Заявление-согласие на обработку персональных данных', '0', nextval('hibernate_sequence'), NULL);

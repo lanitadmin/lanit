@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Report1 MFC</title>
+  <version>1</version>
+  <documentation> 
+    <author>I. Pogodin, S.Matveev</author>  
+    <description>Отчет о работе государственного многофункционального центра</description>  
+    <icon>PentahoReporting.png</icon>  
+    <help>Отчет о работе государственного многофункционального центра</help>  
+    <result-type>report</result-type> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">PDF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Excel</entry>  
+          <entry key="report-output-type-id">xls</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Word</entry>  
+          <entry key="report-output-type-id">rtf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Web Page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Comma Separated Value</entry>  
+          <entry key="report-output-type-id">csv</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <date_begin type="string"> 
+      <sources> 
+        <request>date_begin</request> 
+      </sources>  
+      <default-value/> 
+    </date_begin>  
+    <date_end type="string"> 
+      <sources> 
+        <request>date_end</request> 
+      </sources>  
+      <default-value/> 
+    </date_end>  
+    <sql type="string-list"> 
+      <default-value type="string-list"/> 
+    </sql>  
+    <jndi type="string"> 
+      <sources> 
+        <request>jndi</request> 
+      </sources>  
+      <default-value>sharkdb</default-value> 
+    </jndi> 
+  </inputs>
+
+  <outputs> 
+    <content type="content"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </content> 
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>report-stat-work-parameters.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition>  
+    <parameter-template> 
+      <solution-file> 
+        <location>par_template_sr.html</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </parameter-template> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Promt params for Report</action-type>
+      <action-inputs> 
+        <outputTypeList type="property-map-list"/>  
+        <outputType type="string"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <outputType style="select"> 
+            <title>Р¤РѕСЂРјР°С‚ РІС‹РІРѕРґР°:</title>  
+            <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter> 
+          </outputType> 
+        </selections>  
+        <target><![CDATA[Report_Window]]></target>  
+        <xsl>parameter-template</xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions>
+      <condition><![CDATA[false]]></condition>
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript-Correct Date</action-type>
+        <action-inputs> 
+          <date_begin type="string"/>  
+          <date_end type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <date1 type="string"/>  
+          <date2 type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var date_template=/(\d\d)\.(\d\d)\.(\d{4})/;
+var res1=date_begin.match(date_template);
+date1=res1[3]+'-'+res1[2]+'-'+res1[1];
+var res2=date_end.match(date_template);
+date2=res2[3]+'-'+res2[2]+'-'+res2[1];]]></script> 
+        </component-definition> 
+      </action-definition>
+
+    </actions>
+
+    <action-definition> 
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs> 
+        <jndi type="string"/>  
+        <date_begin type="string"/>
+        <date_end type="string"/>
+      </action-inputs>
+      <action-outputs> 
+        <query-result type="result-set" mapping="query_result"/> 
+      </action-outputs>
+      <component-definition> 
+        <live>true</live>  
+        <query><![CDATA[select 1 num,
+        --a.oid, a.bpms_name, a.bpms_id,
+       -- govServiceType,
+       -- personId,
+       -- agentId,
+       -- GetDocsService,
+        case GetDocsService
+                --govServiceType --$
+            when 'GetKidWelfare'
+                    --'ST_Get' --$
+                then personId
+                    --'$1'
+            when 'GetDocCopy'
+                    --'ST_ProLong' --$
+                then agentId
+                    --'$2'
+            else null
+        end reciever_Id,
+        startedDate DATE_1,
+        NULL DATE_2,
+        NULL DATE_3,
+        NULL SOLUTION_OGV,
+        NULL DATE_4,
+        NULL CRASH,
+        NULL DATE_5,
+        end_date DATE_6
+    from
+(
+select
+        p.oid,
+        p.bpms_name,
+        p.bpms_id,
+        (
+            select govservicetype.bpms_value_string
+                from bpms_process_variable govservicetype
+                where
+                    govServiceType.bpms_definition_id = 'govServiceType' AND
+                    govServiceType.bpms_process_id = p.bpms_id
+        ) govServiceType,
+        (
+            select GetDocsService.bpms_value_string
+                from bpms_process_variable GetDocsService
+                where
+                    GetDocsService.bpms_definition_id = '1_GetDocsService' AND
+                    GetDocsService.bpms_process_id = p.bpms_id
+        ) GetDocsService,
+        (
+            select personId.bpms_value_string
+                from bpms_process_variable personId
+                where
+                    personId.bpms_definition_id = 'personId' AND
+                    personId.bpms_process_id = p.bpms_id
+        ) personId,
+        (
+            select agentId.bpms_value_string
+                from bpms_process_variable agentId
+                where
+                    agentId.bpms_definition_id = 'agentId' AND
+                    agentId.bpms_process_id = p.bpms_id
+        ) agentId,
+        (
+            cast('01.01.1970' as timestamp)+
+                    p.bpms_started_time/86400000+cast(3 as float)/24
+        ) startedDate,
+        (   case p.bpms_state
+                when 'closed.completed' then
+                    cast('01.01.1970' as timestamp)+
+                    p.bpms_last_state_time/86400000+cast(3 as float)/24
+                else null
+            end
+        ) end_date
+        --p.bpms_priority, p.bpms_state, p.bpms_description, p.bpms_last_state_time, p.bpms_limit_time, p.bpms_process_mgr_name, p.bpms_activity_requester_id, p.bpms_act_req_process_id, p.bpms_created_time, p.bpms_ext_req_class_name, p.bpms_resource_requester_id, p.bpms_started_time
+    from
+        bpms_process p,
+        bpms_process_mgr m
+    where
+        --m.bpms_process_definition_id='1_1_getRegistrationDocs' and --$
+        m.bpms_process_definition_id='1_GetDocsService' and
+        m.bpms_name = p.bpms_process_mgr_name
+        and
+        (
+            cast('01.01.1970' as timestamp)+
+                    p.bpms_started_time/86400000+cast(3 as float)/24
+        ) between '{date_begin}' and '{date_end}'
+) a]]></query> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JFreeReportComponent</component-name>
+      <action-type>report</action-type>
+      <action-inputs> 
+        <output-type type="string" mapping="outputType"/>  
+        <date_begin type="string"/>  
+        <date_end type="string"/>  
+        <data type="result-set" mapping="query_result"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <action-outputs> 
+        <report-output type="content" mapping="content"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,53 @@
+<definitions name="GosServiceRosNed" targetNamespace="http://webservices.gossrvc.samara.lanit.org" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://webservices.gossrvc.samara.lanit.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <types/>
+ <message name="GosServiceRosNedInterface_login">
+  <part name="username" type="xsd:string"/>
+  <part name="password" type="xsd:string"/>
+ </message>
+ <message name="GosServiceRosNedInterface_rosNedResponse">
+  <part name="caseNum" type="xsd:string"/>
+  <part name="data" type="xsd:base64Binary"/>
+ </message>
+ <message name="GosServiceRosNedInterface_rosNedResponseResponse">
+  <part name="return" type="xsd:string"/>
+ </message>
+ <message name="GosServiceRosNedInterface_loginResponse">
+  <part name="return" type="xsd:boolean"/>
+ </message>
+ <portType name="GosServiceRosNedInterface">
+  <operation name="login" parameterOrder="username password">
+   <input message="tns:GosServiceRosNedInterface_login"/>
+   <output message="tns:GosServiceRosNedInterface_loginResponse"/>
+  </operation>
+  <operation name="rosNedResponse" parameterOrder="caseNum data">
+   <input message="tns:GosServiceRosNedInterface_rosNedResponse"/>
+   <output message="tns:GosServiceRosNedInterface_rosNedResponseResponse"/>
+  </operation>
+ </portType>
+ <binding name="GosServiceRosNedInterfaceBinding" type="tns:GosServiceRosNedInterface">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="login">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </input>
+   <output>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </output>
+  </operation>
+  <operation name="rosNedResponse">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </input>
+   <output>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </output>
+  </operation>
+ </binding>
+ <service name="GosServiceRosNed">
+  <port binding="tns:GosServiceRosNedInterfaceBinding" name="GosServiceRosNedInterfacePort">
+   <soap:address location="http://samara.lanit.ru:80/lodint-lodint/GosServiceRosNed"/>
+  </port>
+ </service>
+</definitions>

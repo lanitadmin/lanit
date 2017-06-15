@@ -1,0 +1,1 @@
+alter table ev_list_attributes alter COLUMN new_value type varchar(1000);

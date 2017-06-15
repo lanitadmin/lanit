@@ -1,0 +1,12 @@
+						<rich:calendar value="#{var.value}" rendered="#{var.writable}"
+							datePattern="dd.MM.yyyy" enableManualInput="true" id="#{var.getId()}DateCalVal"
+							class="#{(var.attributes['editMask']!=null) ? 'editMask' : '' }"
+                            alt="#{var.attributes['editMask']}"	/>
+
+						<h:inputText value="#{var.value}" readonly="true" id="#{var.getId()}DateVal"
+							styleClass="#{var.writable?'writable':'readonly'}"
+							rendered="#{!var.writable}">
+						</h:inputText>
+
+						
+						

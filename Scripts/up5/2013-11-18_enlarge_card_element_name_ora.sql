@@ -1,0 +1,1 @@
+ALTER TABLE card_element MODIFY name varchar2(1024);

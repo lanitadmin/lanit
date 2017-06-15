@@ -1,0 +1,991 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="64">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="65">
+            <text-property name="helpText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="62"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="63">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">packDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">packNum</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">zayavFIO</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">zyavPhone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">mainService</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">service</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">specFIO</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">reject</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">nameQuest</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ratingQuest</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">packDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">packNum</property>
+                </structure>
+                <structure>
+                    <property name="columnName">zayavFIO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">zyavPhone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mainService</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service</property>
+                </structure>
+                <structure>
+                    <property name="columnName">specFIO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">reject</property>
+                </structure>
+                <structure>
+                    <property name="columnName">nameQuest</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ratingQuest</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">packDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">packNum</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">zayavFIO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">zyavPhone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">mainService</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">service</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">specFIO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">reject</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">nameQuest</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ratingQuest</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+stDate = clazzConvert.getOutDate(params["startDate"]);
+edDate = clazzConvert.getOutDate(params["endDate"]);
+
+result = clazz.getEntityManagerLod().createQuery
+( 
+
+
+"select "+
+" rqs.dateTime, "+
+" dp.packNum, "+
+" ( "+
+"	select P.lastName || ' ' || "+
+"		P.firstName || ' ' || "+
+"		P.middleName from Person as P "+ 
+"	where ogi.objectClass='org.cp.model.common.Person' and P.id = ogi.objectId and ogi.selected = true"+
+"  ) as P_NAME, "+
+" ( "+
+"	select A.person.lastName || ' ' || "+
+"		A.person.firstName || ' ' || "+
+"		A.person.middleName from Agent as A "+ 
+"	where ogi.objectClass='org.cp.lodent.Agent' and A.id = ogi.objectId and A.person!=null and ogi.selected = true"+
+"  ) as AP_NAME, "+
+" ( "+
+"	select COALESCE (P.cellPhone, P.phone) from Person as P "+ 
+"	where ogi.objectClass='org.cp.model.common.Person' and P.id = ogi.objectId and ogi.selected = true "+
+" ) as P_CPHONE, "+
+" ( "+
+"	select COALESCE (A.person.cellPhone,A.person.phone)  from Agent as A "+ 
+"	where ogi.objectClass='org.cp.lodent.Agent' and A.id = ogi.objectId and A.person!=null and ogi.selected = true"+
+"  ) as AP_CPhone, "+
+" (select ce.name from CardElement ce where ce.id = og.mainServiceId ) as main_service,"+
+" (select ce.name from CardElement ce where ce.id = og.serviceId ) as service , "+
+" rqs.typeState, "+
+" quest.nameQuestion, "+
+" answ.numberValue, dp.id  "+
+"from GossrvcPackRatingQualityService rqs left join rqs.listRatingQualityService quest "+
+"  					left join quest.listAnswer answ "+
+" 					join rqs.gossrvcDocPackage dp "+
+"					join dp.applicantGroup og "+
+" 					left join og.items ogi "+
+"where "+ 
+"     rqs.dateTime between :stDate and :edDate  "
+
+).setParameter("stDate", stDate)
+.setParameter("edDate", edDate)
+.getResultList();
+	
+temp = "";
+ currentrow=0;
+ totalrows = result.size();
+ ]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["packDate"] = rowValue[0];
+row["packNum"] = rowValue[1];
+
+if (rowValue[2] != null) { 	row["zayavFIO"] = rowValue[2];}
+else { row["zayavFIO"] =rowValue[3]; }
+
+if (rowValue[4] != null) { 	row["zyavPhone"]  = rowValue[4];}
+else { row["zyavPhone"]  =rowValue[5]; }
+
+row["mainService"] = rowValue[6];
+row["service"] = rowValue[7];
+ 
+ if ("reject".equals(rowValue[8])) 
+   { 
+	  row["reject"] = "Да";
+	  row["ratingQuest"] = 0;
+	  row["nameQuest"] =temp;
+   }else 
+   {
+	  row["reject"] = "Нет";
+	  row["ratingQuest"] = rowValue[10];
+   }
+
+
+//Packages.java.lang.System.out.println("~~~~~~"+rowValue[8]);
+
+if (rowValue[9] != null) {
+	row["nameQuest"] = rowValue[9].replaceAll("Оцените","");
+	temp = rowValue[9].replaceAll("Оцените","");
+}
+
+//row["nameQuest"] = rowValue[9];
+//Работает только для Башкирии, в общем случае будет работать некорректно !!!!!
+if (rowValue[11] != null) {
+  result1 = clazz.getEntityManagerLod().createQuery( "select dp from GossrvcDocPackage dp where dp.id = :id "
+  ).setParameter("id", new Packages.java.lang.Long(rowValue[11]))
+  .getResultList();
+  
+  docPack = null;
+  
+  if (result1.size()>0) {
+  	docPack = result1.get(0);
+  }
+  operD = null;
+  if (docPack!= null) {
+	  longDateRating = rowValue[0].getTime();
+	  longPs1 = null;
+	  longPs2 = null;
+	  flag = false;
+	  //Идем по статусам
+	  for(i=0; i<docPack.getPackStatusChangeHistory().size(); i++) {
+	  	packS = docPack.getPackStatusChangeHistory().get(i);
+	    //Если находим статус регистрации
+	  	if (packS.getStatus() != null &amp;&amp; "regKomplDoc".equals(packS.getStatus().getCode()) &amp;&amp; packS.getBegins()!= null ) {
+	  	  longPs1 =packS.getBegins().getTime();
+	  	  
+	  	  //проверяем, создана ли оценка втечении 2 х часов после регистрации, если да, то человек сформировавший оценку- регистратор
+	  	  if (longDateRating-longPs1<5400000 &amp;&amp; packS.getUserBeg() != null) {
+	  	  		row["specFIO"] = packS.getUserBeg().getFio();
+	  	  		flag = true; 	  		 
+	      }
+	  	}
+	  	
+	  	//Ищем статус выдачи
+	  	if (packS.getStatus() != null &amp;&amp; "docVidacha".equals(packS.getStatus().getCode())) {
+	  	  longPs2 =packS.getBegins().getTime();	  	  
+	  	  if (packS.getUserBeg() != null) {
+	  	    //оператор выдачи - оператор формирующий оценку (по умолчанию для других регионов)
+	  	  	operD = packS.getUserBeg().getFio();
+	  	  	//проверяем, создана ли оценка втечении 2 х часов после выдачи, если да, то человек сформировавший оценку- регистратор
+	  	  	if (longDateRating-longPs2<5400000 ) {
+	  	  		row["specFIO"] = packS.getUserBeg().getFio();
+	  	  		flag = true;  	  		
+	      	}
+	      } 	   
+	  	}
+	  	 	
+	  }
+	  if (!flag) { //Если не было найдено подходящих временных статусов
+	    if (operD== null) { //Если не был найден оператор, производивший выдачу
+	      if (docPack.getRegistrator() != null) { row["specFIO"] = docPack.getRegistrator().getFio()}; //Человек, формирующий карточку - регистратор.
+	    }else {
+	  	  row["specFIO"] =  operD;
+	  	  } 	
+	  }	   
+  }
+}
+// ------------------------
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetData" id="92">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["startDate"],params["endDate"]);
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+}
+else{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Data Cube" id="338">
+            <property name="dimensions">
+                <tabular-dimension name="Group1" id="347">
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="348">
+                            <property name="levels">
+                                <tabular-level name="packDate" id="427">
+                                    <property name="dataType">date-time</property>
+                                    <property name="columnName">packDate</property>
+                                </tabular-level>
+                                <tabular-level name="packNum" id="349">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">packNum</property>
+                                </tabular-level>
+                                <tabular-level name="zayavFIO" id="350">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">zayavFIO</property>
+                                </tabular-level>
+                                <tabular-level name="zyavPhone" id="351">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">zyavPhone</property>
+                                </tabular-level>
+                                <tabular-level name="mainService" id="352">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">mainService</property>
+                                </tabular-level>
+                                <tabular-level name="service" id="353">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">service</property>
+                                </tabular-level>
+                                <tabular-level name="specFIO" id="354">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">specFIO</property>
+                                </tabular-level>
+                                <tabular-level name="reject" id="355">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">reject</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group2" id="356">
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="357">
+                            <property name="levels">
+                                <tabular-level name="nameQuest" id="358">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">nameQuest</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="359">
+                    <property name="measures">
+                        <tabular-measure name="ratingQuest" id="360">
+                            <expression name="measureExpression" type="javascript">dataSetRow["ratingQuest"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">Data Set</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">custom</property>
+            <property name="height">210mm</property>
+            <property name="width">450mm</property>
+            <property name="orientation">landscape</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <label id="13">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">Отчет по оценкам по заявителям</text-property>
+        </label>
+        <text id="463">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[Информация подготовлена за период: с <VALUE-OF>params["startDate"].value</VALUE-OF> по <VALUE-OF>params["endDate"].value</VALUE-OF>]]></text-property>
+        </text>
+        <extended-item extensionName="Crosstab" extensionVersion="2.5.0" id="361">
+            <property name="cube">Data Cube</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="395">
+                    <property name="measure">ratingQuest</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="396">
+                            <property name="aggregationOnRow">Group1/reject</property>
+                            <property name="aggregationOnColumn">Group2/nameQuest</property>
+                            <property name="content">
+                                <data id="397">
+                                    <structure name="numberFormat">
+                                        <property name="category">Custom</property>
+                                    </structure>
+                                    <property name="textAlign">center</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">data["nameQuest"]==null</expression>
+                                        </structure>
+                                    </list-property>
+                                    <structure name="toc"/>
+                                    <property name="resultSetColumn">ratingQuest_Group1/reject_Group2/nameQuest</property>
+                                </data>
+                            </property>
+                            <property name="width">30mm</property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="398">
+                            <property name="paddingTop">0pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">0pt</property>
+                            <property name="paddingRight">0pt</property>
+                            <property name="height">0cm</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="363">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="368">
+                            <property name="dimension">Group1</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="428">
+                                    <property name="level">Group1/packDate</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="429">
+                                            <property name="content">
+                                                <data name="packDate" id="430">
+                                                    <structure name="dateTimeFormat">
+                                                        <property name="category">Custom</property>
+                                                        <property name="pattern">dd.MM.yyyy H:mm:ss</property>
+                                                    </structure>
+                                                    <property name="resultSetColumn">packDate</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">20mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="369">
+                                    <property name="level">Group1/packNum</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="370">
+                                            <property name="content">
+                                                <data name="packNum" id="371">
+                                                    <property name="resultSetColumn">packNum</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">20mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="372">
+                                    <property name="level">Group1/zayavFIO</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="373">
+                                            <property name="content">
+                                                <data name="zayavFIO" id="374">
+                                                    <property name="resultSetColumn">zayavFIO</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">40mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View3" id="375">
+                                    <property name="level">Group1/zyavPhone</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="376">
+                                            <property name="content">
+                                                <data name="zyavPhone" id="377">
+                                                    <property name="resultSetColumn">zyavPhone</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">28mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View4" id="378">
+                                    <property name="level">Group1/mainService</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="379">
+                                            <property name="content">
+                                                <data name="mainService" id="380">
+                                                    <property name="resultSetColumn">mainService</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">60mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View5" id="381">
+                                    <property name="level">Group1/service</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="382">
+                                            <property name="content">
+                                                <data name="service" id="383">
+                                                    <property name="resultSetColumn">service</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">60mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View6" id="384">
+                                    <property name="level">Group1/specFIO</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="385">
+                                            <property name="content">
+                                                <data name="specFIO" id="386">
+                                                    <property name="resultSetColumn">specFIO</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">40mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View7" id="387">
+                                    <property name="level">Group1/reject</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="388">
+                                            <property name="content">
+                                                <data name="reject" id="389">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">reject</property>
+                                                </data>
+                                            </property>
+                                            <property name="width">15mm</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="390">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="459">
+                            <property name="dimension">Group2</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View8" id="460">
+                                    <property name="level">Group2/nameQuest</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="461">
+                                            <property name="content">
+                                                <data name="nameQuest" id="462">
+                                                    <property name="textAlign">center</property>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr" type="javascript">data["nameQuest"]==null</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">nameQuest</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="362">
+                    <property name="content">
+                        <grid id="433">
+                            <property name="marginBottom">-5cm</property>
+                            <column id="434">
+                                <property name="width">20mm</property>
+                            </column>
+                            <column id="435">
+                                <property name="width">20mm</property>
+                            </column>
+                            <column id="436">
+                                <property name="width">40mm</property>
+                            </column>
+                            <column id="437">
+                                <property name="width">28mm</property>
+                            </column>
+                            <column id="438">
+                                <property name="width">60mm</property>
+                            </column>
+                            <column id="439">
+                                <property name="width">60mm</property>
+                            </column>
+                            <column id="440">
+                                <property name="width">40mm</property>
+                            </column>
+                            <column id="441">
+                                <property name="width">15mm</property>
+                            </column>
+                            <row id="442">
+                                <property name="fontWeight">bold</property>
+                                <cell id="443">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="451">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Дата обращения заявителя</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="444">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="452">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">№ дела</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="445">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="453">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">ФИО заявителя</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="446">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="454">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">№ телефона заявителя</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="447">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="455">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Обобщающая услуга</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="448">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="456">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Услуга</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="449">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="457">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">ФИО специалиста</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="450">
+                                    <property name="borderRightColor">#E0E0E0</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">medium</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="458">
+                                        <property name="paddingTop">0pt</property>
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingBottom">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">Отказ (Да/Нет)</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </grid>
+                    </property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="marginBottom">-2pt</property>
+                    <property name="paddingTop">0pt</property>
+                    <property name="paddingLeft">0pt</property>
+                    <property name="paddingBottom">0pt</property>
+                    <property name="paddingRight">0pt</property>
+                </extended-item>
+            </property>
+            <property name="emptyCellValue">0</property>
+            <property name="fontFamily">"Linux Libertine"</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">packNum</property>
+                    <expression name="expression">dimension["Group1"]["packNum"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">zayavFIO</property>
+                    <expression name="expression">dimension["Group1"]["zayavFIO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">zyavPhone</property>
+                    <expression name="expression">dimension["Group1"]["zyavPhone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">mainService</property>
+                    <expression name="expression">dimension["Group1"]["mainService"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <expression name="expression">dimension["Group1"]["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">specFIO</property>
+                    <expression name="expression">dimension["Group1"]["specFIO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">reject</property>
+                    <expression name="expression">dimension["Group1"]["reject"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">packDate</property>
+                    <expression name="expression">dimension["Group1"]["packDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ratingQuest_Group1/reject</property>
+                    <expression name="expression">measure["ratingQuest"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group1/reject</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">nameQuest</property>
+                    <expression name="expression">dimension["Group2"]["nameQuest"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ratingQuest_Group1/reject_Group2/nameQuest</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group1/reject</value>
+                        <value>Group2/nameQuest</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">measure["ratingQuest"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+</report>

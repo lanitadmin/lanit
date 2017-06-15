@@ -1,0 +1,2 @@
+update soap_context set parent_id = null where parent_id in (select id from soap_options where code = 'sid0003178');
+update soap_context_var set soap_options_var_id = null where soap_options_var_id in (select id from SOAP_OPTIONS_VAR where parent_id in (select id from soap_options where code = 'sid0003178'));

@@ -1,0 +1,1 @@
+DROP TABLE IF EXISTS print_form_attachments;

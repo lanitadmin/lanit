@@ -1,0 +1,3 @@
+INSERT INTO permission_ref (id,aaction,add_check,aobject) VALUES (nextval('hibernate_sequence'),'просмотр',null,'Боковое меню - Приём документов');
+INSERT INTO permission_ref (id,aaction,add_check,aobject) VALUES (nextval('hibernate_sequence'),'просмотр',null,'Боковое меню - Регистрация заявителя в ЕСИА');
+INSERT INTO permission_ref (id,aaction,add_check,aobject) VALUES (nextval('hibernate_sequence'),'просмотр',null,'Боковое меню - Черновики');

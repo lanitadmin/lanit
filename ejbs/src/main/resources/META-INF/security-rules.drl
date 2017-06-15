@@ -1,0 +1,120 @@
+package Permissions;
+
+import java.security.Principal;
+
+import org.jboss.seam.security.permission.PermissionCheck;
+import org.jboss.seam.security.Role;
+import java.security.Principal;
+import org.cp.lod.CsGrantable;
+
+rule UserCanChangeHisPassword
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name == "user", action == "changePassword", granted == false)
+  Principal(principalName : name) 
+  CsGrantable(id == principalName)
+then
+  check.grant();
+end
+
+
+rule ViewPublicPages
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name matches ".*/public/.*xhtml", granted == false)
+then
+  check.grant();
+end
+
+rule StartProcessPage
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name matches ".*/member/startprocess.xhtml", granted == false)
+  Principal()
+then
+  check.grant();
+end
+rule WorkItemPage
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name matches ".*/member/workitem.xhtml", granted == false)
+  Principal()
+then
+  check.grant();
+end
+
+rule ProcInfoPage
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name matches ".*/member/procinfo.xhtml", granted == false)
+  Principal()
+then
+  check.grant();
+end
+
+rule downloadPublicResource
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name == "lodrepo", granted == false)
+then
+  check.grant();
+end
+
+
+//rule ViewSetGrantsPage
+//  no-loop
+//  activation-group "permissions" 
+//when
+//  check: PermissionCheck(name matches ".*/member/setgrants\.xhtml", granted == false)
+//  Role(name == "admin")
+//then
+//  check.grant();
+//end
+
+/*
+rule CanViewUsersAndRoles
+ no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name == "user", action == "view")
+  Role(name == "admin")
+then
+  check.grant();
+end
+
+rule CanEditUsersAndRoles
+ no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name == "user", action == "modify")
+  Role(name == "admin")
+then
+  check.grant();
+end
+
+rule AdminCanChangePasswords
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name == "user", action == "changePassword", granted == false)
+  Role(name == "admin")
+then
+  check.grant();
+end
+
+rule ViewAddReports
+  no-loop
+  activation-group "permissions" 
+when
+  check: PermissionCheck(name matches "Report.*", granted == false)
+  Role(name == "admin")
+then
+  check.grant();
+end
+*/

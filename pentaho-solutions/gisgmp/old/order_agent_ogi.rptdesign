@@ -1,0 +1,1847 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[function log(str) {
+	Packages.java.lang.System.out.println(str);
+}
+reportContext.setPersistentGlobalVariable("log", log);]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="objectGId" id="495">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="493"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="494">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">orgInfo_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">orgInfo_inn</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">orgInfo_Account</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">bank_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">bank_bik</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">bank_account</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">zayav_fio</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">zayav_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">total_amount</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ch_billFor</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">OrgInfo_KPP</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">UL_INN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">UL_KPP</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">Charge_Treasure</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">Ch_KBK</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">ch_OKATO</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">bdi_TP</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">bdi_R</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">bdi_TDN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">bdi_TDD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">bdi_PT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">UL_Name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">ul_bankName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">ul_acc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">ul_bikSVal</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">ul_corrAcc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">ch_bd</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">amount_pr</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">amount_pr_k</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">bdi_HEAD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">ch_uin</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">ch_payStatusCode</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">orgInfo_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orgInfo_inn</property>
+                </structure>
+                <structure>
+                    <property name="columnName">orgInfo_Account</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bank_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bank_bik</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bank_account</property>
+                </structure>
+                <structure>
+                    <property name="columnName">zayav_fio</property>
+                </structure>
+                <structure>
+                    <property name="columnName">zayav_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">total_amount</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ch_billFor</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OrgInfo_KPP</property>
+                </structure>
+                <structure>
+                    <property name="columnName">UL_INN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">UL_KPP</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Charge_Treasure</property>
+                </structure>
+                <structure>
+                    <property name="columnName">Ch_KBK</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ch_OKATO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bdi_TP</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bdi_R</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bdi_TDN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bdi_TDD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bdi_PT</property>
+                </structure>
+                <structure>
+                    <property name="columnName">UL_Name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_bankName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_acc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_bikSVal</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_corrAcc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ch_bd</property>
+                </structure>
+                <structure>
+                    <property name="columnName">amount_pr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">amount_pr_k</property>
+                </structure>
+                <structure>
+                    <property name="columnName">bdi_HEAD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ch_uin</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ch_payStatusCode</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">orgInfo_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">orgInfo_inn</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">orgInfo_Account</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">bank_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">bank_bik</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">bank_account</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">zayav_fio</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">zayav_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">total_amount</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ch_billFor</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">OrgInfo_KPP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">UL_INN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">UL_KPP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">Charge_Treasure</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">Ch_KBK</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">ch_OKATO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">bdi_TP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">bdi_R</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">bdi_TDN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">bdi_TDD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">bdi_PT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">UL_Name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">ul_bankName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">ul_acc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">ul_bikSVal</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">ul_corrAcc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">ch_bd</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">amount_pr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">amount_pr_k</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">bdi_HEAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">ch_uin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">ch_payStatusCode</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[shark = new Packages.org.cp.birt.plugins.Shark();
+convert = new Packages.org.cp.birt.plugins.convert.Russian();
+
+OrgInfo_Name ="";
+OrgInfo_INN = "";
+OrgInfo_KPP = "";
+OrgInfo_Account = "";
+Charge_TreasureBranch = "";
+Charge_KBK = "";
+Charge_OKATO = "";
+UL_Name = "";
+UL_BankName = "";
+UL_INN = "";
+UL_KPP = "";
+UL_Account = "";
+UL_BikSwiftVal = "";
+UL_CorrAccount = "";
+Charge_TreasureBranch = "";
+Charge_OKATO = "";
+Charge_TotalAmount = "";
+Charge_BillFor = "";
+Charge_BillDate = "";
+Charge_UIN = "";
+BudgetIndex_TaxPeriod = "";
+BudgetIndex_Purpose = "";
+BudgetIndex_TaxDocNumber = "";
+BudgetIndex_TaxDocDate = "";
+BudgetIndex_Head = "";
+BudgetIndex_PaymentType = "";
+bank_name = "";
+bank_bik_swift_val = "";
+bank_corr_account = "";
+
+objectGId = new Packages.java.lang.Long(params["objectGId"]);
+
+objectGs = shark.getEntityManagerLod().createQuery(
+"from ObjectGroupItem ogi where ogi.id = :ogiId")
+.setParameter("ogiId", objectGId)
+.getResultList();
+
+objectG = null;
+
+if (objectGs.size()==0){
+	//charge = resHome.getCharge(chargeId);
+}else
+{
+	objectG = objectGs.get(0);
+}
+
+agent = objectG.getObject();
+if (agent != null) {
+	UL_Name = agent.getName();
+	UL_BankName = agent.getBank();
+	UL_INN = agent.getInn();
+	UL_KPP = agent.getKpp();
+	UL_Account = agent.getBankAccount();
+	UL_BikSwiftVal = agent.getBik();
+	UL_CorrAccount = agent.getCorrAccount();
+}
+
+objectGroup = objectG.getObjectGroup();
+Packages.java.lang.System.out.println("objectGroup "+objectGroup);
+if (objectGroup != null ){
+	//******
+	// если в цели прописана сумма, то записать её как сумму плтежа (#16102)
+	goalCode = objectGroup.getGoalCode();
+	goals = shark.getEntityManagerLod().createQuery(
+		"from CardElement ce where ce.id = :goalCode")
+		.setParameter("goalCode", goalCode)
+		.getResultList(); 
+	if (goals != null) {
+		if (goals != null && goals.size()>0) {
+			goal = goals.get(0);
+			Charge_TotalAmount = goal.getFieldValue("amountGoal");
+		}	
+	}
+	//******
+
+	serviceId = objectGroup.getMainServiceId();
+	if (serviceId==null) {
+		serviceId = objectGroup.getServiceId();
+	}
+	
+	Packages.java.lang.System.out.println("serviceId "+serviceId);
+	services = shark.getEntityManagerLod().createQuery(
+		"from CardElement ce where ce.id = :ceId")
+		.setParameter("ceId", serviceId)
+		.getResultList(); 
+	if (services.size()>0) {
+		service =  services.get(0);
+		Packages.java.lang.System.out.println("service "+service);
+		Charge_BillFor = service.getFieldValue("bill_for");
+		if (Charge_TotalAmount == null || Charge_TotalAmount == "") {
+			Charge_TotalAmount = service.getFieldValue("amount");
+		}
+		//Charge_KBK = service.getFieldValue("kbk");
+		Charge_BillDate = new Date();
+	}	
+	docTrees = shark.getEntityManagerLod().createQuery(
+		"from GossrvcServiceDocTree gsdt where gsdt.id = :ogiId")
+		.setParameter("ogiId",objectGroup.getGoalId())
+		.getResultList(); 
+	if (docTrees.size()>0){
+		docTree = docTrees.get(0);
+		Packages.java.lang.System.out.println("docTree "+docTree);
+		if (docTree != null) {
+			ogvs = docTree.getListOgvs();
+			if (ogvs.size()>0) {
+				ogv = ogvs.get(0); 
+				OrgInfo_INN = ogv.getFieldValue("ogv_inn");
+				OrgInfo_Account = ogv.getFieldValue("ogv_bankaccount");
+				Charge_TreasureBranch = ogv.getFieldValue("ogv_ufkname");
+				Charge_PersAccCode = ogv.getFieldValue("ogv_licacc");
+				bank_bik_swift_val = ogv.getFieldValue("ogv_bik");
+				bank_name = ogv.getFieldValue("ogv_bankname");
+				bank_corr_account = ogv.getFieldValue("ogv_bancorracc");
+				OrgInfo_Name =	ogv.getName();	
+				OrgInfo_KPP = ogv.getFieldValue("ogv_kpp");		
+				Charge_OKATO = ogv.getFieldValue("ogv_okato");
+				Charge_KBK = service.getFieldValue("kbk");
+				BudgetIndex_Head = ogv.getFieldValue("ogv_kgadb");
+			} 
+		}
+	}
+	
+		
+		
+		
+	//	Charge_PersAccCode = service.getFieldValue("ogv_licacc");
+	//	bank_name = service.getFieldValue("ogv_bankname");
+	//	bank_bik_swift_val = service.getFieldValue("ogv_bik");
+	//	bank_corr_account = service.getFieldValue("ogv_bancorracc");
+	//	if (objectG.getOwner() != null) {
+	//		orgunits = shark.getEntityManagerLod().createQuery(
+	//			"from OrgUnit ou where ou.owner = :ownerCode")
+	//			.setParameter("ownerCode", objectG.getOwner())
+	//			.getResultList(); 
+	//		if (orgunits.size()>0) { OrgInfo_Name =orgunits.get(0).getName(); }
+	//	}
+	//	OrgInfo_INN = service.getFieldValue("ogv_inn");
+	//	OrgInfo_Account = service.getFieldValue("ogv_bankaccount");
+	//	Charge_TreasureBranch = service.getFieldValue("ogv_ufkname");
+	//	OrgInfo_KPP = service.getFieldValue("ogv_kpp");
+		
+	//	Charge_OKATO = service.getFieldValue("ogv_okato");
+	
+}
+
+totalrow = 1;
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow > totalrow) {
+	return (false);
+}
+
+row["orgInfo_name"] = OrgInfo_Name;
+row["orgInfo_inn"] = OrgInfo_INN;
+row["orgInfo_Account"] = OrgInfo_Account;
+row["bank_name"] = bank_name;
+row["bank_bik"] = bank_bik_swift_val;
+row["bank_account"] = bank_corr_account;
+row["ch_billFor"] = Charge_BillFor;
+row["ch_uin"] = Charge_UIN;
+row["total_amount"] = Charge_TotalAmount;
+row["OrgInfo_KPP"] = OrgInfo_KPP;
+row["UL_INN"] = UL_INN;
+row["UL_KPP"] = UL_KPP;
+row["Charge_Treasure"] = Charge_TreasureBranch;
+row["Ch_KBK"] = Charge_KBK;
+row["ch_OKATO"] = Charge_OKATO;
+row["bdi_TP"] = BudgetIndex_TaxPeriod;
+row["bdi_R"] = BudgetIndex_Purpose;
+row["bdi_TDN"] = BudgetIndex_TaxDocNumber;
+row["bdi_TDD"] = BudgetIndex_TaxDocDate;
+row["bdi_PT"] = BudgetIndex_PaymentType;
+row["bdi_HEAD"] = BudgetIndex_Head;
+row["UL_Name"] = UL_Name;
+row["ul_bankName"] = UL_BankName;
+row["ul_acc"] = UL_Account;
+row["ul_bikSVal"] = UL_BikSwiftVal;
+row["ul_corrAcc"] = UL_CorrAccount;
+row["ch_bd"] = Charge_BillDate;
+row["amount_pr"] = convert.amount(new Packages.java.math.BigDecimal(Charge_TotalAmount));
+//row["ch_payStatusCode"] = chargePayerStatusCode;
+
+currentrow++;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="height">9.447916666666666in</property>
+            <property name="width">7.739583333333333in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">orgInfo_name</property>
+                    <text-property name="displayName">orgInfo_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["orgInfo_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">orgInfo_inn</property>
+                    <text-property name="displayName">orgInfo_inn</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["orgInfo_inn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">orgInfo_Account</property>
+                    <text-property name="displayName">orgInfo_Account</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["orgInfo_Account"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bank_name</property>
+                    <text-property name="displayName">bank_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bank_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bank_bik</property>
+                    <text-property name="displayName">bank_bik</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bank_bik"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bank_account</property>
+                    <text-property name="displayName">bank_account</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bank_account"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">zayav_fio</property>
+                    <text-property name="displayName">zayav_fio</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["zayav_fio"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">zayav_address</property>
+                    <text-property name="displayName">zayav_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["zayav_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">total_amount</property>
+                    <text-property name="displayName">total_amount</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total_amount"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ch_billFor</property>
+                    <text-property name="displayName">ch_billFor</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_billFor"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OrgInfo_KPP</property>
+                    <text-property name="displayName">OrgInfo_KPP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["OrgInfo_KPP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">UL_INN</property>
+                    <text-property name="displayName">UL_INN</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["UL_INN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">UL_KPP</property>
+                    <text-property name="displayName">UL_KPP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["UL_KPP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Charge_Treasure</property>
+                    <text-property name="displayName">Charge_Treasure</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Charge_Treasure"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Ch_KBK</property>
+                    <text-property name="displayName">Ch_KBK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["Ch_KBK"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ch_OKATO</property>
+                    <text-property name="displayName">ch_OKATO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_OKATO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bdi_TP</property>
+                    <text-property name="displayName">bdi_TP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bdi_TP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bdi_R</property>
+                    <text-property name="displayName">bdi_R</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bdi_R"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bdi_TDN</property>
+                    <text-property name="displayName">bdi_TDN</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bdi_TDN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bdi_TDD</property>
+                    <text-property name="displayName">bdi_TDD</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bdi_TDD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">bdi_PT</property>
+                    <text-property name="displayName">bdi_PT</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bdi_PT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">UL_Name</property>
+                    <text-property name="displayName">UL_Name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["UL_Name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_bankName</property>
+                    <text-property name="displayName">ul_bankName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_bankName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_acc</property>
+                    <text-property name="displayName">ul_acc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_acc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_bikSVal</property>
+                    <text-property name="displayName">ul_bikSVal</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_bikSVal"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_corrAcc</property>
+                    <text-property name="displayName">ul_corrAcc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_corrAcc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ch_bd</property>
+                    <text-property name="displayName">ch_bd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_bd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">amount_pr</property>
+                    <text-property name="displayName">amount_pr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">amount_pr_k</property>
+                    <text-property name="displayName">amount_pr_k</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["amount_pr_k"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ch_bd_1</property>
+                    <text-property name="displayName">ch_bd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_bd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">bdi_HEAD</property>
+                    <text-property name="displayName">bdi_HEAD</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["bdi_HEAD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ch_uin</property>
+                    <text-property name="displayName">ch_uin</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ch_payStatusCode</property>
+                    <text-property name="displayName">ch_payStatusCode</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_payStatusCode"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">dataSetRow["ch_payStatusCode"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="8">
+                <property name="width">1.7395833333333333in</property>
+            </column>
+            <column id="9">
+                <property name="width">6in</property>
+            </column>
+            <row id="10">
+                <cell id="11">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">2</property>
+                    <grid id="682">
+                        <property name="height">7.614583333333333in</property>
+                        <property name="width">7.666666666666667in</property>
+                        <column id="683">
+                            <property name="width">0.6979166666666666in</property>
+                        </column>
+                        <column id="684">
+                            <property name="width">0.5208333333333334in</property>
+                        </column>
+                        <column id="685">
+                            <property name="width">0.875in</property>
+                        </column>
+                        <column id="686">
+                            <property name="width">0.90625in</property>
+                        </column>
+                        <column id="687">
+                            <property name="width">0.4895833333333333in</property>
+                        </column>
+                        <column id="688">
+                            <property name="width">0.6979166666666666in</property>
+                        </column>
+                        <column id="689">
+                            <property name="width">0.6979166666666666in</property>
+                        </column>
+                        <column id="690">
+                            <property name="width">0.6979166666666666in</property>
+                        </column>
+                        <column id="691">
+                            <property name="width">0.2708333333333333in</property>
+                        </column>
+                        <column id="692">
+                            <property name="width">1.125in</property>
+                        </column>
+                        <column id="693">
+                            <property name="width">0.6875in</property>
+                        </column>
+                        <row id="694">
+                            <property name="height">0.3125in</property>
+                            <cell id="695">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="698">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">1</property>
+                            </cell>
+                            <cell id="995">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="702"/>
+                            <cell id="703"/>
+                            <cell id="704"/>
+                            <cell id="705"/>
+                        </row>
+                        <row id="706">
+                            <cell id="707">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <label id="994">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Поступ. в банк плат.</text-property>
+                                </label>
+                            </cell>
+                            <cell id="710"/>
+                            <cell id="711">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <label id="996">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Списано со сч.плат.</text-property>
+                                </label>
+                            </cell>
+                            <cell id="714"/>
+                            <cell id="715"/>
+                            <cell id="716"/>
+                            <cell id="717"/>
+                        </row>
+                        <row id="718">
+                            <cell id="719">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <label id="997">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">ПЛАТЕЖНОЕ ПОРУЧЕНИЕ № </text-property>
+                                </label>
+                            </cell>
+                            <cell id="725">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <data id="1186">
+                                    <structure name="dateTimeFormat">
+                                        <property name="category">Medium Date</property>
+                                        <property name="pattern">Medium Date</property>
+                                    </structure>
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">ch_bd</property>
+                                </data>
+                            </cell>
+                            <cell id="727"/>
+                            <cell id="728">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="1185">
+                                    <text-property name="text">Электронно</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1176">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">2</property>
+                                <grid id="1178">
+                                    <property name="height">0.46875in</property>
+                                    <property name="width">0.625in</property>
+                                    <column id="1179">
+                                        <property name="width">0.125in</property>
+                                    </column>
+                                    <column id="1180">
+                                        <property name="width">0.5in</property>
+                                    </column>
+                                    <row id="1181">
+                                        <property name="height">0.46875in</property>
+                                        <cell id="1182"/>
+                                        <cell id="1183">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <data id="1184">
+                                                <property name="resultSetColumn">Column Binding</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                        <row id="730">
+                            <cell id="731"/>
+                            <cell id="732"/>
+                            <cell id="733"/>
+                            <cell id="734"/>
+                            <cell id="735"/>
+                            <cell id="736"/>
+                            <cell id="737">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <label id="998">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Дата</text-property>
+                                </label>
+                            </cell>
+                            <cell id="739"/>
+                            <cell id="740">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">1</property>
+                                <label id="999">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Вид платежа</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="742">
+                            <cell id="743">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1000">
+                                    <text-property name="text">Сумма прописью</text-property>
+                                </label>
+                            </cell>
+                            <cell id="745">
+                                <property name="colSpan">9</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="1173">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["amount_pr"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="754">
+                            <cell id="755">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <text id="1048">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[ИНН <VALUE-OF>row["UL_INN"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1004">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <text id="1049">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[КПП <VALUE-OF>row["UL_KPP"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="761">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">2</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1009">
+                                    <text-property name="text">Сумма</text-property>
+                                </label>
+                            </cell>
+                            <cell id="762">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">2</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <text id="1050">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["total_amount"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="766">
+                            <property name="height">0.22916666666666666in</property>
+                            <cell id="767">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">2</property>
+                                <text id="1074">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["UL_Name"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="778">
+                            <property name="height">0.25in</property>
+                            <cell id="785">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">2</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1011">
+                                    <text-property name="text">Сч.№</text-property>
+                                </label>
+                            </cell>
+                            <cell id="786">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">2</property>
+                                <text id="1143">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_acc"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="790">
+                            <property name="height">0.25in</property>
+                            <cell id="1067">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="1073">
+                                    <text-property name="text">Плательщик</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="802">
+                            <cell id="803">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1086">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_bankName"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1135">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1012">
+                                    <text-property name="text">БИК</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1136">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1144">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_bikSVal"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="814">
+                            <cell id="1080">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1087">
+                                    <text-property name="text">Банк плательщика</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1139">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1013">
+                                    <text-property name="text">Сч.№</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1140">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="1145">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_corrAcc"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="826">
+                            <cell id="827">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1099">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["bank_name"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="833">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1015">
+                                    <text-property name="text">БИК</text-property>
+                                </label>
+                            </cell>
+                            <cell id="834">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1161">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["bank_bik"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="838">
+                            <property name="height">0.3229166666666667in</property>
+                            <cell id="1093">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <label id="1100">
+                                    <property name="marginTop">2mm</property>
+                                    <text-property name="text">Банк получателя</text-property>
+                                </label>
+                            </cell>
+                            <cell id="845">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1016">
+                                    <text-property name="text">Сч.№</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1149">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1162">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["bank_account"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="850">
+                            <cell id="851">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <text id="1101">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[ИНН <VALUE-OF>row["orgInfo_inn"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="854">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <text id="1102">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[КПП <VALUE-OF>row["OrgInfo_KPP"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1153">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1020">
+                                    <text-property name="text">Сч.№</text-property>
+                                </label>
+                            </cell>
+                            <cell id="1154">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">2</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="1163">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["orgInfo_Account"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="862">
+                            <property name="height">0.15625in</property>
+                            <cell id="863">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">3</property>
+                                <text id="1127">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["Charge_Treasure"]</VALUE-OF> (<VALUE-OF>row["orgInfo_name"]</VALUE-OF>)]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1157">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                            </cell>
+                        </row>
+                        <row id="874">
+                            <cell id="881">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1021">
+                                    <text-property name="text">Вид.оп</text-property>
+                                </label>
+                            </cell>
+                            <cell id="882">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">3</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <grid id="1024">
+                                    <property name="marginTop">-1pt</property>
+                                    <property name="height">0.71875in</property>
+                                    <property name="width">2.71875in</property>
+                                    <structure name="toc"/>
+                                    <column id="1025">
+                                        <property name="width">0.90625in</property>
+                                    </column>
+                                    <column id="1026">
+                                        <property name="width">0.90625in</property>
+                                    </column>
+                                    <column id="1027">
+                                        <property name="width">0.90625in</property>
+                                    </column>
+                                    <row id="1028">
+                                        <property name="height">0.22916666666666666in</property>
+                                        <cell id="1029">
+                                            <label id="1172">
+                                                <text-property name="text">01</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="1030">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="1040">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <text-property name="text">Срок.плат.</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="1031"/>
+                                    </row>
+                                    <row id="1032">
+                                        <property name="height">0.2604166666666667in</property>
+                                        <cell id="1033"/>
+                                        <cell id="1034">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="1041">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <text-property name="text">Очер.плат.</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="1035"/>
+                                    </row>
+                                    <row id="1036">
+                                        <property name="height">0.22916666666666666in</property>
+                                        <cell id="1037"/>
+                                        <cell id="1038">
+                                            <property name="borderLeftColor">#000000</property>
+                                            <property name="borderLeftStyle">solid</property>
+                                            <property name="borderLeftWidth">thin</property>
+                                            <property name="borderRightColor">#000000</property>
+                                            <property name="borderRightStyle">solid</property>
+                                            <property name="borderRightWidth">thin</property>
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <label id="1042">
+                                                <property name="paddingTop">0pt</property>
+                                                <property name="paddingLeft">0pt</property>
+                                                <property name="paddingBottom">0pt</property>
+                                                <property name="paddingRight">0pt</property>
+                                                <text-property name="text">Рез.поле</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="1039"/>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                        <row id="886">
+                            <cell id="893">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1022">
+                                    <text-property name="text">Наз.пл.</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="898">
+                            <cell id="1120">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <label id="1126">
+                                    <text-property name="text">Получатель</text-property>
+                                </label>
+                            </cell>
+                            <cell id="905">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <label id="1023">
+                                    <text-property name="text">Код</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="910">
+                            <cell id="911">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <text id="1164">
+                                    <property name="textAlign">left</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["bdi_HEAD"]</VALUE-OF>&amp;nbsp;<VALUE-OF>row["Ch_KBK"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="914">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <text id="1165">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>if (row["ch_OKATO"]!=null &amp;&amp; row["ch_OKATO"]!=''){ row["ch_OKATO"]}else {'0'}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="915">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="1166">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>if (row["bdi_R"]!=null &amp;&amp; row["bdi_R"]!=''){ row["bdi_R"]}else {'0'}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="916">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <text id="1167">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>if (row["bdi_TP"]!=null &amp;&amp; row["bdi_TP"]!=''){row["bdi_TP"]}else {'0'}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="918">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <text id="1168">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>if (row["bdi_TDN"]!=null &amp;&amp; row["bdi_TDN"]!=''){ row["bdi_TDN"]}else {'0'}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="920">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <text id="1169">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>if (row["bdi_TDD"]!=null &amp;&amp; row["bdi_TDD"]!=''){ row["bdi_TDD"]}else {'0'}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="921">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <text id="1170">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["bdi_PT"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="922">
+                            <property name="height">0.8333333333333334in</property>
+                            <cell id="923">
+                                <property name="colSpan">11</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1171">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ch_billFor"]</VALUE-OF><VALUE-OF>if (row["ch_billFor"]!=''){'.&amp;nbsp;'}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="934">
+                            <property name="height">0.25in</property>
+                            <cell id="935">
+                                <property name="colSpan">11</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="1175">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Назначение платежа]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="946">
+                            <cell id="947"/>
+                            <cell id="948"/>
+                            <cell id="949"/>
+                            <cell id="950"/>
+                            <cell id="951">
+                                <property name="colSpan">2</property>
+                                <property name="rowSpan">1</property>
+                                <label id="1045">
+                                    <text-property name="text">Подписи</text-property>
+                                </label>
+                            </cell>
+                            <cell id="953"/>
+                            <cell id="954"/>
+                            <cell id="955">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <label id="1046">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Отметки банка</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="958">
+                            <property name="height">0.5625in</property>
+                            <cell id="959"/>
+                            <cell id="960">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">2</property>
+                                <label id="1047">
+                                    <property name="marginTop">8mm</property>
+                                    <text-property name="text">М.П.</text-property>
+                                </label>
+                            </cell>
+                            <cell id="961"/>
+                            <cell id="962">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="966"/>
+                            <cell id="967"/>
+                            <cell id="968"/>
+                            <cell id="969"/>
+                        </row>
+                        <row id="970">
+                            <property name="height">0.5416666666666666in</property>
+                            <cell id="971"/>
+                            <cell id="973"/>
+                            <cell id="974">
+                                <property name="colSpan">4</property>
+                                <property name="rowSpan">1</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="978"/>
+                            <cell id="979"/>
+                            <cell id="980"/>
+                            <cell id="981"/>
+                        </row>
+                        <row id="982">
+                            <property name="height">0.15625in</property>
+                            <cell id="983"/>
+                            <cell id="984"/>
+                            <cell id="985"/>
+                            <cell id="986"/>
+                            <cell id="987"/>
+                            <cell id="988"/>
+                            <cell id="989"/>
+                            <cell id="990"/>
+                            <cell id="991"/>
+                            <cell id="992"/>
+                            <cell id="993"/>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="13"/>
+        </grid>
+    </body>
+</report>

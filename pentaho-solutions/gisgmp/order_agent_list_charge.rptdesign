@@ -1,0 +1,2084 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[function log(str) {
+	Packages.java.lang.System.out.println(str);
+}
+reportContext.setPersistentGlobalVariable("log", log);]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="guid" id="1803">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="493"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="494">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ch_uin</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">reestr_date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">doc_type</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">doc_number</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">date</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">info</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">sum</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">amount_pr</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">ul_inn</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ul_kpp</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">ul_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">ul_account</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">ul_bankName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">ul_corrAcc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">ul_bik</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">org_inn</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">org_kpp</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">org_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">org_acc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">org_bankName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">org_corracc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">org_bik</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">taxPeriod</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">pay_type</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">pay_base</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">doc_n</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">doc_d</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">kbk</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">oktmo</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">pay_status</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">purpose</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ch_uin</property>
+                </structure>
+                <structure>
+                    <property name="columnName">reestr_date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">doc_type</property>
+                </structure>
+                <structure>
+                    <property name="columnName">doc_number</property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">info</property>
+                </structure>
+                <structure>
+                    <property name="columnName">sum</property>
+                </structure>
+                <structure>
+                    <property name="columnName">amount_pr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_inn</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_kpp</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_account</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_bankName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_corrAcc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ul_bik</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_inn</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_kpp</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_acc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_bankName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_corracc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">org_bik</property>
+                </structure>
+                <structure>
+                    <property name="columnName">taxPeriod</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pay_type</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pay_base</property>
+                </structure>
+                <structure>
+                    <property name="columnName">doc_n</property>
+                </structure>
+                <structure>
+                    <property name="columnName">doc_d</property>
+                </structure>
+                <structure>
+                    <property name="columnName">kbk</property>
+                </structure>
+                <structure>
+                    <property name="columnName">oktmo</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pay_status</property>
+                </structure>
+                <structure>
+                    <property name="columnName">purpose</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ch_uin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">reestr_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">doc_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">doc_number</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">date</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">info</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">sum</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">amount_pr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">ul_inn</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ul_kpp</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">ul_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">ul_account</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">ul_bankName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">ul_corrAcc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">ul_bik</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">org_inn</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">org_kpp</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">org_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">org_acc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">org_bankName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">org_corracc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">org_bik</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">taxPeriod</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">pay_type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">pay_base</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">doc_n</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">doc_d</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">kbk</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">oktmo</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">pay_status</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">purpose</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[shark = new Packages.org.cp.birt.plugins.Shark();
+convert = new Packages.org.cp.birt.plugins.convert.Russian();
+guid = new Packages.java.lang.String(params["guid"]);
+resHome = Packages.org.jboss.seam.Component.getInstance("reportHomeAppl", true);
+df = new java.text.SimpleDateFormat ("dd.MM.yyyy");
+
+resultList = resHome.getDebtList(guid);
+UL_Acc = resHome.getAccount(guid);
+UL_Corracc = resHome.getСorrAccount(guid);
+UL_BIK = resHome.getBik(guid);
+UL_BankName = resHome.getBankName(guid);
+
+totalrows = resultList.size();
+currentrow = 0;
+]]></method>
+            <method name="fetch"><![CDATA[row["reestr_date"] = new Date();
+if (currentrow >= totalrows) {
+Packages.java.lang.System.out.println("false ");
+	return (false);
+}
+
+
+Debt_UIN = "";
+Debt_sum = "";
+Debt_info = "";
+Doc_type = "";
+Doc_num = "";
+UL_Inn = "";
+UL_Kpp = "";
+Org_Inn = "";
+Org_Kpp = "";
+doc_n="";
+doc_d = "";
+pay_base = "";
+pay_type="";
+kbk="";
+taxPeriod = "";
+oktomo = "";
+paystatus = "";
+purpose = "";
+
+debt = resultList.get(currentrow);
+
+
+Debt_UIN = debt.getUin();
+Debt_sum = debt.getAmount();
+Debt_info = " Наименование начисления: " + debt.getPurpose()
++ ";  Администратор начисления: " + debt.getAdminName() 
++ ";  ИНН: " + debt.getAdminInn()
++ ";  КПП: " + debt.getAdminKpp()
++ ";  Наименование банка: " + debt.getAdminBankName()
++ ";  Счет №: " + debt.getAdminAcc()
++ ";  БИК: " + debt.getAdminBikSwift();
+
+identifier = debt.getPayerIdentifier();
+
+if(identifier.length() == 12){
+	Doc_type = "СНИЛС";
+	Doc_num = identifier.substring(1);
+}
+if(identifier.length() == 25){
+docTypeList = shark.getEntityManagerLod().createQuery(
+"select ce.name from CardElement ce join ce.cardElementFieldValues cf where ce.card.cardCode = 'STypeDocum' and cf.fieldStringValue = :doc")
+.setParameter("doc", identifier.substring(0, 2))
+.getResultList();
+Doc_type = "";
+		if(docTypeList.size() > 0){
+		Doc_type = docTypeList.get(0);
+		}
+		Doc_num = debt.getPayerDocNumber();
+		
+}
+if(identifier.length() == 15){
+		Doc_type = "КИО / КПП";
+		Doc_num = identifier.substring(1, 6) + " / " + identifier.substring(6);
+}
+
+//
+if(identifier.length() == 20){
+	Doc_type = "ИНН / КПП";
+	UL_Inn = identifier.substring(1, 11);
+	UL_Kpp = identifier.substring(11);
+	Doc_num = UL_Inn + " / " + UL_Kpp;
+	
+}
+
+
+doc_n=debt.getPaymentDocNumber();
+doc_d = debt.getPaymentDocDate();
+pay_base = debt.getBase();
+pay_type=debt.getType();
+kbk=debt.getKbk();
+taxPeriod = debt.getTaxPeriod();
+oktmo = debt.getOkato();
+paystatus = debt.getStatus();
+purpose = debt.getPurpose();
+
+row["ul_name"] = resHome.getAgentName(guid);
+row["ch_uin"] = Debt_UIN;
+row["doc_type"] = Doc_type;
+row["doc_number"] = Doc_num;
+row["info"] = Debt_info;
+if (debt != null &amp;&amp; debt.getDate() != null){
+		row["date"] = df.format(debt.getDate());
+	}
+row["sum"] = Debt_sum;
+row["org_inn"] = Org_Inn;
+row["org_kpp"] = Org_Kpp;
+row["org_name"] = debt.getAdminName();
+row["org_acc"] = debt.getAdminAcc();
+row["org_corracc"] = debt.getAdminBankCorrAcc();
+row["org_bankName"] = debt.getAdminBankName();
+row["amount_pr"] = convert.amount(new Packages.java.math.BigDecimal(Debt_sum));
+row["ul_inn"] = UL_Inn;
+row["ul_kpp"] = UL_Kpp;
+row["ul_account"] = UL_Acc;
+row["ul_corrAcc"] = UL_Corracc;
+row["ul_bankName"] = UL_BankName;
+row["org_bik"] = debt.getAdminBikSwift();
+row["doc_n"] = doc_n;
+row["doc_d"] = doc_d ;
+row["pay_base"] = pay_base;
+row["pay_type"] = pay_type;
+row["kbk"] = kbk;
+row["taxPeriod"] = taxPeriod;
+row["oktmo"] = oktmo;
+row["pay_status"] = paystatus;
+row["purpose"] = purpose;
+
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="label" id="1308"/>
+        <style name="labelHeader" id="1309">
+            <property name="backgroundPositionX">center</property>
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontSize">x-large</property>
+            <property name="fontStyle">oblique</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="tableStyle" id="1323">
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontStyle">normal</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="1267">
+            <property name="height">1.8125in</property>
+            <property name="width">7.822916666666667in</property>
+            <column id="1268">
+                <property name="width">7.822916666666667in</property>
+            </column>
+            <row id="1269">
+                <property name="height">0.40625in</property>
+                <cell id="1270">
+                    <label id="1295">
+                        <property name="style">labelHeader</property>
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <text-property name="text">Реестр начислений ГИСГМП</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="1311">
+                <property name="height">0.46875in</property>
+                <cell id="1312">
+                    <grid id="1313">
+                        <property name="height">0.2916666666666667in</property>
+                        <property name="width">7.666666666666667in</property>
+                        <column id="1314">
+                            <property name="width">2.0833333333333335in</property>
+                        </column>
+                        <column id="1315">
+                            <property name="width">5.583333333333333in</property>
+                        </column>
+                        <row id="1316">
+                            <property name="height">0.2916666666666667in</property>
+                            <cell id="1317">
+                                <text id="1319">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontWeight">bolder</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Реестр сформирован на дату:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1318">
+                                <data id="1320">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="dataSet">Data Set</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">reestr_date</property>
+                                            <text-property name="displayName">reestr_date</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">reestr_date</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="1271">
+                <cell id="1272">
+                    <table id="1277">
+                        <property name="width">7.65625in</property>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ch_uin</property>
+                                <text-property name="displayName">ch_uin</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["ch_uin"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">doc_type</property>
+                                <text-property name="displayName">doc_type</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["doc_type"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">doc_number</property>
+                                <text-property name="displayName">doc_number</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["doc_number"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">info</property>
+                                <text-property name="displayName">info</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">date</property>
+                                <text-property name="displayName">date</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sum</property>
+                                <text-property name="displayName">sum</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="1290">
+                            <property name="width">0.3958333333333333in</property>
+                        </column>
+                        <column id="1307">
+                            <property name="width">1.1458333333333333in</property>
+                        </column>
+                        <column id="1327">
+                            <property name="width">0.9895833333333334in</property>
+                        </column>
+                        <column id="1303">
+                            <property name="width">1.3333333333333333in</property>
+                        </column>
+                        <column id="1299">
+                            <property name="width">0.7604166666666666in</property>
+                        </column>
+                        <column id="1291">
+                            <property name="width">0.8020833333333334in</property>
+                        </column>
+                        <column id="1292">
+                            <property name="width">2.2291666666666665in</property>
+                        </column>
+                        <header>
+                            <row id="1278">
+                                <cell id="1279">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1321">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[№]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1304">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1324">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Тип документа]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1325">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1328">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Номер документа]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1300">
+                                    <property name="style">tableStyle</property>
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text id="1293">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[УИН]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1296">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1331">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Дата]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1280">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1332">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Сумма
+]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1281">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1336">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Информация о начислении]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="1282">
+                                <cell id="1283">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1322">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Aggregation</property>
+                                    </data>
+                                </cell>
+                                <cell id="1305">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1329">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">doc_type</property>
+                                    </data>
+                                </cell>
+                                <cell id="1326">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1337">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">doc_number</property>
+                                    </data>
+                                </cell>
+                                <cell id="1301">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1294">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">ch_uin</property>
+                                    </data>
+                                </cell>
+                                <cell id="1297">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1339">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">date</property>
+                                    </data>
+                                </cell>
+                                <cell id="1284">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1340">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">sum</property>
+                                    </data>
+                                </cell>
+                                <cell id="1285">
+                                    <property name="style">tableStyle</property>
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <data id="1338">
+                                        <property name="textAlign">left</property>
+                                        <property name="resultSetColumn">info</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+            <row id="1273">
+                <cell id="1274"/>
+            </row>
+            <row id="1275">
+                <property name="height">0.13541666666666666in</property>
+                <cell id="1276"/>
+            </row>
+        </grid>
+        <table id="1379">
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">reestr_date</property>
+                    <text-property name="displayName">reestr_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">sum</property>
+                    <text-property name="displayName">sum</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">amount_pr</property>
+                    <text-property name="displayName">amount_pr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_inn</property>
+                    <text-property name="displayName">ul_inn</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_inn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_kpp</property>
+                    <text-property name="displayName">ul_kpp</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_kpp"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_name</property>
+                    <text-property name="displayName">&lt;VALUE-OF></text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_account</property>
+                    <text-property name="displayName">ul_account</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_account"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_bik</property>
+                    <text-property name="displayName">ul_bik</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_bik"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_corrAcc</property>
+                    <text-property name="displayName">ul_corrAcc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_corrAcc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ul_bankName</property>
+                    <text-property name="displayName">ul_bankName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ul_bankName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_acc</property>
+                    <text-property name="displayName">org_acc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_acc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_bankName</property>
+                    <text-property name="displayName">org_bankName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_bankName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_corracc</property>
+                    <text-property name="displayName">org_corracc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_corracc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_inn</property>
+                    <text-property name="displayName">org_inn</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_inn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_kpp</property>
+                    <text-property name="displayName">org_kpp</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_kpp"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_name</property>
+                    <text-property name="displayName">org_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">org_bik</property>
+                    <text-property name="displayName">org_bik</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["org_bik"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">doc_d</property>
+                    <text-property name="displayName">doc_d</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["doc_d"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">doc_n</property>
+                    <text-property name="displayName">doc_n</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["doc_n"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pay_base</property>
+                    <text-property name="displayName">pay_base</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pay_base"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pay_type</property>
+                    <text-property name="displayName">pay_type</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pay_type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">taxPeriod</property>
+                    <text-property name="displayName">taxPeriod</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["taxPeriod"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">kbk</property>
+                    <text-property name="displayName">kbk</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["kbk"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pay_status</property>
+                    <text-property name="displayName">pay_status</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pay_status"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">oktmo</property>
+                    <text-property name="displayName">oktmo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["oktmo"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1386"/>
+            <header>
+                <row id="1380">
+                    <cell id="1381"/>
+                </row>
+            </header>
+            <detail>
+                <row id="1382">
+                    <property name="height">9.395833333333334in</property>
+                    <cell id="1383">
+                        <grid id="1403">
+                            <property name="height">9.145833333333334in</property>
+                            <column id="1404"/>
+                            <row id="1405">
+                                <property name="height">7.947916666666667in</property>
+                                <cell id="1406">
+                                    <grid id="1409">
+                                        <property name="height">8.177083333333334in</property>
+                                        <property name="width">7.604166666666667in</property>
+                                        <column id="1410">
+                                            <property name="width">0.698in</property>
+                                        </column>
+                                        <column id="1411">
+                                            <property name="width">0.521in</property>
+                                        </column>
+                                        <column id="1412">
+                                            <property name="width">0.875in</property>
+                                        </column>
+                                        <column id="1413">
+                                            <property name="width">0.906in</property>
+                                        </column>
+                                        <column id="1414">
+                                            <property name="width">0.49in</property>
+                                        </column>
+                                        <column id="1415">
+                                            <property name="width">0.698in</property>
+                                        </column>
+                                        <column id="1416">
+                                            <property name="width">0.698in</property>
+                                        </column>
+                                        <column id="1417">
+                                            <property name="width">0.698in</property>
+                                        </column>
+                                        <column id="1418">
+                                            <property name="width">0.271in</property>
+                                        </column>
+                                        <column id="1419">
+                                            <property name="width">1.125in</property>
+                                        </column>
+                                        <column id="1420">
+                                            <property name="width">0.6354166666666666in</property>
+                                        </column>
+                                        <row id="1421">
+                                            <property name="height">0.312in</property>
+                                            <cell id="1422">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                            </cell>
+                                            <cell id="1425">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1426">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                            </cell>
+                                            <cell id="1429">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1430">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1431">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1432">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                        </row>
+                                        <row id="1433">
+                                            <cell id="1434">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <label id="1613">
+                                                    <property name="textAlign">center</property>
+                                                    <text-property name="text">Поступ. в банк плат.</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1437">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1438">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <label id="1615">
+                                                    <property name="textAlign">center</property>
+                                                    <text-property name="text">Списано со сч.плат.</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1441">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1442">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1443">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1444">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                        </row>
+                                        <row id="1445">
+                                            <cell id="1446">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <label id="1616">
+                                                    <property name="fontSize">large</property>
+                                                    <property name="fontWeight">bold</property>
+                                                    <text-property name="text">Платежное поручение №</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1452">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <data id="1614">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">reestr_date</property>
+                                                </data>
+                                            </cell>
+                                            <cell id="1454">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1455">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <label id="1617">
+                                                    <property name="textAlign">center</property>
+                                                    <text-property name="text">Электронно</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1456">
+                                                <property name="colSpan">1</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <grid id="1795">
+                                                    <property name="backgroundPositionX">right</property>
+                                                    <property name="height">0.5520833333333334in</property>
+                                                    <property name="width">0.6041666666666666in</property>
+                                                    <column id="1802">
+                                                        <property name="width">0.10416666666666667in</property>
+                                                    </column>
+                                                    <column id="1796">
+                                                        <property name="width">0.5in</property>
+                                                    </column>
+                                                    <row id="1797">
+                                                        <property name="height">0.5520833333333334in</property>
+                                                        <cell id="1801">
+                                                            <property name="borderBottomStyle">none</property>
+                                                            <property name="borderBottomWidth">thin</property>
+                                                            <property name="borderLeftStyle">none</property>
+                                                            <property name="borderLeftWidth">thin</property>
+                                                            <property name="borderRightColor">black</property>
+                                                            <property name="borderRightStyle">none</property>
+                                                            <property name="borderRightWidth">thin</property>
+                                                            <property name="borderTopStyle">none</property>
+                                                            <property name="borderTopWidth">thin</property>
+                                                            <property name="textAlign">right</property>
+                                                        </cell>
+                                                        <cell id="1798">
+                                                            <property name="borderBottomStyle">solid</property>
+                                                            <property name="borderBottomWidth">thin</property>
+                                                            <property name="borderLeftStyle">solid</property>
+                                                            <property name="borderLeftWidth">thin</property>
+                                                            <property name="borderRightColor">black</property>
+                                                            <property name="borderRightStyle">solid</property>
+                                                            <property name="borderRightWidth">thin</property>
+                                                            <property name="borderTopStyle">solid</property>
+                                                            <property name="borderTopWidth">thin</property>
+                                                            <property name="textAlign">right</property>
+                                                            <text id="1799">
+                                                                <property name="textAlign">left</property>
+                                                                <property name="contentType">html</property>
+                                                                <text-property name="content"><![CDATA[<VALUE-OF>row["pay_status"]</VALUE-OF>]]></text-property>
+                                                            </text>
+                                                        </cell>
+                                                    </row>
+                                                </grid>
+                                            </cell>
+                                        </row>
+                                        <row id="1457">
+                                            <cell id="1458">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1459">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1460">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1461">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1462">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1463">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1464">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <label id="1619">
+                                                    <property name="textAlign">center</property>
+                                                    <text-property name="text">Дата</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1466">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1467">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <label id="1618">
+                                                    <property name="textAlign">center</property>
+                                                    <text-property name="text">Вид платежа</text-property>
+                                                </label>
+                                            </cell>
+                                        </row>
+                                        <row id="1469">
+                                            <cell id="1470">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftColor">black</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <label id="1620">
+                                                    <text-property name="text">Сумма прописью</text-property>
+                                                </label>
+                                            </cell>
+                                            <cell id="1472">
+                                                <property name="colSpan">9</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1621">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["amount_pr"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1481">
+                                            <cell id="1482">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftColor">blue</property>
+                                                <property name="borderRightColor">black</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1622">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[ИНН <VALUE-OF>row["ul_inn"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1485">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1623">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[КПП <VALUE-OF>row["ul_kpp"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1488">
+                                                <property name="colSpan">1</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">none</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1627">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Сумма]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1489">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1626">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["sum"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1493">
+                                            <property name="height">0.229in</property>
+                                            <cell id="1494">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">none</property>
+                                                <property name="borderBottomWidth">medium</property>
+                                                <property name="borderLeftStyle">none</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1792">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_name"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1505">
+                                            <property name="height">0.25in</property>
+                                            <cell id="1512">
+                                                <property name="colSpan">1</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1631">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Сч.№]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1513">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1632">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_account"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1517">
+                                            <property name="height">0.25in</property>
+                                            <cell id="1518">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1628">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Плательщик]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1529">
+                                            <cell id="1530">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1633">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_bankName"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1536">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1635">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[БИК]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1537">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1638">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_bik"]<VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1541">
+                                            <cell id="1542">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1634">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Банк плательщика]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1548">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1636">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Сч.№]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1549">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1637">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ul_corrAcc"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1553">
+                                            <cell id="1554">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1663">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["org_bankName"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1560">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1665">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[БИК]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1561">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1793">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["org_bik"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1565">
+                                            <property name="height">0.271in</property>
+                                            <cell id="1566">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1664">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Банк получателя]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1572">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1666">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Сч.№]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1573">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1794">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["org_corracc"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1577">
+                                            <property name="height">0.2708333333333333in</property>
+                                            <cell id="1578">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1668">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[ИНН <VALUE-OF>row["org_inn"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1581">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1669">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[КПП <VALUE-OF>row["org_kpp"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1584">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1670">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Сч.№]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1585">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">2</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1667">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["org_acc"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1589">
+                                            <property name="height">0.156in</property>
+                                            <cell id="1590">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">3</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1671">
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["org_name"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1596">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                            </cell>
+                                        </row>
+                                        <row id="1601">
+                                            <property name="height">0.271in</property>
+                                            <cell id="1608">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1672">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Вид оп.]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1609">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">3</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <grid id="1699">
+                                                    <property name="height">0.78125in</property>
+                                                    <property name="width">2.6666666666666665in</property>
+                                                    <column id="1700">
+                                                        <property name="width">0.9375in</property>
+                                                    </column>
+                                                    <column id="1701">
+                                                        <property name="width">1.1145833333333333in</property>
+                                                    </column>
+                                                    <column id="1702">
+                                                        <property name="width">0.6145833333333334in</property>
+                                                    </column>
+                                                    <row id="1703">
+                                                        <property name="height">0.2916666666666667in</property>
+                                                        <cell id="1704">
+                                                            <text id="1715">
+                                                                <property name="contentType">auto</property>
+                                                                <text-property name="content"><![CDATA[01]]></text-property>
+                                                            </text>
+                                                        </cell>
+                                                        <cell id="1705">
+                                                            <property name="borderBottomStyle">solid</property>
+                                                            <property name="borderBottomWidth">thin</property>
+                                                            <property name="borderLeftStyle">solid</property>
+                                                            <property name="borderLeftWidth">thin</property>
+                                                            <property name="borderRightStyle">solid</property>
+                                                            <property name="borderRightWidth">thin</property>
+                                                            <property name="borderTopStyle">solid</property>
+                                                            <property name="borderTopWidth">thin</property>
+                                                            <text id="1716">
+                                                                <property name="contentType">auto</property>
+                                                                <text-property name="content"><![CDATA[Срок плат.]]></text-property>
+                                                            </text>
+                                                        </cell>
+                                                        <cell id="1706"/>
+                                                    </row>
+                                                    <row id="1707">
+                                                        <property name="height">0.22916666666666666in</property>
+                                                        <cell id="1708"/>
+                                                        <cell id="1709">
+                                                            <property name="borderBottomStyle">solid</property>
+                                                            <property name="borderBottomWidth">thin</property>
+                                                            <property name="borderLeftStyle">solid</property>
+                                                            <property name="borderLeftWidth">thin</property>
+                                                            <property name="borderRightStyle">solid</property>
+                                                            <property name="borderRightWidth">thin</property>
+                                                            <text id="1717">
+                                                                <property name="contentType">auto</property>
+                                                                <text-property name="content"><![CDATA[Очер плат.]]></text-property>
+                                                            </text>
+                                                        </cell>
+                                                        <cell id="1710"/>
+                                                    </row>
+                                                    <row id="1711">
+                                                        <property name="height">0.2604166666666667in</property>
+                                                        <cell id="1712"/>
+                                                        <cell id="1713">
+                                                            <property name="borderBottomStyle">solid</property>
+                                                            <property name="borderBottomWidth">thin</property>
+                                                            <property name="borderLeftStyle">solid</property>
+                                                            <property name="borderLeftWidth">thin</property>
+                                                            <property name="borderRightStyle">solid</property>
+                                                            <property name="borderRightWidth">thin</property>
+                                                            <text id="1718">
+                                                                <property name="contentType">auto</property>
+                                                                <text-property name="content"><![CDATA[Рез.поле]]></text-property>
+                                                            </text>
+                                                        </cell>
+                                                        <cell id="1714"/>
+                                                    </row>
+                                                </grid>
+                                            </cell>
+                                        </row>
+                                        <row id="1651">
+                                            <property name="height">0.271in</property>
+                                            <cell id="1658">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1673">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Наз.пл.]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1639">
+                                            <property name="height">0.271in</property>
+                                            <cell id="1640">
+                                                <property name="colSpan">6</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1719">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Получатель]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1646">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderRightStyle">solid</property>
+                                                <property name="borderRightWidth">thin</property>
+                                                <text id="1698">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Код]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1686">
+                                            <cell id="1687">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1720">
+                                                    <property name="textAlign">left</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["kbk"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1690">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <text id="1721">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["oktmo"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1691">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <text id="1800">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["pay_base"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1692">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <text id="1723">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["taxPeriod"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1694">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
+                                                <text id="1724">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["doc_n"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1696">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
+                                                <text id="1725">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["doc_d"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1697">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderLeftStyle">solid</property>
+                                                <property name="borderLeftWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
+                                                <text id="1726">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[<VALUE-OF>row["pay_type"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1674">
+                                            <property name="height">0.833in</property>
+                                            <cell id="1675">
+                                                <property name="colSpan">11</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1763"/>
+                                            </cell>
+                                        </row>
+                                        <row id="1739">
+                                            <property name="height">0.25in</property>
+                                            <cell id="1740">
+                                                <property name="colSpan">11</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <text id="1764">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Назначение платежа]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1751">
+                                            <property name="height">0.2708333333333333in</property>
+                                            <cell id="1752">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1753">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1754">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1755">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1756">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1765">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Подписи]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1758">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1759">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1760">
+                                                <property name="colSpan">3</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1766">
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[Отметки банка]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                        <row id="1727">
+                                            <property name="height">0.5625in</property>
+                                            <cell id="1728">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1729">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <text id="1779">
+                                                    <property name="contentType">auto</property>
+                                                    <text-property name="content"><![CDATA[М.П.]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1730">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1731">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1732">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1733">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1734">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1735">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1736">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1737">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1738">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                        </row>
+                                        <row id="1767">
+                                            <property name="height">0.5416666666666666in</property>
+                                            <cell id="1768">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1769">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1770">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1771">
+                                                <property name="colSpan">4</property>
+                                                <property name="rowSpan">1</property>
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="borderBottomStyle">solid</property>
+                                                <property name="borderBottomWidth">thin</property>
+                                                <property name="borderTopStyle">solid</property>
+                                                <property name="borderTopWidth">thin</property>
+                                            </cell>
+                                            <cell id="1775">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1776">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1777">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1778">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                        </row>
+                                        <row id="1780">
+                                            <property name="height">0.3854166666666667in</property>
+                                            <cell id="1781">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1782">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1783">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1784">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1785">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1786">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1787">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1788">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1789">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1790">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                            <cell id="1791">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="1407">
+                                <property name="height">1.1979166666666667in</property>
+                                <cell id="1408"/>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+            </detail>
+            <footer>
+                <row id="1384">
+                    <property name="height">0.2916666666666667in</property>
+                    <cell id="1385"/>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

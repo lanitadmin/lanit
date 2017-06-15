@@ -1,0 +1,1 @@
+ALTER TABLE card_element ALTER COLUMN name TYPE varchar(1024);

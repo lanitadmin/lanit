@@ -1,0 +1,1 @@
+alter table gossrvc_doc_package modify (completed_date  timestamp);

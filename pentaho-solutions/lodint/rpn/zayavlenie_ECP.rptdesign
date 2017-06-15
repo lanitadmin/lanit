@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.20" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.1.v20090903 Build &lt;2.5.1.v20090917-1447></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="user" id="52">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">max</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="processId" id="90">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="91">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="16"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="ApSetDataSet" id="17">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">OGV_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">OGV_NAME</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">OGV_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.lanit.samara.birt.plugins.Shark()
+try{
+result = clazz.getEntityManagerLod().createQuery
+(
+" select "+
+" ApS.value "+
+" from "+
+" AppSetting ApS "+
+" where "+
+" ApS.code = 'ogv_name' "
+//" ApS.id = 614548 "
+)
+.getSingleResult();}
+catch(e) {result='Название ведомства отсутствует'}
+
+//totalrows = result.size();
+totalrows = 1;
+
+currentrow = 0;
+	
+		]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) 
+{
+	return(false);
+}
+{
+//var rowValue = result.get(currentrow);
+row["OGV_NAME"] = result;
+}
+currentrow = currentrow + 1;
+
+return(true);
+]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;]]></method>
+        </script-data-set>
+        <script-data-set name="ProcDataSet" id="35">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">TEXT_BODY</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">FIO_USER</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">TEXT_HEAD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">CUR_DATE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">TEXT_REFERENCE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">TEXT_BACKSIDE</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">TEXT_BODY</property>
+                </structure>
+                <structure>
+                    <property name="columnName">FIO_USER</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TEXT_HEAD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CUR_DATE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TEXT_REFERENCE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TEXT_BACKSIDE</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">TEXT_BODY</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">FIO_USER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">TEXT_HEAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">CUR_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">TEXT_REFERENCE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">TEXT_BACKSIDE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.lanit.samara.birt.plugins.Shark()
+
+result2 = clazz.getActivityVariableValue
+	(
+		"uni_prindoc",
+		params["processId"],
+		params["activityId"]
+	);
+	
+uni_prindoc = result2[0];
+
+result = clazz.getEntityManagerLod().createQuery
+(
+"select "+
+	" pd1.body as TEXT_BODY, "+
+	" pd1.head as TEXT_HEAD,  "+
+	" pd1.reference as TEXT_REFERENCE,  "+
+	" pd1.backside as TEXT_BACKSIDE  "+
+" from "+ 
+	" PrintDoc pd1 "+
+" where "+
+	" pd1.id = :uni_prindoc "
+)
+.setParameter("uni_prindoc", uni_prindoc)
+.getResultList();
+
+resultUser = clazz.getEntityManagerLod().createQuery
+(
+" select "+
+	" u_user.lastName ||' '|| substring(u_user.firstName, 1, 1) ||'.'|| substring(u_user.middleName, 1, 1) ||'.' "+    //владелец ЭЦП
+" from "+
+	" User u_user "+
+" where "+
+	" u_user.login = :login "
+)
+.setParameter("login", params["user"])
+.getSingleResult();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["TEXT_BODY"] = rowValue[0];
+row["TEXT_HEAD"] = rowValue[1];
+row["TEXT_REFERENCE"] = rowValue[2];
+row["TEXT_BACKSIDE"] = rowValue[3];
+
+row["FIO_USER"] = resultUser;
+
+switch (BirtDateTime.month(BirtDateTime.today()))						//----текущая дата (русский месяц)------// 
+{
+	case 1: row["CUR_DATE"] = 'января';break;
+	case 2: row["CUR_DATE"] = 'февраля';break;
+	case 3: row["CUR_DATE"] = 'марта';break;
+	case 4: row["CUR_DATE"] = 'апреля';break;
+	case 5: row["CUR_DATE"] = 'мая';break;
+	case 6: row["CUR_DATE"] = 'июня';break;
+	case 7: row["CUR_DATE"] = 'июля';break;
+	case 8: row["CUR_DATE"] = 'августа';break;
+	case 9: row["CUR_DATE"] = 'сентября';break;
+	case 10: row["CUR_DATE"] = 'октября';break;
+	case 11: row["CUR_DATE"] = 'ноября';break;
+	case 12: row["CUR_DATE"] = 'декабря';break;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1.25cm</property>
+            <property name="leftMargin">3cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="10">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+            <property name="dataSet">ApSetDataSet</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">OGV_NAME</property>
+                    <expression name="expression">dataSetRow["OGV_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="11"/>
+            <row id="14">
+                <cell id="15">
+                    <text id="19">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>row["OGV_NAME"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid id="21">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">14pt</property>
+            <property name="textAlign">justify</property>
+            <property name="verticalAlign">middle</property>
+            <property name="pageBreakAfter">always</property>
+            <property name="dataSet">ProcDataSet</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">TEXT_BODY</property>
+                    <expression name="expression">dataSetRow["TEXT_BODY"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">FIO_USER</property>
+                    <expression name="expression">dataSetRow["FIO_USER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TEXT_HEAD</property>
+                    <expression name="expression">dataSetRow["TEXT_HEAD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CUR_DATE</property>
+                    <expression name="expression">dataSetRow["CUR_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TEXT_REFERENCE</property>
+                    <expression name="expression">dataSetRow["TEXT_REFERENCE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TEXT_BACKSIDE</property>
+                    <expression name="expression">dataSetRow["TEXT_BACKSIDE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="22"/>
+            <row id="23">
+                <cell id="24">
+                    <label id="33">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="32">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="31">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="25">
+                <cell id="26"/>
+            </row>
+            <row id="27">
+                <cell id="28">
+                    <text id="93">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">row["TEXT_HEAD"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="29">
+                <cell id="30">
+                    <property name="fontSize">12pt</property>
+                    <label id="40">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="39">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="38">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="105">
+                <cell id="106">
+                    <property name="fontSize">12pt</property>
+                    <text id="107">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">row["TEXT_REFERENCE"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="108">
+                <cell id="109">
+                    <property name="fontSize">12pt</property>
+                    <label id="115">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="41">
+                <cell id="42">
+                    <property name="fontSize">12pt</property>
+                    <text id="92">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">row["TEXT_BODY"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="57">
+                <cell id="58">
+                    <property name="fontSize">12pt</property>
+                    <label id="96">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="65">
+                <cell id="66">
+                    <property name="fontSize">12pt</property>
+                    <label id="89">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="68">
+                <cell id="69">
+                    <property name="fontSize">12pt</property>
+                    <label id="95">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="97">
+                <cell id="98">
+                    <property name="fontSize">12pt</property>
+                    <label id="101">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="99">
+                <cell id="100">
+                    <property name="fontSize">12pt</property>
+                    <label id="102">
+                        <text-property name="text">   </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="70">
+                <cell id="71">
+                    <property name="fontSize">12pt</property>
+                    <label id="94">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="75">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="74">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="73">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="81">
+                        <text-property name="text">   </text-property>
+                    </label>
+                    <label id="72">
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Владелец ключа:</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="77">
+                <cell id="78">
+                    <property name="fontSize">12pt</property>
+                    <text id="80">
+                        <property name="textAlign">right</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>row["FIO_USER"]</VALUE-OF> / ______________________]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="82">
+                <cell id="83">
+                    <property name="fontSize">12pt</property>
+                    <text id="88">
+                        <property name="textAlign">right</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>"<VALUE-OF>BirtDateTime.day(BirtDateTime.today())</VALUE-OF>"<I> </I>
+<VALUE-OF>row["CUR_DATE"]</VALUE-OF><I>  </I><VALUE-OF>BirtDateTime.year(BirtDateTime.today())</VALUE-OF> г.</DIV>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="86">
+                <cell id="87">
+                    <property name="fontSize">12pt</property>
+                </cell>
+            </row>
+        </grid>
+        <grid id="110">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">12pt</property>
+            <property name="height">100%</property>
+            <property name="width">100%</property>
+            <property name="dataSet">ProcDataSet</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">row["TEXT_BACKSIDE"] == null || row["TEXT_BACKSIDE"] == ""</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">TEXT_BACKSIDE</property>
+                    <expression name="expression">dataSetRow["TEXT_BACKSIDE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="111"/>
+            <row id="112">
+                <cell id="113">
+                    <text id="114">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">row["TEXT_BACKSIDE"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

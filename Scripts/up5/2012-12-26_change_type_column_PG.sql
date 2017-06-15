@@ -1,0 +1,1 @@
+ALTER TABLE SOAP_CONTEXT alter column INPUTVARS type varchar(4000);

@@ -1,0 +1,931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>PrintForm-License</title>
+  <version>1</version>
+  <logging-level>INFO</logging-level>
+  <documentation> 
+    <author>Иван Погодин,Сергей Матвеев</author>  
+    <description>Автоматическая для печатных форм лицензий</description>  
+    <icon>PentahoReporting.png</icon>  
+    <help>Выберите формат вывода печатной формы:</help>  
+    <result-type>none</result-type> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">PDF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Excel</entry>  
+          <entry key="report-output-type-id">xls</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Word</entry>  
+          <entry key="report-output-type-id">rtf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Web Page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Comma Separated Value</entry>  
+          <entry key="report-output-type-id">csv</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <processId type="string"> 
+      <sources> 
+        <request>processId</request> 
+      </sources>  
+      <default-value>1_5_getExtractLicenseListByWEB</default-value> 
+    </processId>  
+    <activityId type="string"> 
+      <sources> 
+        <request>activityId</request> 
+      </sources>  
+      <default-value>1_5_getExtractLicenseListByWEB_act2</default-value> 
+    </activityId>  
+    <prn1_2 type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <rep>agentId</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZDate</rep>  
+          <mod>09.01.2007</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>licenseDate</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>licenseNumber</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ogrn</rep>  
+          <mod>ogrn</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRN</rep>  
+          <mod>ogrn1</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRNIP</rep>  
+          <mod>ogrn2</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>activityType</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>govServiceType</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>agentType</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>reGetReason</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>agentAddress</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>activityAddress</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>agentPhone</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>dataDocEGR</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>dataDocTaxAccount</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>agentInn</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>licenseSerie</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>newAgentAddress</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>agentPostAddress</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>newLicenseEndDate</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicensiatAddressNew</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>PostAddress</rep>  
+          <mod>agentPostAddress</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>RegisryDoc</rep>  
+          <mod/>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZMetalType</rep>  
+          <mod>ЧЁРНЫХ</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZNo</rep>  
+          <mod>347-од</mod>  
+          <get/>  
+          <add_mod/> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <rep type="string"/>  
+        <mod type="string"/>  
+        <get type="string"/>  
+        <add_mod type="string"/> 
+      </columns> 
+    </prn1_2>  
+    <modeList type="property-map-list"> 
+      <sources/>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="mode-desc">*1 - о предоставлении лицензии - ЧМ</entry>  
+          <entry key="mode-key">1</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">2 - о предоставлении лицензии - ЦМ</entry>  
+          <entry key="mode-key">2</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">3 - о переоформлении - ЧМ</entry>  
+          <entry key="mode-key">3</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">4 - о переоформлении - ЦМ</entry>  
+          <entry key="mode-key">4</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">9 - о переоформлении по смене адреса - ЦМ</entry>  
+          <entry key="mode-key">9</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">*10 - о переоформлении по смене адреса - ЧМ</entry>  
+          <entry key="mode-key">10</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">*11 - о продлении ЧМ</entry>  
+          <entry key="mode-key">11</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">12 - о продлении ЦМ</entry>  
+          <entry key="mode-key">12</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">*13 - о прекращении действия лицензии ЧМ</entry>  
+          <entry key="mode-key">13</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="mode-desc">*14 - о прекращении действия лицензии ЦМ</entry>  
+          <entry key="mode-key">14</entry> 
+        </property-map> 
+      </default-value> 
+    </modeList>  
+    <emptyBlank type="string"> 
+      <sources> 
+        <request>emptyBlank</request> 
+      </sources>  
+      <default-value><![CDATA[0]]></default-value> 
+    </emptyBlank>  
+    <licenseId type="string"> 
+      <sources> 
+        <request>licenseId</request> 
+      </sources>  
+      <default-value/> 
+    </licenseId>  
+    <page type="string"> 
+      <sources> 
+        <request>page</request> 
+      </sources>  
+      <default-value>0</default-value> 
+    </page>  
+    <pageRef type="property-map-list"> 
+      <sources> 
+        <request>pageRef</request> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="name">лицевая сторона</entry>  
+          <entry key="id">0</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="name">оборотная сторона</entry>  
+          <entry key="id">1</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="name">приложение</entry>  
+          <entry key="id">2</entry> 
+        </property-map> 
+      </default-value> 
+    </pageRef>  
+    <ds_LicenseInfo type="result-set"> 
+      <sources> 
+        <request>ds_LicenseInfo</request> 
+      </sources>  
+      <default-value/> 
+    </ds_LicenseInfo>  
+    <map_LicenseList type="result-set"> 
+      <sources> 
+        <request>map_LicenseList</request> 
+      </sources>  
+      <default-value type="result-set"> 
+        <row> 
+          <licId/>  
+          <licDescription/> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <licId type="string"/>  
+        <licDescription type="string"/> 
+      </columns> 
+    </map_LicenseList>  
+    <debug type="string"> 
+      <sources> 
+        <request>debug</request> 
+      </sources>  
+      <default-value>no</default-value> 
+    </debug>  
+    <debugRef type="string-list"> 
+      <sources> 
+        <request>debugRef</request> 
+      </sources>  
+      <default-value type="string-list"> 
+        <list-item>yes</list-item>  
+        <list-item>no</list-item> 
+      </default-value> 
+    </debugRef>  
+    <ds_LicenseAppendix type="result-set"> 
+      <sources> 
+        <request>ds_LicenseAppendix</request> 
+      </sources>  
+      <default-value/> 
+    </ds_LicenseAppendix> 
+  </inputs>
+
+  <outputs> 
+    <content type="string"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </content> 
+  </outputs>
+
+  <resources> 
+    <report-definition_face> 
+      <solution-file> 
+        <location>license-orel-1-face.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition_face>  
+    <report-definition_reverse> 
+      <solution-file> 
+        <location>license-orel-2-reverse.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition_reverse>  
+    <report-definition_appendix> 
+      <solution-file> 
+        <location>license-orel-3-appendix.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition_appendix>  
+    <r_ejbql_LicenseList> 
+      <solution-file> 
+        <location>license-list.ejbql</location>  
+        <mime-type>text/ejbql</mime-type> 
+      </solution-file> 
+    </r_ejbql_LicenseList>  
+    <r_ejbql_LicenseInfo> 
+      <solution-file> 
+        <location>license-info.ejbql</location>  
+        <mime-type>text/ejbql</mime-type> 
+      </solution-file> 
+    </r_ejbql_LicenseInfo>  
+    <r_ejbql_LicenseAppendix> 
+      <solution-file> 
+        <location>license-appendix.ejbql</location>  
+        <mime-type>text/ejbql</mime-type> 
+      </solution-file> 
+    </r_ejbql_LicenseAppendix>  
+    <r_script> 
+      <solution-file> 
+        <location>license-orel-1.script1.js</location>  
+        <mime-type>text/javascript</mime-type> 
+      </solution-file> 
+    </r_script> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JS - параметры для Ejbql</action-type>
+      <action-inputs/>
+      <action-outputs> 
+        <beenName type="string"/>  
+        <method type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var beenName; beenName="lodint/SeamTestAction/local";
+var method;   method  ="getEJBQL";]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JS - licenseId</action-type>
+      <action-inputs> 
+        <licenseId type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <licenseId type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[licenseId = "12670";//12670,12823,12414,12426;]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[false //список лицензий]]></condition>  
+      <actions> 
+        <condition><![CDATA[//подготовить список лицензий
+((licenseId==null)||(licenseId=="")||(licenseId=="0"))]]></condition>  
+        <action-definition> 
+          <component-name>TemplateComponent</component-name>
+          <action-type>MsgTempl - взять текст из файла</action-type>
+          <action-inputs/>
+          <action-resources> 
+            <template type="resource" mapping="r_ejbql_LicenseList"/> 
+          </action-resources>
+          <action-outputs> 
+            <output-message type="string" mapping="ejbql_LicenseList"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JS - выделить запрос и список полей</action-type>
+          <action-inputs> 
+            <ejbql_LicenseList type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <ejbql_LicenseList type="string"/>  
+            <ejbqlFields_LicenseList type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[//файл состоит из двух частей: 1-запрос, 2-список полей
+//части разделены строкой, в которой есть только знак ";" или "/" и пробельные символы (пробел, либо табуляция)
+//
+var str_array; str_array = ejbql_LicenseList.split(/[\r\n]\s*?[;\/]\s*[\r\n]/);
+var count; count = str_array.length;
+var ejbqlFields_LicenseList;
+ejbql_LicenseList = str_array[0];
+ejbqlFields_LicenseList = 
+	(count<2)? 
+	"value": 
+	str_array[1].replace(/\s*,\s*/g, ",").replace(/\s*$/,"");]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+          <action-type>Custom - Ejbql - список лицензий</action-type>
+          <action-inputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string" mapping="ejbql_LicenseList"/>  
+            <fields type="string" mapping="ejbqlFields_LicenseList"/> 
+          </action-inputs>
+          <action-outputs> 
+            <dsResult type="result-set" mapping="ds_LicenseList"/>  
+            <dsMetaColumn type="string" mapping="dsFields_LicenseList"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JS - map - список лицензий</action-type>
+          <action-inputs> 
+            <ds_LicenseList type="result-set"/>  
+            <dsFields_LicenseList type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <map_LicenseList type="result-set"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[var map_LicenseList = new JavaScriptResultSet();
+map_LicenseList.setColumnHeaders(new Array("licId", "licDescription"));
+var cnt = ds_LicenseList.getRowCount();
+for(i = 0; i < cnt; i++){
+	map_LicenseList.addRow(
+		new Array(ds_LicenseList.getValueAt(i, 0), ds_LicenseList.getValueAt(i, 0) + ": " + ds_LicenseList.getValueAt(i, 1) + " - " + ds_LicenseList.getValueAt(i, 2))
+	);
+}]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[//лицензия выбрана
+!((licenseId==null)||(licenseId=="")||(licenseId=="0"))]]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <licenseId type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <map_LicenseList type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[var map_LicenseList = new JavaScriptResultSet();
+map_LicenseList.setColumnHeaders(new Array("licenseId", "licenseDescription"));
+map_LicenseList.addRow(
+	new Array(licenseId, licenseId)
+);]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[false//page]]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter - параметры</action-type>
+        <action-inputs> 
+          <page type="string"/>  
+          <pageRef type="property-map-list"/>  
+          <outputType type="string"/>  
+          <outputTypeList type="property-map-list"/>  
+          <debug type="string"/>  
+          <debugRef type="string-list"/> 
+        </action-inputs>
+        <component-definition> 
+          <selections> 
+            <page style="list"> 
+              <title>Страница</title>  
+              <filter value-col-name="id" display-col-name="name">pageRef</filter> 
+            </page>  
+            <outputType style="radio"> 
+              <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter>  
+              <title>Формат печати</title> 
+            </outputType>  
+            <debug style="radio"> 
+              <filter>debugRef</filter>  
+              <title>Отладка</title> 
+            </debug> 
+          </selections> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[true//licenseId]]></condition>  
+      <action-definition> 
+        <component-name>SecureFilterComponent</component-name>
+        <action-type>Prompt/Secure Filter - лицензия</action-type>
+        <action-inputs> 
+          <licenseId type="string"/>  
+          <map_LicenseList type="result-set"/>  
+          <debugRef type="string-list"/> 
+        </action-inputs>
+        <component-definition> 
+          <selections> 
+            <licenseId style="list" prompt-if-one-value="true" optional="true"> 
+              <filter value-col-name="licId" display-col-name="licDescription">map_LicenseList</filter>  
+              <title>Лицензия</title> 
+            </licenseId> 
+          </selections> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[true && //лицензия - инфо
+!((licenseId==null)||(licenseId==""))]]></condition>  
+      <action-definition> 
+        <component-name>TemplateComponent</component-name>
+        <action-type>MsgTempl - взять текст из файла</action-type>
+        <action-inputs> 
+          <LICENSE_ID type="string" mapping="licenseId"/> 
+        </action-inputs>
+        <action-resources> 
+          <template type="resource" mapping="r_ejbql_LicenseInfo"/> 
+        </action-resources>
+        <action-outputs> 
+          <output-message type="string" mapping="ejbql_LicenseInfo"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JS - выделить запрос и список полей</action-type>
+        <action-inputs> 
+          <ejbql_LicenseInfo type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <ejbql_LicenseInfo type="string"/>  
+          <ejbqlFields_LicenseInfo type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[//файл состоит из двух частей: 1-запрос, 2-список полей
+//части разделены строкой, в которой есть только знак ";" или "/" и пробельные символы (пробел, либо табуляция)
+//
+var str_array; str_array = ejbql_LicenseInfo.split(/[\r\n]\s*?[;\/]\s*[\r\n]/);
+var count; count = str_array.length;
+var ejbqlFields_LicenseInfo;
+ejbql_LicenseInfo = str_array[0];
+ejbqlFields_LicenseInfo = 
+	(count<2)? 
+	"value": 
+	str_array[1].replace(/\s*,\s*/g, ",").replace(/\s*$/,"");]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+        <action-type>Custom - Ejbql - лицензия</action-type>
+        <action-inputs> 
+          <beenName type="string"/>  
+          <method type="string"/>  
+          <sql type="string" mapping="ejbql_LicenseInfo"/>  
+          <fields type="string" mapping="ejbqlFields_LicenseInfo"/> 
+        </action-inputs>
+        <action-outputs> 
+          <dsResult type="result-set" mapping="ds_LicenseInfo"/>  
+          <dsMetaColumn type="string" mapping="dsFields_LicenseInfo"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[ (debug=="yes")//---]]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JS - debug output</action-type>
+        <action-inputs> 
+          <ds_LicenseInfo type="result-set"/> 
+        </action-inputs>
+        <action-resources> 
+          <r_script type="resource"/> 
+        </action-resources>
+        <action-outputs> 
+          <content type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[var content; content = "";
+content += framedStr("ds_LicenseInfo = " + outputResultSetHtml(ds_LicenseInfo));]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[//приложение
+(page=="2")]]></condition>  
+        <action-definition> 
+          <component-name>TemplateComponent</component-name>
+          <action-type>Message Template</action-type>
+          <action-inputs> 
+            <LICENSE_ID type="string" mapping="licenseId"/> 
+          </action-inputs>
+          <action-resources> 
+            <template type="resource" mapping="r_ejbql_LicenseAppendix"/> 
+          </action-resources>
+          <action-outputs> 
+            <output-message type="string" mapping="ejbql_LicenseAppendix"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JS - выделить запрос и список полей</action-type>
+          <action-inputs> 
+            <ejbql_LicenseAppendix type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <ejbql_LicenseAppendix type="string"/>  
+            <ejbqlFields_LicenseAppendix type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[//файл состоит из двух частей: 1-запрос, 2-список полей
+//части разделены строкой, в которой есть только знак ";" или "/" и пробельные символы (пробел, либо табуляция)
+//
+var str_array; str_array = ejbql_LicenseAppendix.split(/[\r\n]\s*?[;\/]\s*[\r\n]/);
+var count; count = str_array.length;
+var ejbqlFields_LicenseAppendix;
+ejbql_LicenseAppendix = str_array[0];
+ejbqlFields_LicenseAppendix = 
+	(count<2)? 
+	"value": 
+	str_array[1].replace(/\s*,\s*/g, ",").replace(/\s*$/,"");]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <content type="string"/>  
+            <ejbql_LicenseAppendix type="string"/>  
+            <ejbqlFields_LicenseAppendix type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <r_script type="resource"/> 
+          </action-resources>
+          <action-outputs> 
+            <content type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[content += framed("ejbql_LicenseAppendix=" + outputVarHtml(ejbql_LicenseAppendix));
+content += framed("ejbqlFields_LicenseAppendix=" + outputVarHtml(ejbqlFields_LicenseAppendix));]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <actions> 
+          <condition><![CDATA[true]]></condition>  
+          <action-definition> 
+            <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+            <action-type>Custom - Ejbql - приложение к лицензии</action-type>
+            <action-inputs> 
+              <beenName type="string"/>  
+              <method type="string"/>  
+              <sql type="string" mapping="ejbql_LicenseAppendix"/>  
+              <fields type="string" mapping="ejbqlFields_LicenseAppendix"/> 
+            </action-inputs>
+            <action-outputs> 
+              <dsResult type="result-set" mapping="ds_LicenseAppendix"/>  
+              <dsMetaColumn type="string" mapping="dsFields_LicenseAppendix"/> 
+            </action-outputs>
+            <component-definition/> 
+          </action-definition>
+ 
+        </actions>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <content type="string"/>  
+            <ds_LicenseAppendix type="result-set"/> 
+          </action-inputs>
+          <action-resources> 
+            <r_script type="resource"/> 
+          </action-resources>
+          <action-outputs> 
+            <content type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[content += framedStr("ds_LicenseAppendix = " + outputResultSetHtml(ds_LicenseAppendix));]]></script> 
+          </component-definition> 
+        </action-definition>
+ 
+      </actions>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <content type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <content type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[content = "<html><head><META http-equiv=Content-Type content=\"text/html; charset=windows-1251\"></head><body>" + content + "</body></html>";]]></script> 
+        </component-definition> 
+      </action-definition>
+ 
+    </actions>
+  
+    <actions> 
+      <condition><![CDATA[!(debug=="yes")]]></condition>  
+      <actions> 
+        <condition><![CDATA[//лицевая сторона
+page=="0"]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>Pentaho Report - лицевая</action-type>
+          <action-inputs> 
+            <data type="result-set" mapping="ds_LicenseInfo"/>  
+            <output-type type="string" mapping="outputType"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition_face"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[//оборотная сторона
+page=="1"]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>Pentaho Report - лицевая</action-type>
+          <action-inputs> 
+            <data type="result-set" mapping="ds_LicenseInfo"/>  
+            <output-type type="string" mapping="outputType"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition_reverse"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[//приложение
+page=="2"]]></condition>  
+        <actions> 
+          <condition><![CDATA[true//данные]]></condition>  
+          <actions> 
+            <condition><![CDATA[//приложение
+(page=="2")]]></condition>  
+            <action-definition> 
+              <component-name>TemplateComponent</component-name>
+              <action-type>Message Template</action-type>
+              <action-inputs> 
+                <LICENSE_ID type="string" mapping="licenseId"/> 
+              </action-inputs>
+              <action-resources> 
+                <template type="resource" mapping="r_ejbql_LicenseAppendix"/> 
+              </action-resources>
+              <action-outputs> 
+                <output-message type="string" mapping="ejbql_LicenseAppendix"/> 
+              </action-outputs>
+              <component-definition/> 
+            </action-definition>
+  
+            <action-definition> 
+              <component-name>JavascriptRule</component-name>
+              <action-type>JS - выделить запрос и список полей</action-type>
+              <action-inputs> 
+                <ejbql_LicenseAppendix type="string"/> 
+              </action-inputs>
+              <action-outputs> 
+                <ejbql_LicenseAppendix type="string"/>  
+                <ejbqlFields_LicenseAppendix type="string"/> 
+              </action-outputs>
+              <component-definition> 
+                <script><![CDATA[//файл состоит из двух частей: 1-запрос, 2-список полей
+//части разделены строкой, в которой есть только знак ";" или "/" и пробельные символы (пробел, либо табуляция)
+//
+var str_array; str_array = ejbql_LicenseAppendix.split(/[\r\n]\s*?[;\/]\s*[\r\n]/);
+var count; count = str_array.length;
+var ejbqlFields_LicenseAppendix;
+ejbql_LicenseAppendix = str_array[0];
+ejbqlFields_LicenseAppendix = 
+	(count<2)? 
+	"value": 
+	str_array[1].replace(/\s*,\s*/g, ",").replace(/\s*$/,"");]]></script> 
+              </component-definition> 
+            </action-definition>
+  
+            <action-definition> 
+              <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+              <action-type>Custom - Ejbql - приложение к лицензии</action-type>
+              <action-inputs> 
+                <beenName type="string"/>  
+                <method type="string"/>  
+                <sql type="string" mapping="ejbql_LicenseAppendix"/>  
+                <fields type="string" mapping="ejbqlFields_LicenseAppendix"/> 
+              </action-inputs>
+              <action-outputs> 
+                <dsResult type="result-set" mapping="ds_LicenseAppendix"/>  
+                <dsMetaColumn type="string" mapping="dsFields_LicenseAppendix"/> 
+              </action-outputs>
+              <component-definition/> 
+            </action-definition>
+ 
+          </actions>
+ 
+        </actions>
+  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>Pentaho Report - приложение</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="ds_LicenseAppendix"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition_appendix"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

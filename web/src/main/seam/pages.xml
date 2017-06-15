@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pages xmlns="http://jboss.org/schema/seam/pages"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://jboss.org/schema/seam/pages http://jboss.org/schema/seam/pages-2.3.xsd"
+       no-conversation-view-id="/public/home.xhtml"
+       login-view-id="/public/login.xhtml">
+       
+    <page view-id="/public/basicauth.xhtml" action="#{identity.isLoggedIn}">
+        <navigation from-action="#{identity.isLoggedIn}">
+            <rule if-outcome="true">
+                <redirect view-id="#{userPrefs.defaultView}"/>
+            </rule>
+        </navigation>
+    </page>
+
+    <!--<page view-id="*">-->
+        <!--<action execute="#{userManager.checkTmpPwd}"/>-->
+        <!--<navigation>-->
+            <!--<rule if-outcome="changeTmpPwd">-->
+                <!--<redirect view-id="/private/changeTmpPwd.xhtml"/>-->
+            <!--</rule>-->
+            <!--<rule if-outcome="defaultPage">-->
+                <!--<redirect view-id="#{userPrefs.defaultView}"/>-->
+            <!--</rule>-->
+        <!--</navigation>-->
+
+        <!--<navigation from-action="#{userManager.changePassword}">-->
+            <!--<redirect view-id="/private/passwordChanged.xhtml"/>-->
+        <!--</navigation>-->
+        <!--<navigation from-action="#{identity.login}">-->
+            <!--<redirect view-id="#{userPrefs.defaultView}"/>-->
+        <!--</navigation>-->
+    <!--</page>-->
+
+    <page view-id="/public/samlauth.xhtml">
+        <action execute="#{identity.statusLogin}"/>
+        <navigation>
+            <rule if-outcome="login">
+                <redirect view-id="#{userPrefs.defaultView}"/>
+            </rule>
+            <rule if-outcome="logout">
+                <render view-id="/public/login.xhtml"/>
+            </rule>
+        </navigation>
+    </page>
+
+    <page view-id="*">
+
+        <action execute="#{userManager.checkTmpPwd}"/>
+
+        <navigation>
+            <rule if-outcome="changeTmpPwd">
+                <redirect view-id="/private/changeTmpPwd.xhtml"/>
+            </rule>
+            <rule if-outcome="defaultPage">
+                <redirect view-id="#{userPrefs.defaultView}"/>
+            </rule>
+            <rule if-outcome="home">
+                <redirect view-id="/public/home.xhtml"/>
+            </rule>
+        </navigation>
+
+        <navigation from-action="#{userManager.changePassword}">
+            <redirect view-id="/private/passwordChanged.xhtml"/>
+        </navigation>
+
+        <navigation from-action="#{identity.login}">
+            <redirect view-id="#{userPrefs.defaultView}"/>
+        </navigation>
+
+        <navigation from-action="#{appSettings.logout}">
+            <redirect url="#{userPrefs.defaultUrlAfterLogout}"/>
+        </navigation>
+    </page>
+
+    <page view-id="/additional/*" login-required="true"/>
+    <page view-id="/admin/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/gisgmp/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/help/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/bpms/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/cardsystem/*" login-required="true">
+		<begin-conversation join="true"/>    
+    </page>
+    <page view-id="/darchive/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/ev/*" login-required="true"/>
+    <page view-id="/gossrvc/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    
+    <page view-id="/gossrvc/draft/serviceDocPackageDraft.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    
+    
+    <page view-id="/eq/eqBookTimeList.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    
+    <page view-id="/consultation/infoModuleEdit.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+     
+    <page view-id="/impexp/*" login-required="true"/>
+    <page view-id="/journals/*" login-required="true"/>
+    <page view-id="/member/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/methodicalsupport/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/member/personList.xhtml" login-required="true"
+          action="#{auditManager.logAccessAttempt('реестр заявителей')}">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/paymentorder/*" login-required="true"/>
+    <page view-id="/report/*" login-required="true"/>
+    <page view-id="/sed/*" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    
+    <page view-id="/admin/xmlExport.seam" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    
+    <page view-id="/admin/xmlImport.seam" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+
+    <page view-id="/public/licenseList.xhtml">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/eq/consoleOperator.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/electronicqueue/*" login-required="true"/>
+    <page view-id="/reestr/personCardList.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/esia/*" login-required="true">
+        <begin-conversation join="true" />
+    </page>
+    <page view-id="/ecm/workflow.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/ecm/preview.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/ecm/list.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/ecm/test.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/ecm/version.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+    <page view-id="/ecm/categories.xhtml" login-required="true">
+        <begin-conversation join="true"/>
+    </page>
+<!--  /*!!!
+    <exception class="org.jboss.seam.framework.EntityNotFoundException">
+        <redirect>
+            <message severity="warn">Объект не найден</message>
+        </redirect>
+    </exception>
+
+    <exception class="javax.persistence.EntityNotFoundException">
+        <redirect>
+            <message severity="warn">Объект не найден</message>
+        </redirect>
+    </exception>
+
+    <exception class="javax.persistence.OptimisticLockException">
+        <end-conversation/>
+        <redirect>
+            <message severity="error">Другой пользователь изменяет те же данные, попробуйте выполнить операцию еще
+                раз.
+            </message>
+        </redirect>
+    </exception>
+-->
+    <exception class="org.jboss.seam.security.AuthorizationException">
+        <end-conversation/>
+        <redirect>
+            <message severity="warn">К сожалению, у Вас нет полномочий для выполнения этого действия. Если Вы считаете,
+                что должны быть - обратитесь к администратору.
+            </message>
+        </redirect>
+    </exception>
+
+    <exception class="org.cp.admin.exception.UserNotFoundException">
+        <end-conversation/>
+        <redirect view-id="/public/userNotFound.xhtml">
+            <message severity="warn">Не найдено ни одного пользователя, связанного с данным сертификатом.
+            </message>
+        </redirect>
+    </exception>
+
+    <exception class="org.jboss.seam.security.NotLoggedInException">
+        <redirect view-id="/public/login.xhtml">
+            <message severity="warn">Пожалуйста, войдите в систему</message>
+        </redirect>
+    </exception>
+
+    <exception class="javax.faces.application.ViewExpiredException">
+
+        <redirect view-id="/public/login.xhtml">
+            <message severity="warn">Время сессии истекло, войдите в систему</message>
+        </redirect>
+    </exception>
+<!-- 
+    <exception>
+        <redirect>
+            <message severity="error">
+                #{messages.containsKey(org.jboss.seam.handledException.class.name) ? messages.get(org.jboss.seam.handledException.class.name) : 'Ошибка исполнения программы. Попробуйте выполнить операцию еще раз. В случае повторения ошибки обратитесь к администратору'}
+            </message>
+        </redirect>
+    </exception>
+-->
+
+</pages>

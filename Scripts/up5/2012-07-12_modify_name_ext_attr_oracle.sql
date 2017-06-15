@@ -1,0 +1,1 @@
+ALTER TABLE GOSSRVC_SERVICE_ATTR modify (name varchar2(512));

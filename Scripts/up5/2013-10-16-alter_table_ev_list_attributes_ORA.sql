@@ -1,0 +1,7 @@
+ALTER TABLE
+   EV_LIST_ATTRIBUTES
+MODIFY
+   (
+     NEW_VALUE  varchar2(1000)
+   )
+;

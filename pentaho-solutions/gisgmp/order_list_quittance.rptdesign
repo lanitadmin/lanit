@@ -1,0 +1,748 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[function log(str) {
+	Packages.java.lang.System.out.println(str);
+}
+reportContext.setPersistentGlobalVariable("log", log);]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="guid" id="1803">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="493"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="494">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ch_uin</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">reestr_date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">date</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">info</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">sum</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">amount_pr</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">payment_info</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ch_uin</property>
+                </structure>
+                <structure>
+                    <property name="columnName">reestr_date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">info</property>
+                </structure>
+                <structure>
+                    <property name="columnName">sum</property>
+                </structure>
+                <structure>
+                    <property name="columnName">amount_pr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">payment_info</property>
+                    <text-property name="displayName" key="payment_info">payment_info</text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ch_uin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">reestr_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">date</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">info</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">sum</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">amount_pr</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">payment_info</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[shark = new Packages.org.cp.birt.plugins.Shark();
+convert = new Packages.org.cp.birt.plugins.convert.Russian();
+guid = new Packages.java.lang.String(params["guid"]);
+resHome = Packages.org.jboss.seam.Component.getInstance("reportHomeAppl", true);
+df = new java.text.SimpleDateFormat ("dd.MM.yyyy");
+
+resultList = resHome.getChargeList(guid);
+
+totalrows = resultList.size();
+currentrow = 0;
+]]></method>
+            <method name="fetch"><![CDATA[row["reestr_date"] = new Date();
+if (currentrow >= totalrows) {
+Packages.java.lang.System.out.println("false ");
+	return (false);
+}
+
+
+Charge_UIN = "";
+Charge_sum = "";
+Info = "";
+Payment_Info = "";
+
+charge = resultList.get(currentrow);
+
+Charge_UIN = charge.getChargeUniqueId();
+        nf = java.text.NumberFormat.getInstance();
+        nf.setMaximumFractionDigits(2);
+        if (charge.getChargeSum() != null){
+            Charge_sum = nf.format(charge.getChargeSum());
+        };
+Info = " Наименование начисления: " + charge.getChargeName()
++ ";  Назначение платежа: " + charge.getPaymentPurpose() 
++ ";  Администратор начисления: " + charge.getChargeTemplate().getProviderService().toString()
++ ";  ИНН: " + charge.getChargeTemplate().getProviderService().getInn()
++ ";  КПП: " + charge.getChargeTemplate().getProviderService().getKpp()
++ ";  КБК: " + charge.getChargeTemplate().getKbk()
++ ";  ОКТМО: " + charge.getOktmo()
++ ";  Наименование ТОФК: " + charge.getFinOrgName()
++ ";  Л/с: " + charge.getPersonalAccount()
++ ";  Наименование банка: " + charge.getBankName()
++ ";  Счет №: " + charge.getPaymentAccount()
++ ";  БИК: " + charge.getBik();
+
+paymentList = charge.getPayments();
+Payment_Info =  charge.getPaymentSetInfo();
+
+row["ch_uin"] = Charge_UIN;
+row["info"] = Info;
+if (charge != null &amp;&amp; charge.getCreateDate() != null){
+		row["date"] = df.format(charge.getCreateDate());
+	}
+row["sum"] = Charge_sum;
+row["payment_info"] = Payment_Info;
+Packages.java.lang.System.out.println("charge: " + Payment_Info);
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="label" id="1308"/>
+        <style name="labelHeader" id="1309">
+            <property name="backgroundPositionX">center</property>
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontSize">x-large</property>
+            <property name="fontStyle">oblique</property>
+            <property name="textAlign">center</property>
+        </style>
+        <style name="tableStyle" id="1323">
+            <property name="fontFamily">"Times New Roman"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontStyle">normal</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="1267">
+            <property name="height">1.8125in</property>
+            <property name="width">7.822916666666667in</property>
+            <column id="1268">
+                <property name="width">7.822916666666667in</property>
+            </column>
+            <row id="1269">
+                <property name="height">0.40625in</property>
+                <cell id="1270">
+                    <label id="1295">
+                        <property name="style">labelHeader</property>
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <text-property name="text">Реестр сквитированных начислений ГИСГМП</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="1311">
+                <property name="height">0.46875in</property>
+                <cell id="1312">
+                    <grid id="1313">
+                        <property name="height">0.2916666666666667in</property>
+                        <property name="width">7.666666666666667in</property>
+                        <column id="1314">
+                            <property name="width">2.0833333333333335in</property>
+                        </column>
+                        <column id="1315">
+                            <property name="width">5.583333333333333in</property>
+                        </column>
+                        <row id="1316">
+                            <property name="height">0.2916666666666667in</property>
+                            <cell id="1317">
+                                <text id="1319">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontWeight">bolder</property>
+                                    <property name="contentType">auto</property>
+                                    <text-property name="content"><![CDATA[Реестр сформирован на дату:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="1318">
+                                <data id="1806">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="dataSet">Data Set</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">reestr_date</property>
+                                            <text-property name="displayName">reestr_date</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">reestr_date</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="1271">
+                <cell id="1272">
+                    <table id="1277">
+                        <property name="width">7.65625in</property>
+                        <property name="dataSet">Data Set</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ch_uin</property>
+                                <text-property name="displayName">ch_uin</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["ch_uin"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                            <structure>
+                                <property name="name">info</property>
+                                <text-property name="displayName">info</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">date</property>
+                                <text-property name="displayName">date</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">sum</property>
+                                <text-property name="displayName">sum</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">payment_info</property>
+                                <text-property name="displayName" key="payment_info">payment_info</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">reestr_date</property>
+                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                            <structure>
+                                <property name="name">amount_pr</property>
+                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="1290">
+                            <property name="width">0.3958333333333333in</property>
+                        </column>
+                        <column id="1307">
+                            <property name="width">1.1875in</property>
+                        </column>
+                        <column id="1327">
+                            <property name="width">0.6979166666666666in</property>
+                        </column>
+                        <column id="1303">
+                            <property name="width">0.8645833333333334in</property>
+                        </column>
+                        <column id="1299">
+                            <property name="width">2.2083333333333335in</property>
+                        </column>
+                        <column id="1292">
+                            <property name="width">2.2291666666666665in</property>
+                        </column>
+                        <header>
+                            <row id="1278">
+                                <property name="fontWeight">bold</property>
+                                <property name="color">black</property>
+                                <cell id="1279">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1321">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[№]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1304">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1293">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[УИН]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1325">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1331">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Дата]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1300">
+                                    <property name="style">tableStyle</property>
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontWeight">bold</property>
+                                    <text id="1332">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Сумма
+]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1296">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1336">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Информация о начислении]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="1281">
+                                    <property name="style">tableStyle</property>
+                                    <text id="1804">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Информация о платежах]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="1282">
+                                <cell id="1283">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1322">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="dataSet">Data Set</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">ch_uin</property>
+                                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">reestr_date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                                <property name="dataType">date</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">sum</property>
+                                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">amount_pr</property>
+                                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">payment_info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">Aggregation</property>
+                                                <property name="dataType">integer</property>
+                                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                                <list-property name="arguments">
+                                                    <structure>
+                                                        <property name="name">Expression</property>
+                                                        <expression name="value" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                    </structure>
+                                                </list-property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">Aggregation</property>
+                                    </data>
+                                </cell>
+                                <cell id="1305">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1294">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="dataSet">Data Set</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">ch_uin</property>
+                                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">reestr_date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                                <property name="dataType">date</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">sum</property>
+                                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">amount_pr</property>
+                                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">payment_info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">ch_uin</property>
+                                    </data>
+                                </cell>
+                                <cell id="1326">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1339">
+                                        <property name="textAlign">center</property>
+                                        <property name="dataSet">Data Set</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">ch_uin</property>
+                                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">reestr_date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                                <property name="dataType">date</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">sum</property>
+                                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">amount_pr</property>
+                                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">payment_info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">date</property>
+                                    </data>
+                                </cell>
+                                <cell id="1301">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1340">
+                                        <property name="textAlign">center</property>
+                                        <property name="dataSet">Data Set</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">ch_uin</property>
+                                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">reestr_date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                                <property name="dataType">date</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">sum</property>
+                                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">amount_pr</property>
+                                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">payment_info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">sum</property>
+                                    </data>
+                                </cell>
+                                <cell id="1297">
+                                    <property name="style">tableStyle</property>
+                                    <data id="1338">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="dataSet">Data Set</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">ch_uin</property>
+                                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">reestr_date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                                <property name="dataType">date</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">sum</property>
+                                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">amount_pr</property>
+                                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">payment_info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">info</property>
+                                    </data>
+                                </cell>
+                                <cell id="1285">
+                                    <property name="style">tableStyle</property>
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <data id="1805">
+                                        <property name="dataSet">Data Set</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">ch_uin</property>
+                                                <expression name="expression" type="javascript">dataSetRow["ch_uin"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">reestr_date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["reestr_date"]</expression>
+                                                <property name="dataType">date</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">date</property>
+                                                <expression name="expression" type="javascript">dataSetRow["date"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">sum</property>
+                                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">amount_pr</property>
+                                                <expression name="expression" type="javascript">dataSetRow["amount_pr"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">payment_info</property>
+                                                <expression name="expression" type="javascript">dataSetRow["payment_info"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">payment_info</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+            <row id="1273">
+                <cell id="1274"/>
+            </row>
+            <row id="1275">
+                <property name="height">0.13541666666666666in</property>
+                <cell id="1276"/>
+            </row>
+        </grid>
+    </body>
+</report>

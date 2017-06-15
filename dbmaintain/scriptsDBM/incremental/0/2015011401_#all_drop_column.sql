@@ -1,0 +1,1 @@
+alter table EQ_Settings drop COLUMN period_free_window;

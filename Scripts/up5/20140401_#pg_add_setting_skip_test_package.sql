@@ -1,0 +1,1 @@
+insert into app_setting (id, owner,setting_id,setting_name, setting_value,is_pass) values(nextval('hibernate_sequence'), null,'skip_test_package','Не учитывать тестовые дела в консолидированной отчетности: 1-не учитываем тестовые, 0-учитываем все', '0', false);

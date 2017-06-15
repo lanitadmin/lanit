@@ -1,0 +1,59 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>ru.lanit.samara.core-process-ext</groupId>
+		<artifactId>extension-etalon</artifactId>
+		<version>1.1-SNAPSHOT</version>
+	</parent>
+	<artifactId>persistence</artifactId>
+	<name>persistence xml for project</name>
+	<packaging>jar</packaging>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+	
+
+    <profiles>
+        <profile>
+            <id>postgres</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>oracle</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main-ora/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>firebird</id>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main-fb/resources</directory>
+                        <filtering>true</filtering>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+    </profiles>
+	 	
+</project>

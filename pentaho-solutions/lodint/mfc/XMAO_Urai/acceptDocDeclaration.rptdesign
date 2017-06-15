@@ -1,0 +1,1789 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="processId" id="210">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="211">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="user" id="212">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="49"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="50">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">p_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">p_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">p_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">a_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">a_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">a_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">service</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">app_date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">app_time</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ddline</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">u_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">u_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">MFC_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">PROCESS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">AUTH_CODE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">PACK_NUM</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">MFC_ABRV</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">serviceGovLevel</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">dateServEnd</property>
+                    <property name="dataType">date</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">p_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">p_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">p_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">a_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service</property>
+                </structure>
+                <structure>
+                    <property name="columnName">app_date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">app_time</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ddline</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PROCESS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AUTH_CODE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PACK_NUM</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_ABRV</property>
+                </structure>
+                <structure>
+                    <property name="columnName">serviceGovLevel</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateServEnd</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">p_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">p_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">p_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">a_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">a_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">a_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">service</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">app_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">app_time</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ddline</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">u_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">u_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">MFC_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">PROCESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">AUTH_CODE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">PACK_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">MFC_ABRV</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">serviceGovLevel</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">dateServEnd</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+
+result2 = clazz.getActivityVariableValue
+	(
+		"Zayavitel,Komplekt_doc,Service,Zayavlenie,selectOwner,dateServEnd",
+		params["processId"],
+		params["activityId"]
+	);	
+
+Zayavitel = result2[0];
+Komplekt_doc = result2[1];
+Service = result2[2];
+Zayavlenie = result2[3];
+
+dateServEnd = result2[5];
+
+if (Service!=null){
+	try {
+		serviceGovLevel = clazz.getEntityManagerLod().createQuery
+		(
+			" select ce1.name from  CardElementFieldValue cefv, CardElement ce1 "+ 
+			" where cefv.cardElement.id = :serv "+
+			" and cefv.cardField.fieldName = 'serviceGovLevel' and cefv.fieldStringValue like ce1.id "
+
+		).setParameter("serv", Service)
+		.getSingleResult();
+		if (serviceGovLevel.contains("муницип")){
+			serviceGovLevel="муниципальной";
+		}else if (serviceGovLevel.contains("регионал")){
+			serviceGovLevel="региональной";
+		}else if (serviceGovLevel.contains("федерал")){
+			serviceGovLevel="государственной";
+		}else if (serviceGovLevel.contains("республик")){
+			serviceGovLevel="государственной";
+		}else{
+			serviceGovLevel="";
+		}
+	} catch (exception) {
+		serviceGovLevel = ""; //"[не выбрано]"
+	}
+}
+
+if (result2[4]==null) {
+	ReturnPlace= null;
+}else{ 
+	ReturnPlace = clazz.getEntityManagerLod().createQuery
+	(
+		" select ou.name from OrgUnit ou where ou.id = :retPl"
+	).setParameter("retPl", result2[4])
+	.getSingleResult();
+}
+
+result = clazz.getEntityManagerLod().createQuery
+(
+
+" select "+
+
+" ( "+
+"	select P.lastName || ' ' || "+
+"		P.firstName || ' ' || "+
+"		P.middleName from Person as P "+ 
+"	where ogi.objectClass='org.cp.model.common.Person' and P.id = ogi.objectId "+
+"  ) as P_NAME, "+
+
+" ( "+
+"	select P.address from Person as P "+ 
+"	where ogi.objectClass='org.cp.model.common.Person' and P.id = ogi.objectId "+
+" ) as P_ADDRESS, "+
+" ( "+
+"	select P.phone from Person as P "+ 
+"	where ogi.objectClass='org.cp.model.common.Person' and P.id = ogi.objectId "+
+" ) as P_PHONE, "+
+
+" ( "+
+"	select A.name "+ 
+"	from Agent as A "+ 
+"	where ogi.objectClass='org.cp.lodent.Agent' and A.id = ogi.objectId "+
+" ) as A_NAME, "+ 
+
+" ( "+
+"	select A.address "+ 
+"	from Agent as A "+ 
+"	where ogi.objectClass='org.cp.lodent.Agent' and A.id = ogi.objectId "+
+" ) as A_ADDRESS, "+
+" ( "+
+"	select A.phone "+ 
+"	from Agent as A "+ 
+"	where ogi.objectClass='org.cp.lodent.Agent' and A.id = ogi.objectId "+
+" ) as A_PHONE, "+
+
+"	ce1.name as SERVICE, "+
+//"	ga1.applicationDate as APPLICATION_DATE, "+
+"	CEFV.fieldIntegerValue as DDLINE, "+
+
+"	u1.lastName || ' ' || u1.firstName || ' ' || u1.middleName as U_NAME, "+
+//"	u1.position as U_POSITION, "+
+"	u1.phone as U_PHONE, "+
+
+" ( select a1.value from AppSetting a1 where a1.code = 'ogv_name' and u1.owner = a1.owner ) as MFC_NAME, " +
+
+		"( "+
+" select PP.portalProcessId from PortalProcess as PP "+ 
+" where PP.docPackageId = dp1.id "+
+") as PROCESS, "+
+
+"	dp1.authCode as AUTH_CODE, "+
+"	dp1.packNum	as PACK_NUM, "+
+" ( select a2.value from AppSetting a2 where a2.code = 'ogv_name_acronym' and u1.owner = a2.owner ) as MFC_ABRV " +
+
+
+" from "+
+"	User u1,"+
+"	CardElement ce1, "+
+"	ObjectGroupItem ogi, "+ 
+//GossrvcApplication ga1, 
+" CardElementFieldValue as CEFV,  "+
+"	GossrvcDocPackage dp1 "+
+
+" where "+
+"	u1.login = :login "+
+"	and ce1.id = :Service "+
+
+"	and ogi.objectGroup.id = :Zayavitel and ogi.selected = true "+
+
+
+//"	and ga1.id = :Zayavlenie "+
+//"	and ga1.gossrvcDocPackage.id = dp1.id "+
+"	and CEFV.cardElement = CE1 "+
+"	and CEFV.cardField.fieldName = 'ddlSrv'"+
+"	and dp1.id = :Komplekt_doc "
+
+)
+.setParameter("login", params["user"])
+.setParameter("Zayavitel", Zayavitel)
+.setParameter("Service", Service)
+//.setParameter("Zayavlenie", Zayavlenie)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = result.get(currentrow);
+row["p_name"] = rowValue[0];
+row["p_address"] = rowValue[1];
+row["p_phone"] = rowValue[2];
+row["a_name"] = rowValue[3];
+row["a_address"] = rowValue[4];
+row["a_phone"] = rowValue[5];
+row["service"] = rowValue[6];  
+row["app_date"] = new Date();
+row["ddline"] = rowValue[7];
+row["u_name"] = rowValue[8];
+row["u_phone"] = rowValue[9];
+row["MFC_NAME"] = rowValue[10];
+row["PROCESS"] = rowValue[11];
+row["AUTH_CODE"] = rowValue[12];
+row["PACK_NUM"] = rowValue[13];
+row["MFC_ABRV"] = rowValue[14];
+row["serviceGovLevel"] =serviceGovLevel;
+row["dateServEnd"]=dateServEnd;
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;
+result2 = null;
+
+]]></method>
+        </script-data-set>
+        <script-data-set name="needDocs" id="294">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">needDocs</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">needDocs</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">needDocs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+needDocs = clazz.getEntityManagerLod().createQuery
+(
+" select distinct "+
+"	ce1.name "+
+" from "+
+"	GossrvcDocPackageItem gdpi1, CardElement ce1 "+
+" where "+
+"	gdpi1.required = true and "+
+"   ce1.id  = gdpi1.docTypeId and "+
+"	gdpi1.isResult = false and "+
+"	gdpi1.gossrvcDocPackage.id = :Komplekt_doc"
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+totalrows = needDocs.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[function getTypeIdName(typeId){
+
+}
+
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = needDocs.get(currentrow);
+row["needDocs"] = rowValue;
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[needDocs=null;]]></method>
+        </script-data-set>
+        <script-data-set name="takenDocs" id="295">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">docTitle</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">docClass</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">pageCount</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">docTitle</property>
+                </structure>
+                <structure>
+                    <property name="columnName">docClass</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pageCount</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">docTitle</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">docClass</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">pageCount</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+
+takenDocs = clazz.getEntityManagerLod().createQuery
+(
+" select i.title, ce.name, i.pageCount "+
+
+" from "+
+"	GossrvcDocPackageItem i, CardElement ce "+
+" where "+
+"	i.docValue = true and "+
+" (i.passive is null or i.passive = false) and "+
+" 	i.childs.size = 0 and " +
+"	i.isResult = false and "+
+"	i.docClassId = ce.id and "+
+"	i.gossrvcDocPackage.id = :Komplekt_doc"
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+totalrows = takenDocs.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = takenDocs.get(currentrow);
+row["docTitle"] = rowValue[0];
+row["docClass"] = rowValue[1];
+row["pageCount"] = rowValue[2];
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[takenDocs=null;]]></method>
+        </script-data-set>
+        <script-data-set name="allDocs" id="296">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">allDocs</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">allDocs</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">allDocs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+allDocs = clazz.getEntityManagerLod().createQuery
+(
+" select distinct "+
+"	ce3.name "+
+" from "+
+"	GossrvcDocPackageItem gdpi3, CardElement ce3 "+
+" where "+
+"	gdpi3.isResult = false and "+
+"	gdpi3.docValue = false and "+
+" (gdpi3.passive is null or gdpi3.passive = false) and "+
+" 	gdpi3.childs.size = 0 and "+
+"   ce3.id  = gdpi3.docTypeId and "+
+"   gdpi3.docTypeId in (select docTypeId from GossrvcOgvDoc where serviceDoc.serviceId = :service) and "+
+"	gdpi3.gossrvcDocPackage.id = :Komplekt_doc"	
+)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.setParameter("service", Service)
+.getResultList();
+
+
+totalrows = allDocs.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+var rowValue = allDocs.get(currentrow);
+row["allDocs"] = rowValue;
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+            <method name="close"><![CDATA[allDocs=null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">5mm</property>
+            <property name="leftMargin">22.5mm</property>
+            <property name="bottomMargin">10.5mm</property>
+            <property name="rightMargin">12.5mm</property>
+            <property name="showHeaderOnFirst">true</property>
+            <property name="footerHeight">0.33in</property>
+            <page-footer>
+                <auto-text id="635">
+                    <property name="fontFamily">"Roman Unicode"</property>
+                    <property name="fontSize">12pt</property>
+                    <property name="textAlign">right</property>
+                    <property name="type">page-number</property>
+                </auto-text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">12pt</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
+            <property name="height">9.760416666666666in</property>
+            <property name="width">7.072916666666667in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">p_name</property>
+                    <expression name="expression">dataSetRow["p_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_address</property>
+                    <expression name="expression">dataSetRow["p_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">p_phone</property>
+                    <expression name="expression">dataSetRow["p_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_name</property>
+                    <expression name="expression">dataSetRow["a_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_address</property>
+                    <expression name="expression">dataSetRow["a_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">a_phone</property>
+                    <expression name="expression">dataSetRow["a_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <expression name="expression">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_date</property>
+                    <expression name="expression">dataSetRow["app_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ddline</property>
+                    <expression name="expression">dataSetRow["ddline"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">u_name</property>
+                    <expression name="expression">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <expression name="expression">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_NAME</property>
+                    <expression name="expression">dataSetRow["MFC_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PROCESS</property>
+                    <expression name="expression">dataSetRow["PROCESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AUTH_CODE</property>
+                    <expression name="expression">dataSetRow["AUTH_CODE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PACK_NUM</property>
+                    <expression name="expression">dataSetRow["PACK_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ABRV</property>
+                    <expression name="expression">dataSetRow["MFC_ABRV"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">app_time</property>
+                    <expression name="expression" type="javascript">dataSetRow["app_time"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">serviceGovLevel</property>
+                    <text-property name="displayName">serviceGovLevel</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["serviceGovLevel"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">dateServEnd</property>
+                    <text-property name="displayName">dateServEnd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["dateServEnd"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+            </list-property>
+            <column id="8">
+                <property name="width">1.71875in</property>
+            </column>
+            <column id="9">
+                <property name="width">3.6979166666666665in</property>
+            </column>
+            <column id="10">
+                <property name="width">1.65625in</property>
+            </column>
+            <row id="856">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="857">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text id="860">
+                        <property name="fontFamily">"C39HrP36DlTt"</property>
+                        <property name="fontSize">36pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[*<VALUE-OF>if (row["PROCESS"]!=null) row["PROCESS"]; else row["PACK_NUM"]</VALUE-OF>$<VALUE-OF>row["AUTH_CODE"]</VALUE-OF>*]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="698">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="699">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text id="650">
+                        <property name="backgroundAttachment">scroll</property>
+                        <property name="backgroundPositionX">0%</property>
+                        <property name="backgroundPositionY">0%</property>
+                        <property name="backgroundRepeat">repeat</property>
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="fontStyle">normal</property>
+                        <property name="fontVariant">normal</property>
+                        <property name="color">gray</property>
+                        <property name="textLineThrough">none</property>
+                        <property name="textOverline">none</property>
+                        <property name="textUnderline">none</property>
+                        <property name="borderBottomColor">black</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftColor">black</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">black</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">black</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="marginTop">0pt</property>
+                        <property name="marginLeft">0pt</property>
+                        <property name="marginBottom">0pt</property>
+                        <property name="marginRight">0pt</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingLeft">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <property name="paddingRight">1pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="textIndent">0em</property>
+                        <property name="letterSpacing">normal</property>
+                        <property name="lineHeight">normal</property>
+                        <property name="orphans">2</property>
+                        <property name="textTransform">none</property>
+                        <property name="whiteSpace">normal</property>
+                        <property name="widows">2</property>
+                        <property name="wordSpacing">normal</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="showIfBlank">false</property>
+                        <property name="canShrink">false</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>row["MFC_NAME"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="682">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="683">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text id="651">
+                        <property name="backgroundAttachment">scroll</property>
+                        <property name="backgroundPositionX">0%</property>
+                        <property name="backgroundPositionY">0%</property>
+                        <property name="backgroundRepeat">repeat</property>
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="fontStyle">normal</property>
+                        <property name="fontVariant">normal</property>
+                        <property name="color">black</property>
+                        <property name="textLineThrough">none</property>
+                        <property name="textOverline">none</property>
+                        <property name="textUnderline">none</property>
+                        <property name="borderBottomColor">black</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftColor">black</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">black</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">black</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="marginTop">0pt</property>
+                        <property name="marginLeft">0pt</property>
+                        <property name="marginBottom">0pt</property>
+                        <property name="marginRight">0pt</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingLeft">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <property name="paddingRight">1pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="textIndent">0em</property>
+                        <property name="letterSpacing">normal</property>
+                        <property name="lineHeight">normal</property>
+                        <property name="orphans">2</property>
+                        <property name="textTransform">none</property>
+                        <property name="whiteSpace">normal</property>
+                        <property name="widows">2</property>
+                        <property name="wordSpacing">normal</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="showIfBlank">false</property>
+                        <property name="canShrink">false</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV>Расписка</DIV>
+<DIV>в получении документов на предоставление услуги</DIV>
+<DIV><I>(<U><VALUE-OF>row["service"]</VALUE-OF></U>)</I></DIV>]]></text-property>
+                    </text>
+                    <label id="850">
+                        <property name="textAlign">center</property>
+                        <text-property name="text">наименование услуги</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="694">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="695">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <grid id="841">
+                        <property name="width">7in</property>
+                        <column id="842">
+                            <property name="width">5.0625in</property>
+                        </column>
+                        <column id="843">
+                            <property name="width">1.9375in</property>
+                        </column>
+                        <row id="844">
+                            <cell id="845">
+                                <text id="851">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<B>Входящий №  <VALUE-OF>row["PACK_NUM"]</VALUE-OF></B>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="846">
+                                <text id="855">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["app_date"]==null</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[«<VALUE-OF>BirtDateTime.day(row["app_date"])</VALUE-OF>»  <VALUE-OF>BirtDateTime.month(row["app_date"],2)</VALUE-OF><I>  </I><VALUE-OF>BirtDateTime.year(row["app_date"])</VALUE-OF> г.]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="847">
+                            <cell id="848">
+                                <label id="853">
+                                    <text-property name="text">(регистрационный номер обращения в МФЦ)</text-property>
+                                </label>
+                            </cell>
+                            <cell id="849">
+                                <label id="852">
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">дата приема документов</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="690">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <property name="pageBreakInside">auto</property>
+                <cell id="691">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text id="707">
+                        <property name="backgroundAttachment">scroll</property>
+                        <property name="backgroundPositionX">0%</property>
+                        <property name="backgroundPositionY">0%</property>
+                        <property name="backgroundRepeat">repeat</property>
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">13pt</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="fontStyle">normal</property>
+                        <property name="fontVariant">normal</property>
+                        <property name="color">black</property>
+                        <property name="textLineThrough">none</property>
+                        <property name="textOverline">none</property>
+                        <property name="textUnderline">none</property>
+                        <property name="borderBottomColor">black</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftColor">black</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">black</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">black</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="marginTop">auto</property>
+                        <property name="marginLeft">auto</property>
+                        <property name="marginBottom">auto</property>
+                        <property name="marginRight">auto</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingLeft">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <property name="paddingRight">1pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="textIndent">1.25cm</property>
+                        <property name="letterSpacing">normal</property>
+                        <property name="lineHeight">normal</property>
+                        <property name="orphans">2</property>
+                        <property name="textTransform">none</property>
+                        <property name="whiteSpace">normal</property>
+                        <property name="widows">2</property>
+                        <property name="wordSpacing">normal</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="showIfBlank">false</property>
+                        <property name="canShrink">false</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Заявитель</B> <VALUE-OF>if (row["p_name"]!=null) row["p_name"]; else row["a_name"]</VALUE-OF> (контактный телефон <VALUE-OF>row["p_phone"]</VALUE-OF>),]]></text-property>
+                    </text>
+                    <text id="703">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[сдал(-а), а эксперт <VALUE-OF>row["MFC_ABRV"]</VALUE-OF><I> </I><VALUE-OF>row["u_name"]</VALUE-OF>,  
+(контактный телефон: __________,<VALUE-OF>row["u_phone"]</VALUE-OF>) принял(-a) следующие документы:]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="686">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <property name="pageBreakInside">auto</property>
+                <cell id="687">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <label id="537">
+                        <property name="fontSize">14pt</property>
+                        <text-property name="text"> </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="674">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <property name="pageBreakInside">auto</property>
+                <cell id="675">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <table id="653">
+                        <property name="backgroundAttachment">scroll</property>
+                        <property name="backgroundPositionX">0%</property>
+                        <property name="backgroundPositionY">0%</property>
+                        <property name="backgroundRepeat">repeat</property>
+                        <property name="backgroundSizeHeight">auto</property>
+                        <property name="backgroundSizeWidth">auto</property>
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="fontStyle">normal</property>
+                        <property name="fontVariant">normal</property>
+                        <property name="color">black</property>
+                        <property name="textLineThrough">none</property>
+                        <property name="textOverline">none</property>
+                        <property name="textUnderline">none</property>
+                        <property name="borderBottomColor">black</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="borderBottomWidth">medium</property>
+                        <property name="borderLeftColor">black</property>
+                        <property name="borderLeftStyle">none</property>
+                        <property name="borderLeftWidth">medium</property>
+                        <property name="borderRightColor">black</property>
+                        <property name="borderRightStyle">none</property>
+                        <property name="borderRightWidth">medium</property>
+                        <property name="borderTopColor">black</property>
+                        <property name="borderTopStyle">none</property>
+                        <property name="borderTopWidth">medium</property>
+                        <property name="marginTop">0pt</property>
+                        <property name="marginLeft">0pt</property>
+                        <property name="marginBottom">0pt</property>
+                        <property name="marginRight">0pt</property>
+                        <property name="paddingTop">1pt</property>
+                        <property name="paddingLeft">1pt</property>
+                        <property name="paddingBottom">1pt</property>
+                        <property name="paddingRight">1pt</property>
+                        <property name="textIndent">0em</property>
+                        <property name="letterSpacing">normal</property>
+                        <property name="lineHeight">normal</property>
+                        <property name="orphans">2</property>
+                        <property name="textTransform">none</property>
+                        <property name="verticalAlign">middle</property>
+                        <property name="whiteSpace">normal</property>
+                        <property name="widows">2</property>
+                        <property name="wordSpacing">normal</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="showIfBlank">false</property>
+                        <property name="canShrink">false</property>
+                        <property name="width">100%</property>
+                        <property name="dataSet">takenDocs</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">docTitle</property>
+                                <expression name="expression" type="javascript">dataSetRow["docTitle"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">docClass</property>
+                                <expression name="expression" type="javascript">dataSetRow["docClass"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">pageCount</property>
+                                <expression name="expression" type="javascript">dataSetRow["pageCount"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">Aggregation</property>
+                                <property name="dataType">integer</property>
+                                <property name="aggregateFunction">RUNNINGCOUNT</property>
+                                <list-property name="arguments">
+                                    <structure>
+                                        <property name="name">Expression</property>
+                                        <expression name="value" type="javascript">row["docTitle"]</expression>
+                                    </structure>
+                                </list-property>
+                            </structure>
+                        </list-property>
+                        <column id="670">
+                            <property name="width">10%</property>
+                        </column>
+                        <column id="671"/>
+                        <column id="672">
+                            <property name="width">20%</property>
+                        </column>
+                        <column id="673">
+                            <property name="width">20%</property>
+                        </column>
+                        <header>
+                            <row id="654">
+                                <cell id="655">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="656">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<DIV>N</DIV>
+<DIV>п/п</DIV>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="657">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="658">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Документ]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="659">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="660">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<DIV>Вид документа</DIV>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="661">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="662">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<DIV>Кол-во листов</DIV>]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </header>
+                        <detail>
+                            <row id="663">
+                                <cell id="664">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <data id="794">
+                                        <property name="textAlign">center</property>
+                                        <property name="resultSetColumn">Aggregation</property>
+                                    </data>
+                                </cell>
+                                <cell id="666">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="667">
+                                        <property name="fontFamily">"Linux Libertine"</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<VALUE-OF>row["docTitle"]</VALUE-OF>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="668">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="708">
+                                        <property name="paddingLeft">5pt</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<VALUE-OF>row["docClass"]</VALUE-OF>]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="669">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <text id="709">
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[<VALUE-OF>row["pageCount"]</VALUE-OF>]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </detail>
+                    </table>
+                </cell>
+            </row>
+            <row id="213">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="214">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <property name="pageBreakInside">auto</property>
+                    <text id="854">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[В <I>случае неполного комплекта документов:</I> По результатам предварительного анализа в предоставленных документах выявлены несоответствия установленным требованиям/или предоставлен неполный комплект обязательных документов, что может служить основанием для отказа в предоставлении муниципальной услуги (отметить при несоответствии предоставленных документов установленным требованиям)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="221">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <property name="pageBreakInside">auto</property>
+                <cell id="222">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <grid id="562">
+                        <property name="width">7in</property>
+                        <column id="563">
+                            <property name="width">0.4166666666666667in</property>
+                        </column>
+                        <column id="564">
+                            <property name="width">1.71875in</property>
+                        </column>
+                        <column id="565">
+                            <property name="width">4.854166666666667in</property>
+                        </column>
+                        <row id="567">
+                            <cell id="568"/>
+                            <cell id="569">
+                                <text id="237">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Дата приема документов:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="570">
+                                <text id="239">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">row["app_date"]==null</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<U>«<VALUE-OF>BirtDateTime.day(row["app_date"])</VALUE-OF>»  </U> <U><VALUE-OF>BirtDateTime.month(row["app_date"],2)</VALUE-OF></U><I>  </I><U><VALUE-OF>BirtDateTime.year(row["app_date"])</VALUE-OF> г.]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="572">
+                        <property name="width">7in</property>
+                        <column id="573">
+                            <property name="width">0.417in</property>
+                        </column>
+                        <column id="574">
+                            <property name="width">3.6145833333333335in</property>
+                        </column>
+                        <column id="575">
+                            <property name="width">2.9583333333333335in</property>
+                        </column>
+                        <row id="576">
+                            <cell id="577"/>
+                            <cell id="578">
+                                <text id="238">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Ориентировочная дата выдачи итогового(ых) документа(ов):]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="579">
+                                <text id="240">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">(row["app_date"]==null) || (row["ddline"]==null)</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<U>«<VALUE-OF>BirtDateTime.day(row["dateServEnd"])</VALUE-OF>»  </U> <U><VALUE-OF>BirtDateTime.month(row["dateServEnd"],2)</VALUE-OF></U><I>  </I><U><VALUE-OF>BirtDateTime.year(row["dateServEnd"])</VALUE-OF> г.</U>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                    <label id="580">
+                        <property name="fontSize">8pt</property>
+                        <text-property name="text">     </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="620">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="621">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <grid id="581">
+                        <property name="width">7in</property>
+                        <column id="592">
+                            <property name="width">0.417in</property>
+                        </column>
+                        <column id="582">
+                            <property name="width">1.28125in</property>
+                        </column>
+                        <column id="583">
+                            <property name="width">1.78125in</property>
+                        </column>
+                        <column id="584">
+                            <property name="width">1.375in</property>
+                        </column>
+                        <column id="585">
+                            <property name="width">2.125in</property>
+                        </column>
+                        <row id="586">
+                            <property name="pageBreakInside">auto</property>
+                            <cell id="591">
+                                <property name="pageBreakInside">auto</property>
+                            </cell>
+                            <cell id="587">
+                                <text id="593">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Номер процесса:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="588">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">1px</property>
+                                <text id="596">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>if (row["PROCESS"]!=null) row["PROCESS"],row["PACK_NUM"]; else row["PACK_NUM"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="589">
+                                <text id="594">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Код авторизации:]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="590">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">1px</property>
+                                <text id="597">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">11pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["AUTH_CODE"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="233">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="234">
+                    <label id="539">
+                        <property name="fontSize">8pt</property>
+                        <property name="pageBreakInside">auto</property>
+                        <text-property name="text"> </text-property>
+                    </label>
+                </cell>
+                <cell id="235">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                    <property name="pageBreakInside">auto</property>
+                </cell>
+                <cell id="803">
+                    <property name="pageBreakInside">auto</property>
+                </cell>
+            </row>
+            <row id="283">
+                <property name="height">0.3645833333333333in</property>
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="284">
+                    <text id="272">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">13pt</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Документы принял: ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="806">
+                    <property name="pageBreakInside">auto</property>
+                    <grid id="807">
+                        <property name="height">0.28125in</property>
+                        <property name="width">3.0625in</property>
+                        <column id="808">
+                            <property name="width">2.9895833333333335in</property>
+                        </column>
+                        <column id="809">
+                            <property name="width">0.07291666666666667in</property>
+                        </column>
+                        <row id="810">
+                            <property name="height">0.28125in</property>
+                            <cell id="811">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="529">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["u_name"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="812"/>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="805">
+                    <property name="pageBreakInside">auto</property>
+                    <grid id="813">
+                        <property name="height">0.28125in</property>
+                        <column id="814"/>
+                        <row id="815">
+                            <property name="height">0.28125in</property>
+                            <cell id="816">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="599">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="600">
+                    <property name="pageBreakInside">auto</property>
+                </cell>
+                <cell id="601">
+                    <text id="273">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[(Фамилия, инициалы)]]></text-property>
+                    </text>
+                </cell>
+                <cell id="602">
+                    <text id="274">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[(подпись)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="603">
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="604">
+                    <property name="fontSize">18pt</property>
+                    <property name="pageBreakInside">auto</property>
+                    <label id="545">
+                        <property name="fontSize">14pt</property>
+                        <text-property name="text"> </text-property>
+                    </label>
+                </cell>
+                <cell id="605">
+                    <property name="pageBreakInside">auto</property>
+                </cell>
+                <cell id="606">
+                    <property name="pageBreakInside">auto</property>
+                </cell>
+            </row>
+            <row id="217">
+                <property name="height">0.9583333333333334in</property>
+                <property name="pageBreakAfter">avoid</property>
+                <property name="pageBreakBefore">avoid</property>
+                <cell id="218">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <grid id="608">
+                        <property name="pageBreakInside">avoid</property>
+                        <property name="height">0.7291666666666666in</property>
+                        <property name="width">7in</property>
+                        <column id="609">
+                            <property name="width">1.1145833333333333in</property>
+                        </column>
+                        <column id="610">
+                            <property name="width">3.65625in</property>
+                        </column>
+                        <column id="611">
+                            <property name="width">2.2291666666666665in</property>
+                        </column>
+                        <row id="612">
+                            <property name="height">0.3333333333333333in</property>
+                            <cell id="613">
+                                <text id="256">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="fontSize">13pt</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[Заявитель: ]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="614">
+                                <text id="526">
+                                    <property name="fontFamily">"Linux Libertine"</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="pageBreakInside">auto</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["p_name"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="615">
+                                <property name="pageBreakInside">auto</property>
+                            </cell>
+                        </row>
+                        <row id="827">
+                            <property name="height">0.3958333333333333in</property>
+                            <cell id="828">
+                                <property name="colSpan">3</property>
+                                <property name="rowSpan">1</property>
+                                <property name="pageBreakInside">auto</property>
+                                <grid id="831">
+                                    <property name="height">0.3229166666666667in</property>
+                                    <property name="width">6.927083333333333in</property>
+                                    <column id="832">
+                                        <property name="width">1.0520833333333333in</property>
+                                    </column>
+                                    <column id="833">
+                                        <property name="width">3.5729166666666665in</property>
+                                    </column>
+                                    <column id="834">
+                                        <property name="width">0.3020833333333333in</property>
+                                    </column>
+                                    <column id="835">
+                                        <property name="width">2in</property>
+                                    </column>
+                                    <row id="836">
+                                        <property name="height">0.3229166666666667in</property>
+                                        <cell id="837"/>
+                                        <cell id="838">
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <text id="270">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="fontSize">10pt</property>
+                                                <property name="textAlign">center</property>
+                                                <property name="pageBreakInside">auto</property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[(Фамилия, инициалы)]]></text-property>
+                                            </text>
+                                        </cell>
+                                        <cell id="839"/>
+                                        <cell id="840">
+                                            <property name="borderTopColor">#000000</property>
+                                            <property name="borderTopStyle">solid</property>
+                                            <property name="borderTopWidth">thin</property>
+                                            <text id="271">
+                                                <property name="fontFamily">"Linux Libertine"</property>
+                                                <property name="fontSize">10pt</property>
+                                                <property name="textAlign">center</property>
+                                                <property name="pageBreakInside">auto</property>
+                                                <property name="contentType">html</property>
+                                                <text-property name="content"><![CDATA[(подпись)]]></text-property>
+                                            </text>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

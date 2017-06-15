@@ -1,0 +1,2 @@
+INSERT INTO app_setting (SETTING_ID, SETTING_NAME, SETTING_VALUE,SETTING_GROUP, ID, OWNER) VALUES ('enable_filter_reestr_living', 'Режим фильтрации для реестра проживания (1-вкл, <>1-выкл)', '1','Реестр проживания',nextval('hibernate_sequence'),null);
+INSERT INTO app_setting (SETTING_ID, SETTING_NAME, SETTING_VALUE,SETTING_GROUP, ID, OWNER) VALUES ('filter_reestr_living', 'Фильтр для реестра проживания (код оргюнита: код видимого оргюнита1,оргюнита2..; )', '','Реестр проживания',nextval('hibernate_sequence'),null);

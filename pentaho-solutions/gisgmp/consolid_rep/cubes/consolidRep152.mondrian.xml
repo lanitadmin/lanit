@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Schema name="consolidRep152">
+  <Dimension name="org_unit">
+    <Hierarchy name="Name" hasAll="true" primaryKey="id"  caption="Филиал" allMemberCaption="Все филиалы">
+      <Table name="&quot;org_unit&quot;" schema="&quot;mfc&quot;"/>
+      <Level name="Name" column="id" nameColumn="name"  type="Numeric" uniqueMembers="true" parentColumn="parent_id">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+<!--  <Dimension name="Report param">
+    <Hierarchy name="Param name" hasAll="true" primaryKey="id" caption="Показатель" allMemberCaption="Все показатели">
+      <Table name="&quot;report_param&quot;" schema="&quot;mfc&quot;"/>
+      <Level name="Param name" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>-->
+
+    <Dimension name="param_time">
+    <Hierarchy name="Показатель" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="PARAM_TIME_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.report_param WHERE id<8]]>
+	 </SQL>
+         </View>
+      <Level name="Param time" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+<!--    <Dimension name="param">
+    <Hierarchy name="Показатель" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="PARAM_VIEW">
+          <SQL dialect="generic">
+	    <![CDATA[select * from report_param WHERE id >=8 ]]>
+	 </SQL>
+         </View>
+      <Level name="Dimension data" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>-->
+  
+  <Dimension name="countsOfRequestsToMFC">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToMFC">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =8 ]]>
+	 </SQL>
+         </View>
+      <Level name="Param requests to mfc" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="countsOfRequestsToServices">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToServices">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =9 ]]>
+	 </SQL>
+         </View>
+      <Level name="Param requests to services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="countsOfRequestsToOperators">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToOperators">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =10 ]]>
+	 </SQL>
+         </View>
+      <Level name="Param requests to operators" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  
+    <Dimension name="countsOfRequestsToConsult">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToConsult">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =11 ]]>
+	 </SQL>
+         </View>
+      <Level name="Params requests to consult" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="countsOfInteractions">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfRequestsToConsult">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =12 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of interactions " column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="countsOfOutOfDatePacks">
+    <Hierarchy name="Показатель" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =13 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of out of date packs" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="countsOfRefuses">
+    <Hierarchy name="countsOfRefuses" primaryKey="id" hasAll="true" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =14 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of refuses" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="countsOfPerformedServices">
+    <Hierarchy name="countsOfPerformedServices" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =15 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of performed services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="CountsOfDocPacksByCategs">
+    <Hierarchy name="CountsOfDocPacksByCategs" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =21 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of performed services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="CountsOfServicesByCategs">
+    <Hierarchy name="CountsOfServicesByCategs" hasAll="true" primaryKey="id" allMemberCaption="По всем показателям">
+       <View alias="countsOfOutOfDatePacks">
+          <SQL dialect="generic">
+	    <![CDATA[select * from mfc.report_param WHERE id =22 ]]>
+	 </SQL>
+         </View>
+      <Level name="param count of performed services" column="description" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+
+  
+  <Dimension name="rep_dim_time">
+    <Hierarchy name="Year id" hasAll="true" primaryKey="time_id" caption="Время" allMemberCaption="За все время">
+      <Table name="&quot;report_dimension_time&quot;" schema="&quot;mfc&quot;"/>
+      <Level name="Year id" column="year_id" type="Numeric" uniqueMembers="false">
+      </Level>
+      <Level name="Month desc" column="month_desc" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  
+    <Dimension name="dim_gosOrgGovLevel">
+    <Hierarchy name="ОГВ" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="gosOrgGovLevel_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='gosOrgGovLevel']]>
+	 </SQL>
+         </View>
+      <Level name="Dimension data" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+      <Dimension name="dim_typeRefuses">
+    <Hierarchy name="Тип отказа" hasAll="true" primaryKey="id"  allMemberCaption="По всем">
+       <View alias="typeRefuses_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='typeRefuses']]>
+	 </SQL>
+         </View>
+      <Level name="typeRefuses" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_operator_name">
+    <Hierarchy name="ФИО оператора" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="dim_operator_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='operatorName']]>
+	 </SQL>
+         </View>
+      <Level name="operator" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="dim_service_name">
+    <Hierarchy name="Имя услуги" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="sevice_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='serviceName']]>
+	 </SQL>
+         </View>
+      <Level name="serviceName" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_renderedService">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="renderedService_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='renderedService']]>
+	 </SQL>
+         </View>
+      <Level name="renderedService" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+    <Dimension name="dim_mfcStateColumns">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="mfcStateColumns_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='mfcStateColumns']]>
+	 </SQL>
+         </View>
+      <Level name="mfcStateColumns" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension> 
+
+
+  
+ <Dimension name="dim_column_charge_value_cols">
+    <Hierarchy name="Сумма" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="mfcStateColumns_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='chargeCols']]>
+	 </SQL>
+         </View>
+      <Level name="column_charge_value_cols" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+   <Dimension name="dim_column_adm_name">
+    <Hierarchy name="Главный администратор доходов" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_adm_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='admin_name']]>
+	 </SQL>
+         </View>
+      <Level name="column_adm_name" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+     <Dimension name="dim_column_member_name">
+    <Hierarchy name="Наименование участника" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_member_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='member_name']]>
+	 </SQL>
+         </View>
+      <Level name="column_member_name" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  
+     <Dimension name="dim_column_payment_type">
+    <Hierarchy name="Вид платежа" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_payment_type_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='payment_type']]>
+	 </SQL>
+         </View>
+      <Level name="column_payment_type" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+   <Dimension name="dim_column_charge_name">
+    <Hierarchy name="Наименование начисления" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_charge_name_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='charge_name']]>
+	 </SQL>
+         </View>
+      <Level name="column_charge_name" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+     <Dimension name="dim_column_KBK">
+    <Hierarchy name="КБК" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_KBK_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='charge_kbk']]>
+	 </SQL>
+         </View>
+      <Level name="column_KBK" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  
+
+  
+    <Dimension name="dim_consultForPeriod">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="consultForPeriod_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='consultForPeriod']]>
+	 </SQL>
+         </View>
+      <Level name="consultForPeriod" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+  <Dimension name="dim_statePartOfDay">
+    <Hierarchy name="Время суток" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="statePartOfDay_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='statePartOfDay']]>
+	 </SQL>
+         </View>
+      <Level name="statePartOfDay" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+    <Dimension name="dim_stateDayOfWeek">
+    <Hierarchy name="День недели" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="stateDayOfWeek_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='stateDayOfWeek']]>
+	 </SQL>
+         </View>
+      <Level name="stateDayOfWeek" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+      <Dimension name="dim_oper2Columns">
+    <Hierarchy name="Колонки" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="oper2Columns_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='oper2Columns']]>
+	 </SQL>
+         </View>
+      <Level name="oper2Columns" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+
+
+  <Dimension name="dim_column_cat">
+    <Hierarchy name="Категории" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_cat_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='serviceCat']]>
+	 </SQL>
+         </View>
+      <Level name="column_cat" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+  <Dimension name="dim_column_ogv">
+    <Hierarchy name="ОГВ" hasAll="true" primaryKey="id" allMemberCaption="По всем">
+       <View alias="column_ogv_VIEW">
+          <SQL dialect="generic">
+             <![CDATA[select * from mfc.dimension WHERE code='ogv']]>
+	 </SQL>
+         </View>
+      <Level name="column_ogv" column="dimension_value" type="String" uniqueMembers="false">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  
+
+<!-- <Cube name="Показатели по времени (средн.)">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="org_unit" source="org_unit" foreignKey="org_unit_id"/>
+    <DimensionUsage name="param_time" source="param_time" foreignKey="param_id"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    
+    <Measure name="Показатели по времени (средние)" aggregator="avg" formatString="#">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id > 7
+	then 0 else report_fact_param.measure end)
+    </SQL>
+    </MeasureExpression>
+    </Measure>
+  </Cube>-->
+ 
+
+  
+  <Cube name="Отчет по системе начислений">
+    <Table name="&quot;report_fact_param&quot;" schema="&quot;mfc&quot;"/>
+    <DimensionUsage name="dim_column_adm_name" source="dim_column_adm_name" foreignKey="dimension1"/>
+    <DimensionUsage name="dim_column_member_name" source="dim_column_member_name" foreignKey="dimension2"/>
+    <DimensionUsage name="dim_column_payment_type" source="dim_column_payment_type" foreignKey="dimension3"/>
+    <DimensionUsage name="dim_column_charge_name" source="dim_column_charge_name" foreignKey="dimension4"/>
+    <DimensionUsage name="dim_column_KBK" source="dim_column_KBK" foreignKey="dimension5"/>
+    <DimensionUsage name="dim_column_charge_value_cols" source="dim_column_charge_value_cols" foreignKey="dimension6"/>
+    <DimensionUsage name="rep_dim_time" source="rep_dim_time" foreignKey="time_id"/>
+    <Measure name="Количество" aggregator="sum" formatString="#0.00">
+    <MeasureExpression>
+    <SQL dialect="generic">
+      (case when report_fact_param.param_id = 29	
+	then report_fact_param.float_measure else 0  end)
+    </SQL>
+    </MeasureExpression>
+  </Measure>
+</Cube>
+
+
+</Schema>

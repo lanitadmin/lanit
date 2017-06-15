@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2008 rel. 2 sp1 (http://www.altova.com) by voodoo (isg) -->
+<wsdl:definitions xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://spgu.lanit.ru/gate/v2.5" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns="http://spgu.lanit.ru/gate/v2.5" xmlns:ns2="http://schemas.xmlsoap.org/soap/encoding/" xmlns:ns3="http://www.w3.org/2000/09/xmldsig#" name="Gate" targetNamespace="http://spgu.lanit.ru/gate/v2.5">
+	<wsdl:types>
+		<xsd:schema xmlns:bam="http://spgu.lanit.ru/gate/v2.5" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" targetNamespace="http://spgu.lanit.ru/gate/v2.5" elementFormDefault="qualified" attributeFormDefault="qualified">
+			<xsd:import namespace="http://www.w3.org/2000/09/xmldsig#" schemaLocation="http://www.w3.org/TR/xmldsig-core/xmldsig-core-schema.xsd"/>
+			<xsd:simpleType name="EventType">
+				<xsd:restriction base="xsd:string">
+					<xsd:enumeration value="TASK_NOT_EXECUTED">
+						<xsd:annotation>
+							<xsd:documentation>Отметка о том, что шаг процесса был пропущен (не выполнялся)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TASK_EXECUTION">
+						<xsd:annotation>
+							<xsd:documentation>Выполнение шага</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TASK_PAUSED">
+						<xsd:annotation>
+							<xsd:documentation>Выполнение шага приостановлено</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TASK_USER_WAIT">
+						<xsd:annotation>
+							<xsd:documentation>Выполнение шага приостановлено в связи с ожиданием действий Получателя</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TASK_COMPLETE">
+						<xsd:annotation>
+							<xsd:documentation>Завершение выполнения задачи</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TASK_ERROR">
+						<xsd:annotation>
+							<xsd:documentation>Шаг выполнен с ошибкой</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="TASK_TIMED_OUT">
+						<xsd:annotation>
+							<xsd:documentation>Шаг не был выполнен вследствие таймаута (ожидание информации от Получателя, например)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="PROCESS_ERROR">
+						<xsd:annotation>
+							<xsd:documentation>Процесс (подпроцесс) завершен с ошибкой</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="PROCESS_TERMINATED">
+						<xsd:annotation>
+							<xsd:documentation>Процесс (подпроцесс) принудительно (досрочно) завершен</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="PROCESS_COMPLETE">
+						<xsd:annotation>
+							<xsd:documentation>Процесс (подпроцесс) завершен успешно</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="PROCESS_PAUSED">
+						<xsd:annotation>
+							<xsd:documentation>Выполнение процесса (подпроцесса) приостановлено</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+					<xsd:enumeration value="PROCESS_USER_WAIT">
+						<xsd:annotation>
+							<xsd:documentation>Выполнение процесса (подпроцесса) приостановлено в связи с ожиданием действий Получателя</xsd:documentation>
+						</xsd:annotation>
+					</xsd:enumeration>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="Recipient">
+				<xsd:annotation>
+					<xsd:documentation>Информация о получателе</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="address" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="email" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="firstName" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="lastName" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="middleName" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="organizationName" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="phone" type="xsd:string" nillable="true" minOccurs="0"/>
+					<xsd:element name="portalId" type="xsd:long" nillable="true" minOccurs="0"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Representative">
+				<xsd:annotation>
+					<xsd:documentation>Информация о представителе получателя</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexContent>
+					<xsd:extension base="bam:Recipient">
+						<xsd:sequence>
+							<xsd:element name="warrantInfo" type="xsd:string" minOccurs="0"/>
+						</xsd:sequence>
+					</xsd:extension>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="Document">
+				<xsd:annotation>
+					<xsd:documentation>Экземпляр документа</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="comment" type="xsd:string" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Комментарий к экземпляру</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="documentDefId" type="xsd:long" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Ссылка на ИД раб. документа реестра</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="data" type="xsd:base64Binary">
+						<xsd:annotation>
+							<xsd:documentation>Содержание документа</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="explicitFormModel" type="xsd:base64Binary" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Встроенная модель формы</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="fileName">
+						<xsd:annotation>
+							<xsd:documentation>Имя файла</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="form" type="xsd:boolean" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Пометка о том, что документ является формой</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="sn" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Регистрационный номер</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="title">
+						<xsd:annotation>
+							<xsd:documentation>Наименование</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="Documents">
+				<xsd:annotation>
+					<xsd:documentation>Экземпляры документов</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="Document" type="bam:Document" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="EventInfo">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о событии</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="processInstanceId" type="xsd:long" nillable="false">
+						<xsd:annotation>
+							<xsd:documentation>Идентификатор экземпляра процесса</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="TaskInfo" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Информация о шаге процесса. Если не указано,  считаем, что событие является общим для процесса (подпроцесса)</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:choice>
+								<xsd:sequence>
+									<xsd:element name="taskId" type="xsd:long" nillable="true">
+										<xsd:annotation>
+											<xsd:documentation>Идентификатор текущей активности из формализованного описания. Для ввода событий по нерегламентированным шагам процесса это поле не заполняется.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="previousTaskId" type="xsd:long" nillable="true" minOccurs="0">
+										<xsd:annotation>
+											<xsd:documentation>Идентификатор предыдущего шага из формализованного описания</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="taskName" type="bam:taskNameType">
+										<xsd:annotation>
+											<xsd:documentation>Наименование шага. Копируется из наименования соответствующего шага формализованного описания процесса.</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:sequence>
+								<xsd:element name="taskName" type="bam:taskNameType">
+									<xsd:annotation>
+										<xsd:documentation>Наименование произвольного шага.</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+							</xsd:choice>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="modifiedEventId" type="xsd:long" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Идентификатор ранее зарегистрированного события, которое замещается данным событием.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="eventType" type="bam:EventType">
+						<xsd:annotation>
+							<xsd:documentation>Тип события</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:choice minOccurs="0">
+						<xsd:element name="eventNumber" type="xsd:long" nillable="true" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Номер события, служит для явного установления очередности событий.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="previousEventId" minOccurs="0"/>
+					</xsd:choice>
+					<xsd:element name="comment" type="xsd:string" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Текстовый комментарий</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="memo" type="xsd:string" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Служебный комментарий (не отображается пользователям портала)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="documents" type="bam:Documents" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Скан-копии документов или экземпляры электронных форм</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="attributeValues" type="bam:AttributeValues" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Перечень значений атрибутов</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="estimatedCompleteDate" type="xsd:date" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Ожидаемая дата завершения</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="timestamp" type="xsd:dateTime">
+						<xsd:annotation>
+							<xsd:documentation>Фактическое время события</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="executorInfo" type="bam:ExecutorInfoType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Сведения об исполнителе шага</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="bam:userInfo"/>
+					<xsd:element name="processStatusDescription" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Произвольное описание текущего статуса процесса</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="255"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ProcessInfo">
+				<xsd:annotation>
+					<xsd:documentation>Сведения для старта процесса в шлюзе и системе учета</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="creationDate" type="xsd:date">
+						<xsd:annotation>
+							<xsd:documentation>Фактическая дата создания процесса (может быть ранее даты ввода события в систему)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="startInfo">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="startEventId" type="xsd:long" nillable="true">
+									<xsd:annotation>
+										<xsd:documentation>Идентификатор точки начала процесса из формализованного описания</xsd:documentation>
+									</xsd:annotation>
+								</xsd:element>
+								<xsd:choice>
+									<xsd:element name="processDefId" type="xsd:long">
+										<xsd:annotation>
+											<xsd:documentation>Идентификатор формализованного описания, если создается новый процесс</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+									<xsd:element name="relatedEventId" type="xsd:long" nillable="true">
+										<xsd:annotation>
+											<xsd:documentation>Идентификатор связанного события из "родительского" экземпляра процесса, если запускается подпроцесс</xsd:documentation>
+										</xsd:annotation>
+									</xsd:element>
+								</xsd:choice>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="record" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Номер дела, соответствующий процессу</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="1024"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="officeId" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Идентификатор офиса государственного органа, инициирующего процесс (владелец процесса). Идентификатор можно выяснить в реестре. Либо в БД шлюза будет записан ИД "по-умолчанию"</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element ref="bam:userInfo"/>
+					<xsd:element name="recipient" type="bam:Recipient" nillable="true" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Сведения о получателе услуги</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="representative" type="bam:Recipient" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Сведения о представителе получателя услуги</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="AttributeValue">
+				<xsd:annotation>
+					<xsd:documentation>Значение учетного атрибута</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element name="id" type="xsd:ID">
+						<xsd:annotation>
+							<xsd:documentation>ИД определения атрибута из формализованного описания</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:choice>
+						<xsd:element name="floatValue" type="xsd:double" nillable="true" minOccurs="0"/>
+						<xsd:element name="timestampValue" type="xsd:dateTime" minOccurs="0"/>
+						<xsd:element name="textValue" type="xsd:string" nillable="true" minOccurs="0"/>
+						<xsd:element name="longValue" type="xsd:long" nillable="true" minOccurs="0"/>
+					</xsd:choice>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="AttributeValues">
+				<xsd:sequence>
+					<xsd:element name="AttributeValue" type="bam:AttributeValue" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="ExecutorInfoType">
+				<xsd:annotation>
+					<xsd:documentation>Исполнитель</xsd:documentation>
+				</xsd:annotation>
+				<xsd:choice>
+					<xsd:element name="orgName">
+						<xsd:annotation>
+							<xsd:documentation>Наименование организации-исполнителя</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="person" type="bam:PersonType">
+						<xsd:annotation>
+							<xsd:documentation>Сведения о конкретном исполнителе</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+			<xsd:complexType name="PersonType">
+				<xsd:sequence>
+					<xsd:element name="FullName">
+						<xsd:annotation>
+							<xsd:documentation>ФИО или фамилия/инициалы</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="Functionary" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Должность</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="orgName">
+						<xsd:annotation>
+							<xsd:documentation>Наименование организации</xsd:documentation>
+						</xsd:annotation>
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:maxLength value="512"/>
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:element>
+					<xsd:element name="officeId" type="xsd:long" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Идентификатор офиса ОГВ</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="RegisterEventRequestType">
+				<xsd:annotation>
+					<xsd:documentation>Запрос на регистрацию события</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element ref="bam:signature"/>
+					<xsd:element name="eventInfo">
+						<xsd:complexType>
+							<xsd:complexContent>
+								<xsd:extension base="bam:EventInfo"/>
+							</xsd:complexContent>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:simpleType name="taskNameType">
+				<xsd:restriction base="xsd:string">
+					<xsd:maxLength value="512"/>
+				</xsd:restriction>
+			</xsd:simpleType>
+			<xsd:complexType name="signatureType">
+				<xsd:choice minOccurs="0">
+					<xsd:element name="PKCS7" type="xsd:base64Binary">
+						<xsd:annotation>
+							<xsd:documentation>ЭЦП в формате PKCS #7</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="XMLDigSig">
+						<xsd:annotation>
+							<xsd:documentation>ЭЦП в формате XML Digital Signature</xsd:documentation>
+						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element ref="ds:Signature" minOccurs="0"/>
+							</xsd:sequence>
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+			<xsd:complexType name="StartProcessRequestType">
+				<xsd:annotation>
+					<xsd:documentation>Запрос на запуск процесса</xsd:documentation>
+				</xsd:annotation>
+				<xsd:sequence>
+					<xsd:element ref="bam:signature"/>
+					<xsd:element name="processInfo" type="bam:ProcessInfo">
+						<xsd:annotation>
+							<xsd:documentation>Сведения для запуска процесса (подпроцесса)</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="signature" type="bam:signatureType" nillable="true">
+				<xsd:annotation>
+					<xsd:documentation>Сведения об ЭЦП</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="userInfo">
+				<xsd:annotation>
+					<xsd:documentation>Сведения о пользователе шлюза, внесшего информацию</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="userId" type="xsd:long">
+							<xsd:annotation>
+								<xsd:documentation>Идентификатор пользователя шлюза</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="person" type="bam:PersonType">
+							<xsd:annotation>
+								<xsd:documentation>Сведения о пользователе на момент создания события</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="RegisterEventRequest" type="bam:RegisterEventRequestType"/>
+			<xsd:element name="StartProcessRequest" type="bam:StartProcessRequestType"/>
+			<xsd:element name="RegisterEventResponse">
+				<xsd:annotation>
+					<xsd:documentation>Ответное сообщение сервиса шлюза при регистрации события</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eventId" type="xsd:long">
+							<xsd:annotation>
+								<xsd:documentation>Идентификатор события, зарегистрированный в шлюзе</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="StartProcessResponse">
+				<xsd:annotation>
+					<xsd:documentation>Ответное сообщение сервиса шлюза при запуске процесса</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="processInstanceId" type="xsd:long">
+							<xsd:annotation>
+								<xsd:documentation>Идентификатор экземпляра процесса (подпроцесса), зарегистрированный в шлюзе</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:schema>
+	</wsdl:types>
+	<wsdl:message name="registerEventResponse">
+		<wsdl:part name="parameter" element="tns:RegisterEventResponse"/>
+	</wsdl:message>
+	<wsdl:message name="startProcessResponse">
+		<wsdl:part name="parameter" element="tns:StartProcessResponse"/>
+	</wsdl:message>
+	<wsdl:message name="startProcessRequest">
+		<wsdl:part name="parameter" element="tns:StartProcessRequest"/>
+	</wsdl:message>
+	<wsdl:message name="registerEventRequest">
+		<wsdl:part name="parameter" element="tns:RegisterEventRequest"/>
+	</wsdl:message>
+	<wsdl:portType name="BamPortType">
+		<wsdl:operation name="registerEvent">
+			<wsdl:input name="registerEvent" message="tns:registerEventRequest">
+    </wsdl:input>
+			<wsdl:output name="registerEvent" message="tns:registerEventResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="startProcess">
+			<wsdl:input name="startProcess" message="tns:startProcessRequest">
+    </wsdl:input>
+			<wsdl:output name="startProcess" message="tns:startProcessResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BamSoapBinding" type="tns:BamPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="registerEvent">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="registerEvent">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="registerEvent">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="startProcess">
+			<soap:operation soapAction="" style="document"/>
+			<wsdl:input name="startProcess">
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output name="startProcess">
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="Bam">
+		<wsdl:port name="BamPort" binding="tns:BamSoapBinding">
+			<soap:address location="my_location"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

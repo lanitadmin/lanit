@@ -1,0 +1,427 @@
+select 
+		ac.id as id,
+		ac.recordDate,
+		lic.id as licenseId,
+		lic.licenseSerie as licenseSerie, 
+		lic.licenseNumber as licenseNumber, 
+		lic.licenseDate as licenseDate, 
+		lic.licenseEndDate as licenseEndDate,
+		(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'reGetReason') as reGetReason,
+		(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'newActivityAddress') as newActivityAddress,
+		(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'outDocNo') as outDocNo,
+		(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'outDocDate') as outDocDate
+	from
+		License lic,
+		AgentCase ac, 
+		AgentCaseVariable acvLicId, 
+		AgentCaseVariable acvST,
+		AgentCaseVariable acvRGR
+	where 
+		acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and lic.id = acvLicId.longValue and
+		acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue = 'ST_ReGet' and
+		acvRGR.agentCase = ac and acvRGR.variableName =  'reGetReason' and acvRGR.stringValue = 'RT_ChangeActivityAdd'
+	order by ac.recordDate asc
+;
+id,
+recordDate, 
+licenseId,
+licenseSerie, 
+licenseNumber, 
+licenseDate, 
+licenseEndDate,
+reGetReason,
+newActivityAddress,
+outDocNo,
+outDocDate
+;
+, 
+recordDate, 
+licenseId,
+licenseSerie, 
+licenseNumber, 
+licenseDate, 
+licenseEndDate
+;
+,
+licenseEndDate_1,
+govServiceType, 
+govServiceType_caption,
+reGetReason,
+reGetReason_caption,
+newActivityAddress,
+newActivityAddress_caption,
+;
+ac.activityVars
+;
+
+		lic.id as licenseId,
+		lic.licenseSerie as licenseSerie, 
+		lic.licenseNumber as licenseNumber, 
+		lic.licenseDate as licenseDate, 
+		lic.licenseEndDate as licenseEndDate
+, 
+		(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseEndDate') as licenseEndDate_1,
+		acvST.stringValue as govServiceType, 
+		acvST.caption as govServiceType_caption,
+		(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'reGetReason') as reGetReason,
+		(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'reGetReason') as reGetReason_caption,
+		(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'newActivityAddress') as newActivityAddress,
+		(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'newActivityAddress') as newActivityAddress_caption,
+		ac.activityVars
+;
+
+
+
+
+select ac.id, acvLicId.longValue, acvST.stringValue, 
+	ac.activityVars,
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'reGetReason') as reGetReason,
+	(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'reGetReason') as reGetReason_caption,
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'newActivityAddress') as newActivityAddress,
+	(select acv.caption from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName =  'newActivityAddress') as newActivityAddress_caption
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId, 
+    AgentCaseVariable acvST
+  where 
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' 
+;
+ac.id, acvLicId.longValue, acvST.stringValue, 
+ac.activityVars, 
+reGetReason,
+reGetReason_caption,
+newActivityAddress,
+newActivityAddress_caption
+;
+acvLicId.longValue = {LICENSE_ID} and
+;
+
+
+
+select ac.id, acvLicId.longValue, acvST.stringValue, ac.activityVars
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId, 
+    AgentCaseVariable acvST
+  where 
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_ReGet', 'ST_ProLong')
+;
+ac.id, acvLicId.longValue, acvST.stringValue, ac.activityVars
+;
+select ac.id from AgentCase ac where ac.id < 12500
+;
+id
+;
+select ac.id, acvLicId.stringValue
+  from AgentCase ac, AgentCaseVariable acvLicId
+  where 
+    ac.id < 12500 and
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId'
+;
+select ac.id, acvLicId.stringValue, ac.activityVars
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId
+  where 
+    ac.id < 12500 and
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId'
+;
+select ac.id, acvLicId.longValue, acvST.stringValue, ac.activityVars
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId, 
+    AgentCaseVariable acvST
+  where 
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_ReGet', 'ST_ProLong')
+;
+select ac.id, acvLicId.longValue, acvST.stringValue, acvDT.stringValue, 
+    ac.activityVars
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId, 
+    AgentCaseVariable acvST, 
+    AgentCaseVariable acvDT
+  where 
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_ReGet', 'ST_ProLong') and 
+    acvDT.agentCase = ac and acvDT.variableName = 'decisionType'
+;
+select ac.id, acvLicId.longValue, acvST.stringValue, 
+    (select acvDT.stringValue from AgentCaseVariable acvDT where acvDT.agentCase = ac and acvDT.variableName = 'decisionType'), 
+    (select acvDate.stringValue from AgentCaseVariable acvDate where acvDate.agentCase = ac and acvDate.variableName = 'licenseDate'), 
+    (select acvEndDate.stringValue from AgentCaseVariable acvEndDate where acvEndDate.agentCase = ac and acvEndDate.variableName = 'licenseEndDate'), 
+    (select acvLicSerie.stringValue from AgentCaseVariable acvLicSerie where acvLicSerie.agentCase = ac and acvLicSerie.variableName = 'licenseSerie'), 
+    (select acvLicNumber.stringValue from AgentCaseVariable acvLicNumber where acvLicNumber.agentCase = ac and acvLicNumber.variableName = 'licenseNumber'), 
+    ac.activityVars
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId, 
+    AgentCaseVariable acvST
+  where 
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_ReGet', 'ST_ProLong')
+;
+select ac.id, acvLicId.longValue as licenseId, acvST.stringValue as govServiceType, 
+    (select acvDT.stringValue from AgentCaseVariable acvDT where acvDT.agentCase = ac and acvDT.variableName = 'decisionType') as decisionType, 
+    (select acvDate.stringValue from AgentCaseVariable acvDate where acvDate.agentCase = ac and acvDate.variableName = 'licenseDate') as licenseDate, 
+    (select acvEndDate.stringValue from AgentCaseVariable acvEndDate where acvEndDate.agentCase = ac and acvEndDate.variableName = 'licenseEndDate') as licenseEndDate, 
+    (select acvLicSerie.stringValue from AgentCaseVariable acvLicSerie where acvLicSerie.agentCase = ac and acvLicSerie.variableName = 'licenseSerie') as licenseSerie, 
+    (select acvLicNumber.stringValue from AgentCaseVariable acvLicNumber where acvLicNumber.agentCase = ac and acvLicNumber.variableName = 'licenseNumber') as licenseNumber, 
+    ac.activityVars
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvLicId, 
+    AgentCaseVariable acvST
+    
+  where 
+    acvLicId.agentCase = ac and acvLicId.variableName = 'licenseId' and
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_ReGet', 'ST_ProLong')
+;
+select 
+	ac.id, 
+	acvST.stringValue as govServiceType, 
+    (select acvLicenseId.longValue from AgentCaseVariable acvLicenseId where acvLicenseId.agentCase = ac and acvLicenseId.variableName = 'licenseId') as licenseId, 
+    (select acvDT.stringValue from AgentCaseVariable acvDT where acvDT.agentCase = ac and acvDT.variableName = 'decisionType') as decisionType, 
+    (select acvDate.stringValue from AgentCaseVariable acvDate where acvDate.agentCase = ac and acvDate.variableName = 'licenseDate') as licenseDate, 
+    (select acvEndDate.stringValue from AgentCaseVariable acvEndDate where acvEndDate.agentCase = ac and acvEndDate.variableName = 'licenseEndDate') as licenseEndDate, 
+    (select acvLicSerie.stringValue from AgentCaseVariable acvLicSerie where acvLicSerie.agentCase = ac and acvLicSerie.variableName = 'licenseSerie') as licenseSerie, 
+    (select acvLicNumber.stringValue from AgentCaseVariable acvLicNumber where acvLicNumber.agentCase = ac and acvLicNumber.variableName = 'licenseNumber') as licenseNumber
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvST
+  where 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue = 'ST_Get'
+;
+select 
+	ac.id, 
+	acvST.stringValue as govServiceType, 
+    (select acvLicenseId.longValue from AgentCaseVariable acvLicenseId where acvLicenseId.agentCase = ac and acvLicenseId.variableName = 'licenseId') as licenseId, 
+    (select acvLicenseId.stringValue from AgentCaseVariable acvLicenseId where acvLicenseId.agentCase = ac and acvLicenseId.variableName = 'licenseId') as licenseId, 
+    (select acvLicSerie.stringValue from AgentCaseVariable acvLicSerie where acvLicSerie.agentCase = ac and acvLicSerie.variableName = 'licenseSerie') as licenseSerie, 
+    (select acvLicNumber.stringValue from AgentCaseVariable acvLicNumber where acvLicNumber.agentCase = ac and acvLicNumber.variableName = 'licenseNumber') as licenseNumber, 
+    (select acvDT.stringValue from AgentCaseVariable acvDT where acvDT.agentCase = ac and acvDT.variableName = 'decisionType') as decisionType, 
+    (select acvDate.stringValue from AgentCaseVariable acvDate where acvDate.agentCase = ac and acvDate.variableName = 'licenseDate') as licenseDate, 
+    (select acvEndDate.stringValue from AgentCaseVariable acvEndDate where acvEndDate.agentCase = ac and acvEndDate.variableName = 'licenseEndDate') as licenseEndDate
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvST
+  where 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ( 'ST_ReGet', 'ST_ProLong', 'ST_Get')
+  order by 2, 1
+;
+select 
+	ac.id, 
+	acvST.stringValue as govServiceType, 
+    (select acvLicenseId.longValue from AgentCaseVariable acvLicenseId where acvLicenseId.agentCase = ac and acvLicenseId.variableName = 'licenseId') as licenseId, 
+    (select acvLicenseId.stringValue from AgentCaseVariable acvLicenseId where acvLicenseId.agentCase = ac and acvLicenseId.variableName = 'licenseId') as licenseId, 
+    (select acvLicSerie.stringValue from AgentCaseVariable acvLicSerie where acvLicSerie.agentCase = ac and acvLicSerie.variableName = 'licenseSerie') as licenseSerie, 
+    (select acvLicNumber.stringValue from AgentCaseVariable acvLicNumber where acvLicNumber.agentCase = ac and acvLicNumber.variableName = 'licenseNumber') as licenseNumber
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvST
+  where 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ( 'ST_ReGet', 'ST_ProLong', 'ST_Get')
+  order by 2, 1
+;
+select 
+	ac.id, 
+	acv.variableName, 
+	acv.stringValue, 
+	acv.longValue, 
+	acv.dateValue, 
+	acv.boolValue, 
+	acv.doubleValue, 
+	acv.blobValue
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acv,
+	AgentCaseVariable acvST
+  where 
+    acv.agentCase = ac and 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue ='ST_Get' and
+    not (
+      acv.stringValue = null and
+      acv.longValue = null and
+      acv.dateValue = null and
+      acv.doubleValue = null and
+      acv.boolValue = null and
+      acv.blobValue = null
+    )
+  order by 5, 2, 1
+;
+select distinct
+    '(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_S, ' ||
+    '(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_L, ' ||
+    '(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_D, ' ||
+    '(select acv.boolValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_B, ' ||
+    '(select acv.doubleValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_DD, ' ||
+    '(select acv.blobValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_BB, '
+ as txt
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acv,
+	AgentCaseVariable acvST
+  where 
+    acv.agentCase = ac and 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue ='ST_Get' and
+    not (
+      acv.stringValue = null and
+      acv.longValue = null and
+      acv.dateValue = null and
+      acv.doubleValue = null and
+      acv.boolValue = null and
+      acv.blobValue = null
+    )
+  order by 1
+;
+select distinct
+    '(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_S, ' ||
+    '(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_L, ' ||
+    '(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_D, ' ||
+    '(select acv.boolValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_B, ' ||
+    '(select acv.doubleValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_DD, ' ||
+    '(select acv.blobValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_BB, '
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue ='ST_Get' and
+    not (
+      acv.stringValue = null and
+      acv.longValue = null and
+      acv.dateValue = null and
+      acv.doubleValue = null and
+      acv.boolValue = null and
+      acv.blobValue = null
+    )
+;
+select distinct
+    '(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_S, ' ||
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue ='ST_Get' and
+    not (
+      acv.stringValue = null
+    )
+;
+select distinct
+    '(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_S, '
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_Get', 'ST_ReGet', 'ST_ProLong') and
+    not (
+      acv.stringValue = null
+    )
+union all
+select distinct
+    '(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_L, '
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_Get', 'ST_ReGet', 'ST_ProLong') and
+    not (
+      acv.longValue = null
+    )
+union all
+select distinct
+    '(select acv.boolValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_B, '
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_Get', 'ST_ReGet', 'ST_ProLong') and
+    not (
+      acv.boolValue = null
+    )
+union all
+select distinct
+    '(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_D, '
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ('ST_Get', 'ST_ReGet', 'ST_ProLong') and
+    not (
+      acv.dateValue = null
+    )
+;
+
+
+
+select distinct
+    '(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = ''' || acv.variableName || ''') as ' || acv.variableName || '_L, ' ||
+ as txt
+  from AgentCase ac, AgentCaseVariable acv, AgentCaseVariable acvST
+  where acv.agentCase = ac and acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue ='ST_Get' and
+    not (
+      acv.stringValue = null
+    )
+;
+select 
+	ac.id, 
+	acvST.stringValue as govServiceType, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'activityAddress') as activityAddress_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'activityType') as activityType_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'agentEmail') as agentEmail_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'agentPhone') as agentPhone_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'agentPostAddress') as agentPostAddress_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'conversionWay') as conversionWay_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'decisionType') as decisionType_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_AmendmentNotice') as file_AmendmentNotice_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_ChangeDocs') as file_ChangeDocs_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_ConstDocs') as file_ConstDocs_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_Decision') as file_Decision_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_Declaration') as file_Declaration_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_GetLandBuildEquip') as file_GetLandBuildEquip_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_GetLetter') as file_GetLetter_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_License') as file_License_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_RejectLetter') as file_RejectLetter_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_SkillWorker') as file_SkillWorker_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_StateDue') as file_StateDue_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'file_TechDescription') as file_TechDescription_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'govServiceType') as govServiceType_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'inDocNo') as inDocNo_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseNumber') as licenseNumber_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseSerie') as licenseSerie_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'newActivityAddress') as newActivityAddress_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outDocNo') as outDocNo_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outLetterNo') as outLetterNo_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outRejectNo') as outRejectNo_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'reGetReason') as reGetReason_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'rejectMotive') as rejectMotive_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'rejectReason') as rejectReason_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'tarifAmount') as tarifAmount_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'tarifName') as tarifName_S,
+	(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'agentId') as agentId_L, 
+	(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseId') as licenseId_L,
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'askDate') as askDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseDate') as licenseDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseEndDate') as licenseEndDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outDocDate') as outDocDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outLetterDate') as outLetterDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outRejectDate') as outRejectDate_D
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvST
+  where 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ( 'ST_ReGet', 'ST_ProLong', 'ST_Get')
+  order by 2, 1
+;
+select 
+	ac.id, 
+	acvST.stringValue as govServiceType, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'govServiceType') as govServiceType_S, 
+	(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseId') as licenseId_L,
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'inDocNo') as inDocNo_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseNumber') as licenseNumber_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseSerie') as licenseSerie_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'newActivityAddress') as newActivityAddress_S, 
+	(select acv.stringValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'outDocNo') as outDocNo_S, 
+	(select acv.longValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'agentId') as agentId_L, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'askDate') as askDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseDate') as licenseDate_D, 
+	(select acv.dateValue from AgentCaseVariable acv where acv.agentCase = ac and acv.variableName = 'licenseEndDate') as licenseEndDate_D
+  from 
+    AgentCase ac, 
+    AgentCaseVariable acvST
+  where 
+    acvST.agentCase = ac and acvST.variableName = 'govServiceType' and acvST.stringValue in ( 'ST_ReGet', 'ST_ProLong', 'ST_Get')
+  order by 2, 1
+
+ 

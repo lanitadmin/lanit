@@ -1,0 +1,2 @@
+insert into CARD_FIELD (FIELD_ID,FIELD_NAME,FIELD_TYPE,FIELD_VISIBLE,FIELD_CAPTION,FIELD_SIZE,CARD_CODE,FIELD_REQUIRED) 
+values (hibernate_sequence.nextval,'priority','integer',1,'Приоритет',3,'SCatServ',0);

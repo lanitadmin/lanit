@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://samara.lanit.ru/darchive/schemas/ArchiveIncomeRequest" xmlns:tns="http://samara.lanit.ru/darchive/schemas/ArchiveIncomeRequest" elementFormDefault="qualified">
+
+   <xs:element name="request" type="tns:ArchiveIncomeRequest"></xs:element>
+
+   <xs:complexType name="ArchiveIncomeRequest">
+    <xs:sequence>
+    	<xs:element minOccurs="0" name="docItem"
+    		type="tns:DocPackageItem">
+    		<xs:annotation>
+    			<xs:documentation>Комплект документов</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="1" name="fizLico" type="tns:Person">
+    		<xs:annotation>
+    			<xs:documentation>Информация о физ. лице
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="requestDate" type="xs:date" minOccurs="1">
+    		<xs:annotation>
+    			<xs:documentation>Дата заявления</xs:documentation>
+    		</xs:annotation></xs:element>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="DocPackageItem">
+    <xs:sequence>
+     <xs:element minOccurs="1" name="title" type="xs:string">
+     	<xs:annotation>
+     		<xs:documentation>Наименование документа</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element minOccurs="1" name="docTypeId" type="xs:string">
+     	<xs:annotation>
+     		<xs:documentation>Идентификатор эталона типа документа</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element minOccurs="0" name="attachment" type="xs:base64Binary" maxOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Приложенный файл</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element minOccurs="0" name="attachmentType" type="xs:string" maxOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>MIME тип приложенного файла</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element minOccurs="0" name="attachmentName" type="xs:string" maxOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Имя приложенного файла</xs:documentation>
+     	</xs:annotation></xs:element>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Person">
+    <xs:sequence>
+    	<xs:element minOccurs="0" name="passFrom" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>
+    				Кем выдан (пасспорт)
+    			</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="1" name="firstName" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Имя</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="0" name="phone" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Телефон</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="1" name="middleName" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Отчество</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="1" name="lastName" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Фамилия</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="0" name="passNo" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Номер (пасспорт)</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="0" name="passSeria" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Серия (пасспорт)</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="0" name="address" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Адрес</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="0" name="passDate" type="xs:date">
+    		<xs:annotation>
+    			<xs:documentation>Дата выдачи (пасспорт)</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element minOccurs="0" name="email" type="xs:string">
+    		<xs:annotation>
+    			<xs:documentation>Email</xs:documentation>
+    		</xs:annotation>
+    	</xs:element>
+    	<xs:element name="fioFrom" type="xs:string" minOccurs="0">
+    		<xs:annotation>
+    			<xs:documentation>ФИО в родительном падеже</xs:documentation>
+    		</xs:annotation></xs:element>
+    </xs:sequence>
+   </xs:complexType>
+
+</xs:schema>

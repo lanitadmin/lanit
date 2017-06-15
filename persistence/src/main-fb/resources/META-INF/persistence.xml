@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!-- Persistence deployment descriptor for dev profile -->
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="lodint">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<jta-data-source>java:jboss/datasources/lodintDataSource</jta-data-source>
+
+		<jar-file>ejbs.jar</jar-file>
+		<jar-file>shark-persist.jar</jar-file>
+		<jar-file>callcenter.jar</jar-file>
+		<jar-file>electronic-queue.jar</jar-file>
+		<!--<jar-file>kladr.jar</jar-file>-->
+		<jar-file>mobile.jar</jar-file>
+		<jar-file>reestr-living.jar</jar-file>
+		<jar-file>mdm.jar</jar-file>
+
+
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
+
+		<properties>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			
+			<property name="hibernate.jdbc.fetch_size" value="50" />
+			<property name="hibernate.jdbc.batch_size" value="30" />
+
+			<property name="hibernate.cache.use_query_cache" value="true" />
+	  		<property name="hibernate.cache.use_second_level_cache"	value="true" />
+
+			<property name="hibernate.id.new_generator_mappings" value="true" />
+
+			<property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.use_sql_comments" value="false" />
+			<property name="hibernate.generate_statistics" value="false" />
+
+			<property name="jboss.entity.manager.factory.jndi.name"
+				value="java:/lodintEntityManagerFactory" />
+    			<property name="hibernate.dialect"
+				value="org.cp.hibernateext.ExtendedFirebirdDialect" />
+
+
+							
+			<!-- Infinispan -->
+<!-- 
+			Ничего писать не надо. Infinispan уже подключен к нашему приложению в Jboss7         				  
+ 			<property name="hibernate.cache.region.factory_class" value="org.jboss.as.jpa.hibernate4.infinispan.InfinispanRegionFactory"/>
+			<property name="hibernate.cache.infinispan.cachemanager" value="java:jboss/infinispan/container/hibernate"/>
+			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup"/>			
+-->
+			<property name="hibernate.cache.infinispan.statistics" value="false"/>
+<!-- 			
+			<property name="hibernate.cache.infinispan.entity.eviction.strategy" value= "LRU"/>
+            <property name="hibernate.cache.infinispan.entity.eviction.wake_up_interval" value= "60000"/>
+            <property name="hibernate.cache.infinispan.entity.eviction.max_entries" value= "10000"/> -->
+            <property name="hibernate.cache.infinispan.entity.expiration.lifespan" value= "3600000"/>
+            <property name="hibernate.cache.infinispan.entity.expiration.max_idle" value= "1800000"/>
+<!-- 
+            <property name="hibernate.cache.infinispan.query.eviction.strategy" value= "LRU"/>
+            <property name="hibernate.cache.infinispan.query.eviction.wake_up_interval" value= "60000"/>
+            <property name="hibernate.cache.infinispan.query.eviction.max_entries" value= "10000"/> -->
+            <property name="hibernate.cache.infinispan.query.expiration.lifespan" value= "3600000"/>
+            <property name="hibernate.cache.infinispan.query.expiration.max_idle" value= "1800000"/>
+<!-- 
+            <property name="hibernate.cache.infinispan.collection.eviction.strategy" value= "LRU"/>
+            <property name="hibernate.cache.infinispan.collection.eviction.wake_up_interval" value= "60000"/>
+            <property name="hibernate.cache.infinispan.collection.eviction.max_entries" value= "10000"/> -->
+            <property name="hibernate.cache.infinispan.collection.expiration.lifespan" value= "3600000"/>
+            <property name="hibernate.cache.infinispan.collection.expiration.max_idle" value= "1800000"/>
+<!-- 
+            <property name="hibernate.cache.infinispan.timestamp.eviction.strategy" value= "LRU"/>
+            <property name="hibernate.cache.infinispan.timestamp.eviction.wake_up_interval" value= "60000"/>
+            <property name="hibernate.cache.infinispan.timestamp.eviction.max_entries" value= "10000"/> -->
+            <property name="hibernate.cache.infinispan.timestamp.expiration.lifespan" value= "3600000"/>
+            <property name="hibernate.cache.infinispan.timestamp.expiration.max_idle" value= "1800000"/>				
+				
+		</properties>
+	</persistence-unit>
+
+</persistence>

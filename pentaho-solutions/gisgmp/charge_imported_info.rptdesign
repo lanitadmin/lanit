@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <method name="initialize"><![CDATA[function log(str) {
+	Packages.java.lang.System.out.println(str);
+}
+reportContext.setPersistentGlobalVariable("log", log);]]></method>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="chargeId" id="57">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="53"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="54">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ID_UNIQ</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">ID_UNIF</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ID_ALT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">ID_REQ</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">CH_STATUS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CH_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">CH_SUM</property>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">CH_ISSUE</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">CH_HEAD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">CH_KBK</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">AD_STATUS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">AD_TYPE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">AD_BASE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">AD_TAX</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">AD_NUM</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">AD_DATE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">BH_RS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">BH_TOFK</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">BH_LS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">BH_BN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">BH_BIK</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">BH_SWIFT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">BH_CS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">BH_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">BH_INN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">BH_KPP</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">BH_OGRN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">BH_OKATO</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">MN_DATEREQ</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">MN_IDREQ</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">MN_ORGUNIT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">MN_AUTHOR</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ID_UNIQ</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ID_UNIF</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ID_ALT</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ID_REQ</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CH_STATUS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CH_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CH_SUM</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CH_ISSUE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CH_HEAD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CH_KBK</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AD_STATUS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AD_TYPE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AD_BASE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AD_TAX</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AD_NUM</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AD_DATE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_RS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_TOFK</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_LS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_BN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_BIK</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_SWIFT</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_CS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_INN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_KPP</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_OGRN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">BH_OKATO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MN_DATEREQ</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MN_IDREQ</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MN_ORGUNIT</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MN_AUTHOR</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ID_UNIQ</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">ID_UNIF</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ID_ALT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">ID_REQ</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">CH_STATUS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">CH_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">CH_SUM</property>
+                        <property name="dataType">float</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">CH_ISSUE</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">CH_HEAD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">CH_KBK</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">AD_STATUS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">AD_TYPE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">AD_BASE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">AD_TAX</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">AD_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">AD_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">BH_RS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">BH_TOFK</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">BH_LS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">BH_BN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">BH_BIK</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">BH_SWIFT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">BH_CS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">BH_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">BH_INN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">BH_KPP</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">BH_OGRN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">BH_OKATO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">MN_DATEREQ</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">MN_IDREQ</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">MN_ORGUNIT</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">MN_AUTHOR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[shark = new Packages.org.cp.birt.plugins.Shark();
+
+
+//activity = shark.getActivityVariableValue
+//(
+//	"charge",
+//	params["processId"],
+//	params["activityId"]
+//);
+
+charge = shark.getEntityManagerLod().createQuery(
+"from Charge ch where ch.id = :chargeId")
+.setParameter("chargeId", params["chargeId"])
+.getSingleResult();
+
+MN_AUTHOR = "";
+MN_ORGUNIT = "";
+MN_IDREQ = "";
+MN_DATEREQ = "";
+
+BH_NAME = "";
+BH_INN = "";
+BH_KPP = "";
+BH_OGRN = "";
+BH_OKATO = "";
+
+BH_RS = "";
+BH_TOFK = "";
+BH_LS = "";
+BH_BN = "";
+BH_BIK = "";
+BH_SWIFT = "";
+BH_CS = "";
+
+AD_STATUS = "";
+AD_TYPE = "";
+AD_BASE = "";
+AD_TAX = "";
+AD_NUM = "";
+AD_DATE = "";
+
+CH_STATUS = "";
+CH_NAME = "";
+CH_SUM = "";
+CH_ISSUE = "";
+CH_HEAD = "";
+CH_KBK = "";
+
+ID_UNIQ = "";
+ID_UNIF = "";
+ID_ALT = ""
+ID_REQ = "";
+
+MN_AUTHOR = charge.getAuthor();
+MN_ORGUNIT = charge.getAuthorOrgUnit();
+soapContextImport = charge.getSoapContextImport();
+if (soapContextImport != null) {
+	MN_DATEREQ = soapContextImport.getRunTime();
+}
+
+ID_UNIQ = charge.getChargeUniqueId();
+ID_UNIF = charge.getPayerUnifiedId();
+ID_ALT = charge.getPayerAlternativeId();
+ID_REQ = charge.getBid();
+  
+chargeStatus = charge.getChargeStatus();
+if (chargeStatus != null) {
+	CH_STATUS = chargeStatus.getName();
+}
+CH_NAME = charge.getChargeName();
+CH_SUM = charge.getChargeSum();
+CH_ISSUE = charge.getChargeIssueDate(); 
+
+
+payerStatus = charge.getPayerStatus();
+if (payerStatus != null) {
+	AD_STATUS = payerStatus.getName();
+}
+paymentType = charge.getPaymentType();
+if (paymentType != null) {
+	AD_TYPE = paymentType.getName();
+}
+basePayment = charge.getBasePayment();
+if (basePayment != null) {
+	AD_BASE = basePayment.getName();
+}
+taxablePeriod = charge.getTaxablePeriod();
+if (taxablePeriod != null) {
+	AD_TAX = taxablePeriod.getName();
+}
+
+AD_NUM = charge.getDocumentNumberIndex();
+AD_DATE = charge.getDocumentDateIndex();
+
+chargeTemplate = charge.getChargeTemplate();
+if (chargeTemplate != null) {
+	CH_KBK = chargeTemplate.getKbk();
+	budgetClassificationHead = chargeTemplate.getBudgetClassificationHead();
+	if (budgetClassificationHead != null) {
+		CH_HEAD = budgetClassificationHead.getFieldValue('code_glav');
+	}
+	
+	providerService = chargeTemplate.getProviderService();
+	if (providerService != null) {
+		BH_NAME = providerService.getName();
+		BH_INN = providerService.getInn();
+		BH_KPP = providerService.getKpp();
+		BH_OGRN = providerService.getOgrn();
+		BH_OKATO = providerService.getOkato();
+		BH_RS = providerService.getCurrentAccount(); 
+		account = providerService.getAccount();		
+		if (account != null) {
+			BH_TOFK = account.getFieldValue('code_tofk');
+			BH_LS = account.getFieldValue('persaccount');
+		}
+		bank = providerService.getBank();
+		if (bank != null) {
+			BH_BN = bank.getName();
+			BH_BIK = bank.getFieldValue('code_bik');
+			BH_SWIFT = bank.getFieldValue('code_swift');
+			BH_CS = bank.getFieldValue('code_coracc');
+		}
+	}
+}
+
+totalrow = 1;
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow > totalrow) {
+	return (false);
+}
+
+row["MN_AUTHOR"] = MN_AUTHOR;
+row["MN_ORGUNIT"] = MN_ORGUNIT;
+row["MN_IDREQ"] = MN_IDREQ;
+row["MN_DATEREQ"] = MN_DATEREQ;
+
+row["BH_NAME"] = BH_NAME;
+row["BH_INN"] = BH_INN;
+row["BH_KPP"] = BH_KPP;
+row["BH_OGRN"] = BH_OGRN;
+row["BH_OKATO"] = BH_OKATO;
+
+row["BH_RS"] = BH_RS;
+row["BH_TOFK"] = BH_TOFK;
+row["BH_LS"] = BH_LS;
+row["BH_BN"] = BH_BN;
+row["BH_BIK"] = BH_BIK;
+row["BH_SWIFT"] = BH_SWIFT;
+row["BH_CS"] = BH_CS;
+
+row["AD_STATUS"] = AD_STATUS;
+row["AD_TYPE"] = AD_TYPE;
+row["AD_BASE"] = AD_BASE;
+row["AD_TAX"] = AD_TAX;
+row["AD_NUM"] = AD_NUM;
+row["AD_DATE"] = AD_DATE;
+
+row["CH_STATUS"] = CH_STATUS;
+row["CH_NAME"] = CH_NAME;
+row["CH_SUM"] = CH_SUM;
+row["CH_ISSUE"] = CH_ISSUE;
+row["CH_HEAD"] = CH_HEAD;
+row["CH_KBK"] = CH_KBK;
+
+row["ID_UNIQ"] = ID_UNIQ;
+row["ID_UNIF"] = ID_UNIF;
+row["ID_ALT"] = ID_ALT
+row["ID_REQ"] = ID_REQ;
+
+currentrow++;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ID_UNIQ</property>
+                    <text-property name="displayName">ID_UNIQ</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ID_UNIQ"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ID_UNIF</property>
+                    <text-property name="displayName">ID_UNIF</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ID_UNIF"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ID_ALT</property>
+                    <text-property name="displayName">ID_ALT</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ID_ALT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ID_REQ</property>
+                    <text-property name="displayName">ID_REQ</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ID_REQ"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CH_STATUS</property>
+                    <text-property name="displayName">CH_STATUS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CH_STATUS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CH_NAME</property>
+                    <text-property name="displayName">CH_NAME</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CH_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CH_SUM</property>
+                    <text-property name="displayName">CH_SUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CH_SUM"]</expression>
+                    <property name="dataType">float</property>
+                </structure>
+                <structure>
+                    <property name="name">CH_ISSUE</property>
+                    <text-property name="displayName">CH_ISSUE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CH_ISSUE"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">CH_HEAD</property>
+                    <text-property name="displayName">CH_HEAD</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CH_HEAD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CH_KBK</property>
+                    <text-property name="displayName">CH_KBK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["CH_KBK"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AD_STATUS</property>
+                    <text-property name="displayName">AD_STATUS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AD_STATUS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AD_TYPE</property>
+                    <text-property name="displayName">AD_TYPE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AD_TYPE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AD_BASE</property>
+                    <text-property name="displayName">AD_BASE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AD_BASE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AD_TAX</property>
+                    <text-property name="displayName">AD_TAX</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AD_TAX"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AD_NUM</property>
+                    <text-property name="displayName">AD_NUM</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AD_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AD_DATE</property>
+                    <text-property name="displayName">AD_DATE</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["AD_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_RS</property>
+                    <text-property name="displayName">BH_RS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_RS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_TOFK</property>
+                    <text-property name="displayName">BH_TOFK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_TOFK"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_LS</property>
+                    <text-property name="displayName">BH_LS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_LS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_BN</property>
+                    <text-property name="displayName">BH_BN</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_BN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_BIK</property>
+                    <text-property name="displayName">BH_BIK</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_BIK"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_SWIFT</property>
+                    <text-property name="displayName">BH_SWIFT</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_SWIFT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_CS</property>
+                    <text-property name="displayName">BH_CS</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_CS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_NAME</property>
+                    <text-property name="displayName">BH_NAME</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_INN</property>
+                    <text-property name="displayName">BH_INN</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_INN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_KPP</property>
+                    <text-property name="displayName">BH_KPP</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_KPP"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_OGRN</property>
+                    <text-property name="displayName">BH_OGRN</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_OGRN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BH_OKATO</property>
+                    <text-property name="displayName">BH_OKATO</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["BH_OKATO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MN_DATEREQ</property>
+                    <text-property name="displayName">MN_DATEREQ</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MN_DATEREQ"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">MN_IDREQ</property>
+                    <text-property name="displayName">MN_IDREQ</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MN_IDREQ"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MN_ORGUNIT</property>
+                    <text-property name="displayName">MN_ORGUNIT</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MN_ORGUNIT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MN_AUTHOR</property>
+                    <text-property name="displayName">MN_AUTHOR</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["MN_AUTHOR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="8"/>
+            <row id="9">
+                <cell id="10">
+                    <label id="11">
+                        <property name="fontSize">18pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Информация об отправленном начислении</text-property>
+                    </label>
+                    <text id="12">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Автор документа:</B> <VALUE-OF>row["MN_AUTHOR"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="52">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Наименование участника:</B> <VALUE-OF>row["MN_ORGUNIT"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="13">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Серийный номер сертификата ЭП-СП:</B>]]></text-property>
+                    </text>
+                    <text id="14">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Серийный номер сертификата ЭП-ОВ:</B>]]></text-property>
+                    </text>
+                    <text id="15">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Идентификатор отправителя:</B>]]></text-property>
+                    </text>
+                    <text id="16">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Статус запроса:</B> REQUEST]]></text-property>
+                    </text>
+                    <text id="17">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Время формирования запроса:</B> <VALUE-OF>row["MN_DATEREQ"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="18">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Идентификатор запроса:</B>]]></text-property>
+                    </text>
+                    <label id="19">
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">10pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Идентификация начисления</text-property>
+                    </label>
+                    <text id="21">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Уникальный идентификатор начисления:</B> <VALUE-OF>row["ID_UNIQ"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="22">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Единый идентификатор плательщика:</B> <VALUE-OF>row["ID_UNIF"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="23">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Альтернативный идентификатор плательщика:</B> <VALUE-OF>row["ID_ALT"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="20">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Уникальный идентификатор заявки:</B> <VALUE-OF>row["ID_REQ"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <label id="24">
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">10pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Информация о начислении</text-property>
+                    </label>
+                    <text id="26">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Статус начисления:</B> <VALUE-OF>row["CH_STATUS"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="27">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Наименование начисления:</B> <VALUE-OF>row["CH_NAME"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="28">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Полная сумма начисления:</B> <VALUE-OF>row["CH_SUM"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="30">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Дата выставления начисления:</B> <VALUE-OF>row["CH_ISSUE"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="29">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Код главы бюджета:</B> <VALUE-OF>row["CH_HEAD"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="25">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>КБК:</B> <VALUE-OF>row["CH_KBK"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <label id="31">
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">10pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Дополнительные реквизиты начисления</text-property>
+                    </label>
+                    <text id="32">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Статус плательщика:</B> <VALUE-OF>row["AD_STATUS"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="33">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Тип платежа:</B> <VALUE-OF>row["AD_TYPE"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="34">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Основание платежа:</B> <VALUE-OF>row["AD_BASE"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="37">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Налоговый период:</B> <VALUE-OF>row["AD_TAX"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="36">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Показатель номера документа:</B> <VALUE-OF>row["AD_NUM"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="35">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Показатель даты документа:</B> <VALUE-OF>row["AD_DATE"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <label id="38">
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">10pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Данные получателя</text-property>
+                    </label>
+                    <text id="40">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Наименование получателя:</B> <VALUE-OF>row["BH_NAME"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="41">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>ИНН получателя:</B> <VALUE-OF>row["BH_INN"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="43">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>КПП получателя:</B> <VALUE-OF>row["BH_KPP"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="42">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>ОГРН получателя:</B> <VALUE-OF>row["BH_OGRN"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="39">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>ОКАТО получателя:</B> <VALUE-OF>row["BH_OKATO"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <label id="44">
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">10pt</property>
+                        <property name="marginBottom">10pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Банковские реквизиты получателя</text-property>
+                    </label>
+                    <text id="49">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Наименование ТОФК или ФО:</B> <VALUE-OF>row["BH_TOFK"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="51">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Лицевой счет:</B> <VALUE-OF>row["BH_LS"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="50">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Расчетный счет:</B> <VALUE-OF>row["BH_RS"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="48">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Наименование банка:</B> <VALUE-OF>row["BH_BN"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="46">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>БИК:</B> <VALUE-OF>row["BH_BIK"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="47">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>SWIFT:</B> <VALUE-OF>row["BH_SWIFT"]</VALUE-OF>]]></text-property>
+                    </text>
+                    <text id="45">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<B>Корреспондентский счет банка:</B> <VALUE-OF>row["BH_CS"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

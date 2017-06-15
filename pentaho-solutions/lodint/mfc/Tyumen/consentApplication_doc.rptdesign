@@ -1,0 +1,1512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="user" id="38">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="processId" id="39">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="40">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="dataSource" id="31"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="appSetting" id="32">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">mfcAcronym</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">mfcName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">mfcChiefName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">mfcChiefPost</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">mfcAddress</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">mfcChiefNameDative</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">mfcAcronym</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcChiefName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcChiefPost</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcAddress</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcChiefNameDative</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">mfcAcronym</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">mfcName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">mfcChiefName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">mfcChiefPost</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">mfcAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">mfcChiefNameDative</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">dataSource</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzShark = new Packages.org.cp.birt.plugins.HibernateUtil("entityManagerNoFilter");
+dative =  new Packages.padeg.lib.Padeg();
+
+owners = clazzShark.getEntityManagerShark().createQuery(
+" select u.owner from User u where u.login = :user "
+)
+.setParameter("user", params["user"])
+.getResultList();
+
+//owner_where = "";
+//if (!owners.isEmpty()) {
+//  owner = owners.get(0);
+//  if (owner != null) {
+//      owner_where =   " and a1.owner = '" + owner + "'" +
+//                      " and a2.owner = '" + owner + "'" +
+//                      " and a3.owner = '" + owner + "'" +
+//                      " and a4.owner = '" + owner + "'" +
+//                      " and a5.owner = '" + owner + "'";
+//
+//  }
+//}
+
+result = clazz.getEntityManagerLod().createQuery
+(
+" select a1.value, a2.value, a3.value, a4.value, a5.value"+
+" from "+
+" AppSetting a1, AppSetting a2, AppSetting a3, AppSetting a4, AppSetting a5 " +
+" where "+
+" a1.code = 'ogv_name' and a2.code = 'ogv_name_acronym' " +
+" and a3.code = 'ogv_boss_post' and a4.code = 'ogv_boss_name_dative' and a5.code = 'ogv_address' "
+).getResultList();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+    return(false);
+}
+var rowValue = result.get(currentrow);
+
+row["mfcName"] = rowValue[0];
+row["mfcAcronym"] = rowValue[1];
+row["mfcChiefPost"] = rowValue[2];
+row["mfcChiefNameDative"] = rowValue[3];
+row["mfcAddress"] = rowValue[4];
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="applicant" id="33">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">pName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">pAddress</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">pDocSeries</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">pDocNumber</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">pDocIssueOrg</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">pDocIssueDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">rName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">rAddress</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">rDocSeries</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">rDocNumber</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">rDocIssueOrg</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">rDocIssueDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">ogvName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">ogvAddress</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">pSex</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">rSex</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">pDocType</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">rDocType</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">mfcAcronym</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">mfcName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">mfcChiefName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">mfcChiefPost</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">mfcAddress</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">mfcChiefNameDative</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">pName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pAddress</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pDocSeries</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pDocNumber</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pDocIssueOrg</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pDocIssueDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rAddress</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rDocSeries</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rDocNumber</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rDocIssueOrg</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rDocIssueDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogvName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogvAddress</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pSex</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rSex</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pDocType</property>
+                </structure>
+                <structure>
+                    <property name="columnName">rDocType</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcAcronym</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcChiefName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcChiefPost</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcAddress</property>
+                </structure>
+                <structure>
+                    <property name="columnName">mfcChiefNameDative</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">pName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">pAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">pDocSeries</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">pDocNumber</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">pDocIssueOrg</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">pDocIssueDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">rName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">rAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">rDocSeries</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">rDocNumber</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">rDocIssueOrg</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">rDocIssueDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">ogvName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">ogvAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">pSex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">rSex</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">pDocType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">rDocType</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">mfcAcronym</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">mfcName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">mfcChiefName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">mfcChiefPost</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">mfcAddress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">mfcChiefNameDative</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">dataSource</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzShark = new Packages.org.cp.birt.plugins.HibernateUtil("entityManagerNoFilter");
+result2 = clazz.getActivityVariableValue
+    (
+        "Zayavitel,Komplekt_doc,Service,Zayavlenie,selectOwner,dateServEnd",
+        params["processId"],
+        params["activityId"]
+    );
+
+Zayavitel = result2[0];
+Komplekt_doc = result2[1];
+Zayavlenie = result2[3];
+
+result = clazz.getEntityManagerLod().createQuery(
+" SELECT "+
+
+"   ( " +
+"       SELECT P.lastName || ' ' || P.firstName || ' ' || P.middleName " +
+"       FROM Person as P " +
+"       WHERE ogi.objectClass = 'org.cp.model.common.Person' " +
+"       AND P.id = ogi.objectId " +
+"   ) as pName, " +
+"   ( " +
+"       SELECT P.factAddress FROM Person as P " +
+"       WHERE ogi.objectClass = 'org.cp.model.common.Person' " +
+"       AND P.id = ogi.objectId " +
+"   ) as pAddress, " +
+"   ( " +
+"       SELECT P.passSeria FROM Person as P "+
+"       WHERE ogi.objectClass='org.cp.model.common.Person' AND P.id = ogi.objectId " +
+"   ) as pDocSeries, " +
+"   ( " +
+"       SELECT P.passNo FROM Person as P " +
+"       WHERE ogi.objectClass='org.cp.model.common.Person' AND P.id = ogi.objectId " +
+"   ) as pDocNumber, " +
+"   ( " +
+"       SELECT P.passDate FROM Person as P " +
+"       WHERE ogi.objectClass='org.cp.model.common.Person' AND P.id = ogi.objectId " +
+"   ) as pDocIssueDate, " +
+"   ( " +
+"       SELECT P.passFrom FROM Person as P " +
+"       WHERE ogi.objectClass='org.cp.model.common.Person' AND P.id = ogi.objectId " +
+"   ) as pDocIssueOrg, " +
+"   ( " +
+"       SELECT A.person.lastName || ' ' || A.person.firstName || ' ' || A.person.middleName " +
+"       FROM Agent as A " +
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' " +
+"       AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rName, " +
+"   ( " +
+"       SELECT A.person.passSeria FROM Agent as A " +
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rDocSeries, " +
+"   ( " +
+"       SELECT A.person.passNo FROM Agent as A " +
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rDocNumber, " +
+"   ( " +
+"       SELECT A.person.passDate FROM Agent as A " +
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rDocIssueDate, " +
+"   ( " +
+"       SELECT A.person.passFrom FROM Agent as A " +
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rDocIssueOrg, " +
+"   ( " +
+"       SELECT A.person.factAddress FROM Agent as A "+
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rAddress, " +
+"   ( " +
+"       SELECT P.sex FROM Person as P " +
+"       WHERE ogi.objectClass = 'org.cp.model.common.Person' " +
+"       AND P.id = ogi.objectId " +
+"   ) as pSex, " +
+"   ( " +
+"       SELECT A.person.sex FROM Agent as A "+
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rSex, " +
+"   ( " +
+"       SELECT P.identityDocType FROM Person as P "+
+"       WHERE ogi.objectClass='org.cp.model.common.Person' AND P.id = ogi.objectId " +
+"   ) as pDocType, " +
+"   ( " +
+"       SELECT A.person.identityDocType FROM Agent as A " +
+"       WHERE ogi.objectClass = 'org.cp.lodent.Agent' AND A.id = ogi.objectId AND A.person != null " +
+"   ) as rDocType, " +
+"   dp1 " +
+" FROM User u1, ObjectGroupItem ogi, GossrvcDocPackage dp1 " +
+" WHERE u1.login = :login " +
+" AND ogi.objectGroup.id = :Zayavitel " +
+" AND ogi.selected = true " +
+" AND dp1.id = :Komplekt_doc "
+)
+.setParameter("login", params["user"])
+.setParameter("Zayavitel", Zayavitel)
+.setParameter("Komplekt_doc", Komplekt_doc)
+.getResultList();
+
+totalrows = result.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+    return(false);
+}
+var rowValue = result.get(currentrow);
+if(rowValue[0] != null) {
+    row["pName"] = rowValue[0];
+    row["pAddress"] = rowValue[1];
+    row["pDocSeries"] = rowValue[2];
+    row["pDocNumber"] = rowValue[3];
+    row["pDocIssueDate"] = rowValue[4];
+    row["pDocIssueOrg"] = rowValue[5];
+    row["pSex"] = rowValue[12];
+    row["pDocType"] = rowValue[14];
+} else if(rowValue[6] != null) {
+    row["pName"] = rowValue[6];
+    row["pAddress"] = rowValue[7];
+    row["pDocSeries"] = rowValue[8];
+    row["pDocNumber"] = rowValue[9];
+    row["pDocIssueDate"] = rowValue[10];
+    row["pDocIssueOrg"] = rowValue[11];
+    row["pSex"] = rowValue[13];
+    row["pDocType"] = rowValue[15];
+}
+
+row["ogvName"] = rowValue[16].getOgv().getName();
+id = rowValue[16].getOgv().getId();
+row["ogvAddress"] = clazz.getEntityManagerLod().createQuery(
+" SELECT cefv.fieldStringValue " +
+" FROM CardElementFieldValue cefv " +
+" WHERE cefv.cardField.fieldName = 'addressOGV' " +
+" AND cefv.cardElement.id = :id "
+).setParameter("id", id).getSingleResult();
+if(!row["ogvAddress"].equals("")) {
+    row["ogv"] = row["ogvName"] + " " + "(" + row["ogvAddress"] + ")";
+} else {
+    row["ogv"] = row["ogvName"];
+}
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+            <property name="headerHeight">1cm</property>
+            <property name="footerHeight">1cm</property>
+            <page-footer>
+                <auto-text id="193">
+                    <property name="fontFamily">"Linux Libertine"</property>
+                    <property name="textAlign">right</property>
+                    <property name="type">page-number</property>
+                </auto-text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="41">
+            <property name="width">7.072916666666667in</property>
+            <property name="dataSet">appSetting</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">mfcAcronym</property>
+                    <text-property name="displayName">mfcAcronym</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mfcAcronym"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">mfcName</property>
+                    <text-property name="displayName">mfcName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mfcName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">mfcChiefName</property>
+                    <text-property name="displayName">mfcChiefName</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mfcChiefName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">mfcChiefPost</property>
+                    <text-property name="displayName">mfcChiefPost</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mfcChiefPost"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">mfcAddress</property>
+                    <text-property name="displayName">mfcAddress</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mfcAddress"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">mfcChiefNameDative</property>
+                    <text-property name="displayName">mfcChiefNameDative</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mfcChiefNameDative"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="42">
+                <property name="width">2.3958333333333335in</property>
+            </column>
+            <column id="43">
+                <property name="width">4.677083333333333in</property>
+            </column>
+            <row id="44">
+                <cell id="45"/>
+                <cell id="46">
+                    <label id="401">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Директору ГАУ ТО «МФЦ»</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="47">
+                <cell id="48">
+                    <text id="136">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">center</property>
+                        <list-property name="visibility">
+                            <structure>
+                                <property name="format">all</property>
+                                <expression name="valueExpr" type="javascript">if(row["rDocIssueDate"] == null &amp; row["pDocIssueDate"] == null) {true} else {false}</expression>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+                <cell id="49">
+                    <label id="402">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text">Нагибину А.Н.</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <label id="426">
+            <text-property name="text">
+
+</text-property>
+        </label>
+        <label id="53">
+            <property name="fontSize">13pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">Заявление-согласие субъекта, не являющегося сотрудником организации, на обработку его персональных данных</text-property>
+        </label>
+        <label id="427">
+            <text-property name="text">
+
+</text-property>
+        </label>
+        <grid id="61">
+            <property name="width">7.0625in</property>
+            <column id="62">
+                <property name="width">0.3854166666666667in</property>
+            </column>
+            <column id="63">
+                <property name="width">6.541666666666667in</property>
+            </column>
+            <column id="221">
+                <property name="width">0.13541666666666666in</property>
+                <property name="verticalAlign">middle</property>
+            </column>
+            <row id="64">
+                <cell id="65">
+                    <label id="67">
+                        <property name="fontSize">12pt</property>
+                        <text-property name="text">Я,</text-property>
+                    </label>
+                </cell>
+                <cell id="66">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="60">
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+                <cell id="220">
+                    <label id="223">
+                        <text-property name="text">,</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="324">
+                <cell id="325"/>
+                <cell id="326">
+                    <label id="328">
+                        <property name="fontSize">8pt</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">(Ф.И.О)</text-property>
+                    </label>
+                </cell>
+                <cell id="327"/>
+            </row>
+        </grid>
+        <grid id="93">
+            <property name="height">0.3020833333333333in</property>
+            <property name="width">6.90625in</property>
+            <column id="404">
+                <property name="width">1.5625in</property>
+            </column>
+            <column id="94">
+                <property name="width">1.0625in</property>
+            </column>
+            <column id="95">
+                <property name="width">4.28125in</property>
+            </column>
+            <row id="96">
+                <property name="height">0.3020833333333333in</property>
+                <property name="verticalAlign">bottom</property>
+                <cell id="403">
+                    <text id="216">
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<VALUE-OF>if (row["pName"]  != null &amp;&amp; row["pSex"] != null) {
+    if(row["pSex"].equals("male")) {
+        'проживающий'
+    } else {
+        'проживающая'
+    }
+} else {
+    'проживающий(-ая)'
+ }</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+                <cell id="97">
+                    <label id="102">
+                        <property name="fontSize">12pt</property>
+                        <text-property name="text">по адресу</text-property>
+                    </label>
+                </cell>
+                <cell id="98">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                </cell>
+            </row>
+        </grid>
+        <grid id="389">
+            <property name="verticalAlign">bottom</property>
+            <property name="width">7.072916666666667in</property>
+            <column id="390">
+                <property name="width">6.916666666666667in</property>
+            </column>
+            <column id="394">
+                <property name="width">0.15625in</property>
+            </column>
+            <row id="391">
+                <property name="height">0.8cm</property>
+                <property name="verticalAlign">bottom</property>
+                <cell id="392">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="369">
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+                <cell id="393">
+                    <label id="395">
+                        <text-property name="text">,</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <label id="103">
+            <property name="fontSize">8pt</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">(фактический адрес проживания)</text-property>
+        </label>
+        <grid id="105">
+            <property name="verticalAlign">bottom</property>
+            <property name="width">7.072916666666667in</property>
+            <column id="106">
+                <property name="width">2.875in</property>
+            </column>
+            <column id="107">
+                <property name="width">1.6354166666666667in</property>
+            </column>
+            <column id="108">
+                <property name="width">0.6770833333333334in</property>
+            </column>
+            <column id="109">
+                <property name="width">1.7291666666666667in</property>
+            </column>
+            <column id="218">
+                <property name="width">0.15625in</property>
+            </column>
+            <row id="353">
+                <property name="height">0.8cm</property>
+                <property name="verticalAlign">bottom</property>
+                <cell id="354">
+                    <property name="textAlign">left</property>
+                    <label id="359">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">документ, удостоверяющий личность </text-property>
+                    </label>
+                </cell>
+                <cell id="355">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="361">
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+                <cell id="358">
+                    <property name="verticalAlign">bottom</property>
+                    <label id="360">
+                        <text-property name="text">,</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="110">
+                <property name="height">0.8cm</property>
+                <property name="verticalAlign">bottom</property>
+                <cell id="111">
+                    <label id="115">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">right</property>
+                        <text-property name="text"> серия</text-property>
+                    </label>
+                </cell>
+                <cell id="112">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="133">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+                <cell id="113">
+                    <label id="116">
+                        <property name="fontSize">12pt</property>
+                        <text-property name="text">, номер</text-property>
+                    </label>
+                </cell>
+                <cell id="114">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="134">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+                <cell id="217">
+                    <property name="verticalAlign">bottom</property>
+                    <label id="219">
+                        <text-property name="text">,</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <grid id="117">
+            <property name="height">0.3020833333333333in</property>
+            <property name="width">6.916666666666667in</property>
+            <column id="118">
+                <property name="width">1.0729166666666667in</property>
+            </column>
+            <column id="119">
+                <property name="width">5.84375in</property>
+            </column>
+            <row id="120">
+                <property name="height">0.3020833333333333in</property>
+                <property name="verticalAlign">bottom</property>
+                <cell id="121">
+                    <label id="123">
+                        <property name="fontSize">12pt</property>
+                        <text-property name="text">выданный</text-property>
+                    </label>
+                </cell>
+                <cell id="122">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="135">
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid id="396">
+            <property name="width">6.916666666666667in</property>
+            <column id="397">
+                <property name="width">6.916666666666667in</property>
+            </column>
+            <row id="398">
+                <property name="height">0.8cm</property>
+                <cell id="399">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <text id="400">
+                        <property name="contentType">html</property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid id="124">
+            <property name="width">7.063in</property>
+            <column id="125">
+                <property name="width">3in</property>
+            </column>
+            <column id="126">
+                <property name="width">4.052083333333333in</property>
+            </column>
+            <row id="127">
+                <cell id="128">
+                    <grid id="236">
+                        <property name="width">2.9479166666666665in</property>
+                        <column id="247">
+                            <property name="width">0.4cm</property>
+                        </column>
+                        <column id="237">
+                            <property name="width">0.9cm</property>
+                        </column>
+                        <column id="245">
+                            <property name="width">0.4cm</property>
+                        </column>
+                        <column id="238">
+                            <property name="width">1.4166666666666667in</property>
+                        </column>
+                        <column id="253">
+                            <property name="width">0.010416666666666666in</property>
+                        </column>
+                        <column id="239">
+                            <property name="width">1.5cm</property>
+                        </column>
+                        <row id="240">
+                            <property name="height">0.8cm</property>
+                            <property name="verticalAlign">middle</property>
+                            <cell id="246">
+                                <property name="textAlign">right</property>
+                                <property name="verticalAlign">bottom</property>
+                                <label id="249">
+                                    <property name="fontSize">14pt</property>
+                                    <text-property name="text">«</text-property>
+                                </label>
+                            </cell>
+                            <cell id="241">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                                <text id="248">
+                                    <property name="contentType">html</property>
+                                </text>
+                            </cell>
+                            <cell id="244">
+                                <property name="textAlign">left</property>
+                                <property name="verticalAlign">bottom</property>
+                                <label id="250">
+                                    <property name="fontSize">14pt</property>
+                                    <text-property name="text">»</text-property>
+                                </label>
+                            </cell>
+                            <cell id="242">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="verticalAlign">bottom</property>
+                                <text id="251">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                </text>
+                            </cell>
+                            <cell id="252"/>
+                            <cell id="243">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="verticalAlign">bottom</property>
+                                <text id="254">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="370">
+                            <cell id="371">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                            </cell>
+                            <cell id="372">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                            </cell>
+                            <cell id="373">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                            </cell>
+                            <cell id="374">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                                <label id="377">
+                                    <property name="fontSize">8pt</property>
+                                    <text-property name="text">(дата выдачи документа)</text-property>
+                                </label>
+                            </cell>
+                            <cell id="375">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                            </cell>
+                            <cell id="376">
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">bottom</property>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+                <cell id="129">
+                    <property name="verticalAlign">middle</property>
+                    <label id="130">
+                        <property name="fontSize">12pt</property>
+                        <text-property name="text"> года, в соответствии со ст. 9 Федерального закона  </text-property>
+                    </label>
+                    <label id="270">
+                        <property name="fontSize">8pt</property>
+                        <text-property name="text"></text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <grid id="434">
+            <property name="width">7.072916666666667in</property>
+            <column id="435">
+                <property name="width">7.072916666666667in</property>
+            </column>
+            <row id="436">
+                <cell id="437">
+                    <text id="132">
+                        <property name="fontSize">12pt</property>
+                        <property name="marginLeft">0pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="dataSet">appSetting</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">mfcAcronym</property>
+                                <text-property name="displayName">mfcAcronym</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcAcronym"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcName</property>
+                                <text-property name="displayName">mfcName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcChiefName</property>
+                                <text-property name="displayName">mfcChiefName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcChiefName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcChiefPost</property>
+                                <text-property name="displayName">mfcChiefPost</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcChiefPost"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcAddress</property>
+                                <text-property name="displayName">mfcAddress</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcAddress"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcChiefNameDative</property>
+                                <text-property name="displayName">mfcChiefNameDative</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcChiefNameDative"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <structure name="toc"/>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[от 27.07.2006 № 152-ФЗ «О персональных данных», даю согласие ГАУ ТО «МФЦ», расположенному по адресу: Тюменская область, г.Тюмень, ул. Водопроводная, д.12, на обработку моих персональных данных с использованием средств автоматизации, а именно:]]></text-property>
+                    </text>
+                    <grid id="408">
+                        <property name="height">1.53125in</property>
+                        <property name="width">6.895833333333333in</property>
+                        <column id="409">
+                            <property name="width">0.3645833333333333in</property>
+                        </column>
+                        <column id="410">
+                            <property name="width">6.53125in</property>
+                        </column>
+                        <row id="411">
+                            <property name="height">1.53125in</property>
+                            <cell id="412">
+                                <text id="188">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[&amp;bull;]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="413">
+                                <label id="173">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">justify</property>
+                                    <structure name="toc"/>
+                                    <text-property name="text">фамилия, имя, отчество, пол, дата и место рождения, гражданство; адрес регистрации и фактического проживания; дата регистрации по месту жительства; почтовый адрес; адрес электронной почты (E-mail); паспорт (серия, номер, кем и когда выдан); контактный номер телефона; документ, удостоверяющий личность (вид документа; серия; номер; дата выдачи; гражданство; место рождения);идентификационный номер налогоплательщика; номер страхового свидетельства обязательного пенсионного страхования;</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="414">
+                        <property name="height">0.34375in</property>
+                        <property name="width">6.90625in</property>
+                        <column id="415">
+                            <property name="width">0.3645833333333333in</property>
+                        </column>
+                        <column id="416">
+                            <property name="width">6.541666666666667in</property>
+                        </column>
+                        <row id="417">
+                            <property name="height">0.34375in</property>
+                            <cell id="418">
+                                <text id="419">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[&amp;bull;]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="420">
+                                <label id="422">
+                                    <property name="fontSize">12pt</property>
+                                    <text-property name="text">иные категории персональных данных:</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="438">
+                        <property name="height">1.9375in</property>
+                        <property name="width">6.916666666666667in</property>
+                        <column id="439">
+                            <property name="width">0.3645833333333333in</property>
+                        </column>
+                        <column id="440">
+                            <property name="width">6.552083333333333in</property>
+                        </column>
+                        <row id="441">
+                            <cell id="442"/>
+                            <cell id="444">
+                                <label id="445">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">justify</property>
+                                    <structure name="toc"/>
+                                    <text-property name="text">состояние в браке, данные свидетельства о заключении брака, фамилия, имя, отчество супруга(и), паспортные данные супруга(и), степень родства, фамилии, имена, отчества и  даты рождения других членов семьи, фамилии, имена, отчества и даты рождения иждивенцев, состав семьи, имущественное положение, место работы, должность, оклад, данные о трудовом договоре, период работы, причины увольнения, номер, серия и дата выдачи трудовой книжки, форма допуска, серия, номер, дата выдачи, наименование органа, выдавшего документ, являющийся основанием для предоставления льгот и статуса, сведения о квалификации, сведения о переподготовке, ученая степень, ученое звание,  наименование  образовательного  учреждения,   документ,  подтверждающие образование: наименование,  номер,  дата выдачи,  специальность,  данные о повышении</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="446">
+                        <property name="height">1.7291666666666667in</property>
+                        <property name="width">6.927083333333333in</property>
+                        <column id="447">
+                            <property name="width">0.3645833333333333in</property>
+                        </column>
+                        <column id="448">
+                            <property name="width">6.5625in</property>
+                        </column>
+                        <row id="449">
+                            <property name="height">1.7291666666666667in</property>
+                            <cell id="450"/>
+                            <cell id="451">
+                                <label id="452">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">justify</property>
+                                    <structure name="toc"/>
+                                    <text-property name="text">квалификации, информация о знании иностранных языков, сведения о наличии специальных знаний или специальной подготовки, серия, номер, дата выдачи, наименование органа, выдавшего военный билет, военно-учетная специальность, воинское звание, данные о принятии\снятии на(с) учет(а), данные о наградах, медалях, поощрениях, почетных званиях, доходы, расовая принадлежность, национальная принадлежность, религиозные убеждения, политические взгляды, философские убеждения, состояние здоровья, сведения из страховых полисов обязательного (добровольного) медицинского страхования, сведения о нетрудоспособности.</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <text id="344">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="dataSet">appSetting</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">mfcAcronym</property>
+                                <text-property name="displayName">mfcAcronym</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcAcronym"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcName</property>
+                                <text-property name="displayName">mfcName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcChiefName</property>
+                                <text-property name="displayName">mfcChiefName</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcChiefName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcChiefPost</property>
+                                <text-property name="displayName">mfcChiefPost</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcChiefPost"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcAddress</property>
+                                <text-property name="displayName">mfcAddress</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcAddress"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">mfcChiefNameDative</property>
+                                <text-property name="displayName">mfcChiefNameDative</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["mfcChiefNameDative"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <structure name="toc"/>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[&amp;emsp;&amp;emsp;&amp;emsp;Обработка вышеуказанных персональных данных будет осуществляться путем сбора, систематизации, накопления, хранения, уточнения (изменения, обновления), использования, уничтожения, передачи.<BR>
+&amp;emsp;&amp;emsp;&amp;emsp;Для обработки в целях предоставления гражданам государственных и муниципальных услуг, я, в соответствии с п. 6 Постановления Правительства РФ № 687 от 15.09.2008, утверждаю, что проинформирован(а) о факте обработки моих персональных данных, обработка которых осуществляется без использования средств автоматизации, согласно вышеприведенным категориям обрабатываемых персональных данных, а также об особенностях и правилах осуществления такой обработки, установленных нормативными правовыми актами федеральных органов исполнительной власти, органов исполнительной власти субъектов Российской Федерации.<BR>
+&amp;emsp;&amp;emsp;&amp;emsp; Обработка осуществляется в следующих документах:<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Заявление-согласие субъекта, не являющегося сотрудником организации, на обработку<BR>
+&amp;emsp;&amp;emsp;&amp;emsp; его персональных данных;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Заявление-согласие субъекта на обработку персональных данных подопечного;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Заявление-согласие субъекта на получение его персональных данных у третьей стороны;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Заявление-согласие субъекта на передачу его персональных данных третьей стороне;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Форма запроса субъекта персональных данных о наличии и ознакомлении с ПДн;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Форма запроса субъекта персональных данных на уточнение ПДн;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Форма запроса субъекта персональных данных на уничтожение ПДн;<BR>
+&amp;emsp;&amp;emsp;&amp;bull;&amp;emsp;Форма запроса субъекта персональных данных с отзывом согласия на обработку ПДн.<BR>
+&amp;emsp;&amp;emsp;&amp;emsp; Также я даю согласие на передачу моих персональных данных федеральным органам исполнительной власти, органам государственных внебюджетных фондов, органам государственной власти субъектов Российской Федерации, органам местного самоуправления, с которыми ГАУ ТО «МФЦ» заключило соглашение о взаимодействии по предоставлению государственных (муниципальных) услуг в соответствии с постановлением Правительства №797 от 27.09.2011 года.]]></text-property>
+                    </text>
+                    <text id="424">
+                        <property name="fontSize">12pt</property>
+                        <property name="textAlign">justify</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[&amp;emsp;&amp;emsp;&amp;emsp; Я утверждаю, что ознакомлен(а) с документами организации, устанавливающими порядок обработки персональных данных, а также с моими правами и обязанностями в этой области.<BR>
+&amp;emsp;&amp;emsp;&amp;emsp; Согласие вступает в силу со дня его подписания и действует до достижения целей обработки.<BR>
+&amp;emsp;&amp;emsp;&amp;emsp; Согласие может быть отозвано мною в любое время на основании моего письменного заявления.]]></text-property>
+                    </text>
+                    <grid id="158">
+                        <property name="width">6.979166666666667in</property>
+                        <column id="159">
+                            <property name="width">1.8020833333333333in</property>
+                        </column>
+                        <column id="432">
+                            <property name="width">0.16666666666666666in</property>
+                        </column>
+                        <column id="160">
+                            <property name="width">0.5104166666666666in</property>
+                        </column>
+                        <column id="310">
+                            <property name="width">0.3229166666666667in</property>
+                        </column>
+                        <column id="315">
+                            <property name="width">2.0416666666666665in</property>
+                        </column>
+                        <column id="161">
+                            <property name="width">2.1145833333333335in</property>
+                        </column>
+                        <row id="208">
+                            <cell id="209">
+                                <property name="colSpan">6</property>
+                                <property name="rowSpan">1</property>
+                            </cell>
+                        </row>
+                        <row id="162">
+                            <property name="verticalAlign">bottom</property>
+                            <cell id="163">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="192">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>BirtDateTime.day(BirtDateTime.now())</VALUE-OF>&amp;nbsp;<VALUE-OF>BirtDateTime.month(BirtDateTime.now(), 2)</VALUE-OF> &amp;nbsp;]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="430"/>
+                            <cell id="164">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="317">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>BirtDateTime.year(BirtDateTime.now()).toString()</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="308">
+                                <property name="textAlign">left</property>
+                                <label id="316">
+                                    <property name="fontSize">12pt</property>
+                                    <text-property name="text"> г.</text-property>
+                                </label>
+                            </cell>
+                            <cell id="313"/>
+                            <cell id="165">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                        <row id="166">
+                            <cell id="167">
+                                <label id="171">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(дата)</text-property>
+                                </label>
+                            </cell>
+                            <cell id="431"/>
+                            <cell id="168"/>
+                            <cell id="309"/>
+                            <cell id="314"/>
+                            <cell id="169">
+                                <label id="170">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(подпись)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

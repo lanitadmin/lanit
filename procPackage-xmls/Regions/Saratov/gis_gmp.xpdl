@@ -1,0 +1,2282 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="gis_gmp" Name="Процессы работы с платежами и начислениями" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>LANIT-Samara</Vendor>
+        <Created>2008-09-27 19:47:47</Created>
+    </PackageHeader>
+    <RedefinableHeader>
+        <Author>Zhnyakin</Author>
+    </RedefinableHeader>
+    <ConformanceClass GraphConformance="NON_BLOCKED"/>
+    <Script Type="text/javascript"/>
+    <Participants>
+        <Participant Id="Director" Name="Руководитель МФЦ">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Kontroler" Name="Ответственный за контроль">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Vidavatel" Name="Ответственный за выдачу">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Vnutr_Kurier" Name="Внутренний курьер">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Specialist_arh" Name="Специалист отдела архитектуры и градостроительства района">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Specialist_UMI" Name="Специалист управления муниципального имущества">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="OGV_part1" Name="Специалист ОГВ распределитель">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="OGV_part2" Name="Специалист ОГВ исполнитель">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Informator" Name="Сотрудник, ответственный за информирование и консультирование">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+    </Participants>
+    <Applications>
+        <Application Id="assignVariable" Name="assignVariable">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createDocPackage" Name="createDocPackage">
+            <FormalParameters>
+                <FormalParameter Id="Service" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="Komplekt_doc" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="goalId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcDocPackagePlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeEntityMethod" Name="invokeEntityMethod">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodArgs" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodResult" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeObjectMethodAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createApplication" Name="createApplication">
+            <FormalParameters>
+                <FormalParameter Id="Service" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="appNumb" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdApplication" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcApplicationPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createRequest" Name="createRequest">
+            <FormalParameters>
+                <FormalParameter Id="ogvId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdRequest" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="reqNumb" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsFromOgv" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcRequestPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createReject" Name="createReject">
+            <FormalParameters>
+                <FormalParameter Id="serviceid" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdReject" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+        </Application>
+        <Application Id="getEntityPropertiesByLong" Name="Получить свойства объекта (long)">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="propertiesList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="variableList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetObjectPropsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="completeActivity" Name="Завершитть действие">
+            <FormalParameters>
+                <FormalParameter Id="activityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CSCompleteActivity"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="assignVariableInt" Name="Задать целочисленную переменную">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="setEntityPropertiesByLong" Name="Задать свойства объекта (long)">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="propertiesList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="variableList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSetObjectPropsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="printDocTemplate">
+            <FormalParameters>
+                <FormalParameter Id="docTypeId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackageId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="printDocCounter" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="printDocId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.PrintDocPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="getRefPropAgent" Name="Получить дополнительное поле справочника">
+            <FormalParameters>
+                <FormalParameter Id="element" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="field" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetRefPropAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="SetupForkProcessesForOgvRequest" Name="SetupForkProcessesForOgvRequest">
+            <FormalParameters>
+                <FormalParameter Id="komplektVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="forkSetupVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ogvVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ddlVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="tddlVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeSumVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeValidateVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeMaxVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SetupForkProcessesForOgvRequest"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="ForkProcessesBySetup" Name="ForkProcessesBySetup">
+            <FormalParameters>
+                <FormalParameter Id="setupId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ForkProcessesBySetup"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="ProcessRequestTerminate" Name="Завершение экземпляров процессов">
+            <FormalParameters>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ProcessRequestTerminate"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="loginPart">
+            <FormalParameters>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SetLoggedUser"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="activityTerminate" Name="Завершение шагов процессов">
+            <FormalParameters>
+                <FormalParameter Id="procId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="actId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varValue" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="inCurrentProcess" Mode="IN">
+                    <DataType>
+                        <BasicType Type="BOOLEAN"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ActivityTerminatePlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="WSTransferRequest2Ogv" Name="Вызов Веб-сервиса передачи запроса в ОГВ">
+            <FormalParameters>
+                <FormalParameter Id="Event" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="reqId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ogvId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsExpected" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="kontrPart" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.RaiseEventPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryResultInt" Name="Выполнение sql запроса (рез-т: число)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsEjbqlResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryVarParamsIntResult" Name="Выполнение параметризованного запроса(INTEGER)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params_variable" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsVarParamsEjbResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryVarParamsStringResult" Name="Выполнение параметризованного запроса(STRING)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params_variable" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsVarParamsEjbResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeWithParams" Name="Вызов метода с параметрами">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="object" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="method" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="args" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeObjectMethodWithParamsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryResultStr" Name="Выполнение sql запроса (рез-т: строка)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsEjbqlResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="getAppSetting" Name="Получение значения параметра из настроек (AppSetting)">
+            <FormalParameters>
+                <FormalParameter Id="paramName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetAppSetting"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="savePackStatus" Name="Запись статуса пакет документов">
+            <Description>Запись статуса пакет документов</Description>
+            <FormalParameters>
+                <FormalParameter Id="id" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                    <Description>id пакета документов</Description>
+                </FormalParameter>
+                <FormalParameter Id="status" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>код статуса</Description>
+                </FormalParameter>
+                <FormalParameter Id="mode" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>1-Начало,2-Конец,пусто - время не меняем</Description>
+                </FormalParameter>
+                <FormalParameter Id="ddl" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varsName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>Список переменных через запятую</Description>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSavePackStatus"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="savePackStatusFull" Name="Запись статуса пакет документов Full">
+            <FormalParameters>
+                <FormalParameter Id="id" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="status" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mode" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ddl" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varsName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="begStatus" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="endStatus" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSavePackStatus"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeSeamContextClassMethod" Name="Вызов метода экземпляра класса в контексте Seam">
+            <FormalParameters>
+                <FormalParameter Id="name" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="resultMsg" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeComponentMethod"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="sendRequestToOGV" Name="Передача запроса в ОГВ (электронно)">
+            <FormalParameters>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="requestId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="modeSend" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SendRequestToOGV"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="assignVariableDate" Name="Задать переменную-дату">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="DATETIME"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="DATETIME"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+    </Applications>
+    <DataFields>
+        <DataField Id="is_approve" IsArray="FALSE" Name="Утвердить">
+            <DataType>
+                <BasicType Type="BOOLEAN"/>
+            </DataType>
+        </DataField>
+        <DataField Id="sendDate" IsArray="FALSE" Name="Дата отправки">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+        </DataField>
+        <DataField Id="chargeTemplate" IsArray="FALSE" Name="Шаблон начислений">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="ru.gisgmp.entity.ChargeTemplate"/>
+                <ExtendedAttribute Name="entityHome" Value="chargetemplateextHome"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="komment" IsArray="FALSE" Name="Комментарий">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="approveDate" IsArray="FALSE" Name="Дата утверждения шаблона">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+        </DataField>
+        <DataField Id="createDate" IsArray="FALSE" Name="Дата создания шаблона начисления">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+        </DataField>
+        <DataField Id="charge" IsArray="FALSE" Name="Начисление">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="ru.gisgmp.entity.Charge"/>
+                <ExtendedAttribute Name="entityHome" Value="chargeHome"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="currentUser" IsArray="FALSE" Name="Текущий пользователь">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="&quot;org.cp.lodent.User&quot;"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="tmp" IsArray="FALSE" Name="tmp">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="chargeImport" IsArray="FALSE" Name="Импорт начисления">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.soap.SoapContext"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="togo" IsArray="FALSE" Name="Селектор перехода">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="switchVariable" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="expertVar" IsArray="FALSE" Name="Эксперт">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="expert"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="chargeSenderVar" IsArray="FALSE" Name="Ответственный за отправку">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="iniciator"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="templateCode" IsArray="FALSE" Name="Код шаблона">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="templateName" IsArray="FALSE" Name="Имя шаблона">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="chargeUniqueId" IsArray="FALSE" Name="Идентификатор начисления">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="isImported" IsArray="FALSE" Name="Статус отправки начисления">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="entityHome" Value="importedextHome"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="isEditChargeMode" IsArray="FALSE" Name="Режим редактирования начисления">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>0</InitialValue>
+        </DataField>
+        <DataField Id="imported" IsArray="FALSE" Name="Флаг успешного импорта">
+            <DataType>
+                <BasicType Type="BOOLEAN"/>
+            </DataType>
+            <InitialValue>true</InitialValue>
+        </DataField>
+        <DataField Id="importDate" IsArray="FALSE" Name="Дата импорта начисления">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+        </DataField>
+        <DataField Id="isPortal" IsArray="FALSE" Name="С портала">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>0</InitialValue>
+            <Description>0 - обычная подача, 1 - с портала</Description>
+        </DataField>
+        <DataField Id="selectChargeTemplateChange" IsArray="FALSE" Name="Выбор шаблона начисления">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="chargeTemplate"/>
+                <ExtendedAttribute Name="entityHome" Value="chargetemplatechangeHome"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="homeAttributes" Value="chargeTemplateId=chargeTemplate"/>
+                <ExtendedAttribute Name="homeResultVar" Value="chargeTemplate"/>
+            </ExtendedAttributes>
+        </DataField>
+    </DataFields>
+    <WorkflowProcesses>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="Create_charging_form" Name="Формирование шаблона начислений">
+            <ProcessHeader>
+                <Created>2013-05-24 10:25:07</Created>
+            </ProcessHeader>
+            <RedefinableHeader>
+                <Author>Zhnyakin</Author>
+            </RedefinableHeader>
+            <Participants>
+                <Participant Id="general_expert" Name="Главный эксперт">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="expert" Name="Эксперт">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="Create_charging_form_act1" Name="Формирование шаблона начислений">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>expert</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Create_charging_form_tra1"/>
+                                    <TransitionRef Id="Create_charging_form_tra8"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="395,16"/>
+                        <ExtendedAttribute Name="readable" Value="chargeTemplate,komment,togo"/>
+                        <ExtendedAttribute Name="writable" Value="chargeTemplate,togo"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act11" Name="Утверждение шаблона начислений">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>general_expert</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="225,73"/>
+                        <ExtendedAttribute Name="readable" Value="is_approve,chargeTemplate,komment,togo"/>
+                        <ExtendedAttribute Name="writable" Value="is_approve,komment,togo"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act2" Name="Запись в статус утверждения">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"status"</ActualParameter>
+                                <ActualParameter>"is_approve"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"commentary"</ActualParameter>
+                                <ActualParameter>"komment"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"chargetemplateextHome"</ActualParameter>
+                                <ActualParameter>"approveTemplate"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>general_expert</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Create_charging_form_tra5"/>
+                                    <TransitionRef Id="Create_charging_form_tra3"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="409,75"/>
+                        <ExtendedAttribute Name="readable" Value="is_approve,komment"/>
+                        <ExtendedAttribute Name="writable" Value="is_approve,komment"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act3">
+                    <Route/>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="737,76"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_init_charge_template" Name="Создание шаблона начислений">
+                    <Implementation>
+                        <Tool Id="assignVariableDate" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>new java.util.Date()</ActualParameter>
+                                <ActualParameter>createDate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"createDate"</ActualParameter>
+                                <ActualParameter>"createDate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="assignVariable" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"1"</ActualParameter>
+                                <ActualParameter>tmp</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="loginPart" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>expertVar</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="232,88"/>
+                        <ExtendedAttribute Name="readable" Value="is_approve"/>
+                        <ExtendedAttribute Name="writable" Value="is_approve"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act21" Name="Запись текущей даты">
+                    <Implementation>
+                        <Tool Id="assignVariableDate" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>new java.util.Date();</ActualParameter>
+                                <ActualParameter>sendDate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"sendDate"</ActualParameter>
+                                <ActualParameter>"sendDate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"chargetemplateextHome"</ActualParameter>
+                                <ActualParameter>"createTemplate"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="getEntityPropertiesByLong" Type="APPLICATION">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"templateCode,templateName"</ActualParameter>
+                                <ActualParameter>"templateCode,templateName"</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>expert</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="83,59"/>
+                        <ExtendedAttribute Name="readable" Value="is_approve"/>
+                        <ExtendedAttribute Name="writable" Value="is_approve"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act4" Name="Запись даты утверждения">
+                    <Implementation>
+                        <Tool Id="assignVariableDate" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>new java.util.Date()</ActualParameter>
+                                <ActualParameter>approveDate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"approveDate"</ActualParameter>
+                                <ActualParameter>"approveDate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>general_expert</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="578,62"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act5" Name="Удаление шаблона">
+                    <Implementation>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"entityToolsBean"</ActualParameter>
+                                <ActualParameter>"removeFakeChargeTemplate"</ActualParameter>
+                                <ActualParameter>"chargeTemplate"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>expert</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="573,44"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act6">
+                    <Route/>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="704,47"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="Create_charging_form_act11" Id="Create_charging_form_tra2" Name="Выполнить" To="Create_charging_form_act2">
+                    <Description>Утвердить шаблон или отправить его на доработку (в зависимости от галочки в поле «Утвердить»)</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act2" Id="Create_charging_form_tra3" To="Create_charging_form_act4">
+                    <Condition Type="CONDITION">is_approve</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act2" Id="Create_charging_form_tra5" To="Create_charging_form_act1">
+                    <Condition Type="CONDITION">!is_approve</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_init_charge_template" Id="Create_charging_form_tra4" To="Create_charging_form_act1">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act21" Id="Create_charging_form_tra7" To="Create_charging_form_act11">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act1" Id="Create_charging_form_tra1" Name="Отправить на утверждение" To="Create_charging_form_act21">
+                    <Condition Type="CONDITION">togo==0</Condition>
+                    <Description>Отправить шаблон на утверждение главному эксперту</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act4" Id="Create_charging_form_tra6" To="Create_charging_form_act3">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act1" Id="Create_charging_form_tra8" Name="Отмена" To="Create_charging_form_act5">
+                    <Condition Type="CONDITION">togo==1</Condition>
+                    <Description>Выйти из процесса подготовки шаблона без сохранения</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                        <ExtendedAttribute Name="noCheck"/>
+                        <ExtendedAttribute Name="skipRequired" Value="true"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act5" Id="Create_charging_form_tra9" To="Create_charging_form_act6">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=expert,CONNECTING_ACTIVITY_ID=Create_charging_form_act6,X_OFFSET=855,Y_OFFSET=7,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=FreeTextExpressionParticipant,CONNECTING_ACTIVITY_ID=Create_init_charge_template,X_OFFSET=133,Y_OFFSET=48,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=general_expert,CONNECTING_ACTIVITY_ID=Create_charging_form_act3,X_OFFSET=859,Y_OFFSET=37,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="FreeTextExpressionParticipant;expert;general_expert"/>
+                <ExtendedAttribute Name="proc_identity" Value="templateCode,templateName"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="gis_gmp_wp1" Name="Добавление начисления">
+            <ProcessHeader>
+                <Created>2013-06-03 10:45:07</Created>
+            </ProcessHeader>
+            <RedefinableHeader>
+                <Author>Zhnyakin</Author>
+            </RedefinableHeader>
+            <DataFields>
+                <DataField Id="soapOptCode" IsArray="FALSE" Name="Код адаптера">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </DataField>
+            </DataFields>
+            <Participants>
+                <Participant Id="iniciator" Name="Инициатор">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="chargeSender" Name="Отправитель начислений">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="gis_gmp_wp1_act1" Name="создание начисления">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"chargeHome"</ActualParameter>
+                                <ActualParameter>"initCharge"</ActualParameter>
+                                <ActualParameter>"charge"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="469,39"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act2" Name="Формирование начисления">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="gis_gmp_wp1_tra5"/>
+                                    <TransitionRef Id="gis_gmp_wp1_tra2"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="627,263"/>
+                        <ExtendedAttribute Name="readable" Value="charge,togo"/>
+                        <ExtendedAttribute Name="writable" Value="charge,togo"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act3">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="801,214"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act4" Name="Подготовка импорта начисления">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="gis_gmp_wp1_tra3"/>
+                                    <TransitionRef Id="gis_gmp_wp1_tra8"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="170,39"/>
+                        <ExtendedAttribute Name="readable" Value="charge,togo"/>
+                        <ExtendedAttribute Name="writable" Value="togo"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act5" Name="Импорт начисления">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="427,157"/>
+                        <ExtendedAttribute Name="readable" Value="chargeImport"/>
+                        <ExtendedAttribute Name="writable" Value="chargeImport"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act7" Name="Удаление начисления">
+                    <Implementation>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"entityToolsBean"</ActualParameter>
+                                <ActualParameter>"removeFakeCharge"</ActualParameter>
+                                <ActualParameter>"charge"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="788,71"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act8" Name="Создание контекста адаптера">
+                    <Implementation>
+                        <Tool Id="assignVariable" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"SID0003572"</ActualParameter>
+                                <ActualParameter>soapOptCode</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"soapManage"</ActualParameter>
+                                <ActualParameter>"createSoapContextIdWithVars"</ActualParameter>
+                                <ActualParameter>"soapOptCode,charge"</ActualParameter>
+                                <ActualParameter>"chargeImport"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"soapContextImport"</ActualParameter>
+                                <ActualParameter>"chargeImport"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="281,145"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act6" Name="Проставляем переменные">
+                    <Implementation>
+                        <Tool Id="getEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"chargeUniqueId,chargeTemplate.templateCode,chargeTemplate.templateName"</ActualParameter>
+                                <ActualParameter>"chargeUniqueId,templateCode,templateName"</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="393,245"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act9" Name="Принятие результата">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="623,64"/>
+                        <ExtendedAttribute Name="readable" Value="isImported,charge"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act10" Name="Изменение начисления">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="256,209"/>
+                        <ExtendedAttribute Name="readable" Value="charge"/>
+                        <ExtendedAttribute Name="writable" Value="charge"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act11" Name="Определение операции над начислением">
+                    <Implementation>
+                        <Tool Id="loginPart" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>chargeSenderVar</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="gis_gmp_wp1_tra11"/>
+                                    <TransitionRef Id="gis_gmp_wp1_tra12"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="304,43"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act12" Name="Подготовка к изменению начисления">
+                    <Implementation>
+                        <Tool Id="assignVariableInt" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>1</ActualParameter>
+                                <ActualParameter>isEditChargeMode</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="252,145"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act13" Name="Успешный импорт">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"imported"</ActualParameter>
+                                <ActualParameter>"imported"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="assignVariableDate" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>new java.util.Date()</ActualParameter>
+                                <ActualParameter>importDate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"importDate"</ActualParameter>
+                                <ActualParameter>"importDate"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="484,61"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act15" Name="С портала ли?">
+                    <Implementation>
+                        <Tool Id="assignVariable" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"1"</ActualParameter>
+                                <ActualParameter>tmp</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>iniciator</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="gis_gmp_wp1_tra16"/>
+                                    <TransitionRef Id="gis_gmp_wp1_tra17"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="iniciator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="133,60"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp1_act14" Name="Импорт начислений с ПГУ">
+                    <Implementation>
+                        <SubFlow Execution="SYNCHR" Id="charge_import_PGU">
+                            <ActualParameters>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>imported</ActualParameter>
+                                <ActualParameter>importDate</ActualParameter>
+                                <ActualParameter>togo</ActualParameter>
+                                <ActualParameter>chargeImport</ActualParameter>
+                            </ActualParameters>
+                        </SubFlow>
+                    </Implementation>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="68,213"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="gis_gmp_wp1_act1" Id="gis_gmp_wp1_tra1" To="gis_gmp_wp1_act2">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act2" Id="gis_gmp_wp1_tra2" Name="Подготовить начисление" To="gis_gmp_wp1_act6">
+                    <Condition Type="CONDITION">togo==1</Condition>
+                    <Description>Подготовить начисление для отправки в ГИС ГМП</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="480,187"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act4" Id="gis_gmp_wp1_tra3" Name="Отправить начисление" To="gis_gmp_wp1_act8">
+                    <Condition Type="CONDITION">togo==1</Condition>
+                    <Description>Отправить начисление в ГИС ГМП</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act5" Id="gis_gmp_wp1_tra4" Name="Принять результаты" To="gis_gmp_wp1_act13">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act2" Id="gis_gmp_wp1_tra5" Name="Отмена" To="gis_gmp_wp1_act7">
+                    <Condition Type="CONDITION">togo==2</Condition>
+                    <Description>Выйти из процесса подготовки начисления без сохранения</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                        <ExtendedAttribute Name="noCheck"/>
+                        <ExtendedAttribute Name="skipRequired" Value="true"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act7" Id="gis_gmp_wp1_tra6" To="gis_gmp_wp1_act3">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act8" Id="gis_gmp_wp1_tra7" To="gis_gmp_wp1_act5">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act4" Id="gis_gmp_wp1_tra8" Name="Переформировать начисление" To="gis_gmp_wp1_act2">
+                    <Condition Type="CONDITION">togo==0</Condition>
+                    <Description>Вернуться к редактированию начисления</Description>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act6" Id="gis_gmp_wp1_tra9" To="gis_gmp_wp1_act4">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act9" Id="gis_gmp_wp1_tra10" Name="Выход" To="gis_gmp_wp1_act3">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act11" Id="gis_gmp_wp1_tra11" To="gis_gmp_wp1_act1">
+                    <Condition Type="CONDITION">charge==null</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act10" Id="gis_gmp_wp1_tra13" Name="Подготовить начисление" To="gis_gmp_wp1_act4">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act11" Id="gis_gmp_wp1_tra12" To="gis_gmp_wp1_act12">
+                    <Condition>charge!=null</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act12" Id="gis_gmp_wp1_tra14" To="gis_gmp_wp1_act10">
+                    <Condition Type="CONDITION"/>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act13" Id="gis_gmp_wp1_tra15" To="gis_gmp_wp1_act9">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act15" Id="gis_gmp_wp1_tra16" To="gis_gmp_wp1_act14">
+                    <Condition>isPortal==1</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act15" Id="gis_gmp_wp1_tra17" To="gis_gmp_wp1_act11">
+                    <Condition>isPortal!=1</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp1_act14" Id="gis_gmp_wp1_tra18" To="gis_gmp_wp1_act3">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=iniciator,CONNECTING_ACTIVITY_ID=gis_gmp_wp1_act15,X_OFFSET=56,Y_OFFSET=43,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=chargeSender,CONNECTING_ACTIVITY_ID=gis_gmp_wp1_act3,X_OFFSET=886,Y_OFFSET=14,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="iniciator;chargeSender"/>
+                <ExtendedAttribute Name="proc_identity" Value="chargeUniqueId,templateCode,templateName"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="Change_status_charge_template" Name="Изменение статуса шаблона начислений">
+            <ProcessHeader>
+                <Created>2013-05-24 10:25:07</Created>
+            </ProcessHeader>
+            <RedefinableHeader>
+                <Author>Zhnyakin</Author>
+            </RedefinableHeader>
+            <DataFields>
+                <DataField Id="flagTrue" IsArray="FALSE" Name="flagTrue">
+                    <DataType>
+                        <BasicType Type="BOOLEAN"/>
+                    </DataType>
+                    <InitialValue>true</InitialValue>
+                </DataField>
+                <DataField Id="flagFalse" IsArray="FALSE" Name="flagFalse">
+                    <DataType>
+                        <BasicType Type="BOOLEAN"/>
+                    </DataType>
+                    <InitialValue>false</InitialValue>
+                </DataField>
+                <DataField Id="longTemp" IsArray="FALSE" Name="longTemp">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </DataField>
+            </DataFields>
+            <Participants>
+                <Participant Id="general_expert" Name="Главный эксперт">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="Create_charging_form_act1" Name="Выбор шаблона начисление из реестра">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>general_expert</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="gis_gmp_wp2_tra2"/>
+                                    <TransitionRef Id="gis_gmp_wp2_tra1"/>
+                                    <TransitionRef Id="gis_gmp_wp2_tra3"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="128,84"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="229,19"/>
+                        <ExtendedAttribute Name="readable" Value="selectChargeTemplateChange,komment,togo"/>
+                        <ExtendedAttribute Name="writable" Value="selectChargeTemplateChange,komment,togo"/>
+                        <ExtendedAttribute Name="required" Value="selectChargeTemplateChange"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="login" Name="Авторизация">
+                    <Implementation>
+                        <Tool Id="assignVariableDate" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>new java.util.Date()</ActualParameter>
+                                <ActualParameter>createDate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.ChargeTemplate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                                <ActualParameter>"createDate"</ActualParameter>
+                                <ActualParameter>"createDate"</ActualParameter>
+                                <ActualParameter>chargeTemplate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="assignVariable" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"1"</ActualParameter>
+                                <ActualParameter>tmp</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="loginPart" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>expertVar</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="228,75"/>
+                        <ExtendedAttribute Name="readable" Value="is_approve"/>
+                        <ExtendedAttribute Name="writable" Value="is_approve"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Create_charging_form_act6" Name="машрутизатор">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="657,11"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp2_act1" Name="изменение статуса шаблона на удалить">
+                    <Implementation>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"chargetemplatechangeHome"</ActualParameter>
+                                <ActualParameter>"updateStatus"</ActualParameter>
+                                <ActualParameter>"chargeTemplate,flagTrue"</ActualParameter>
+                                <ActualParameter>"longTemp"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>general_expert</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Change_status_charge_template_tra2"/>
+                                    <TransitionRef Id="gis_gmp_wp2_tra5"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="158,47"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="168,205"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="gis_gmp_wp2_act2" Name="изменение статуса шаблона на восстановить">
+                    <Implementation>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"chargetemplatechangeHome"</ActualParameter>
+                                <ActualParameter>"updateStatus"</ActualParameter>
+                                <ActualParameter>"chargeTemplate,flagFalse"</ActualParameter>
+                                <ActualParameter>"longTemp"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>general_expert</Performer>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Change_status_charge_template_tra1"/>
+                                    <TransitionRef Id="gis_gmp_wp2_tra4"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="136,65"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="general_expert"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="428,134"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="login" Id="Create_charging_form_tra4" To="Create_charging_form_act1">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="285,153"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act1" Id="gis_gmp_wp2_tra1" Name="Отмена" To="Create_charging_form_act6">
+                    <Condition Type="CONDITION">togo==0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="454,190"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                        <ExtendedAttribute Name="noCheck"/>
+                        <ExtendedAttribute Name="skipRequired" Value="true"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act1" Id="gis_gmp_wp2_tra2" Name="Удалить" To="gis_gmp_wp2_act1">
+                    <Condition Type="CONDITION">togo==2</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="249,277"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                        <ExtendedAttribute Name="requestConfirmation" Value="Вы действительно хотите удалить шаблон начиcлений?"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Create_charging_form_act1" Id="gis_gmp_wp2_tra3" Name="Восстановить" To="gis_gmp_wp2_act2">
+                    <Condition Type="CONDITION">togo==1</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="321,318"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                        <ExtendedAttribute Name="requestConfirmation" Value="Вы действительно хотите восстановить шаблон начиcлений?"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp2_act2" Id="gis_gmp_wp2_tra4" To="Create_charging_form_act6">
+                    <Condition Type="CONDITION">longTemp == 0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="686,316"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp2_act1" Id="gis_gmp_wp2_tra5" To="Create_charging_form_act6">
+                    <Condition>longTemp == 0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="727,375"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp2_act2" Id="Change_status_charge_template_tra1" To="Create_charging_form_act1">
+                    <Condition Type="CONDITION">longTemp != 0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="484,222"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="gis_gmp_wp2_act1" Id="Change_status_charge_template_tra2" To="Create_charging_form_act1">
+                    <Condition Type="CONDITION">longTemp != 0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="280,300"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=general_expert,CONNECTING_ACTIVITY_ID=Create_charging_form_act6,X_OFFSET=855,Y_OFFSET=7,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=FreeTextExpressionParticipant,CONNECTING_ACTIVITY_ID=login,X_OFFSET=133,Y_OFFSET=48,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="FreeTextExpressionParticipant;general_expert"/>
+                <ExtendedAttribute Name="proc_identity" Value="templateCode,templateName"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+        <WorkflowProcess AccessLevel="PRIVATE" Id="charge_import_PGU" Name="Импорт начисления с ПГУ">
+            <ProcessHeader>
+                <Created>2014-03-04 15:20:44</Created>
+            </ProcessHeader>
+            <RedefinableHeader>
+                <Author>Zhnyakin</Author>
+            </RedefinableHeader>
+            <FormalParameters>
+                <FormalParameter Id="charge" Mode="INOUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="imported" Mode="INOUT">
+                    <DataType>
+                        <BasicType Type="BOOLEAN"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="importDate" Mode="INOUT">
+                    <DataType>
+                        <BasicType Type="DATETIME"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="togo" Mode="INOUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="chargeImport" Mode="INOUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <DataFields>
+                <DataField Id="soapOptCode" IsArray="FALSE" Name="Код адаптера">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </DataField>
+                <DataField Id="rejectComment" IsArray="FALSE" Name="Комментарий к отказу">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Length>1000</Length>
+                </DataField>
+                <DataField Id="isReject" IsArray="FALSE" Name="Отказ">
+                    <DataType>
+                        <BasicType Type="BOOLEAN"/>
+                    </DataType>
+                    <InitialValue>true</InitialValue>
+                </DataField>
+            </DataFields>
+            <Participants>
+                <Participant Id="chargeSender" Name="Отправитель начислений">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="charge_import_PGU_act1" Name="Подготовка импорта">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="charge_import_PGU_tra1"/>
+                                    <TransitionRef Id="charge_import_PGU_tra2"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="112,108"/>
+                        <ExtendedAttribute Name="readable" Value="charge,togo"/>
+                        <ExtendedAttribute Name="writable" Value="togo"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="charge_import_PGU_act2" Name="Создание контекста">
+                    <Implementation>
+                        <Tool Id="assignVariable" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"SID0003572"</ActualParameter>
+                                <ActualParameter>soapOptCode</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"soapManage"</ActualParameter>
+                                <ActualParameter>"createSoapContextIdWithVars"</ActualParameter>
+                                <ActualParameter>"soapOptCode,charge"</ActualParameter>
+                                <ActualParameter>"chargeImport"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"soapContextImport"</ActualParameter>
+                                <ActualParameter>"chargeImport"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="387,144"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="charge_import_PGU_act4" Name="Импорт начисления">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="558,142"/>
+                        <ExtendedAttribute Name="readable" Value="chargeImport"/>
+                        <ExtendedAttribute Name="writable" Value="chargeImport"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="charge_import_PGU_act7">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="845,22"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="charge_import_PGU_act5" Name="Успешный импорт">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"imported"</ActualParameter>
+                                <ActualParameter>"imported"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="assignVariableDate" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>new java.util.Date()</ActualParameter>
+                                <ActualParameter>importDate</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"ru.gisgmp.entity.Charge"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                                <ActualParameter>"importDate"</ActualParameter>
+                                <ActualParameter>"importDate"</ActualParameter>
+                                <ActualParameter>charge</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="809,136"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="charge_import_PGU_act3" Name="Добавление комментария к отказу">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="391,13"/>
+                        <ExtendedAttribute Name="readable" Value="rejectComment,charge"/>
+                        <ExtendedAttribute Name="writable" Value="rejectComment"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="charge_import_PGU_act8" Name="Отправка отказа">
+                    <Implementation>
+                        <Tool Id="invokeSeamContextClassMethod" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"chargePortal"</ActualParameter>
+                                <ActualParameter>"sendRejectToPortal"</ActualParameter>
+                                <ActualParameter>"charge,rejectComment"</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                                <ActualParameter>""</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>chargeSender</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="chargeSender"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="633,26"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="charge_import_PGU_act1" Id="charge_import_PGU_tra1" Name="Отправить начисление" To="charge_import_PGU_act2">
+                    <Condition Type="CONDITION">togo==1</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="charge_import_PGU_act2" Id="charge_import_PGU_tra3" To="charge_import_PGU_act4">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="charge_import_PGU_act1" Id="charge_import_PGU_tra2" Name="Вернуть заявителю" To="charge_import_PGU_act3">
+                    <Condition Type="CONDITION">togo==0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="charge_import_PGU_act4" Id="charge_import_PGU_tra4" Name="Принять результат" To="charge_import_PGU_act5">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="charge_import_PGU_act5" Id="charge_import_PGU_tra7" To="charge_import_PGU_act7">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="charge_import_PGU_act3" Id="charge_import_PGU_tra5" Name="Отправить отказ" To="charge_import_PGU_act8">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="charge_import_PGU_act8" Id="charge_import_PGU_tra6" To="charge_import_PGU_act7">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=chargeSender,CONNECTING_ACTIVITY_ID=charge_import_PGU_act7,X_OFFSET=998,Y_OFFSET=101,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=chargeSender,CONNECTING_ACTIVITY_ID=charge_import_PGU_act1,X_OFFSET=76,Y_OFFSET=37,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="FreeTextExpressionParticipant;chargeSender"/>
+                <ExtendedAttribute Name="proc_identity" Value="charge,togo,chargeImport,imported,importDate"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="EDITING_TOOL" Value="OpenIcar Modeler"/>
+        <ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="1.0-1-C-20071102-1425"/>
+        <ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </ExtendedAttributes>
+</Package>

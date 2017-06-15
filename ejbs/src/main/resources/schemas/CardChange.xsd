@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema targetNamespace="http://samara.lanit.org/soa/esb/webservice/transferchanges/cardchange" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://samara.lanit.org/soa/esb/webservice/transferchanges/cardchange">
+
+    <complexType name="CardChangeData">
+        <annotation>
+        	<documentation>Данные справочника</documentation>
+        </annotation>
+        <sequence>
+    		<element name="event" type="string" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Событие (создание, изменение, удаление)</documentation></annotation>
+    		</element>
+    		<element name="id" type="string" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>ID записи в справочнике</documentation>
+                </annotation>
+    		</element>
+            <element name="cardCode" type="string" maxOccurs="1" minOccurs="1">
+            	<annotation>
+            		<documentation>Код справочника</documentation></annotation></element>
+            <element name="cardField" type="tns:CardField"
+    			maxOccurs="unbounded" minOccurs="0">
+                <annotation>
+                	<documentation>Поля справочника</documentation></annotation>
+            </element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="CardChangeMeta">
+        <annotation>
+        	<documentation>Метаданные справочника</documentation>
+        </annotation>
+        <sequence>
+    		<element name="event" type="string" maxOccurs="1"
+    			minOccurs="1">
+                <annotation>
+                	<documentation>Событие (создание, изменение, удаление)</documentation>
+                </annotation>
+    		</element>
+            <element name="cardCode" type="string" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Код справочника</documentation>
+                </annotation>
+            </element>
+    		<element name="cardField" type="tns:CardField"
+    			maxOccurs="unbounded" minOccurs="0">
+                <annotation>
+                	<documentation>Поля справочника</documentation>
+                </annotation>
+    		</element>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="CardField">
+        <annotation>
+        	<documentation>Поле справочника</documentation>
+        </annotation>
+        <sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="1">
+    			<annotation>
+    				<documentation>Имя поля</documentation>
+    			</annotation></element>
+    		<element name="type" type="string" maxOccurs="1" minOccurs="0">
+    			<annotation>
+    				<documentation>Тип поля</documentation>
+    			</annotation></element>
+    		<element name="size" type="string" maxOccurs="1" minOccurs="0">
+    			<annotation>
+    				<documentation>Размер поля</documentation>
+    			</annotation></element>
+    		<element name="value" type="string" maxOccurs="1" minOccurs="0">
+    			<annotation>
+    				<documentation>Значение</documentation>
+    			</annotation></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CardChange">
+        <annotation>
+        	<documentation>Изменение справочника</documentation></annotation>
+        <sequence>
+    		<element name="cardChangeMeta" type="tns:CardChangeMeta"
+    			maxOccurs="unbounded" minOccurs="0">
+                <annotation>
+                	<documentation>Метаданные справочника</documentation></annotation>
+    		</element>
+    		<element name="cardChangeData" type="tns:CardChangeData" maxOccurs="unbounded" minOccurs="0">
+    			<annotation>
+    				<documentation>Данные справочника</documentation></annotation></element>
+    	</sequence>
+    </complexType>
+
+    <element name="cardChange" type="tns:CardChange">
+    	<annotation>
+    		<documentation>Изменение справочника</documentation>
+    	</annotation></element>
+</schema>

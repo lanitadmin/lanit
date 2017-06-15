@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <xs:element name="appMenuItem" type="appMenuItemType"/>
+
+  <xs:complexType name="appMenuItemType">
+    <xs:sequence>
+      <xs:element name="items" minOccurs="0">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="item" type="appMenuItemType" minOccurs="0" maxOccurs="unbounded"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute name="messageName" type="xs:string"/>
+    <xs:attribute name="name" type="xs:string" use="required"/>
+    <xs:attribute name="viewId" type="xs:string"/>
+    
+    <xs:attribute name="style" type="xs:string"/>
+    <xs:attribute name="styleClass" type="xs:string"/>
+    
+    <xs:attribute name="iconClass" type="xs:string"/>
+    <xs:attribute name="iconStyle" type="xs:string"/>
+    
+    <xs:attribute name="selectStyle" type="xs:string"/>
+    <xs:attribute name="selectClass" type="xs:string"/>
+
+    <xs:attribute name="rendered" type="xs:string"/>
+    <xs:attribute name="action" type="xs:string"/>
+                             
+  </xs:complexType>
+</xs:schema>
+

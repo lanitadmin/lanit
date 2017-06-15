@@ -1,0 +1,1369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="user" id="9">
+            <text-property name="promptText">Текущий пользователь</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="processId" id="10">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="11">
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="7"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="8">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">u_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">u_phone</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">u_position</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">u_email</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">ogv_signature_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">ogv_signature_post</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">ogv_address</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">ogv_index</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">ogv_phones</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">ogv_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">ogv_name_acronym</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">person_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">person_birthdate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">agent_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">agent_inn</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">service</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">pack_ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">today</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">req_doc</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">req_num</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">req_ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">u_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_position</property>
+                </structure>
+                <structure>
+                    <property name="columnName">u_email</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_signature_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_signature_post</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_address</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_index</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_phones</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ogv_name_acronym</property>
+                </structure>
+                <structure>
+                    <property name="columnName">person_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">person_birthdate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">agent_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">agent_inn</property>
+                </structure>
+                <structure>
+                    <property name="columnName">service</property>
+                </structure>
+                <structure>
+                    <property name="columnName">pack_ogv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">today</property>
+                </structure>
+                <structure>
+                    <property name="columnName">req_doc</property>
+                </structure>
+                <structure>
+                    <property name="columnName">req_num</property>
+                </structure>
+                <structure>
+                    <property name="columnName">req_ogv</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">u_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">u_phone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">u_position</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">u_email</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">ogv_signature_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">ogv_signature_post</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">ogv_address</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">ogv_index</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">ogv_phones</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">ogv_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">ogv_name_acronym</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">person_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">person_birthdate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">agent_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">agent_inn</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">service</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">pack_ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">today</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">req_doc</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">req_num</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">req_ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzShark = new Packages.org.cp.birt.plugins.HibernateUtil("entityManagerNoFilter");
+result2 = clazz.getActivityVariableValue
+	(
+		"Zapros,Zayavitel,Service", 
+		params["processId"],
+		params["activityId"]
+	);	
+Zapros = result2[0];
+Zayavitel = result2[1];
+Service = result2[2];
+
+result = clazz.getEntityManagerLod().createQuery
+(
+" SELECT "+
+	" US.lastName || ' ' || US.firstName || ' ' || US.middleName, " +
+	" US.phone, " +
+	" US.position, " +
+	" US.email, " +
+	" GR, " +
+	" GDP, " +
+	" ( " +
+	"	SELECT P " +
+	"	FROM Person as P " + 
+	"	WHERE ogi.objectClass = 'org.cp.model.common.Person' " +
+	"		AND P.id = ogi.objectId " +
+	"  ) AS P_NAME, " +
+	" ( " +
+	"	SELECT A " + 
+	"	FROM Agent as A " + 
+	"	WHERE ogi.objectClass = 'org.cp.lodent.Agent' " +
+	"		AND A.id = ogi.objectId " +
+	" ) AS A_NAME, "+ 
+	" el.name " +
+" FROM " +
+	" User as US, " +
+	" GossrvcRequest as GR, " + 
+	" GossrvcDocPackage GDP, " +
+	" ObjectGroupItem ogi, " + 
+	" CardElement el " + 
+" WHERE US.login = :login " +
+"	AND GR.gossrvcDocPackage.id = GDP " +
+"	AND GDP.serviceId = :Service " +
+"	AND el.id = GDP.serviceId " +
+"	AND GR.id = :Zapros " +
+"	AND ogi.objectGroup.id = :Zayavitel " +
+"	AND ogi.selected = TRUE "
+)
+.setParameter("login", params["user"])
+.setParameter("Zapros", Zapros)
+.setParameter("Zayavitel", Zayavitel)
+.setParameter("Service", Service)
+.getResultList();
+
+Packages.java.lang.System.out.println("result.size(): " + result.size());
+
+totalrows = result.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[function getAppSettingValue(id){
+	try{
+		appS = clazz.getEntityManagerLod().createQuery(
+			" SELECT a0.value " +
+			" FROM AppSetting a0, User u " +
+			" WHERE a0.code = '" + id + "' " +
+			" 	AND a0.owner = u.owner " + 
+			"	AND u.login = '" + params["user"] + "'" 
+		).getResultList();
+		if (appS.size() > 1){
+			return appS[0];
+		} else if(appS.size() == 0) {
+			appSet = clazz.getEntityManagerLod().createQuery(
+				" SELECT a0.value " +
+				" FROM AppSetting a0 " +
+				" WHERE a0.code = '" + id + "' " +
+				" 	AND a0.owner = null" 
+			).getSingleResult();
+			return appSet 
+		} 
+	}
+	catch (e) {appS = "[не найдено]";}
+	return appS[0];	
+}
+
+function getAppSettingValueMax(id){
+	try{
+		appS = clazzShark.getEntityManagerShark().createQuery(
+			" SELECT a0.value " +
+			" FROM AppSetting a0 " +
+			" WHERE a0.code = '" + id + "' " +
+			" 	AND a0.owner = null" 
+		).getSingleResult();
+		return appSet 
+	}
+	catch (e) {appS = "[не найдено]";}
+	return appS[0];	
+}
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["u_name"] = rowValue[0];
+row["u_phone"] = rowValue[1];
+row["u_position"] = rowValue[2];
+row["u_email"] = rowValue[3];
+row["req_num"] = rowValue[4].getRequestNum();
+
+//if(rowValue[4].getOptions() != null) {
+//	if(rowValue[4].getOptions().getDocType() != null) {
+//		row["req_doc"] = rowValue[4].getOptions().getDocType().getName();
+//	}
+
+docsFromOgv = rowValue[4].getDocsFromOgv().split(":")[0];
+row["req_doc"] = clazzShark.getEntityManagerShark().createQuery(
+	" SELECT ce.name " +
+	" FROM CardElement ce " +
+	" WHERE ce.id = :docsFromOgv "
+).setParameter("docsFromOgv", docsFromOgv).getSingleResult();
+
+ogvId = rowValue[4].getOgvId();
+row["req_ogv"] = clazzShark.getEntityManagerShark().createQuery(
+	" SELECT ce.name " +
+	" FROM CardElement ce " +
+	" WHERE ce.id = :ogvId "
+).setParameter("ogvId", ogvId).getSingleResult();
+
+packYear = rowValue[5].getPackNum().split("/")[0].substring(2, 4);
+packNum = rowValue[5].getPackNum().split("/")[1];
+if(packNum.length() > 6) {
+	packNum = packNum.substring(packNum.length() - 6, packNum.length());
+} else if(packNum.length() < 6) {
+	k = 6 - packNum.length();
+	for(i = 0; i < k; i ++) {
+		packNum = "0" + packNum;
+	}
+}
+owner = rowValue[5].getOwner();
+if(owner != null) {
+	orgUnitNum = clazzShark.getEntityManagerShark().createQuery(
+		" SELECT ou.codeOrgUnit " +
+		" FROM OrgUnit ou " +
+		" WHERE ou.owner = :owner "
+	).setParameter("owner", owner).getSingleResult();
+} else {
+	orgUnitNum = "001";
+}
+reqNum = rowValue[4].getRequestNum().split("/")[1];
+if(reqNum.length() > 2) {
+	reqNum = reqNum.substring(reqNum.length() - 2, reqNum.length());
+}
+row["req_num"] = orgUnitNum + "/" + packYear + "/" + packNum + "/" + reqNum;
+row["pack_date"] = rowValue[5].getPackDate();
+row["pack_ogv"] = rowValue[5].getOgv().getName();
+if(rowValue[6] != null) {
+	row["person_name"] = rowValue[6].getFullName_R();
+	row["person_birthdate"] = new Packages.java.text.SimpleDateFormat("yyyy").format(rowValue[6].getBirthdate());
+} else {
+	row["agent_name"] = rowValue[7].getName();
+	row["agent_inn"] = rowValue[7].getInn();
+}
+row["service"] = rowValue[8];
+
+row["today"] = new Packages.java.text.SimpleDateFormat("dd.MM.yyyy").format(new Date());
+row["ogv_signature_name"] = getAppSettingValue("ogv_signature_name");
+row["ogv_signature_post"] = getAppSettingValue("ogv_signature_post");
+row["ogv_address"] = getAppSettingValue("ogv_address");
+row["ogv_index"] = getAppSettingValue("ogv_index");
+row["ogv_phones"] = getAppSettingValue("ogv_phones");
+row["ogv_name"] = getAppSettingValue("ogv_name");
+row["ogv_name_acronym"] = getAppSettingValue("ogv_name_acronym");
+
+row["mfc_name_acronym"] = getAppSettingValueMax("ogv_name_acronym");
+row["mfc_name"] = getAppSettingValueMax("ogv_name");
+row["mfc_address"] = getAppSettingValueMax("ogv_address");
+row["mfc_phone"] = getAppSettingValueMax("ogv_phone");
+row["mfc_fax"] = getAppSettingValueMax("ogv_fax");
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">1cm</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="12">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">12pt</property>
+            <property name="height">11.375in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">u_name</property>
+                    <text-property name="displayName">u_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_phone</property>
+                    <text-property name="displayName">u_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_phone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_position</property>
+                    <text-property name="displayName">u_position</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_position"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">u_email</property>
+                    <text-property name="displayName">u_email</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["u_email"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_signature_name</property>
+                    <text-property name="displayName">ogv_signature_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_signature_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_signature_post</property>
+                    <text-property name="displayName">ogv_signature_post</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_signature_post"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_address</property>
+                    <text-property name="displayName">ogv_address</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_address"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_index</property>
+                    <text-property name="displayName">ogv_index</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_index"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_phones</property>
+                    <text-property name="displayName">ogv_phones</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_phones"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name</property>
+                    <text-property name="displayName">ogv_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ogv_name_acronym</property>
+                    <text-property name="displayName">ogv_name_acronym</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv_name_acronym"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">person_name</property>
+                    <text-property name="displayName">person_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["person_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">person_birthdate</property>
+                    <text-property name="displayName">person_birthdate</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["person_birthdate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">agent_name</property>
+                    <text-property name="displayName">agent_name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["agent_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">agent_inn</property>
+                    <text-property name="displayName">agent_inn</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["agent_inn"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">service</property>
+                    <text-property name="displayName">service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">pack_ogv</property>
+                    <text-property name="displayName">pack_ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["pack_ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">today</property>
+                    <text-property name="displayName">today</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["today"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">req_doc</property>
+                    <text-property name="displayName">req_doc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["req_doc"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">req_num</property>
+                    <text-property name="displayName">req_num</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["req_num"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">req_ogv</property>
+                    <text-property name="displayName">req_ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["req_ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="13"/>
+            <row id="14">
+                <cell id="15">
+                    <grid id="20">
+                        <property name="height">2.8229166666666665in</property>
+                        <column id="21"/>
+                        <column id="22"/>
+                        <row id="23">
+                            <cell id="24">
+                                <property name="textAlign">center</property>
+                                <image id="33">
+                                    <property name="height">0.46875in</property>
+                                    <property name="width">1.3854166666666667in</property>
+                                    <property name="source">embed</property>
+                                    <property name="imageName">МФЦ_Тюмень.jpg</property>
+                                </image>
+                                <label id="29">
+                                    <property name="fontSize">12pt</property>
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">Государственное автономное учреждение Тюменской области «Многофункциональный центр предоставления государственных и муниципальных услуг в Тюменской области»
+(ГАУ ТО «МФЦ»)</text-property>
+                                </label>
+                                <label id="41">
+                                    <text-property name="text">ул. Водопроводная, д. 12, г. Тюмень, 625002, 
+тел.: (3452)399289, факс: (3452)399280
+www.mfcto.ru, e-mail: mail@mfcto.ru
+ОКПО 26156432 ОГРН 1137232022333 
+ИНН/КПП 7202246112/720201001</text-property>
+                                </label>
+                            </cell>
+                            <cell id="32">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">2</property>
+                                <property name="textAlign">center</property>
+                                <property name="verticalAlign">middle</property>
+                                <grid id="34">
+                                    <column id="35"/>
+                                    <row id="36">
+                                        <cell id="37">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <data id="210">
+                                                <property name="resultSetColumn">req_ogv</property>
+                                            </data>
+                                        </cell>
+                                    </row>
+                                    <row id="38">
+                                        <cell id="39">
+                                            <label id="40">
+                                                <property name="fontSize">8pt</property>
+                                                <text-property name="text">(наименование исполнительного органа государственной власти субъекта РФ, органа местного самоуправления, подведомственной исполнительному органу государственной власти субъекта РФ или органу местного самоуправления организации)</text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                        <row id="26">
+                            <cell id="27">
+                                <text id="42">
+                                    <property name="textAlign">center</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[от <VALUE-OF>row["today"]</VALUE-OF> № <VALUE-OF>row["req_num"]</VALUE-OF><BR>
+на №_______________ от____________                ]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="16">
+                <property name="height">1cm</property>
+                <cell id="17"/>
+            </row>
+            <row id="18">
+                <cell id="19">
+                    <label id="43">
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Запрос</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="48">
+                <property name="height">1cm</property>
+                <cell id="49"/>
+            </row>
+            <row id="46">
+                <cell id="47">
+                    <grid id="51">
+                        <property name="width">7in</property>
+                        <column id="52">
+                            <property name="width">4.208333333333333in</property>
+                        </column>
+                        <column id="53">
+                            <property name="width">2.7916666666666665in</property>
+                        </column>
+                        <row id="54">
+                            <cell id="55">
+                                <text id="63">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[&amp;emsp;&amp;emsp;В целях предоставления государственной услуги]]></text-property>
+                                </text>
+                            </cell>
+                            <cell id="56">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                        <row id="57">
+                            <cell id="58"/>
+                            <cell id="59">
+                                <label id="64">
+                                    <property name="fontSize">8pt</property>
+                                    <text-property name="text">(наименование государственной услуги, для предо -</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="65">
+                        <column id="66"/>
+                        <row id="67">
+                            <cell id="68">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <data id="72">
+                                    <property name="dataSet">Data Set</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">service</property>
+                                            <text-property name="displayName">service</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["service"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">service</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="69">
+                            <cell id="70">
+                                <property name="fontSize">8pt</property>
+                                <label id="71">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">ставления которой необходимо представление документа, номер (идентификатор) такой услуги в реестре государственных услуг)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="74">
+                        <column id="75"/>
+                        <row id="187">
+                            <cell id="188">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="189"/>
+                            </cell>
+                        </row>
+                        <row id="76">
+                            <cell id="77">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="92">
+                                    <text-property name="text">в соответствии с административным регламентом оказания услуги</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="78">
+                            <cell id="79">
+                                <label id="88">
+                                    <property name="fontSize">8pt</property>
+                                    <text-property name="text">(указание на положения нормативного правового акта, которыми установлено представление</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="80">
+                            <cell id="81">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="177"/>
+                            </cell>
+                        </row>
+                        <row id="82">
+                            <cell id="83">
+                                <label id="89">
+                                    <property name="fontSize">8pt</property>
+                                    <text-property name="text">документа, необходимого для предоставления государственной услуги, указание на реквизиты данного нормативного правового акта</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="84">
+                            <cell id="85">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="178"/>
+                            </cell>
+                        </row>
+                        <row id="86">
+                            <cell id="87">
+                                <label id="90">
+                                    <property name="fontSize">8pt</property>
+                                    <text-property name="text">и положения (абзац, подпункт, часть, статья и т. п.) этого нормативного акта)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="93">
+                            <cell id="94">
+                                <grid id="199">
+                                    <property name="width">6.927083333333333in</property>
+                                    <column id="200">
+                                        <property name="width">1.78125in</property>
+                                    </column>
+                                    <column id="201">
+                                        <property name="width">5.145833333333333in</property>
+                                    </column>
+                                    <row id="202">
+                                        <cell id="203">
+                                            <label id="205">
+                                                <text-property name="text">прошу предоставить</text-property>
+                                            </label>
+                                        </cell>
+                                        <cell id="204">
+                                            <property name="borderBottomColor">#000000</property>
+                                            <property name="borderBottomStyle">solid</property>
+                                            <property name="borderBottomWidth">thin</property>
+                                            <label id="196"/>
+                                        </cell>
+                                    </row>
+                                    <row id="206">
+                                        <cell id="207"/>
+                                        <cell id="208">
+                                            <label id="99">
+                                                <property name="fontSize">8pt</property>
+                                                <property name="textAlign">center</property>
+                                                <text-property name="text">(наименование документа, необходимого для предоставления государственной услуги или </text-property>
+                                            </label>
+                                        </cell>
+                                    </row>
+                                </grid>
+                            </cell>
+                        </row>
+                        <row id="95">
+                            <cell id="96">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="184">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["req_doc"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="194">
+                            <cell id="195">
+                                <label id="209">
+                                    <property name="fontSize">8pt</property>
+                                    <text-property name="text">перечень запрашиваемых сведений)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="192">
+                            <cell id="193">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="197"/>
+                            </cell>
+                        </row>
+                        <row id="190">
+                            <cell id="191">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="198"/>
+                            </cell>
+                        </row>
+                        <row id="97">
+                            <cell id="98">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="107">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[в отношении <VALUE-OF>if(row["person_name"] != null) {row["person_name"] + ' ' + row["person_birthdate"] + ' года рождения'} else if(row["agent_name"] != null) {row["agent_name"] + ' ' + row["agent_inn"]}</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="105">
+                            <cell id="106">
+                                <label id="108">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(наименование юридического лица его ИНН, фамилия, имя, отчество гражданина, год рождения)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="110">
+                        <property name="width">7in</property>
+                        <column id="111">
+                            <property name="width">6.072916666666667in</property>
+                        </column>
+                        <column id="112"/>
+                        <row id="113">
+                            <cell id="114">
+                                <label id="109">
+                                    <text-property name="text">Для предоставления запрашиваемого документа сообщаю следующие сведения:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="115">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="116">
+                        <column id="117"/>
+                        <row id="118">
+                            <cell id="119">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="183"/>
+                            </cell>
+                        </row>
+                        <row id="120">
+                            <cell id="121">
+                                <label id="128">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(сведения, определяемые регламентом оказания услуги и вводимые оператором)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="122">
+                            <cell id="123">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="179"/>
+                            </cell>
+                        </row>
+                        <row id="124">
+                            <cell id="125">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="180"/>
+                            </cell>
+                        </row>
+                        <row id="126">
+                            <cell id="127">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="181"/>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="129">
+                        <property name="width">7in</property>
+                        <column id="130">
+                            <property name="width">6.072916666666667in</property>
+                        </column>
+                        <column id="131">
+                            <property name="width">0.9270833333333334in</property>
+                        </column>
+                        <row id="132">
+                            <cell id="133">
+                                <label id="134">
+                                    <text-property name="text">Контактная информация для направления ответа на межведомственный запрос:</text-property>
+                                </label>
+                            </cell>
+                            <cell id="135">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="136">
+                        <column id="137"/>
+                        <row id="138">
+                            <cell id="139">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <text id="176">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ogv_name"]</VALUE-OF>, <VALUE-OF>row["ogv_address"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                        <row id="142">
+                            <cell id="143">
+                                <label id="144">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(наименование филиала, адрес филиала)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                        <row id="140">
+                            <cell id="141">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <label id="182"/>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="146">
+                <property name="height">0.5cm</property>
+                <cell id="147"/>
+            </row>
+            <row id="44">
+                <cell id="45">
+                    <text id="145">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[&amp;emsp;&amp;emsp;Согласие на обработку персональных данных получено.<BR>
+&amp;emsp;&amp;emsp;Ответ на запрос прошу направить в срок, не превышающий пяти рабочих дней со дня поступления запроса. ]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="148">
+                <property name="height">2cm</property>
+                <cell id="149"/>
+            </row>
+            <row id="150">
+                <cell id="151">
+                    <grid id="154">
+                        <property name="width">7in</property>
+                        <column id="155">
+                            <property name="width">2.5416666666666665in</property>
+                        </column>
+                        <column id="156">
+                            <property name="width">1.6041666666666667in</property>
+                        </column>
+                        <column id="157">
+                            <property name="width">0.3333333333333333in</property>
+                        </column>
+                        <column id="158">
+                            <property name="width">2.5208333333333335in</property>
+                        </column>
+                        <row id="159">
+                            <property name="verticalAlign">bottom</property>
+                            <cell id="160">
+                                <data id="170">
+                                    <property name="dataSet">Data Set</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">ogv_signature_post</property>
+                                            <text-property name="displayName">ogv_signature_post</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["ogv_signature_post"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">ogv_signature_post</property>
+                                </data>
+                            </cell>
+                            <cell id="161">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                            </cell>
+                            <cell id="162"/>
+                            <cell id="163">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <data id="169">
+                                    <property name="dataSet">Data Set</property>
+                                    <list-property name="boundDataColumns">
+                                        <structure>
+                                            <property name="name">ogv_signature_name</property>
+                                            <text-property name="displayName">ogv_signature_name</text-property>
+                                            <expression name="expression" type="javascript">dataSetRow["ogv_signature_name"]</expression>
+                                            <property name="dataType">string</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">ogv_signature_name</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="164">
+                            <cell id="165"/>
+                            <cell id="166">
+                                <label id="171">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(подпись)</text-property>
+                                </label>
+                            </cell>
+                            <cell id="167"/>
+                            <cell id="168">
+                                <label id="172">
+                                    <property name="fontSize">8pt</property>
+                                    <property name="textAlign">center</property>
+                                    <text-property name="text">(ФИО)</text-property>
+                                </label>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="152">
+                <property name="height">1cm</property>
+                <cell id="153"/>
+            </row>
+            <row id="173">
+                <cell id="174">
+                    <text id="175">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Исполнитель:<BR>
+Фамилия, имя, отчество: <VALUE-OF>row["u_name"]</VALUE-OF><BR>
+должность: <VALUE-OF>row["u_position"]</VALUE-OF><BR>
+номер служебного телефона (факса) и адрес электронной почты данного лица: <VALUE-OF>row["u_phone"] + ' ' + row["u_email"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <list-property name="images">
+        <structure>
+            <property name="name">МФЦ_Тюмень.jpg</property>
+            <property name="data">
+                /9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwg
+                JC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIy
+                MjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCADBAeoDASIAAhEBAxEB/8QA
+                GgABAAIDAQAAAAAAAAAAAAAAAAIFAwQGAf/EABkBAQEBAQEBAAAAAAAAAAAAAAABBQQDAv/aAAwDAQAC
+                EAMQAAAB78AAAAA8PUUSREkRJESREkRJESREkfT0UeeRJESREkRJESREkRJESREkZUAAAAAAAA81KXnl
+                to6TjTgeIAAAAAAABu6W76L4a1p6yzrMuB4gAAAAAAEojb3qZ7Oq95i462+OmgAAAKr2o4olG851GzYf
+                MEAAAAPfbv1Ufk4eYIPbD7V2/b5ewHXaqq6qHLOXWlZxPB8AN6Vtl0VFo9NzPMDnANnWufVrLt2uXhs6
+                2eD5WN1yll2Lkd1AAa2zzvg1/DMjoee6HqZue6XH0uYZsOaCAAEnQezzYlHSvMwnDIicb70Nw06eaxtD
+                6Gtn+UtfYVzGPo+ezJEeLpsuLLsXFzPTczxQOQAuaa591kNO87rbOtkQPgBe73M9LpPR0UDV560q82Bz
+                nQ890PU2hoXHz/SY/Ccwz4M0EJOg9jZNKoyjXMwnHHlhdYM+pWHJzvzGbS3eFfDVtPob9ZmTotnmOk60
+                6q1j6Xlko5M6bLiy7Fxcz03M8UDkALmmufdZDTvO62zrZED4ALyj3vZejUoHP6mXFkQPg6Hnuh6m0R0L
+                Jpbvyx8/0mPynMSz3PGbJo0wwNmMo1zOTHs5UvxrXRorGuzI3dLd+F8Na09ZZ1mXFtU70Xo1bz2rZVuT
+                Omy4supcXM9NzPFA5AC5prn3WQ07zuts62RA+ADNhnXUDZoHM4tvUx4HydDz3Q9TajKPfeXvaGWXOpae
+                5p0Powuf8IuaG+5m7GUe+8zs62XKnRjWtJX3lHmRu6W78L4a1p6yzrMuN7RtYthq2mrdvUyp02XFl07i
+                5npuZ4oHIAXNNc+6yGned1tnWyIHwAThmrpRs0Coq+g5/Ngc50PPdD1NqMo995YY0le0EvV1OHUquwxG
+                eX1DfdDdjKOheZjKGPOkz09xqWPOdLr/ADOc3dfY4V8NW09ZZ1+XHSYNvsIyrPW1MTInTZcWXYuLmem5
+                nigcgBc01z7rIad53W2dbIgfABu6V37LAalAc50ep4TnxmHQ890PU2oyj33lhjQAABfUN90t2Mo6F5mE
+                4Y8lf89k9XTtXa0rHV3AH01suR8hhpzs8ObA8HTZcWXYuOj6B5ufdA85z7oBz9lvPsHved1tnWyIHwAy
+                dNoWGiDpoAFRV9XT8MrOh57d8l9Gm86mgM4AAAvqHb9nQRpvOtpw98zwRKzqn26fJytl2LgddRr6fmlv
+                UxcQPMB02WilortSKu1ILtSC7Ugu1IMGtbz5lKt6jxLDy76Ho76AAABoU/Tx5pyy5r+NrJR8gAAAAAAA
+                Dd0t30Xw1rT1lnWZcDxAAAAAAAD06Da1tnXuPQs0B6AAAAAAAGPIjAzowM4wM4wM4wM4wM4wM4wM4wSy
+                gPpjhnfLAzjAzjAzjAzjAzjAzjAzjAzjFlKCgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/8QAKRAA
+                AQMDBAIDAQACAwAAAAAAAwABAgQQMxITIDIRFDAxQCEiIzRgcP/aAAgBAQABBQL/AKT5ZamWplqZamWp
+                lqZamWplqZamWplqZamWplqZamWpl5a/lmWplqZamWplqZamWplqZamWplqZamWplqZamWplqZeW/H9K
+                dXGKlUzknk7/AI6XPas+/wATO7KFROKjVs6Z2f5i1DDUySI/5aXPas+/yxk8HFUtP5D1FnZ2+Zm8vzpo
+                y3bVcXd+bUs5R9MielnGPIYZFb0yL0yKUdErgqNPxVJvFxwYgCDccvjZtTjDtjl34DpXk0Bxg3CUIyU6
+                RfXEWJFxcqPpY+bhTG0/AYu1G9PinBiRINxy+Fm1OELCaXWXe0YvKQQMNvgKJitODwlcWJFxcqPpY+bj
+                TE1w5GJuTvT4lODEiQbjlzZtThDtMpdZd7U4tELO/honjIliGYbs7SaxRbsXbw9hYkXFyo+lj5uI5aJ8
+                Tz0D4U+K04NOJRuKXFm1OEO01pdZd1Sj8ysQjDgQjklS57Vn3CbwcRmK1qsf8sLEi4uVH0sfNypJeRcK
+                x/7wp8V5wacSjcUrs2pwh2mvLrLugx0hTvpiWe4RUue1Z9qEnhKMtcFKOpnbw6FiRcXKj6WPm5UsvBeF
+                Q/kvCnxcJwacSjcUkzanCHabhLrLuFvJrVUvArUue1Z92o53qG8HQsSLi5UfSx83IT+C8CZeFPiT9QnY
+                l5wacZhlAgQ7TWIRhxBN5jUusu9NntVv/ttS57Vn3alzWq+yFiRcXKj6WPm5R7cCZeFPiUuqAfcbiQjD
+                jObklS4FLrLvTZ7VeW1LntWfdqXNar7IWJFxcqPpY+blHtwqG8F4U+JS6pn8OA+41yEYcSEcklS4FLrL
+                uF/BrVcfI7Uue1Z92o4/21Q/kyFiRcXKj6WPm5D/AKXhWN/lwp8Sl1sz+HAfcZEIw4kI5JWpcCl1l3+k
+                GWoSk2qJIbZFS57Vn2oxeTwjogndos76pIWJFxcqPpY+blTR8l4VENY+FPiUut2fw8KptshHJK9LgUus
+                u6pSeHsUTEjOEoSpc9qz7jF5OELDa1WT/GwsSLi5UfSx83Kkj4HxKPbnenxKXX4aXApdZd0z+HAXchaU
+                WlGFPGBLECxXhCMGsUjDjJ9UrCxKbeR+sVesVesVesVesVesVUw5DjY+bjCOubN4bjUC3I3p8Sl1+Glw
+                KXWXe0JvCQjMSPwEJEbEI5JXFi+M+bjTC0x51IL0+JS6/DS4FLrLvdn8OOqUZxlxeTRRKvwnd5PwFi+M
+                +bhTh1v8J6bxaFTOEfcIvbm7fCOokOPuEXtzdn/r8qcs3JapJKCd/L8mqpxj7hF7hF7hF7hF7hF7hF7h
+                F7hF7hF7hF7hFELHj6cFOljGCDT7i+vjLTNNShKH5qXPas+/x03/AB0RvIxUvj5nZpNKkipAJFOzt+Ol
+                z2rPv8XjyqdvAPyOOLrZGtka2RrZGtka2RrZGtka2RrZGtka2RrZGtka2RrZGtkaYcIvaUIyWyNbI1sj
+                WyNbI1sjWyNbI1sjWyNbI1sjWyNbI1sjWyNbI0woN/4R/8QAFBEBAAAAAAAAAAAAAAAAAAAAgP/aAAgB
+                AwEBPwFJ/wD/xAApEQABAwMDBAIDAAMAAAAAAAABAAIDEBESBDEyFCAzUSEwIkJhQVBx/9oACAECAQE/
+                Ae66urq6urq6v2XV1dXV1dXV/qk1DWfCdO931RcxSfyH6mzvao9Q13we6ef9WqOPP4RBBse6KIvRoxjn
+                7KPTWNyaSafI5XT43M3qNMyynjDD8VhYHPsV00acLOIpBP8Aq7snkwbTS8lNCH/9RBBseyKIyFBoaLBH
+                dRR5lNaGiwRcBvTIXsiARYqaLA/yjdlq9xXTeSknI108mTbGupdd9qaXlSaEPH9RBBsaRRGQprQ0WCKO
+                6hZi1TS4BRkmQE0nNpSoJcxY7qRmbbUbstXuK6byUk5Gundi+rzdxNNLyo1wcLhTQh4/qjgc51imtDRY
+                LIZYopovJTUOu9RcxSfyFQG0gpMLPKbstXuK6byUk5Grd6vFnGml5IqKUxlNcHC4pNNh8DdaY3kuimm0
+                lNQ2z1FzFJ/IVALyCkxu8puy1e4rpvJSTkat3rqW2feml5I0ilMZUmoAb+KJv8laXmijuon5Nup4sx8b
+                qMWkANJ/IVBFgLndSPwbejdlq9xXTeSknI1gbk+s8ebaaXkj26XmijuoZcCmuDhcItBNzTEXuibfJU0u
+                Z/lG7KSFsm66Ri6RiZA1huKScjXTx4tueyeD9mqB4YbldSztgeGOuV1LEaMkczZR6nI2IpLqMDYBPkc/
+                eo1LLLqY11Ma6mNdTGupjRge45BPjLN1BBf8nd0mna75CdC9v+Pqi5ik/kP1R8AnRtcbn6bLFvpYt9LF
+                vpYt9LFvpYt9LFvpYt9LEUxCxb6WLfSxb6WLfSxb6WLfSxb6WLfStb/S/wD/xAAtEAABAwQBBAEEAgEF
+                AAAAAAABAAIQESAxcTISITBRQEFhkaEigWITQlJgcP/aAAgBAQAGPwL/AKTlZCyFkLIWQshZCyFkLIWQ
+                shZCyFkLIWQszlZCyFkLIWQshZCyFkLIWQshZCyFkLIWQs/E7Cq9aXcn4Ylvw+xXva/k2i7Gvmpkrv8A
+                GEt+NUKjux8nSz8/IBoaS2gPgBq3ustRNW9r6iiy1ZaqGzpdj34uhv8Ac0KofJQI/wDKiO7QXGgXYW9w
+                qsNzNQ/V7ty63oOD4PubAqFUPioF7KKO5ACrl3h9H2qGxmofq925ddQ5F+rBFCqHwUC9mCjua/UzUroH
+                5kAqomipLNQ/V7ty64Ou32tEkFUN1AvZko7jr+gmqqfwhLVUL7z1/mWah+r3bl19PVrRaLCCqGygXs2F
+                HcNEEomBLYqEHe4oURDNQ/V7ty6+nvxC0gqhigXs2lHabuae5Etktl0M1D9Xu3Lr27tdu0QVQ9jJBQZm
+                q9maldRgo7QkD7SJbP8AUiGah+r3bl14tdu0QYoadV1SqmSjtCRqRLZ/qRDNQ/V7ty68Wm0QYqu9Oqyp
+                VTYUdpu5r6kS2S6XQzUP1e7cuvbu1ptEGarvTqipVTaUdw0wR7RbAlsUCDfUVKJ9wzUP1e7cuvr6t13t
+                EGyqJdTqH0VTcUdx0fSafVUIQlqo0VVf909A/uWah+r3bl15Pu6lgg+Qo7iq/wApocLqBOpFSVRs1RJ+
+                ss1DgPS4/tcf2uP7XH9rj+1x/aPUKS64N9qgu+4sEHyFHc9QX+Xrw91U2M15HXdRz4Oto3Ig+Qo7sqEA
+                /wDK/iQbe5AVGd/uqnNrNeR1vUcDxVZUxQALDVhvi6QAsNWGqt4aT2kBp8AFG9lhqw1YasNWGrDVhqw1
+                YasNWGr/AFHE1PpcinGp7CKu7DyVHYr+Qp8YS34jYcPsqvz681Cv4khcSu4+GJb8Rtfi4XFcVxXFcVxX
+                FcVxXFcVxXFcVxXFcVUCe4XFcVxXFcVxXFcVxXFcVxXFcVxXFcVj/wAI/8QAKxAAAQIDBwQDAQADAAAA
+                AAAAAQAREDGhICFBcbHw8TBRYdFAkcGBYHDh/9oACAEBAAE/If8ACSKYfa5ZcsuWXLLllyy5ZcsuWXLL
+                llyy5ZcsuWXLLlkDFgB/sTMAM1yy5ZcsuWXLLllyy5ZcsuWXLLllyy5ZcsuWXLJ+QffwyQDksEQYx53K
+                Xt/ZTJZn4dAY6r8+HNAZFYv/AGJR4AnkDcgriDuD1msBlGSeB/z41AY6r8+MOlIRRr+l3UZf+zoBASLj
+                LrEYAcohiQcLYxomG9olwoXyGXQHFgHmVyZ9I8WAeZtnBQa69cmfS5M+kYjTjtYI2+I4pdKaMwMR3juX
+                14PUOGcUI43kTlVqwA5YJ9MYNeg4CcYtfZAsI/xNi8+CiCRBDEWaLpCq6dKNBpZdCeXF5dC+We4FjayW
+                +YX14PSOGcVNHlZUZVajMSJQEWY0uizT/AiPCx72KLpCq6dKNBpafCXneds7+FwWNrKG+YX14PQOGcUA
+                odzFoUZVagASQBMoIilfUQGIABiUy0miIOTfiEMEBHiIr2xBcFGOUwWjRdIVXTpRoNLXh4oEEOLL+cbj
+                6s7WUcRpOmfsbRwzigFDuYtGjKrUL/f9ImR39gj64GDlQGOq/E5+9SgwTEQMGbtFRdIVXTpRoNLbl3bO
+                XwTZ2srGI0nTP2Ng4ZxQCh3MWsUZVaQDlllQ8BkZAOu2MhCgMdV+QCp4QgEgeADyinswLQoukKrp0o0G
+                ltmw2b/4urZ2srOI0nTP2MDhnFAKHcxazRlVpMXNHzMgI0BjqvyJC/gHEc2F4UXSFV06UaDS24/GzfL5
+                62drKBsTwrtBmzjiNKaBIWQCh3MWif3hwDzWIkmFGVWkNfSPiDP2NAY6r8ibD5KIsfu/5Ci6QqunSjQa
+                WyY3mzczetnayhRlAkEEXEIDqDpd7RIQO1w7rGupWZhRlVpa/SI3mDf2NAY6r8iLj4KJ3fZ/yFF0hVdO
+                lGg0tg4vNnN19bO1lCjMCCCYvCA0YOl3sEhA7XDurjbyuhKzMKMqtJ75I+VkI0BjqvyJXYwYb/kfGhCi
+                6QqunSjQaWxY+NnPYaztZQozEggmLwgNGDpd4EhA7XDurjbyujKzMKMqtIFwIwWRjGATMgZGvBsMoUBj
+                qvyDH3KGIwQOCMAnhmTwoukKrp0o0Gltvw2cnnZNrKFGbBBBMXhENL7CuNvK6xKzMKMqtQv2znIziZld
+                gKOis+6oDHVfidwLwp6OF8QMIHJ/iNF0hVdOlGg0t+Zdox8BvGVjayhRnpSszCjKrUCCCYLhAA5DJiJE
+                NyQVniJ4EbsmWMIuOz4DuizkTxoukDToSAW2C2wW2C2wW2C2wQJeE946DS0UFiQMItXmHvyPNjayhRnp
+                SszCjKrUQOaELOQMXROsg+AX0bFii6dTQaWnkJBnHDoMF0XeLayhRnpSszCjKrVggpgR3DDKHeygpxnk
+                oRMjyI5M5Ts0XTqaDSzPN67z0pHBiO0AJpHcLgz7RKCd4PvpOdR5C4M+0SgneD7ROFjfaBYuE+kabmie
+                aAZ3IhCZm2OLANIrgz7XBn2uDPtcGfa4M+1wZ9rgz7XBn2uDPtcGfa4M+0OgJok7QEMXyGBpp37QABhL
+                p3tn7HRBi5vjUBjqvz4mp1gQMHJMBCY9e6xsDhHX+EN6xaHi9TQGY+HQGOq/PhgpATkiAAQb7jn8WZVL
+                cJW4StwlbhK3CVuErcJW4StwlbhK3CVuErcJW4StwlbhK3CVdhnOOKzeVuErcJW4StwlbhK3CVuErcJW
+                4StwlbhK3CVuErcJW4StwlbhKkFaAAF3+h//2gAMAwEAAgADAAAAEPPPPPOMssssssssvMssssssssvP
+                PPPPPPPN/wB7zzzzzzzyjz3zzzzzzzy71Pzzzzz/AM888888+c8018p+88118879085888ue/Z88885I
+                +j+68+s78WX88r8U88188/8AP/P/ALzl6rrT8jz1fr5ZfzyvxTzz/wA808/88/5e0q48Vo8978+WX88r
+                8U88q88W8/qZ089dq681o89v80WX88r8U88q88d8/q8L98/q+2do87d4+WX88r8U88/88p+/q8888/q+
+                N+c8c4F8W+//APfFPPL/ADzzvm/zzzz+/wA8O38tc88d99999R2n88888v3288888888o8988888888+
+                Ue88888888OMMMMMMMMO8uMMMMMMMMM888888888888888888888888888888888888//8QAHBEAAgMB
+                AQEBAAAAAAAAAAAAAREAECAwQFBg/9oACAEDAQE/EPhP0PRPRUsKHCsYNDxGxkWaHYYNjIyOR4GxyGhg
+                8DY4Ghh0MHAwbHA0NDqoosjBp6eHTw444444qGl+a//EACcRAAEDAwMDBQEBAAAAAAAAAAEAETEQIWFB
+                cZEgobEwUYHR8MFQ/9oACAECAQE/EOl0xMTExMTExMTijhMTExMTExMTE/o2hcrXmCJJn0e/FP229EEi
+                FagbI7AeowJ+YoxkDda6OojaAgYkUKMKZrwUfwuKIMNTQJflCw11EoliPKEA0JoYEGtoeiAkxSfZAXCa
+                6OjGBKYIwUyO3oJTALIkAVzQEIDcI6A4RbUopDsuyrB807o+a+5AqX2wpPtRxCCOpBTGBKAAWCgpkAY1
+                NyouT+dFQu9CECbeF7MEAhohixUOy7KsHzTuj5qyvrau8FJ9kbJ1Nk4hBEVgCUAAsFvEqCaBn+0e8WXf
+                in7bIrTW1GdlQ7LsqwfNO6PmpMJq0D70n2UE4BGqAj2oAUDEKWP8UE0HP9o55uu/FP22RWFHdnwodl2V
+                YPmndHzUHEVIfQaT7KFHAI1CDjcSiFqKfb6UFIhD5bq7wfmRAC7igEiH6yPrBAIaJcuVDsuyrB807o+a
+                tuL1iJEUn2UOmfb6UFMiX4MoAI4QcC4oBmIudUAHGCO0IUh2RAEzb2WQ9vpZD2+k+Yv+xTuj5r70HoM5
+                FuEepLevHTo1ZFvXhE5JoQc0EDQmgSPCEdvt7VFAF+FmPCzHhZjwsx4WY8IiBY3HyjYGtGIAtoPfq00K
+                n3bXRBE+j34p+23ogOgbZHhAI3b0SBkLE4WJwsThYnCxOFicLE4WJwgG4AoSlyAsThYnCxOFicLE4WJw
+                sThYnCAQH+L/AP/EACsQAQABAgQFBAMBAQEBAAAAAAERAPAQITFRIEFhodEwcbHxgZHBQOFgcP/aAAgB
+                AQABPxD/AMToT9xX12vrtfXa+u19dr67X12vrtfXa+u19dr67X12vrtfXa+u19dqTO2A488jdFfXa+u1
+                9dr67X12vrtfXa+u19dr67X12vrtfXa+u19dr67X12jWP2H+NwINVYK636AfsTRkQOoP7mu5iP8Ajtm2
+                N90/xvczzCoMYpn/ALFPkFiAj3mIrpeRJ29ZYJ5yGPdUh7GgWD2l/wA1s2xvun+YoUGYFB94omN2BBL9
+                +o6RnmF7jKH84IqBlRr6wJyaATSa4UPEEsGta5mlhpviEZZlGKIiiInJ4yHgkZISdsADDyWEkBO3Gfuc
+                pp8DiAAPco5dGZP94HCuUrPL35f9oRJGT0WhmkeSakZYgZlBDAqgSTWosZQEEmPULyXgIqGNBBpJoc+V
+                XTfgQAVcgOdMFzkVk/OlbyERL8hw77PKF70zJzaece54pyyIRIThs+zCz7uPsXxjedHDBxcy8335T6Bi
+                MwGdMtfilVVVXVce1PhSAMs4YFURJNaixlAQSY9IvJeAipYhZmIy2OfKrltV03xIuYxl3p4RDOCJcjn6
+                JlgGQBaKdlQQQ6jgs+zCz7uPsXxjedHEum2lkhl88bGITRsyS58HanwwQBlnDAqiJJrUWMoCCTHoF5Lw
+                EU3AqXK9gwuW1XTfAmlSAObQLzMVIgxlvyxCC0qQFBWGeRNBOUOeK05OIMojf3paaJlDiXWjDMb0O8OR
+                1MbPsws+7j7F8Y3nRxKISTJuc+1GkEeY8MfEy5mirPh7U+GIR5GJgU6lDIFJEQeIvJeAim4FS5XsGNy2
+                q6b4IOsoEawPOJtyMhYlaWpXQSFWzbG+6UEwoQksPvFN4hxmO3674mBzZQ1yye3fGz7MLPu4+xfGN50c
+                aouamvJz88Mm5H85fx4e1PhwBHkYmBTqUMgUkRB4C8l4CKbgVLlewcFy2q6b0gAlWCt0mbLm5/3DWBS/
+                FPp84ZmA08/nC2bY33TAtWsZzDJ0oxYBCdOmBUTBOXWafXTL8MYWfZhZ93H2L4xvOjjWJzIWdhjhebv/
+                AFXD2p8OEI8jEwKdShkCkiIOBeS8BFNwKlyvYOG5bVdN6NfSH6Z/ygAgIMJ4asz5Zv8AMbZtjfdMSGiD
+                M6s/OOkcgGW4L84WfZhZ93H2L4xvOjjQvl+ieFdSXu4e1PhgwTCNP1QEYwB0dTnycQjyMTAp1KImgiUP
+                1TcCpcr2DGJKHTCraDwDSCYI98LltV03qZdhd2LPIG/M4rZtjfdMUa2H9/mJ8x/hgs+zCz7uPsXxjedH
+                H0iL34TB2Hu4e1PhhctqdtRIjCNRZOAHRrJN5Yxjn/0uwrYpQxICCYA2mrNvhctqum9MB3Afti5FzZnW
+                cVs2xvumKVbj+f3E3mP4YLPsws+7j7F8Y3nRx9Yid+HTiZ8/VcPanwwuW2DXw4myVBc4BYhrIcGf/S7C
+                tiuRcACAMLNvhctqum9GnpDN1y/tDJJpgEMcy9sz+42zbG+6YhOAS/Jlz+GMWElAj2B+MLPsws+7j7F8
+                Y3nRxuPz/RPDBFc1/hn+8PanwwuW2LXw4myVBc4BYhrIYZ/9LsK2K5FwAIAxs2+Fy2q6b0+qkJQyZMYN
+                zJ+MJ75CjrTiIGW8+Rwtm2N90wGlvMBSHqQS83n3wAtqlpwkJf5Zws+zCz7uPsXxjedHG0UySx1GPjhn
+                M2aI5wOXD2p8MLltwNfDibJTbSUBTpiuRcACAOCzb4XLarpvg4xpQ66MuzjJwGZck6fmhSAYEZDk1bNs
+                b7pTI5MwKHNQxrkc4L5YlSJg5ghP3PbGz7MLPu4+xfGN50ccsiOTOxl8zwuZFRhc5XqY4O1PhhctvSs2
+                +Fy2q6b4MfBk6lD8eg3NjnGPPyAmKDsATUMzfEaxPKJMxzfagTeorNzirlJBWKQ1TFBjZ9mB1SeTEqMV
+                f8tX/LV/y1f8tX/LV/y1EdFCDJHRxvOjiIhyRTkc39UcCBoTxQuSAnRp+wpEYSEx7U+GFy29Kzb4XLar
+                pvjF51yR6Vli1hc8uZ6OeeMS5tLIDPIMi44LPs9S86OJspRGSBJ/X0NSURM41Zx7U+GFy29Kzb4XLarp
+                vwNRDSMaNH5A0SJ7gUSknIc/1rw8vISRSBFPMj9ZVO6MqI4bPs9S86OFCAB90/7HpJFoV19074KH8xJ0
+                jfpgAeMIRj0gMBVZZc/ZwAPGEIxQWOSlR14kNIRkaL7yANDeMc3DdBmI396ROUleNh4JWSAjf1AAAAAA
+                AAAAAAATjWyEIdEztV6eKWrAjEKE7YNQlEER1+1GQgaHptOaamha83LOiqJ0hr7f5rZtjfdP8i568ERD
+                Q5qNDZfkBAI3TX1nMp1JShJRsA/lJM8oY/CaThPZD/HbNsb7p/jNQ5sJotrzBCZv8iCI6NSOfOubzVjz
+                VY81WPNVjzVY81WPNVjzVY81WPNVjzVY81WPNVjzVY81WPNVjzVY81G4joyflxfGbozHxVjzVY81WPNV
+                jzVY81WPNVjzVY81WPNVjzVY81WPNVjzVY81WPNVjzVY81AxFnOrzUKEH/wf/9k=
+            </property>
+        </structure>
+    </list-property>
+</report>

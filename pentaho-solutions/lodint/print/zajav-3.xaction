@@ -1,0 +1,1104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Zajav-3</title>
+  <version>1</version>
+  <logging-level>INFO</logging-level>
+  <documentation> 
+    <author>Report Designer</author>  
+    <description>Zajav-3</description>  
+    <icon>PentahoReporting.png</icon>  
+    <help>Choose Report Output Format.</help>  
+    <result-type>report</result-type> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">PDF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Excel</entry>  
+          <entry key="report-output-type-id">xls</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Word</entry>  
+          <entry key="report-output-type-id">rtf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Web Page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Comma Separated Value</entry>  
+          <entry key="report-output-type-id">csv</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <processId type="string"> 
+      <sources> 
+        <request>processId</request> 
+      </sources>  
+      <default-value><![CDATA[4708_lod_package_1_2_givingDocsByWEB]]></default-value> 
+    </processId>  
+    <activityId type="string"> 
+      <sources> 
+        <request>activityId</request> 
+      </sources>  
+      <default-value><![CDATA[5086_4708_lod_package_1_2_givingDocsByWEB_1_2_givingDocsByWEB_act1]]></default-value> 
+    </activityId>  
+    <mode type="string"> 
+      <sources> 
+        <request>mode</request> 
+      </sources>  
+      <default-value><![CDATA[3]]></default-value> 
+    </mode>  
+    <prn1_2 type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <rep>ActivityNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressJurPerson</rep>  
+          <mod>? agentAddress</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPhizPerson</rep>  
+          <mod>? agentAddress</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPlace</rep>  
+          <mod>?: activityAddress newActivityAddress</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>Applicant</rep>  
+          <mod>agentName</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ContactPhones</rep>  
+          <mod>agentPhone</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocJur</rep>  
+          <mod>? dataDocEGR</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocPhiz</rep>  
+          <mod>? dataDocEGR</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocUchet</rep>  
+          <mod>dataDocTaxAccount</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>INN</rep>  
+          <mod>agentInn</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseDate</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseEmitter</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseGivenTo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseSerie</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseStintNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicensiatAddressNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRN</rep>  
+          <mod>ogrn</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRNIP</rep>  
+          <mod>ogrn</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>PostAddress</rep>  
+          <mod>agentPostAdress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>RegisryDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZDate</rep>  
+          <mod>09.01.2007</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZMetalType</rep>  
+          <mod>ЧЁРНЫХ</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZNo</rep>  
+          <mod>347-од</mod>  
+          <get/>  
+          <add_mod/> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <rep type="string"/>  
+        <mod type="string"/>  
+        <get type="string"/>  
+        <add_mod type="string"/> 
+      </columns> 
+    </prn1_2>  
+    <prn3_4 type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <rep>ActivityNo</rep>  
+          <mod>ActivityNo</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddDoc</rep>  
+          <mod>AddDoc</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>Applicant</rep>  
+          <mod>agentName</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ChiefPosition</rep>  
+          <mod>ChiefPosition</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ContactPhones</rep>  
+          <mod>agentPhone</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocNo</rep>  
+          <mod>DocNo</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseDate</rep>  
+          <mod>licenseDate</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseGivenTo</rep>  
+          <mod>licenseIdGiv</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseNo</rep>  
+          <mod>licenseNumber</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseSerie</rep>  
+          <mod>licenseSerie</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicensiatAddressNew</rep>  
+          <mod>newAgentAddress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRN</rep>  
+          <mod>ogrn</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>PostAddress</rep>  
+          <mod>agentPostAdress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>RegisryDoc</rep>  
+          <mod>dataDocEGR</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>SignatureDecipher</rep>  
+          <mod>SignatureDecipher</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZAppendixNo</rep>  
+          <mod>3</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZMetalType</rep>  
+          <mod>ЧЁРНЫХ</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>qqq</rep>  
+          <mod>agentId</mod>  
+          <get>1</get>  
+          <add_mod>agentId_caption</add_mod> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <rep type="string"/>  
+        <mod type="string"/>  
+        <get type="string"/>  
+        <add_mod type="string"/> 
+      </columns> 
+    </prn3_4>  
+    <prn9_10 type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <rep>ActivityNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressJurPerson</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPhizPerson</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPlace</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>Applicant</rep>  
+          <mod>agentName</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ContactPhones</rep>  
+          <mod>agentPhone</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocJur</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocPhiz</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocUchet</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>INN</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseDate</rep>  
+          <mod>licenseDate</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseEmitter</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseGivenTo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseNo</rep>  
+          <mod>licenseNumber</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseSerie</rep>  
+          <mod>licenseSerie</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseStintNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicensiatAddressNew</rep>  
+          <mod>newAgentAddress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRN</rep>  
+          <mod>ogrn</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRNIP</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>PostAddress</rep>  
+          <mod>agentPostAdress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>RegisryDoc</rep>  
+          <mod>dataDocEGR</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZDate</rep>  
+          <mod>09.01.2007</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZMetalType</rep>  
+          <mod>ЧЁРНЫХ</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZNo</rep>  
+          <mod>347-од</mod>  
+          <get/>  
+          <add_mod/> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <rep type="string"/>  
+        <mod type="string"/>  
+        <get type="string"/>  
+        <add_mod type="string"/> 
+      </columns> 
+    </prn9_10>  
+    <prn11_12 type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <rep>ActivityNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressJurPerson</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPhizPerson</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPlace</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>Applicant</rep>  
+          <mod>agentName</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ContactPhones</rep>  
+          <mod>agentPhone</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocJur</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocPhiz</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocUchet</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>INN</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseDate</rep>  
+          <mod>licenseDate</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseEmitter</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseGivenTo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseNo</rep>  
+          <mod>licenseNumber</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseSerie</rep>  
+          <mod>licenseSerie</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseStintNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicensiatAddressNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRN</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRNIP</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>PostAddress</rep>  
+          <mod>agentPostAdress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>RegisryDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZDate</rep>  
+          <mod>09.01.2007</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZMetalType</rep>  
+          <mod>ЧЁРНЫХ</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZNo</rep>  
+          <mod>347-од</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>gotServiceType=</rep>  
+          <mod>ST_ReGet</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <rep type="string"/>  
+        <mod type="string"/>  
+        <get type="string"/>  
+        <add_mod type="string"/> 
+      </columns> 
+    </prn11_12>  
+    <prn13_14 type="result-set"> 
+      <default-value type="result-set"> 
+        <row> 
+          <rep>ActivityNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressJurPerson</rep>  
+          <mod>agentAddress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPhizPerson</rep>  
+          <mod>agentAddress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>AddressPlace</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>Applicant</rep>  
+          <mod>agentName</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ContactPhones</rep>  
+          <mod>agentPhone</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocJur</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocNo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocPhiz</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>DocUchet</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>INN</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseDate</rep>  
+          <mod>licenseDate</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseEmitter</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseGivenTo</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseNo</rep>  
+          <mod>licenseNumber</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseSerie</rep>  
+          <mod>licenseSerie</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicenseStintNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>LicensiatAddressNew</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRN</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>OGRNIP</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>PostAddress</rep>  
+          <mod>agentPostAdress</mod>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>RegisryDoc</rep>  
+          <mod/>  
+          <get>1</get>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZDate</rep>  
+          <mod>09.01.2007</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZMetalType</rep>  
+          <mod>ЧЁРНЫХ</mod>  
+          <get/>  
+          <add_mod/> 
+        </row>  
+        <row> 
+          <rep>ZNo</rep>  
+          <mod>347-од</mod>  
+          <get/>  
+          <add_mod/> 
+        </row> 
+      </default-value>  
+      <columns> 
+        <rep type="string"/>  
+        <mod type="string"/>  
+        <get type="string"/>  
+        <add_mod type="string"/> 
+      </columns> 
+    </prn13_14> 
+  </inputs>
+
+  <outputs> 
+    <dsResult type="result-set"/> 
+  </outputs>
+
+  <resources> 
+    <report-definition3_4> 
+      <solution-file> 
+        <location>zajav-3.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition3_4>  
+    <report-definition1_2> 
+      <solution-file> 
+        <location>Zajav-1.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition1_2>  
+    <report-definition9_10> 
+      <solution-file> 
+        <location>zajav-10.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition9_10>  
+    <report-definition11_12> 
+      <solution-file> 
+        <location>zajav-11.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition11_12>  
+    <report-definition13_14> 
+      <solution-file> 
+        <location>zajav-13.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition13_14> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt for Report Export Type</action-type>
+      <action-inputs> 
+        <outputTypeList type="property-map-list"/>  
+        <outputType type="string"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <outputType style="radio"> 
+            <title>Выберите формат вывода:</title>  
+            <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter> 
+          </outputType> 
+        </selections> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript</action-type>
+      <action-inputs> 
+        <prn3_4 type="result-set"/>  
+        <mode type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <variableList type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[beenName="lodint/WorklistBean/local";
+method="getActivityVars";
+if ((mode==1)||(mode==2)) {
+  var prn=prn1_2;
+}
+else if ((mode==3)||(mode==4)) {
+  var prn=prn3_4;
+}
+else if ((mode==9)||(mode==10)) {
+  var prn=prn9_10;
+}
+else if ((mode==11)||(mode==12)) {
+  var prn=prn11_12;
+}
+else if ((mode==13)||(mode==14)) {
+  var prn=prn13_14;
+}
+
+var row = prn.getRowCount();
+variableList='';
+for (var i = 0; i < row; i++) {
+  if (prn.getValueAt(i, 2)=='1'){
+    if (variableList!='') {
+	variableList+=',';
+    }
+    variableList+=prn.getValueAt(i, 1);
+    if (prn.getValueAt(i,0)!=''){
+    	variableList+='/'+prn.getValueAt(i, 0);
+    }	
+    if (prn.getValueAt(i,3)!=''){
+    	variableList+='/'+prn.getValueAt(i, 3);
+    }	
+  }  
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+      <action-type>Custom</action-type>
+      <action-inputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <processId type="string"/>  
+        <activityId type="string"/>  
+        <variableList type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <dsResult type="result-set"/>  
+        <dsMetaColumn type="string"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[1==0]]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript</action-type>
+        <action-inputs> 
+          <dsResult type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <hh type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[/*
+dsRep = new JavaScriptResultSet();
+var header = new Array();
+
+regions.setColumnHeaders(new Array( 'country', 'country_style' ));
+*/
+var hh="1";]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[((mode==1)||(mode==2))]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition1_2"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[((mode==3)||(mode==4))]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition3_4"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[((mode==9)||(mode==10))]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition9_10"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[((mode==11)||(mode==12))]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition11_12"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[((mode==13)||(mode==14))]]></condition>  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition13_14"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

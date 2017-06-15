@@ -1,0 +1,10 @@
+<a4j:region rendered="#{!var.hidden}" id="#{var.getId()}region">
+	<h:panelGrid id="#{var.getId()}PanGr" columns="#{var.attributes['embedded'] != null ? 1 : 2}"
+		styleClass="proc-var-embeded" 
+		columnClasses="#{var.attributes['embedded'] != null ? 'workitem-var-group-col2' : 'workitem-var-group-col1,workitem-var-group-col2'}" >
+		<h:panelGroup id="#{var.getId()}grHead">
+			<h:outputText id="label_#{var.id}" value="#{var.name} #{var.required?'*':''}" styleClass="#{var.required?'required':''}" />
+			<rich:tooltip target="label_#{var.id}" value="#{var.description}" rendered="#{not empty var.description}"/>
+<!--			<ui:include src="/layout/ajaxStatus.xhtml" /> -->
+		</h:panelGroup>
+		<h:panelGroup id="#{var.getId()}gr">

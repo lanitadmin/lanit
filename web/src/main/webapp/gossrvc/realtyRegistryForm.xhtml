@@ -1,0 +1,242 @@
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                             "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a4j="http://richfaces.org/a4j" >
+
+	<s:div>
+		<rich:collapsiblePanel header="Поиск">
+			<a4j:region>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Кадастровый номер</ui:define>
+					<h:inputText value="#{realtyRegistry.filter.cadastralNumber}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Условный номер</ui:define>
+					<h:inputText value="#{realtyRegistry.filter.conditionalNumber}" />
+				</s:decorate>
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Инвентарный номер</ui:define>
+					<h:inputText value="#{realtyRegistry.filter.inventoryNumber}" />
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Назначение объекта</ui:define>
+					<h:selectOneMenu value="#{realtyRegistry.filter.realtyPurpose}">
+						<s:selectItems value="#{realtyRegistry.realtyPurposeList}"
+									   var="reg"
+									   label="#{reg.name}"
+									   noSelectionLabel="Не выбрано"
+								/>
+						<s:convertEntity />
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Адрес (местоположение) </ui:define>
+					<h:inputText value="#{realtyRegistry.filter.address}" />
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Правообладатель (Тип)</ui:define>
+					<h:selectOneMenu value="#{realtyRegistry.filter.rightHolderType}">
+						<s:selectItems value="#{realtyRegistry.rightHolderList}"
+									   var="reg"
+									   label="#{reg.name}"
+									   noSelectionLabel="Не выбрано"
+								/>
+						<s:convertEntity />
+					</h:selectOneMenu>
+				</s:decorate>
+
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Правообладатель (ФИО/Наименование) </ui:define>
+					<h:inputText value="#{realtyRegistry.filter.rightHolder}" />
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Вид права </ui:define>
+					<h:selectOneMenu value="#{realtyRegistry.filter.rightType}">
+						<s:selectItems value="#{realtyRegistry.rightTypeList}"
+									   var="reg"
+									   label="#{reg.name}"
+									   noSelectionLabel="Не выбрано"
+								/>
+						<s:convertEntity />
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Ограничения (обременения права)</ui:define>
+
+					<h:selectOneMenu value="#{realtyRegistry.filter.rightRestrict}">
+						<s:selectItems value="#{realtyRegistry.rightRestrictList}"
+									   var="reg"
+									   label="#{reg.name}"
+									   noSelectionLabel="Не выбрано"
+								/>
+						<s:convertEntity />
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<s:decorate template="/layout/display.xhtml">
+					<ui:define name="label">Правопритязания</ui:define>
+					<h:selectOneMenu value="#{realtyRegistry.filter.claim}">
+						<s:selectItems value="#{realtyRegistry.claimList}"
+									   var="reg"
+									   label="#{reg.name}"
+									   noSelectionLabel="Не выбрано"
+								/>
+						<s:convertEntity />
+					</h:selectOneMenu>
+				</s:decorate>
+
+				<div style="clear: both"/>
+
+				<s:div styleClass="actionButtons">
+					<a4j:commandButton id="search" value="Поиск"
+									   execute="@region"
+									   action="#{realtyRegistry.search()}"
+									   render="realtyRegistryTableWrapper" />
+					<a4j:commandButton id="reset" value="#{messages['clear']}"
+									   execute="@region"
+									   onclick="document.getElementById('filterForm').reset();"
+									   action="#{realtyRegistry.search()}"
+									   render="realtyRegistryTableWrapper" />
+				</s:div>
+			</a4j:region>
+
+		</rich:collapsiblePanel>
+
+		<h:panelGrid columns="2">
+			<a4j:commandButton
+					value="Закрыть"
+					execute="@this"
+					rendered="#{realtyRegistry.selectedMode}"
+					action="#{realtyRegistry.closeRegistry}"
+					title="Закрыть реестр"/>
+
+			<a4j:commandButton
+					value="Добавить"
+					execute="@this"
+					action="#{realtyRegistry.setRealtyMode('CREATE')}"
+					oncomplete="#{rich:component('createOrUpdateRealtyPanel')}.show();"
+					render="createOrUpdateRealtyPanel"
+					title="Добавить новый объект недвижимости"/>
+		</h:panelGrid>
+
+
+		<s:div id="realtyRegistryTableWrapper">
+
+			<s:div id="navigation" style="width:100%; padding:0px;">
+				<ui:include src="/layout/datascroller.xhtml">
+					<ui:param name="been" value="#{realtyRegistry}" />
+					<ui:param name="dataScroll"
+							  value="#{realtyRegistry.dataScroll}" />
+					<ui:param name="idForm" value="filterForm" />
+					<ui:param name="updateElements" value="realtyRegistryTable" />
+				</ui:include>
+			</s:div>
+
+			<rich:dataTable id="realtyRegistryTable"
+							value="#{realtyRegistry.resultList}"
+							styleClass="registryTable"
+							rendered="#{not empty realtyRegistry.resultList}" var="row">
+
+				<a4j:ajax event="rowclick" listener="#{realtyRegistry.editRealty(row)}"
+						  oncomplete="#{rich:component('createOrUpdateRealtyPanel')}.show();"
+						  render="createOrUpdateRealtyPanel"/>
+
+				<f:facet name="header">
+					<rich:columnGroup>
+						<rich:column rendered="#{realtyRegistry.selectedMode}">
+							<h:outputText value="Выбрать"/>
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Наименование объекта" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Кадастровый номер" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Условный номер" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Назначение объекта" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Адрес (местоположение)" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Правообладатель (Тип)" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Правообладатель (ФИО/Наименование)" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Вид права" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Ограничения(обременения права)" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Правопритязания" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Заявленнные в судебном порядке права требования" />
+						</rich:column>
+						<rich:column>
+							<h:outputText value="Договоры в долевом строительстве" />
+						</rich:column>
+					</rich:columnGroup>
+				</f:facet>
+
+				<rich:column rendered="#{realtyRegistry.selectedMode}">
+					<a4j:commandButton value="#{messages['choose']}"
+									   action="#{realtyRegistry.selectRealty(row)}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.realtyName}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.cadastralNumber}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.conditionalNumber}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.realtyPurpose.name}" rendered="#{not empty row.realtyPurpose}"/>
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.address}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.rightHolderType.name}" rendered="#{not empty row.rightHolderType}"/>
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.rightHolder}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.rightType.name}" rendered="#{not empty row.rightType}"/>
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.rightRestrictsString}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.claim.name}" rendered="#{not empty row.requirementsRight}"/>
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.requirementsRight.name}" rendered="#{not empty row.requirementsRight}" />
+				</rich:column>
+				<rich:column>
+					<h:outputText value="#{row.agreements}" />
+				</rich:column>
+			</rich:dataTable>
+		</s:div>
+	</s:div>
+</ui:composition>

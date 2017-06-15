@@ -1,0 +1,1366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="90">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="91">
+            <text-property name="helpText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="user" id="198">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Пользователь</text-property>
+            <text-property name="promptText">Пользователь</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="orgUnitCode" id="201">
+            <text-property name="helpText">Организационная единица</text-property>
+            <text-property name="promptText">Организационная единица</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">DataSetOrgUnit</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["code"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="85"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="86">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">count_Gos_Serv</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">count_Mun_Service</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">count_consult_pers</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">count_cons_phone</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">count_cons_int</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">count_cims_email</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">count_Rosreestr</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">count_Kadastr</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">count_BTI</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">date_record</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">curr_date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">count_Gos_Serv_Res</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">count_Mun_Serv_Res</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">cons_full</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">count_Gos_Serv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_Mun_Service</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_consult_pers</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_cons_phone</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_cons_int</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_cims_email</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_Rosreestr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_Kadastr</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_BTI</property>
+                </structure>
+                <structure>
+                    <property name="columnName">date_record</property>
+                </structure>
+                <structure>
+                    <property name="columnName">curr_date</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_Gos_Serv_Res</property>
+                </structure>
+                <structure>
+                    <property name="columnName">count_Mun_Serv_Res</property>
+                </structure>
+                <structure>
+                    <property name="columnName">cons_full</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">count_Gos_Serv</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">count_Mun_Service</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">count_consult_pers</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">count_cons_phone</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">count_cons_int</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">count_cims_email</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">count_Rosreestr</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">count_Kadastr</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">count_BTI</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">date_record</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">curr_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">count_Gos_Serv_Res</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">count_Mun_Serv_Res</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">cons_full</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+
+stDate = clazzConvert.getOutDate(params["startDate"]);
+edDate = clazzConvert.getOutDate(params["endDate"]);
+
+codeOrgUn = params["orgUnitCode"];
+
+listOrgUnitForSearch = null;
+if (codeOrgUn == "all"){ //Получаем список оргюнитов
+	listOrgUnitForSearch = clazz.getEntityManagerShark().createQuery
+		(
+			"select orgUn.owner from  OrgUnit orgUn where orgUn.owner is not null"
+		).getResultList();
+}else { //делаем лист, с 1 значением
+	listOrgUnitForSearch = 	clazz.getEntityManagerShark().createQuery
+		(
+			"select orgUn.owner from  OrgUnit orgUn where orgUn.owner=:code "
+		).setParameter("code", codeOrgUn).getResultList();
+}
+
+result = clazz.getEntityManagerShark().createQuery
+( 
+"select  "+
+"      (select count( distinct ps.gossrvcDocPackage.packNum) from  CardElementFieldValue cef "+
+"       where  "+
+"           ps.status.code = 'forRaspred' and "+
+"           cef.cardElement.id = ce.id and  "+
+"           cef.cardField.fieldName ='serviceGovLevel' and  "+
+"           cef.fieldStringValue like 'Municip'  "+
+"      ) as p1, "+
+"      (select count( distinct ps.gossrvcDocPackage.packNum) from  CardElementFieldValue cef "+
+"       where  "+
+"           ps.status.code = 'resultToZayav' and "+
+"           ps.ends !=null and  "+
+"           ps.ends between :stDate and :edDate and  "+
+"           cef.cardElement.id = ce.id and  "+
+"           cef.cardField.fieldName ='serviceGovLevel' and  "+
+"           cef.fieldStringValue like 'Municip'  "+
+"      ) as p2, "+
+"     (select count( distinct ps.gossrvcDocPackage.packNum) from CardElementFieldValue cef "+
+"       where  "+
+"           ps.status.code = 'forRaspred' and  "+
+"           cef.cardElement.id = ce.id and  "+
+"           cef.cardField.fieldName ='serviceGovLevel' and  "+
+"           (cef.fieldStringValue like 'Feder' or cef.fieldStringValue like 'Respub') "+
+"      ) as p3,  "+
+"     (select count( distinct ps.gossrvcDocPackage.packNum) from CardElementFieldValue cef  "+
+"       where  "+
+"           ps.status.code = 'resultToZayav' and  "+ 
+"           ps.ends !=null and  "+
+"           ps.ends between :stDate and :edDate and  "+
+"           cef.cardElement.id = ce.id and  "+
+"           cef.cardField.fieldName ='serviceGovLevel' and  "+
+"           (cef.fieldStringValue like 'Feder' or cef.fieldStringValue like 'Respub') "+
+"      ) as p4,  "+
+"      ps.begins "+
+"from PackStatus ps,CardElement ce where "+
+"     ps.gossrvcDocPackage.serviceId = ce.id and     "+
+"     ps.begins between :stDate and :edDate "+
+"     and ps.owner in (:listOwner) "
+ ).setParameter("stDate", stDate)
+ .setParameter("edDate", edDate)
+ .setParameter("listOwner", listOrgUnitForSearch)
+ .getResultList();
+ 
+//result2 = clazz.getEntityManagerLod().createQuery
+//( 
+//"select cj.consultDate , "+
+//" (select count ( cj1.id) from ConsultJournal cj1 "+
+//"     where cj1.type = 'consWeb' and cj1.id = cj.id) as ps1, "+
+//"  (select count ( cj1.id) from ConsultJournal cj1 "+
+//"     where cj1.type = 'consEmail' and cj1.id = cj.id) as ps2, "+
+//"  (select count ( cj1.id) from ConsultJournal cj1 "+
+//"     where cj1.type = 'consLichno' and cj1.id = cj.id) as ps3, "+
+//"  (select count ( cj1.id) from ConsultJournal cj1 "+
+//"     where cj1.type = 'consPhone' and cj1.id = cj.id) as ps4 "+
+//"from ConsultJournal cj "+
+//"where  "+
+//"  cj.consultDate between :stDate and :edDate  "
+//).setParameter("stDate", stDate)
+// .setParameter("edDate", edDate)
+// .getResultList();
+
+result2 = clazz.getEntityManagerShark().createQuery( 
+"select ps.begins, "+
+"(    select count (pv.definitionId) from PackVariable pv "+
+"     where pv.definitionId = 'TypeConst' and "+
+"           pv.stringValue = 'consWeb' and "+
+"           pv.packStatus=ps) as p1, "+
+"(    select count (pv.definitionId) from PackVariable pv "+
+"     where pv.definitionId = 'TypeConst' and "+
+"           pv.stringValue = 'consEmail' and "+
+"           pv.packStatus=ps) as p2, "+
+"(    select count (pv.definitionId) from PackVariable pv "+
+"     where pv.definitionId = 'TypeConst' and "+
+"           pv.stringValue = 'consLichno' and "+
+"           pv.packStatus=ps) as p3,"+
+"(    select count (pv.definitionId) from PackVariable pv "+
+"     where pv.definitionId = 'TypeConst' and "+
+"           pv.stringValue = 'consPhone' and "+
+"           pv.packStatus=ps) as p4 "+
+"from PackStatus ps "+
+"where ps.begins between :stDate and :edDate "+
+"     and ps.owner in (:listOwner) "
+ ).setParameter("stDate", stDate)
+ .setParameter("edDate", edDate)
+ .setParameter("listOwner", listOrgUnitForSearch)
+ .getResultList();
+ 
+ 
+ //Запрос для росреестра УФА 
+ result3 = clazz.getEntityManagerShark().createQuery( 
+"select "+
+"    ( select count (*) from  CardElementFieldValue cef where "+
+"     ps.status.code = 'forRaspred' and "+
+"     cef.cardElement.id = ce.id and   "+
+"      cef.cardField.fieldName ='serviceGovLevel' and   "+
+"      cef.fieldStringValue like 'Municip' "+
+"    ) as p1, "+
+"     ( select count (*) from  CardElementFieldValue cef where "+
+"      ps.status.code = 'resultToZayav' and "+
+"      cef.cardElement.id = ce.id and   "+
+"      cef.cardField.fieldName ='serviceGovLevel' and   "+
+"      cef.fieldStringValue like 'Municip' "+
+"    ) as p1, "+
+"     ( select count (*) from  CardElementFieldValue cef where "+
+"      ps.status.code = 'forRaspred' and "+
+"      cef.cardElement.id = ce.id and   "+
+"      cef.cardField.fieldName ='serviceGovLevel' and   "+
+"      (cef.fieldStringValue like 'Feder' or cef.fieldStringValue like 'Respub') "+
+"    ) as p1, "+
+"     ( select count (*) from  CardElementFieldValue cef where "+
+"      ps.status.code = 'resultToZayav' and "+
+"      cef.cardElement.id = ce.id and   "+
+"      cef.cardField.fieldName ='serviceGovLevel' and   "+
+"      (cef.fieldStringValue like 'Feder' or cef.fieldStringValue like 'Respub') "+
+"    ) as p1, "+
+" ps.begins "+
+" from PackStatus ps join ps.vars var, CardElement ce   where  "+
+"     ps.gossrvcDocPackage.packNum = 'dpForCons' and "+
+"     var.definitionId = 'Service' and     "+
+"     ps.begins between :stDate and :edDate and  "+
+"     ce.id = var.stringValue  "+
+"     and ps.owner in (:listOwner) ")
+.setParameter("stDate", stDate)
+ .setParameter("edDate", edDate)
+ .setParameter("listOwner", listOrgUnitForSearch)
+ .getResultList();
+ 
+ currentrow=0;
+ //totalrows = result.size();
+ totalrows = (edDate.getTime()-stDate.getTime())/1000/60/60/24;
+ 
+ ]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+var currDate = new Packages.java.util.Date(stDate.getYear(), stDate.getMonth(),stDate.getDate()+currentrow);
+var currAddDate = new Packages.java.util.Date(stDate.getYear(), stDate.getMonth(),stDate.getDate()+1+currentrow);
+row["curr_date"] = currDate;
+
+//блок получения количества улуг 
+  countM = new Packages.java.lang.Long(0);
+  countf  =  new Packages.java.lang.Long(0);
+  countMr = new Packages.java.lang.Long(0);
+  countfr =  new Packages.java.lang.Long(0);
+for (i=0; i< result.size(); i++ ){ // идем по всем полученным статусам за период
+   var currRowtemp = result.get(i);
+   //формируем дату - число выдергиваем, время ставим 12:00
+   dateRecord = new Packages.java.util.Date(currRowtemp[4].getYear(),currRowtemp[4].getMonth(),currRowtemp[4].getDate(),12,0);
+   if (dateRecord.after(currDate) &amp;&amp; dateRecord.before(currAddDate)) {     //если статус попал для текущей даты - суммируем.
+     var temInt = new Packages.java.lang.Long(currRowtemp[0]);
+     var temInt2 = new Packages.java.lang.Long(currRowtemp[1]);
+     var temInt3 = new Packages.java.lang.Long(currRowtemp[2]);
+     var temInt4 = new Packages.java.lang.Long(currRowtemp[3]);
+     countM =parseInt(countM)+parseInt(temInt)     
+     countMr =parseInt(countMr)+parseInt(temInt2);  
+     countf =parseInt(countf)+parseInt(temInt3)     
+     countfr =parseInt(countfr)+parseInt(temInt4);        
+   }
+}
+
+//блок для Росреестра УФА
+for (i=0; i< result3.size(); i++ ){ // идем по всем полученным статусам за период
+   var currRowtemp = result3.get(i);
+   //формируем дату - число выдергиваем, время ставим 12:00//
+   dateRecord = new Packages.java.util.Date(currRowtemp[4].getYear(),currRowtemp[4].getMonth(),currRowtemp[4].getDate(),12,0);
+   if (dateRecord.after(currDate) &amp;&amp; dateRecord.before(currAddDate)) {     //если статус попал для текущей даты - суммируем.
+     var temInt = new Packages.java.lang.Long(currRowtemp[0]);
+     var temInt2 = new Packages.java.lang.Long(currRowtemp[1]);
+     var temInt3 = new Packages.java.lang.Long(currRowtemp[2]);
+    var temInt4 = new Packages.java.lang.Long(currRowtemp[3]);
+     countM =parseInt(countM)+parseInt(temInt)     
+    countMr =parseInt(countMr)+parseInt(temInt2);  
+     countf =parseInt(countf)+parseInt(temInt3)     
+     countfr =parseInt(countfr)+parseInt(temInt4);        
+   }
+}
+
+row["count_Mun_Service"] = countM; 
+row["count_Gos_Serv"] = countf; 
+row["count_Mun_Serv_Res"] = countMr; 
+row["count_Gos_Serv_Res"] = countfr;  
+
+
+//блок получения количества консультаций
+countKonsWeb = new Packages.java.lang.Long(0);
+countKonsEmail = new Packages.java.lang.Long(0);
+countKonsLichno = new Packages.java.lang.Long(0);
+countKonsPhone = new Packages.java.lang.Long(0);
+for (i=0; i< result2.size(); i++ ){ // идем по всем полученным статусам за период
+   var currRowtemp1 = result2.get(i);  
+     
+    dateRecord1 = new Packages.java.util.Date(currRowtemp1[0].getYear(),currRowtemp1[0].getMonth(),currRowtemp1[0].getDate(),12,0); //дата консультации
+    if (dateRecord1.after(currDate) &amp;&amp; dateRecord1.before(currAddDate)) {  
+     var temInt = new Packages.java.lang.Long(currRowtemp1[1]);
+     
+     var temInt2 = new Packages.java.lang.Long(currRowtemp1[2]);
+     
+     var temInt3 = new Packages.java.lang.Long(currRowtemp1[3]);
+     
+     var temInt4 = new Packages.java.lang.Long(currRowtemp1[4]);
+     
+     
+     countKonsWeb =parseInt(countKonsWeb)+parseInt(temInt);    
+     countKonsEmail =parseInt(countKonsEmail)+parseInt(temInt2);  
+     countKonsLichno = parseInt(countKonsLichno)+parseInt(temInt3);  
+     countKonsPhone = parseInt(countKonsPhone)+parseInt(temInt4);  
+   }
+}
+row["count_consult_pers" ]= countKonsLichno;
+row["count_cons_phone"] = countKonsPhone;
+row["count_cims_email"] = countKonsEmail;
+row["count_cons_int"] = countKonsWeb;
+row["cons_full"] = parseInt(countKonsLichno)+parseInt(countKonsPhone)+parseInt(countKonsEmail)+parseInt(countKonsWeb);
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetData" id="92">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["startDate"],params["endDate"]);
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+}
+else{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetData2" id="197">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name_ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name_ogv</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name_ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+
+
+orgUnCode = params["orgUnitCode"];
+
+result = clazzShark.getEntityManagerShark().createQuery(
+" select orgun.name from  OrgUnit orgun " + 
+" where orgun.owner =:orgUnCode ")
+.setParameter("orgUnCode", orgUnCode)
+.getResultList();
+
+
+
+currentrow = 0;
+totalrows = result.size();]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["name_ogv"] = rowValue !=null ? rowValue : "Сводная" ;
+
+
+
+currentrow++;
+return true;]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetOrgUnit" id="200">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">0</property>
+                    <property name="name">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+
+userLogin = params["user"];
+
+result = clazzShark.getEntityManagerShark().createQuery(
+" select orgUn.owner, orgUn.name from  OrgUnit orgun , User us " + 
+" where "+
+" (us.owner = orgun.owner and us.owner is not null and us.login = :usLogin) or "+
+" (us.owner is null and us.login = :usLogin) ")
+.setParameter("usLogin", userLogin)
+.getResultList();
+
+if (result.size()>1){
+	result.add(["all","[Общее]"])
+}
+
+currentrow = 0;
+totalrows = result.size();]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["code"] = rowValue[0];
+row["name"] = rowValue[1];
+
+
+currentrow++;
+return true;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">5mm</property>
+            <property name="bottomMargin">1mm</property>
+            <property name="rightMargin">5mm</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="9">
+            <property name="height">0.4583333333333333in</property>
+            <property name="dataSet">DataSetData2</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">name_ogv</property>
+                    <text-property name="displayName">name_ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name_ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="10"/>
+            <row id="11">
+                <cell id="12">
+                    <text id="199">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Мониторинг организации предоставления государственных и муниципальных услуг в РГАУ МФЦ <VALUE-OF>row["name_ogv"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <table id="18">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">8pt</property>
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftColor">#000000</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightColor">#000000</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopColor">#000000</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="width">11.25in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">count_Gos_Serv</property>
+                    <text-property name="displayName">count_Gos_Serv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_Mun_Service</property>
+                    <text-property name="displayName">count_Mun_Service</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Mun_Service"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_consult_pers</property>
+                    <text-property name="displayName">count_consult_pers</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_consult_pers"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_cons_phone</property>
+                    <text-property name="displayName">count_cons_phone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cons_phone"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_cons_int</property>
+                    <text-property name="displayName">count_cons_int</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cons_int"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_cims_email</property>
+                    <text-property name="displayName">count_cims_email</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cims_email"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_Rosreestr</property>
+                    <text-property name="displayName">count_Rosreestr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Rosreestr"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_Kadastr</property>
+                    <text-property name="displayName">count_Kadastr</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Kadastr"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_BTI</property>
+                    <text-property name="displayName">count_BTI</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_BTI"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">date_record</property>
+                    <text-property name="displayName">date_record</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["date_record"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">curr_date</property>
+                    <text-property name="displayName">curr_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["curr_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">count_Gos_Serv_Res</property>
+                    <text-property name="displayName">count_Gos_Serv_Res</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv_Res"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">count_Mun_Serv_Res</property>
+                    <text-property name="displayName">count_Mun_Serv_Res</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Mun_Serv_Res"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding</property>
+                    <expression name="expression" type="javascript">dataSetRow["curr_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_1</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_2</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv_Res"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_3</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Mun_Service"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_4</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Mun_Serv_Res"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_5</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_consult_pers"]+dataSetRow["count_cons_phone"]+dataSetRow["count_cons_int"]+dataSetRow["count_cims_email"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_6</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_consult_pers"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_7</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cons_phone"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_8</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cons_int"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_9</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cims_email"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_10</property>
+                    <expression name="expression" type="javascript">dataSetRow["curr_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_11</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_12</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_consult_pers"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_13</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv_Res"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_14</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Mun_Service"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_15</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Mun_Serv_Res"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_16</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_consult_pers"]+dataSetRow["count_cons_phone"]+dataSetRow["count_cons_int"]+dataSetRow["count_cims_email"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_17</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cons_phone"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_18</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cons_int"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_19</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_cims_email"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">cons_full</property>
+                    <text-property name="displayName">cons_full</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["cons_full"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_20</property>
+                    <expression name="expression" type="javascript">dataSetRow["cons_full"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Column Binding_21</property>
+                    <expression name="expression" type="javascript">dataSetRow["count_Gos_Serv"]+dataSetRow["count_Mun_Service"]+dataSetRow["cons_full"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="61">
+                <property name="width">0.5520833333333334in</property>
+            </column>
+            <column id="62">
+                <property name="width">0.9895833333333334in</property>
+            </column>
+            <column id="63">
+                <property name="width">0.59375in</property>
+            </column>
+            <column id="64">
+                <property name="width">1.0208333333333333in</property>
+            </column>
+            <column id="65">
+                <property name="width">0.6979166666666666in</property>
+            </column>
+            <column id="66">
+                <property name="width">0.9895833333333334in</property>
+            </column>
+            <column id="67">
+                <property name="width">0.7916666666666666in</property>
+            </column>
+            <column id="68">
+                <property name="width">0.5833333333333334in</property>
+            </column>
+            <column id="69">
+                <property name="width">0.6041666666666666in</property>
+            </column>
+            <column id="70">
+                <property name="width">0.7604166666666666in</property>
+            </column>
+            <column id="107">
+                <property name="width">0.7395833333333334in</property>
+            </column>
+            <column id="71">
+                <property name="width">0.9166666666666666in</property>
+            </column>
+            <column id="72">
+                <property name="width">0.9375in</property>
+            </column>
+            <column id="73">
+                <property name="width">1.0729166666666667in</property>
+            </column>
+            <header>
+                <row id="19">
+                    <property name="fontSize">9pt</property>
+                    <cell id="20">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="74">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Дата</text-property>
+                        </label>
+                    </cell>
+                    <cell id="21">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="75">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Количество физических лиц, обратившихся за получением государственной услуги</text-property>
+                        </label>
+                    </cell>
+                    <cell id="22">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="88">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">в т.ч выдан документ</text-property>
+                        </label>
+                    </cell>
+                    <cell id="23">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="76">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Количество физических лиц, обратившихся за получением муниципальной услуги</text-property>
+                        </label>
+                    </cell>
+                    <cell id="24">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="89">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">в т.ч выдан документ</text-property>
+                        </label>
+                    </cell>
+                    <cell id="25">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="77">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Количество физических лиц, обратившихся за консультацией</text-property>
+                        </label>
+                    </cell>
+                    <cell id="26">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="78">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">в т.ч. посредством личного посещения</text-property>
+                        </label>
+                    </cell>
+                    <cell id="27">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="79">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">по телефону</text-property>
+                        </label>
+                    </cell>
+                    <cell id="28">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="80">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">через интернет</text-property>
+                        </label>
+                    </cell>
+                    <cell id="29">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="81">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">по электронной почте</text-property>
+                        </label>
+                    </cell>
+                    <cell id="105">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="108">
+                            <property name="fontSize">8pt</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">ИТОГО по РГАУ МФЦ</text-property>
+                        </label>
+                    </cell>
+                    <cell id="30">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="82">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Количество физических лиц, обслуженных Управлением Росреестра РФ по РБ</text-property>
+                        </label>
+                    </cell>
+                    <cell id="31">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="83">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Количество физических лиц, обслуженных ФГБУ "Федеральная Кадастровая палата" по РБ</text-property>
+                        </label>
+                    </cell>
+                    <cell id="32">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <label id="84">
+                            <property name="fontSize">8pt</property>
+                            <text-property name="text">Количество физических лиц, обслуженных ГУП «Бюро технической инвентаризации Республики Башкортостан"</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row id="33">
+                    <cell id="34">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="93">
+                            <property name="resultSetColumn">Column Binding_10</property>
+                        </data>
+                    </cell>
+                    <cell id="35">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="94">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_11</property>
+                        </data>
+                    </cell>
+                    <cell id="36">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="96">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_13</property>
+                        </data>
+                    </cell>
+                    <cell id="37">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="97">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_14</property>
+                        </data>
+                    </cell>
+                    <cell id="38">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="98">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_15</property>
+                        </data>
+                    </cell>
+                    <cell id="39">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="104">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_20</property>
+                        </data>
+                    </cell>
+                    <cell id="40">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="95">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_12</property>
+                        </data>
+                    </cell>
+                    <cell id="41">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="100">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_17</property>
+                        </data>
+                    </cell>
+                    <cell id="42">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="101">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_18</property>
+                        </data>
+                    </cell>
+                    <cell id="43">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="102">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_19</property>
+                        </data>
+                    </cell>
+                    <cell id="106">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="109">
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">Column Binding_21</property>
+                        </data>
+                    </cell>
+                    <cell id="44">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="45">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                    <cell id="46">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

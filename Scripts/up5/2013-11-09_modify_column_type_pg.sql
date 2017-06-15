@@ -1,0 +1,1 @@
+ALTER TABLE soap_context ALTER COLUMN inputvars TYPE text;

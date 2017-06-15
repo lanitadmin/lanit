@@ -1,0 +1,1 @@
+alter table gossrvc_doc_package_item modify (doc_date  timestamp);

@@ -1,0 +1,1 @@
+CREATE INDEX gossrvc_doc_package_item_idx_3 ON GOSSRVC_DOC_PACKAGE_ITEM(PARENT_ID);

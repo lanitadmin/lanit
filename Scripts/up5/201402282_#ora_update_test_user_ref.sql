@@ -1,0 +1,1 @@
+update user_ref set is_test = 0 where is_test = 1

@@ -1,0 +1,1 @@
+update card_group set name_group = group_code;

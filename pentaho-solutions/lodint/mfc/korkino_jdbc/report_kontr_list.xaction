@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Печатные формы заявления на оказание услуги и расписки о представленных документах</title>
+  <version>1</version>
+  <logging-level/>
+  <documentation> 
+    <author>Тесля Дмитрий</author>  
+    <description>Печатные формы заявления на оказание услуги и расписки о представленных документах</description>  
+    <help/>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[pdf]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">PDF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Excel</entry>  
+          <entry key="report-output-type-id">xls</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Word</entry>  
+          <entry key="report-output-type-id">rtf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Web Page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Comma Separated Value</entry>  
+          <entry key="report-output-type-id">csv</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <processId type="string"> 
+      <sources> 
+        <request>processId</request> 
+      </sources> 
+    </processId>  
+    <activityId type="string"> 
+      <sources> 
+        <request>activityId</request> 
+      </sources> 
+    </activityId>  
+    <user type="string"> 
+      <sources> 
+        <request>user</request> 
+      </sources> 
+    </user>  
+    <outTypeDoc type="string"> 
+      <sources> 
+        <request>outTypeDoc</request> 
+      </sources>  
+      <default-value><![CDATA[kontr_list_1]]></default-value> 
+    </outTypeDoc>  
+    <outTypeDocList type="property-map-list"> 
+      <sources> 
+        <runtime>outTypeDocList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="id">kontr_list_1</entry>  
+          <entry key="desc">Контрольный лист стр.1</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="id">kontr_list_2</entry>  
+          <entry key="desc">Контрольный лист стр.2</entry> 
+        </property-map> 
+      </default-value> 
+    </outTypeDocList> 
+  </inputs>
+
+  <outputs> 
+    <content type="content"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </content> 
+  </outputs>
+
+  <resources> 
+    <report-definition1> 
+      <solution-file> 
+        <location>report_kontr_list_1.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition1>  
+    <report-definition> 
+      <solution-file> 
+        <location>report_kontr_list_2.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Promt params for Report</action-type>
+      <action-inputs> 
+        <outTypeDoc type="string"/>  
+        <outTypeDocList type="property-map-list"/>  
+        <outputType type="string"/>  
+        <outputTypeList type="property-map-list"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <outTypeDoc style="select"> 
+            <filter value-col-name="id" display-col-name="desc">outTypeDocList</filter>  
+            <title>Вывести на печать:</title> 
+          </outTypeDoc>  
+          <outputType style="select"> 
+            <title>Формат вывода:</title>  
+            <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter> 
+          </outputType> 
+        </selections> 
+      </component-definition> 
+    </action-definition>
+  
+    <actions> 
+      <condition><![CDATA[(processId!='')&&(activityId!='')]]></condition>  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript - Prepare parameters for Query to SHARK</action-type>
+        <action-inputs/>
+        <action-outputs> 
+          <beenName type="string"/>  
+          <method type="string"/>  
+          <variableList type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[beenName="lodint/WorklistBean/local";
+
+method="getActivityVars";
+
+variableList="Zayavlenie,Zayavitel,Y_Zayavitel";]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+        <action-type>Custom</action-type>
+        <action-inputs> 
+          <beenName type="string"/>  
+          <method type="string"/>  
+          <variableList type="string"/>  
+          <processId type="string"/>  
+          <activityId type="string"/> 
+        </action-inputs>
+        <action-outputs> 
+          <dsResult type="result-set"/>  
+          <dsMetaColumn type="string"/> 
+        </action-outputs>
+        <component-definition/> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript - Get Data from Shark</action-type>
+        <action-inputs> 
+          <dsResult type="result-set"/> 
+        </action-inputs>
+        <action-outputs> 
+          <application_id type="string"/>  
+          <person_id type="string"/>  
+          <jur_person_id type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[rcount=dsResult.getRowCount();
+
+if (rcount!=0){
+application_id=dsResult.getValueAt(0,0);
+
+person_id=dsResult.getValueAt(0,2);
+
+  if(dsResult.getValueAt(0,4) != null){
+    jur_person_id=dsResult.getValueAt(0,4);
+  }else{
+    jur_person_id=-1;
+  }
+}]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <action-definition> 
+        <component-name>JavascriptRule</component-name>
+        <action-type>JavaScript - Get current Date</action-type>
+        <action-outputs> 
+          <CURRENT_DATE_DAY type="string"/>  
+          <CURRENT_DATE_MONTH type="string"/>  
+          <CURRENT_DATE_YEAR type="string"/> 
+        </action-outputs>
+        <component-definition> 
+          <script><![CDATA[monthNames = new Array(12);
+monthNames[1] = "января";
+monthNames[2] = "февраля";
+monthNames[3] = "марта";
+monthNames[4] = "апреля";
+monthNames[5] = "мая";
+monthNames[6] = "июня";
+monthNames[7] = "июля";
+monthNames[8] = "августа";
+monthNames[9] = "сентября";
+monthNames[10] = "октября";
+monthNames[11] = "ноября";
+monthNames[12] = "декабря";
+
+currentDate = new Date();
+currentDay = currentDate.getDate();
+
+if(currentDay < 10){
+	CURRENT_DATE_DAY = "0" + currentDay.toString();
+}else{
+	CURRENT_DATE_DAY = currentDay.toString();
+}
+
+CURRENT_DATE_MONTH = monthNames[currentDate.getMonth() + 1];
+
+CURRENT_DATE_YEAR = (currentDate.getYear() + 1900).toString();]]></script> 
+        </component-definition> 
+      </action-definition>
+  
+      <actions> 
+        <condition><![CDATA[(outTypeDoc=="kontr_list_1")]]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-outputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <codeOfGenDoc type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[beenName="lodint/EntityToolsBean/local";
+
+method="getGeneratedDocNo";
+
+codeOfGenDoc="KontrList";]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+          <action-type>Custom</action-type>
+          <action-inputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <codeOfGenDoc type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <dsResult type="result-set"/>  
+            <dsMetaColumn type="string"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript - Get Receipt Number</action-type>
+          <action-inputs> 
+            <dsResult type="result-set"/> 
+          </action-inputs>
+          <action-outputs> 
+            <NUMBER type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[rcount=dsResult.getRowCount();
+
+if (rcount!=0){
+NUMBER=dsResult.getValueAt(0,0);
+}]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript - Prepare Query to DB</action-type>
+          <action-inputs> 
+            <user type="string"/>  
+            <application_id type="string"/>  
+            <jur_person_id type="string"/>  
+            <person_id type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string"/>  
+            <fields type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[beenName="lodint/SeamTestAction/local";
+
+method="getEJBQLTest";
+
+sql="select "+
+" u1.firstName,u1.lastName,u1.middleName, "+
+" (select MAX(r1.name) from u1.roles r1), "+
+" ga1.applicationNum,ga1.body,ga1.head, "+
+" ga1.applicationDate, "+
+" month(ga1.applicationDate), "+
+" dpi1.title, "+
+" as1.value, "+
+" ce1.name, "+
+" ce2.name, "+
+" dp1.authCode, "+
+" dp1.packNum, "+
+" (select pp1.localProcessId "+
+" from PortalProcess pp1 "+
+" where pp1.docPackageId=dp1.id), "+
+" dpi1.docClassId ";
+
+if(jur_person_id == -1){
+	sql=sql+" ,p1.lastName || ' ' || p1.firstName || ' ' || p1.middleName ";
+}else{
+	sql=sql+" ,a1.name ";
+}
+
+sql=sql+" from "+
+" User u1,GossrvcApplication ga1, "+
+" GossrvcDocPackageItem dpi1, CardElement ce1, GossrvcDocPackage dp1, "+
+" CardElement ce2, AppSetting as1 ";
+
+if(jur_person_id == -1){
+	sql=sql+" , Person p1 ";
+}else{
+	sql=sql+" , Agent a1 ";
+}
+
+sql=sql+" where "+
+" u1.login='{user}' and "+
+" ga1.id={application_id} and "+
+" ga1.gossrvcDocPackage=dpi1.gossrvcDocPackage and "+
+" ga1.gossrvcDocPackage.id=dp1.id and "+
+" dp1.serviceId=ce1.id and "+
+" dpi1.docValue=1 and "+
+" as1.id='ogv_name_acronym' and "+
+" dpi1.docClassId=ce2.id and "+
+" ga1.applicationDate=dpi1.docDate ";
+
+if(jur_person_id == -1){
+	sql=sql+" and p1.id={person_id} ";
+}else{
+	sql=sql+" and a1.id={jur_person_id} ";
+}
+
+fields="R_FIRST_NAME,R_LAST_NAME,R_MIDDLE_NAME,"+
+"R_DOLZHNOST,"+
+"APPLICATION_NUM,BODY,HEAD,"+
+"APPLICATION_DATE,"+
+"APPLICATION_DATE_MONTH,"+
+"DOC_TYPE_NAME,"+
+"OGV_NAME,"+
+"SERVICE,"+
+"DOC_TYPE,"+
+"AUTH_CODE,"+
+"PACK_NUM,"+
+"PROCESS_NUMBER,"+
+"DOC_CLASS_ID,"+
+"NAME";]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+          <action-type>Custom</action-type>
+          <action-inputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string"/>  
+            <fields type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <dsResult type="result-set"/>  
+            <dsMetaColumn type="string"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/>  
+            <CURRENT_DATE_DAY type="string"/>  
+            <CURRENT_DATE_MONTH type="string"/>  
+            <CURRENT_DATE_YEAR type="string"/>  
+            <NUMBER type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource" mapping="report-definition1"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+  
+      <actions> 
+        <condition><![CDATA[(outTypeDoc=="kontr_list_2")]]></condition>  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <application_id type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string"/>  
+            <fields type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[beenName="lodint/SeamTestAction/local";
+
+method="getEJBQLTest";
+
+sql="select "+
+" dpi1.title "+
+" from "+
+" GossrvcApplication ga1, GossrvcDocPackageItem dpi1 "+ 
+" where "+
+" ga1.id={application_id} and "+
+" ga1.gossrvcDocPackage=dpi1.gossrvcDocPackage and "+
+" dpi1.docValue=1 and dpi1.isResult=1 ";
+
+fields="DOC_OGV";]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+          <action-type>Custom</action-type>
+          <action-inputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string"/>  
+            <fields type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <dsResult type="result-set"/>  
+            <dsMetaColumn type="string"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <dsResult type="result-set"/> 
+          </action-inputs>
+          <action-outputs> 
+            <SERVICE_RESULT type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[rcount=dsResult.getRowCount();
+
+var SERVICE_RESULT='';
+
+if(rcount!=0){
+   var i=0;
+   for(i=0;i<rcount;i++){
+      if(i==0){
+         SERVICE_RESULT=dsResult.getValueAt(i,0);
+      }else{
+         SERVICE_RESULT=SERVICE_RESULT + ', ' +dsResult.getValueAt(i,0);
+      }
+   }
+}]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JavascriptRule</component-name>
+          <action-type>JavaScript</action-type>
+          <action-inputs> 
+            <user type="string"/>  
+            <application_id type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string"/>  
+            <fields type="string"/> 
+          </action-outputs>
+          <component-definition> 
+            <script><![CDATA[beenName="lodint/SeamTestAction/local";
+
+method="getEJBQLTest";
+
+sql="select "+
+" u1.firstName,u1.lastName,u1.middleName, "+
+" (select MAX(r1.name) from u1.roles r1), "+
+" ga1.applicationNum,ga1.body,ga1.head, "+
+" ga1.applicationDate, "+
+" month(ga1.applicationDate), "+
+" dpi1.title, "+
+" ce1.name, "+
+" ce2.name, "+
+" dp1.authCode, "+
+" dp1.packNum, "+
+" (select pp1.localProcessId "+
+" from PortalProcess pp1 "+
+" where pp1.docPackageId=dp1.id), "+
+" dpi1.docClassId, "+
+" (select MAX(dpi2.docDate) from GossrvcDocPackageItem dpi2 "+
+" where dpi2.gossrvcDocPackage=dpi1.gossrvcDocPackage), "+
+
+" (select MAX(ce3.name) from GossrvcOgvDoc god1, CardElement ce3 "+
+" where god1.resultDocTypeId=dpi1.docTypeId and "+
+" ce3.id=god1.ogvId), "+
+
+" dpi1.docDate "+
+" from "+
+" User u1,GossrvcApplication ga1, "+
+" GossrvcDocPackageItem dpi1, CardElement ce1, GossrvcDocPackage dp1, "+
+" CardElement ce2 "+
+" where "+
+" u1.login='{user}' and "+
+" ga1.id={application_id} and "+
+" ga1.gossrvcDocPackage=dpi1.gossrvcDocPackage and "+
+" ga1.gossrvcDocPackage.id=dp1.id and "+
+" dp1.serviceId=ce1.id and "+
+" dpi1.docValue=1 and "+
+" dpi1.docClassId=ce2.id and "+
+" ga1.applicationDate<dpi1.docDate "+
+" order by dpi1.docDate ";
+
+fields="R_FIRST_NAME,R_LAST_NAME,R_MIDDLE_NAME,"+
+"R_DOLZHNOST,"+
+"APPLICATION_NUM,BODY,HEAD,"+
+"APPLICATION_DATE,"+
+"APPLICATION_DATE_MONTH,"+
+"DOC_TYPE_NAME,"+
+"SERVICE,"+
+"DOC_TYPE,"+
+"AUTH_CODE,"+
+"PACK_NUM,"+
+"PROCESS_NUMBER,"+
+"DOC_CLASS_ID,"+
+"SERVICE_COMPLITE_DATE,"+
+"DOC_OGV,"+
+"DOC_DATE";]]></script> 
+          </component-definition> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+          <action-type>Custom</action-type>
+          <action-inputs> 
+            <beenName type="string"/>  
+            <method type="string"/>  
+            <sql type="string"/>  
+            <fields type="string"/> 
+          </action-inputs>
+          <action-outputs> 
+            <dsResult type="result-set"/>  
+            <dsMetaColumn type="string"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+  
+        <action-definition> 
+          <component-name>JFreeReportComponent</component-name>
+          <action-type>report</action-type>
+          <action-inputs> 
+            <output-type type="string" mapping="outputType"/>  
+            <data type="result-set" mapping="dsResult"/>  
+            <CURRENT_DATE_DAY type="string"/>  
+            <CURRENT_DATE_MONTH type="string"/>  
+            <CURRENT_DATE_YEAR type="string"/>  
+            <NUMBER type="string"/>  
+            <SERVICE_RESULT type="string"/> 
+          </action-inputs>
+          <action-resources> 
+            <report-definition type="resource"/> 
+          </action-resources>
+          <action-outputs> 
+            <report-output type="content" mapping="content"/> 
+          </action-outputs>
+          <component-definition/> 
+        </action-definition>
+ 
+      </actions>
+ 
+    </actions>
+ 
+  </actions> 
+</action-sequence>

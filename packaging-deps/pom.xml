@@ -1,0 +1,274 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ru.lanit.samara.core-process-ext</groupId>
+    <artifactId>extension-etalon</artifactId>
+    <version>1.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>packaging-deps</artifactId>
+  <name>Packaging shared dependencies</name>
+  <packaging>pom</packaging>
+	<dependencies>
+<!--     		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>ejbs</artifactId>
+			<type>ejb</type>
+			<exclusions>
+  				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>kladr</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>egr</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>shark-shared</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>ws-shared</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>${project.groupId}</groupId>
+					<artifactId>shark-client-api</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkcommonapi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkclientapi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkutilities-wmentity</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkinternalapi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkkernel-standard</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkadminapi</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>util</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.enhydra.shark</groupId>
+					<artifactId>sharkclientutilities-misc</artifactId>
+				</exclusion>
+
+
+				<exclusion>
+					<groupId>org.pentaho</groupId>
+					<artifactId>pentaho-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.pentaho</groupId>
+					<artifactId>pentaho-messages</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.pentaho</groupId>
+					<artifactId>pentaho-util</artifactId>
+				</exclusion>
+
+				<exclusion>
+		           	<groupId>org.hibernate.javax.persistence</groupId>
+		   			<artifactId>hibernate-jpa-2.0-api</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.jboss.jbossws</groupId>
+					<artifactId>jbossws-native-core</artifactId>
+				</exclusion>
+
+				<exclusion>
+					<groupId>org.eclipse.jdt</groupId>
+					<artifactId>core</artifactId>
+				</exclusion>
+				
+			</exclusions>
+		</dependency> -->
+
+		<!--<dependency>-->
+			<!--<groupId>org.drools</groupId>-->
+			<!--<artifactId>drools-core</artifactId>-->
+			<!--<exclusions>-->
+				<!--<exclusion>-->
+					<!--<groupId>org.jboss.jbossws</groupId>-->
+					<!--<artifactId>jbossws-native-core</artifactId>-->
+				<!--</exclusion>-->
+			<!--</exclusions>-->
+		<!--</dependency>-->
+        <dependency>
+        	<groupId>com.google.protobuf</groupId>
+        	<artifactId>protobuf-java</artifactId>
+        </dependency>
+<!--  
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>kladr</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>egr</artifactId>
+		</dependency> -->
+<!--  		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>coreps-core</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>${core.groupId}</groupId>
+			<artifactId>shark-persist</artifactId>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam</artifactId>
+			<version>${jboss.seam.version}</version>
+			<type>ejb</type>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.el</groupId>
+					<artifactId>el-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>shark-tool-agents</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.geronimo.specs</groupId>
+					<artifactId>geronimo-javamail_1.4_spec</artifactId>
+				</exclusion>
+			</exclusions>				
+		</dependency>
+
+
+		<!--
+			war dependenies,
+			http://maven.apache.org/plugins/maven-war-plugin/examples/skinny-wars.html
+		-->
+		<dependency>
+			<groupId>org.jboss.seam</groupId>
+			<artifactId>jboss-seam-ui</artifactId>
+		</dependency>
+		<!-- /war dependenies -->
+
+
+		<!-- shark engine -->
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkassignment-standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkassignment-xpdlstraightparticipantmapping
+			</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkcaching-lru</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkcaching-simple</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkeventaudit-notifying</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkeventaudit-smtp</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkinteroperability-wfxml</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharklogging-eaf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharklogging-standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkrepositorypersistence-filesystem</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkscripting-standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharksecurity-standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkutilities-compilerandloader</artifactId>
+		</dependency>
+<!-- 	<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkutilities-geronimo</artifactId>
+		</dependency> -->
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkutilities-map</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkutilities-misc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkutilities-quartz</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>sharkutilities-xpil</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>wrd</artifactId>
+		</dependency>
+       	<dependency>
+           <groupId>org.enhydra.shark</groupId>
+           <artifactId>util</artifactId>
+		</dependency>				
+<!--  	<dependency>
+			<groupId>org.enhydra.shark.engine</groupId>
+			<artifactId>js</artifactId>
+		</dependency> -->	
+		<dependency>
+      		<groupId>org.mozilla</groupId>
+      		<artifactId>rhino</artifactId>
+    	</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark</groupId>
+			<artifactId>sharktoolagent-standard</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.enhydra.shark</groupId>
+			<artifactId>sharkxpdlmodel</artifactId>
+		</dependency>
+		
+		<!-- /shark engine -->
+
+	</dependencies>
+
+</project>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="licenseList" type="licenseListType" />
+	<xs:element name="license" type="licenseType" />
+	<xs:complexType name="licenseListType">
+		<xs:sequence>
+			<xs:element ref="license" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="licenseType">
+		<xs:sequence>
+			<xs:element name="activityTypeId" type="xs:string"
+				nillable="true" />
+			<xs:element name="agent" type="agentType" nillable="true" />
+			<xs:element name="id" type="xs:long" minOccurs="0" />
+			<xs:element name="isIssued" type="xs:boolean" nillable="true" />
+			<xs:element name="licObjects" type="licObjectType"
+				nillable="true" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="licenseBSO" type="xs:string" minOccurs="0" />
+			<xs:element name="licenseDate" type="xs:dateTime"
+				nillable="true" />
+			<xs:element name="licenseEndDate" type="xs:dateTime"
+				nillable="true" />
+			<xs:element name="licenseNumber" type="xs:string"
+				nillable="true" />
+			<xs:element name="licenseSerie" type="xs:string" nillable="true" />
+			<xs:element name="state" type="xs:string" nillable="true" />
+			<xs:element name="statusId" type="xs:string" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="agentType">
+		<xs:sequence>
+			<xs:element name="inn" type="xs:string" nillable="true" />
+			<xs:element name="name" type="xs:string" nillable="true" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="licObjectType">
+		<xs:sequence>
+			<xs:element name="id" type="xs:long" minOccurs="0" />
+			<xs:element name="kladr" type="xs:string" minOccurs="0" />
+			<xs:element name="name" type="xs:string" minOccurs="0" />
+			<xs:element name="objType" type="xs:string" minOccurs="0" />
+			<xs:element name="isHeavyAlc" type="xs:boolean" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,24 @@
+Мы перешли на новый jackrabbit 2.6.5, jcr 2.0
+
+
+!!!Что надо сделать в вашем jboss перед запуском ear-а!!!
+1) Заменить jackrabbit-jca-1.6.2.rar на jackrabbit-jca-2.6.5.rar 
+в /opt/jboss-eap-6.1/standalone/deployments/ 
+(скачать с http://cloud.samara.lanit.ru/owncloud/public.php?service=files&t=ca78c7eadd732d52f1594d9edc418c5e)
+
+2) Скопировать jcr-2.0.jar и module.xml 
+в /opt/jboss-eap-6.1/modules/system/layers/base/javax/jcr/main/
+(скачать с http://cloud.samara.lanit.ru/owncloud/public.php?service=files&t=ca78c7eadd732d52f1594d9edc418c5e)
+
+3) Скорректировать описание узлов во всех репозитариях
+lodnsi, lodresource, mfcresource
+
+исправить /репозиторий/repository/nodetypes/custom_nodetypes.xml - удалить свойство primaryItemName="cs:name"
+
+4) Скорректировать конфиг /opt/jboss-eap-6.1/standalone/configuration/standalone*****.xml
+
+В тексте заменить jackrabbit-jca-1.6.2.rar на 
+
+
+Все. Все старые репозитории должны заработать без какой либо конвертации.
+Заливаю, так как надо потестить.

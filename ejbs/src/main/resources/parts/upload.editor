@@ -1,0 +1,15 @@
+					<h:panelGrid id="#{var.getId()}UpLoadGr">
+							<h:outputText
+								value="#{empty var.caption?'[нет]':var.caption} #{empty var.value?'(не сохранен)':''}" />
+							<h:panelGroup rendered="#{not empty var.value}" id="#{var.getId()}UpLoadPanLoadGr">
+								<a id="#{var.getId()}fileLink"
+									href="#{facesContext.externalContext.requestContextPath}/csresource/docpackdownload/#{var.value}/">
+								<h:outputText value="Скачать" /></a>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{var.writable}" id="#{var.getId()}UpLoadPanEditGr">
+								<a4j:commandLink id="#{var.getId()}fileEditLink"
+									value="#{empty var.caption ? 'Приложить' : 'Изменить'}"
+									onclick="document.body.style.cursor = 'wait';"
+									oncomplete="javascript:{Richfaces.showModalPanel('mp',{param1: '#{var.id}'}, {param1: '#{var.id}'}); document.body.style.cursor = 'default';}" />
+							</h:panelGroup>
+						</h:panelGrid>

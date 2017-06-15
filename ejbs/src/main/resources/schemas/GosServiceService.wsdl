@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="GosServiceService" targetNamespace="http://samara.lanit.ru/gossrvc/webservices" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://samara.lanit.ru/gossrvc/webservices" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <types>
+    <xs:schema targetNamespace="http://samara.lanit.ru/gossrvc/webservices" version="1.0" xmlns:tns="http://samara.lanit.ru/gossrvc/webservices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="login" type="tns:login"/>
+   <xs:element name="loginResponse" type="tns:loginResponse"/>
+   <xs:element name="startProcess" type="tns:startProcess"/>
+   <xs:element name="startProcessResponse" type="tns:startProcessResponse"/>
+   <xs:complexType name="login">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="username" type="xs:string"/>
+     <xs:element minOccurs="0" name="password" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="loginResponse">
+    <xs:sequence>
+     <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="startProcess">
+    <xs:sequence>
+     <xs:element minOccurs="1" name="portalProcessId" type="xs:string">
+     	<xs:annotation>
+     		<xs:documentation>Идентификатор процесса из портала</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element minOccurs="1" name="serviceId" type="xs:string">
+     	<xs:annotation>
+     		<xs:documentation>Идентификатор эталона услуги (оказания) в реестре</xs:documentation>
+     	</xs:annotation></xs:element>
+     <xs:element name="request" type="xs:base64Binary" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>XML данные по услуге</xs:documentation>
+     	</xs:annotation></xs:element>
+    </xs:sequence>
+   </xs:complexType>
+
+
+   <xs:complexType name="startProcessResponse">
+    <xs:sequence>
+     <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+   </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="GosService_login">
+    <part name="login" element="tns:login">
+    </part>
+  </message>
+  <message name="GosService_loginResponse">
+    <part name="loginResponse" element="tns:loginResponse">
+    </part>
+  </message>
+  <message name="GosService_startProcessResponse">
+    <part name="startProcessResponse" element="tns:startProcessResponse">
+    </part>
+  </message>
+  <message name="GosService_startProcess">
+    <part name="startProcess" element="tns:startProcess"></part>
+  </message>
+  <portType name="GosService">
+    <operation name="login" parameterOrder="login">
+      <input message="tns:GosService_login">
+    </input>
+      <output message="tns:GosService_loginResponse">
+    </output>
+    </operation>
+    <operation name="startProcess" parameterOrder="startProcess">
+      <input message="tns:GosService_startProcess">
+      </input>
+      <output message="tns:GosService_startProcessResponse">
+    </output>
+    </operation>
+  </portType>
+  <binding name="GosServiceBinding" type="tns:GosService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="login">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="startProcess">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="GosServiceService">
+    <port name="GosServicePort" binding="tns:GosServiceBinding">
+      <soap:address location="http://samara.lanit.ru/gossrvc/webservices"/>
+    </port>
+  </service>
+</definitions>

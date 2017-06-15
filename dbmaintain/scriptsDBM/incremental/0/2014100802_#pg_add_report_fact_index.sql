@@ -1,0 +1,10 @@
+CREATE INDEX "report_fact_param_idx" ON "mfc"."report_fact_param"  USING btree ("param_id");
+CREATE INDEX "report_fact_time_idx" ON "mfc"."report_fact_param"  USING btree ("time_id");
+CREATE INDEX "report_fact_orgunit_idx" ON "mfc"."report_fact_param"  USING btree ("org_unit_id");
+CREATE INDEX "report_fact_service_idx" ON "mfc"."report_fact_param"  USING btree ("service_id");
+CREATE INDEX "report_fact_ogv_idx" ON "mfc"."report_fact_param"  USING btree ("ogv_id");
+CREATE INDEX "report_fact_category_idx" ON "mfc"."report_fact_param"  USING btree ("category_id");
+CREATE INDEX "report_fact_kontroler_idx" ON "mfc"."report_fact_param"  USING btree ("kontroler_id");
+CREATE INDEX "report_fact_operator_idx" ON "mfc"."report_fact_param"  USING btree ("operator_id");
+CREATE INDEX "report_fact_custom_idx" ON "mfc"."report_fact_param"  USING btree ("custom_id");
+CREATE INDEX "report_time_year_idx" ON "mfc"."report_dimension_time"  USING btree ("year_id");

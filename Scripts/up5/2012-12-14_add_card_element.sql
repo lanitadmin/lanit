@@ -1,0 +1,54 @@
+INSERT INTO CARD (card_code, card_name, owner, group_code) values ('STypeDoh', 'Вид дохода', null, 'Услуги');
+
+insert into card_element (id, name, owner, card_code) values ('ZarPlata', 'Заработная плата', null, 'STypeDoh');
+
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_2', 'Суммы, начисленные за сверхурочную работу', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_3', 'Суммы, начисленные за работу в выходные и праздничные дни', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_4', 'Заработная плата, сохраняемая при увольнении в связи с ликвидацией организации', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_5', 'Заработная плата при увольнении в связи с сокращением численности или штата работников', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_6', 'Денежное довольствие', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_7', 'Авторское вознаграждение', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_8', 'Оплата работ по договорам, заключаемым в соответствии с гражданским законодательством РФ', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_9', 'Ежемесячное пожизненное содержание судей, вышедших в отставку', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_10', 'Дотация на общественное питание', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_11', 'Доход от избирательных комиссий', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_12', 'Доходы по акциям и другие доходы от участия в управлении собственностью организации', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_13', 'Доходы от занятий предпринимательской деятельностью', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_14', 'Доход от личного подсобного хозяйства', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_15', 'Алименты, получаемые членами семьи', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_16', 'Стипендия', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_17', 'Государственная социальная помощь', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_18', 'Выходное пособие, выплачиваемое при увольнении', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_19', 'Единовременное пособие при увольнении с военной службы', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_20', 'Пособие по безработице', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_21', 'Пособие по временной нетрудоспособности', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_22', 'Пособие по беременности и родам', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_23', 'Единовременное пособие женщинам, вставшим на учет в медицинских учреждениях в ранние сроки беременности', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_24', 'Ежемесячное пособие безработным супругам военнослужащих', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_25', 'Ежемесячная компенсация неработающим женам работников ОВД', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_26', 'Продовольственное обеспечение военнослужащих', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_27', 'Денежная компенсация за неиспользованный отпуск', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_28', 'Компенсация при выходе в отставку', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_29', 'Компенсационные выплаты', null, 'STypeDoh');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_30', 'Другие доходы', null, 'STypeDoh');
+
+INSERT INTO CARD (card_code, card_name, owner, group_code) values ('STypeDocUL', 'Тип документа, удостоверяющего личность', null, 'Услуги');
+
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_34', 'Паспорт гражданина Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_35', 'Миграционная карта', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_36', 'Заграничный Паспорт гражданина Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_37', 'Дипломатический паспорт гражданина Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_38', 'Водительское удостоверение Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_39', 'Полис обязательного медицинского страхования Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_40', 'Документ, удостоверяющий личность, предъявленный при пересечении границы Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_41', 'Свидетельство о рождении гражданина', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_42', 'Паспорт моряка (удостоверение личности моряка)', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_43', 'Удостоверение личности военнослужащего Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_44', 'Военный билет', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_45', 'Временное удостоверение личности гражданина Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_46', 'Справка об освобождении из мест лишения свободы', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_47', 'Паспорт иностранного гражданина (лица без гражданства)', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_48', 'Вид на жительство в Российской Федерации', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_49', 'Разрешение на временное проживание', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_50', 'Удостоверение беженца', null, 'STypeDocUL');
+insert into card_element (id, name, owner, card_code) values ('ZhS07112012_51', 'Паспорт гражданина СССР образца 1974 года', null, 'STypeDocUL');

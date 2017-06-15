@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Docs_List">
+		<xs:annotation>
+			<xs:documentation>Список документов в ответе от АИС ГКУ</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Document" minOccurs="0" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>Описание передаваемого документа</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Doc_ID">
+								<xs:annotation>
+									<xs:documentation>Идентификатор документа / относительный URL документа в хранилище</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Doc_Name">
+								<xs:annotation>
+									<xs:documentation>Название документа</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Attach" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Сканкопия</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Mime_type" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Тип данных</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="File_name" type="xs:string">
+											<xs:annotation>
+												<xs:documentation>Имя файла</xs:documentation>
+											</xs:annotation>
+										</xs:element>													
+										<xs:element name="Attach_data" type="xs:base64Binary">
+											<xs:annotation>
+												<xs:documentation>Данные</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>										
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>				
+</xs:schema>

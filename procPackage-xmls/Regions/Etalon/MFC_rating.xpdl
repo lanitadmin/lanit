@@ -1,0 +1,1611 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="MFC_rating" Name="Оценка качества оказания услуг" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>LANIT-Samara</Vendor>
+        <Created>2008-09-27 19:47:47</Created>
+    </PackageHeader>
+    <RedefinableHeader>
+        <Author>Zhnyakin</Author>
+    </RedefinableHeader>
+    <ConformanceClass GraphConformance="NON_BLOCKED"/>
+    <Script Type="text/javascript"/>
+    <Participants>
+        <Participant Id="Registrator" Name="Ответственный за прием">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Vidavatel" Name="Ответственный за выдачу">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Vnutr_Kurier" Name="Внутренний курьер">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Specialist_arh" Name="Специалист отдела архитектуры и градостроительства района">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Specialist_UMI" Name="Специалист управления муниципального имущества">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="OGV_part1" Name="Специалист ОГВ распределитель">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="OGV_part2" Name="Специалист ОГВ исполнитель">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Informator" Name="Сотрудник, ответственный за информирование и консультирование">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+    </Participants>
+    <Applications>
+        <Application Id="assignVariable" Name="assignVariable">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createDocPackage" Name="createDocPackage">
+            <FormalParameters>
+                <FormalParameter Id="Service" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="Komplekt_doc" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="goalId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcDocPackagePlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeEntityMethod" Name="invokeEntityMethod">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodArgs" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodResult" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeObjectMethodAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createApplication" Name="createApplication">
+            <FormalParameters>
+                <FormalParameter Id="Service" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="appNumb" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdApplication" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcApplicationPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createRequest" Name="createRequest">
+            <FormalParameters>
+                <FormalParameter Id="ogvId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdRequest" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="reqNumb" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsFromOgv" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcRequestPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createReject" Name="createReject">
+            <FormalParameters>
+                <FormalParameter Id="serviceid" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdReject" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+        </Application>
+        <Application Id="getEntityPropertiesByLong" Name="Получить свойства объекта (long)">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="propertiesList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="variableList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetObjectPropsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="completeActivity" Name="Завершитть действие">
+            <FormalParameters>
+                <FormalParameter Id="activityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CSCompleteActivity"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="assignVariableInt" Name="Задать целочисленную переменную">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="setEntityPropertiesByLong" Name="Задать свойства объекта (long)">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="propertiesList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="variableList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSetObjectPropsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="printDocTemplate">
+            <FormalParameters>
+                <FormalParameter Id="docTypeId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackageId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="printDocCounter" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="printDocId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.PrintDocPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="getRefPropAgent" Name="Получить дополнительное поле справочника">
+            <FormalParameters>
+                <FormalParameter Id="element" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="field" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetRefPropAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="SetupForkProcessesForOgvRequest" Name="SetupForkProcessesForOgvRequest">
+            <FormalParameters>
+                <FormalParameter Id="komplektVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="forkSetupVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ogvVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ddlVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="tddlVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeSumVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeValidateVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeMaxVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SetupForkProcessesForOgvRequest"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="ForkProcessesBySetup" Name="ForkProcessesBySetup">
+            <FormalParameters>
+                <FormalParameter Id="setupId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ForkProcessesBySetup"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="ProcessRequestTerminate" Name="Завершение экземпляров процессов">
+            <FormalParameters>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ProcessRequestTerminate"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="loginPart">
+            <FormalParameters>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SetLoggedUser"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="activityTerminate" Name="Завершение шагов процессов">
+            <FormalParameters>
+                <FormalParameter Id="procId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="actId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varValue" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="inCurrentProcess" Mode="IN">
+                    <DataType>
+                        <BasicType Type="BOOLEAN"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ActivityTerminatePlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="WSTransferRequest2Ogv" Name="Вызов Веб-сервиса передачи запроса в ОГВ">
+            <FormalParameters>
+                <FormalParameter Id="Event" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="reqId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ogvId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsExpected" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="kontrPart" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.RaiseEventPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryResultInt" Name="Выполнение sql запроса (рез-т: число)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsEjbqlResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryVarParamsIntResult" Name="Выполнение параметризованного запроса(INTEGER)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params_variable" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsVarParamsEjbResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryVarParamsStringResult" Name="Выполнение параметризованного запроса(STRING)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params_variable" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsVarParamsEjbResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeWithParams" Name="Вызов метода с параметрами">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="object" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="method" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="args" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeObjectMethodWithParamsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryResultStr" Name="Выполнение sql запроса (рез-т: строка)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsEjbqlResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="getAppSetting" Name="Получение значения параметра из настроек (AppSetting)">
+            <FormalParameters>
+                <FormalParameter Id="paramName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetAppSetting"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="savePackStatus" Name="Запись статуса пакет документов">
+            <Description>Запись статуса пакет документов</Description>
+            <FormalParameters>
+                <FormalParameter Id="id" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                    <Description>id пакета документов</Description>
+                </FormalParameter>
+                <FormalParameter Id="status" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>код статуса</Description>
+                </FormalParameter>
+                <FormalParameter Id="mode" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>1-Начало,2-Конец,пусто - время не меняем</Description>
+                </FormalParameter>
+                <FormalParameter Id="ddl" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varsName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>Список переменных через запятую</Description>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSavePackStatus"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="savePackStatusFull" Name="Запись статуса пакет документов Full">
+            <FormalParameters>
+                <FormalParameter Id="id" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="status" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mode" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ddl" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varsName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="begStatus" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="endStatus" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSavePackStatus"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeSeamContextClassMethod" Name="Вызов метода экземпляра класса в контексте Seam">
+            <FormalParameters>
+                <FormalParameter Id="name" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="resultMsg" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeComponentMethod"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="sendRequestToOGV" Name="Передача запроса в ОГВ (электронно)">
+            <FormalParameters>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="requestId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="modeSend" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SendRequestToOGV"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="assignVariableDate" Name="Задать переменную-дату">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="DATETIME"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="DATETIME"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+    </Applications>
+    <DataFields>
+        <DataField Id="Zayavlenie" IsArray="FALSE" Name="Заявление">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.GossrvcApplication"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="group" Value="*Заявление"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Service" IsArray="FALSE" Name="Услуга">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.cardsystem.CardElement"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты обращения"/>
+                <ExtendedAttribute Name="entityFilter" Value="[parents].parentCardElement.id = %MainService%"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="entityHome" Value="sserviceextHome"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Zayavitel" IsArray="FALSE" Name="Заявитель">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.common.ObjectGroup"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты заявителя"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Zapros" IsArray="FALSE" Name="Запрос">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.GossrvcRequest"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="group" Value="*Запрос"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Komplekt_doc" IsArray="FALSE" Name="Комплект документов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.GossrvcDocPackage"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="group" Value="*Комплект документов"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Paket_doc" IsArray="FALSE" Name="Пакет документов">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="Svc_Result" IsArray="FALSE" Name="Результат услуги">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SDocType"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты обращения"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Gos_Org" IsArray="FALSE" Name="Орган государственной власти">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>mfc</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SGosOrg"/>
+                <ExtendedAttribute Name="entityFilter" Value="(id in (%ogvList%))"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты запроса"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Target" IsArray="FALSE" Name="Цель использования земельного участка">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="STarget"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты запроса"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="togo" IsArray="FALSE" Name="Селектор">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="switchVariable" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Where_go" IsArray="FALSE" Name="Определитель ветки процесса">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="areAllDocs" IsArray="FALSE" Name="Результат проверки всех обязательных документов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="isPackFull" IsArray="FALSE" Name="Результат проверки полноты комплекта документов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="areTheseDocs" IsArray="FALSE" Name="Конкретные документы">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="group" Value="Реквизиты запроса"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Result_zapros" IsArray="FALSE" Name="Результат запроса">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="group" Value="Реквизиты запроса"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="docsFromOgv" IsArray="FALSE" Name="Ожидаемые документы">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="group" Value="Реквизиты запроса"/>
+                <ExtendedAttribute Name="entityClass" Value="SDocType"/>
+                <ExtendedAttribute Name="entityClass2" Value="SDocClass"/>
+                <ExtendedAttribute Name="multiple" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Kontr_part" IsArray="FALSE" Name="Ответственный за контроль">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="Kontroler"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты обращения"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Y_Zayavitel" IsArray="FALSE" Name="Заявитель Юр лицо">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.lodent.Agent"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты заявителя"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Zayavitel_type" IsArray="FALSE" Name="Тип заявителя">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SZType"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты заявителя"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Rayon" IsArray="FALSE" Name="Отдела архитектуры">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="Specialist_arh"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="SrcIntegrationInfo" IsArray="FALSE" Name="SrcIntegrationInfo">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="LastActivity" IsArray="FALSE" Name="LastActivity">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="dopLevel" IsArray="FALSE" Name="Номер расписки на донос документов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="ogvList" IsArray="FALSE" Name="Орган государственной власти (список)">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="group" Value="Реквизиты запроса"/>
+                <ExtendedAttribute Name="entityClass" Value="SGosOrg"/>
+                <ExtendedAttribute Name="multiple" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="printDocId" IsArray="FALSE" Name="Документ для печати">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.common.PrintDoc"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="group" Value="*Документ для печати"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="GUID" IsArray="FALSE" Name="GUID">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>2314</InitialValue>
+        </DataField>
+        <DataField Id="CurrentActivityType" IsArray="TRUE" Name="CurrentActivityType">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="ddl" IsArray="FALSE" Name="Срок запроса (дн)">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="srvDdl" IsArray="FALSE" Name="Срок оказания услуги">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="forkProcessSetup" IsArray="FALSE" Name="Список запросов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.common.ForkProcessSetup"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="forkPackageId" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>MFC_plus</InitialValue>
+        </DataField>
+        <DataField Id="forkProcessId" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>Zapros</InitialValue>
+        </DataField>
+        <DataField Id="parentActivity" IsArray="FALSE" Name="Действие головного процесса">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="selectCDoc" IsArray="FALSE" Name="Выбор комплекта документов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.GossrvcDocPackage"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Registr_part" IsArray="FALSE" Name="Ответственный за прием">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="Registrator"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Vid_part" IsArray="FALSE" Name="Ответственный за выдачу">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="Vidavatel"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="nameGroup" IsArray="FALSE" Name="Имя группы заявителей">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>Заявители</InitialValue>
+        </DataField>
+        <DataField Id="komment" IsArray="FALSE" Name="Комментарий">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="length" Value="1024"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="level" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>2</InitialValue>
+        </DataField>
+        <DataField Id="typeDoc" IsArray="FALSE" Name="Тип документа">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SDocType"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="docClass" IsArray="FALSE" Name="Вид документа">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SDocClass"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="ReceiptNumb" IsArray="FALSE" Name="Номер расписки">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="generateDocNo" Value="GosSrvcReceipt"/>
+                <ExtendedAttribute Name="group" Value="*Номер расписки"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="ddlDopDoc" IsArray="FALSE" Name="Срок ожидания дополнительных документов">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="selectAppl" IsArray="FALSE" Name="Выбор заявления">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.GossrvcApplication"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="RegistrJournal" IsArray="FALSE" Name="Журнал регистратора">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.journals.GossrvcRegistratorJournal"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Date" IsArray="FALSE" Name="Текущая дата">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+        </DataField>
+        <DataField Id="infoResult" IsArray="FALSE" Name="Информация о результате">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="MainService" IsArray="FALSE" Name="Обобщающая услуга">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SService"/>
+                <ExtendedAttribute Name="entityFilter" Value="parents.size = 0"/>
+                <ExtendedAttribute Name="group" Value="Реквизиты обращения"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="reqadm" IsArray="FALSE" Name="Обращение">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="length" Value="1024"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="call" IsArray="FALSE" Name="Уведомлять заявителя по телефону">
+            <DataType>
+                <BasicType Type="BOOLEAN"/>
+            </DataType>
+        </DataField>
+        <DataField Id="reasonReject" IsArray="FALSE" Name="Причина отказа">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="length" Value="1024"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="OGV_part1" IsArray="FALSE" Name="Специалист ОГВ1">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="OGV_part1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="longTemp" IsArray="FALSE" Name="longTemp">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="is_resieve" IsArray="FALSE" Name="is_resieve">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>0</InitialValue>
+        </DataField>
+        <DataField Id="notice" IsArray="FALSE" Name="Примечание">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="kontroller" IsArray="FALSE" Name="Ответственный за контроль">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="group" Value="Реквизиты обращения"/>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.common.Kontroller"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="OGV_part2" IsArray="FALSE" Name="Специалист ОГВ2">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="participantSource" Value="OGV_part2"/>
+                <ExtendedAttribute Name="entityFilter" Value="exists (select r from RoleEnt r join r.users us WHERE r.code=:Gos_Org and us.login=u.login)"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="dateServEnd" IsArray="FALSE" Name="Плановая дата окончания услуги">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+        </DataField>
+        <DataField Id="factDateServEnd" IsArray="FALSE" Name="Фактическая дата окончания услуги">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+        </DataField>
+        <DataField Id="userId" IsArray="FALSE" Name="userId">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <Description>Тип запуска процесса. Не null - автоматически, null - вручную</Description>
+        </DataField>
+        <DataField Id="TypeApplicant" IsArray="FALSE" Name="Категория заявителя">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+        <DataField Id="Goal" IsArray="FALSE" Name="Цель услуги">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.gossrvc.GossrvcServiceDocTree"/>
+                <ExtendedAttribute Name="entityCombo"/>
+                <ExtendedAttribute Name="entityFilter" Value="a.serviceId.id  = %Service% and  ([typeApplicants:LEFT].id =  %TypeApplicant%  or  %TypeApplicant%  = 'null' or a.typeApplicants.size = 0) and a.parent is null"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="isPortal" IsArray="FALSE" Name="С портала">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>0</InitialValue>
+            <Description>0 - обычная подача, 1 - с портала</Description>
+        </DataField>
+        <DataField Id="selectOwner" IsArray="FALSE" Name="Место выдачи результата">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.sed.OrgUnit"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="strTemp" IsArray="FALSE" Name="strTemp">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <InitialValue>""</InitialValue>
+        </DataField>
+        <DataField Id="owner" IsArray="FALSE" Name="Организационная единица">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.sed.OrgUnit"/>
+                <ExtendedAttribute Name="orgUnitSource"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="waitDate" IsArray="FALSE" Name="Крайний срок предоставления недостающих документов">
+            <DataType>
+                <BasicType Type="DATETIME"/>
+            </DataType>
+            <InitialValue>null</InitialValue>
+        </DataField>
+        <DataField Id="tddl" IsArray="FALSE" Name="в рабочих днях">
+            <DataType>
+                <BasicType Type="BOOLEAN"/>
+            </DataType>
+            <InitialValue>false</InitialValue>
+        </DataField>
+        <DataField Id="TypeConst" IsArray="FALSE" Name="Вид обращения заявителя за консультацией">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="org.cp.cardsystem.CardElement"/>
+                <ExtendedAttribute Name="embedded" Value="1"/>
+                <ExtendedAttribute Name="entityHome" Value="appealtypeHome"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="docWait" IsArray="FALSE" Name="Код документа, который мы ожидаем.">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="entityClass" Value="SDocType"/>
+            </ExtendedAttributes>
+        </DataField>
+    </DataFields>
+    <WorkflowProcesses>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="Reg_lichno1" Name="Формирование карточки для оценки качества">
+            <ProcessHeader>
+                <Created>2008-09-03 11:16:27</Created>
+                <Description>Для старта процесса необходимо определить следующие значения:
+- Способ обращения заявителя
+	- лично, по почте
+	- в электронной форме
+- Заявитель (Если заявитель уже обращался, необходимо найти и выбрать его из справочника. Если заявитель обратился в первый раз, необходима регистрация в справочнике заявителей)
+- Услуга (Выбор из справочника услуг)</Description>
+            </ProcessHeader>
+            <DataFields>
+                <DataField Id="Zayavitel" IsArray="FALSE" Name="Заявитель">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                    <InitialValue>null</InitialValue>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="entityClass" Value="org.cp.common.ObjectGroup"/>
+                        <ExtendedAttribute Name="group" Value="Реквизиты заявителя"/>
+                        <ExtendedAttribute Name="embedded" Value="1"/>
+                        <ExtendedAttribute Name="entityHome" Value="objectgroupratingHome"/>
+                    </ExtendedAttributes>
+                </DataField>
+            </DataFields>
+            <Activities>
+                <Activity Id="Reg_lichno_act2" Name="Создание эталонного перечня документов">
+                    <Implementation>
+                        <Tool Id="createDocPackage" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>Service</ActualParameter>
+                                <ActualParameter>Komplekt_doc</ActualParameter>
+                                <ActualParameter>Zayavitel</ActualParameter>
+                                <ActualParameter>Goal</ActualParameter>
+                                <ActualParameter>Komplekt_doc</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="120,60"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="591,106"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act3" Name="Выбрать (зарегистрировать) заявителя">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Registrator</Performer>
+                    <StartMode>
+                        <Manual/>
+                    </StartMode>
+                    <FinishMode>
+                        <Manual/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="173,61"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="Registrator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="172,51"/>
+                        <ExtendedAttribute Name="readable" Value="Zayavitel,Registr_part,komment"/>
+                        <ExtendedAttribute Name="writable" Value="Zayavitel,komment"/>
+                        <ExtendedAttribute Name="required" Value="Zayavitel"/>
+                        <ExtendedAttribute Name="noSaveAcceptButton"/>
+                        <ExtendedAttribute Name="union" Value="start"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act1" Name="Создание группы заявителей">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"org.cp.common.ObjectGroup"</ActualParameter>
+                                <ActualParameter>Zayavitel</ActualParameter>
+                                <ActualParameter>"groupName"</ActualParameter>
+                                <ActualParameter>"nameGroup"</ActualParameter>
+                                <ActualParameter>Zayavitel</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="loginPart" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>Registr_part</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="assignVariableInt" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>Math.floor(Math.random()*100000000001)</ActualParameter>
+                                <ActualParameter>GUID</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="117,60"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="201,46"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act4" Name="C очереди или нет">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="Reg_lichno_tra9"/>
+                                    <TransitionRef Id="Reg_lichno_tra10"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="93,132"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act12" Name="Инициализация">
+                    <Implementation>
+                        <Tool Id="loginPart" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>Registr_part</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="assignVariableInt" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>Math.floor(Math.random()*100000000001)</ActualParameter>
+                                <ActualParameter>GUID</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="67,61"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="97,42"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act7" Name="Установка переменных обощающей услуги, услуги, цели">
+                    <Implementation>
+                        <Tool Id="getEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"org.cp.common.ObjectGroup"</ActualParameter>
+                                <ActualParameter>Zayavitel</ActualParameter>
+                                <ActualParameter>"mainServiceId,serviceId,goalId,callFromSelectedObject"</ActualParameter>
+                                <ActualParameter>"MainService,Service,Goal,call"</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>Registrator</Performer>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="137,99"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="Registrator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="415,48"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act9">
+                    <Route/>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="FreeTextExpressionParticipant"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="729,80"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Reg_lichno_act31" Name="Распечатать карточку оценки качества">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>Registrator</Performer>
+                    <StartMode>
+                        <Manual/>
+                    </StartMode>
+                    <FinishMode>
+                        <Manual/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="152,64"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="Registrator"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="627,47"/>
+                        <ExtendedAttribute Name="readable" Value="Zayavitel,Registr_part,Komplekt_doc,komment"/>
+                        <ExtendedAttribute Name="writable"/>
+                        <ExtendedAttribute Name="required"/>
+                        <ExtendedAttribute Name="noSaveAcceptButton"/>
+                        <ExtendedAttribute Name="union" Value="start"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="Reg_lichno_act4" Id="Reg_lichno_tra9" To="Reg_lichno_act12">
+                    <Condition Type="CONDITION">Zayavitel != null</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="116,312"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act4" Id="Reg_lichno_tra10" To="Reg_lichno_act1">
+                    <Condition Type="CONDITION">Zayavitel == null</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="169,267"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act3" Id="Reg_lichno_tra12" Name="Выполнить" To="Reg_lichno_act7">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="381,73"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act7" Id="Reg_lichno_tra13" To="Reg_lichno_act2">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="474,353"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act2" Id="Reg_lichno1_tra1" To="Reg_lichno_act31">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="666,143"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act31" Id="Reg_lichno1_tra2" Name="Завершить" To="Reg_lichno_act9">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="756,174"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act12" Id="Reg_lichno1_tra3" To="Reg_lichno_act3">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="128,81"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Reg_lichno_act1" Id="Reg_lichno1_tra4" To="Reg_lichno_act3">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_SPLINE"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=FreeTextExpressionParticipant,CONNECTING_ACTIVITY_ID=Reg_lichno_act9,X_OFFSET=780,Y_OFFSET=242,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=FreeTextExpressionParticipant,CONNECTING_ACTIVITY_ID=Reg_lichno_act4,X_OFFSET=76,Y_OFFSET=249,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="Registrator;FreeTextExpressionParticipant"/>
+                <ExtendedAttribute Name="proc_identity" Value="Zayavitel,Service,Komplekt_doc"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="EDITING_TOOL" Value="OpenIcar Modeler"/>
+        <ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="1.0-1-C-20071102-1425"/>
+        <ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+        <ExtendedAttribute Name="onCreateTask" Value="org.cp.gossrvc.integration.CallPortalCreateTask"/>
+        <ExtendedAttribute Name="onStartTask" Value="org.cp.gossrvc.integration.CallPortalStartTask"/>
+        <ExtendedAttribute Name="onTransition" Value="org.cp.gossrvc.integration.CallPortalCompleteTask"/>
+    </ExtendedAttributes>
+</Package>

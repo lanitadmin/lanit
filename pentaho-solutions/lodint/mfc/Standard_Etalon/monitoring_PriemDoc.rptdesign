@@ -1,0 +1,1014 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.DataSetForCube.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.DataSetForCube.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.DataSetForCube.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.DataSetForCube.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.width</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.height</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="Data Cube - DataSetForCube.DataSetForCube.x">265</property>
+    <property name="Data Cube - DataSetForCube.DataSetForCube.y">13</property>
+    <property name="Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.x">52</property>
+    <property name="Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.y">55</property>
+    <property name="Data Cube - DataSetForCube.DataSetForCube.width">150</property>
+    <property name="Data Cube - DataSetForCube.DataSetForCube.height">200</property>
+    <property name="Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.width">150</property>
+    <property name="Data Cube - DataSetForCube.GroupEt.NewTabularHierarchy2.height">200</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="90">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="91">
+            <text-property name="helpText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="stDt" id="410">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="concealValue">true</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="user" id="593">
+            <property name="hidden">true</property>
+            <text-property name="helpText">Пользователь</text-property>
+            <text-property name="promptText">Пользователь</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="orgUnitCode" id="596">
+            <text-property name="helpText">Организационная единица</text-property>
+            <text-property name="promptText">Организационная единица</text-property>
+            <property name="valueType">dynamic</property>
+            <property name="dataSetName">DataSetOrgUnit</property>
+            <expression name="valueExpr" type="javascript">dataSetRow["code"]</expression>
+            <expression name="labelExpr" type="javascript">dataSetRow["name"]</expression>
+            <expression name="sortByColumn">dataSetRow["name"]</expression>
+            <property name="sortDirection">asc</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">false</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="85"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="DataSetData" id="92">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["startDate"],params["endDate"]);
+
+totalrows = 1;
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+}
+else{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetForCube" id="111">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">categ_Uslugi</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">categ_Uslugi_name</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">dateRecord</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">priority</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">test</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">categ_Uslugi</property>
+                </structure>
+                <structure>
+                    <property name="columnName">categ_Uslugi_name</property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateRecord</property>
+                </structure>
+                <structure>
+                    <property name="columnName">priority</property>
+                </structure>
+                <structure>
+                    <property name="columnName">test</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">categ_Uslugi</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">categ_Uslugi_name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">dateRecord</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">priority</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">test</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+stDate = clazzConvert.getOutDate(params["startDate"]);
+edDate = clazzConvert.getOutDate(params["endDate"]);
+
+codeOrgUn = params["orgUnitCode"];
+
+listOrgUnitForSearch = null;
+if (codeOrgUn == "all"){ //Получаем список оргюнитов
+	listOrgUnitForSearch = clazzShark.getEntityManagerShark().createQuery
+		(
+			"select orgUn.owner from  OrgUnit orgUn where orgUn.owner is not null"
+		).getResultList();
+}else { //делаем лист, с 1 значением
+	listOrgUnitForSearch = 	clazzShark.getEntityManagerShark().createQuery
+		(
+			"select orgUn.owner from  OrgUnit orgUn where orgUn.owner=:code "
+		).setParameter("code", codeOrgUn).getResultList();
+}
+  
+ 
+ listCat = clazzShark.getEntityManagerLod().createQuery(
+     " select ce.id from CardElement ce where ce.card.cardCode = 'SCatServ'"
+).getResultList();
+
+result = clazzShark.getEntityManagerShark().createQuery(
+"select cef.fieldStringValue, ps.begins "+
+" from PackStatus ps,CardElement ce ,CardElementFieldValue cef  "+
+" where  "+
+"  ps.gossrvcDocPackage.serviceId = ce.id and "+
+"  ps.begins between :stDate and :edDate  and  "+
+"  ps.status.code = 'forRaspred' and  "+
+"  cef.cardElement.id = ce.id and "+
+"  cef.cardField.fieldName ='catService' "+
+"  and ps.owner in (:listOwner) "
+ ).setParameter("stDate", stDate)
+ .setParameter("edDate", edDate)
+ .setParameter("listOwner", listOrgUnitForSearch)
+ .getResultList();
+ 
+ 
+ result2 = clazzShark.getEntityManagerShark().createQuery(
+"select cef.fieldStringValue, ps.begins"+
+" from PackStatus ps join ps.vars var,CardElement ce ,CardElementFieldValue cef "+
+" where  "+
+"  ps.gossrvcDocPackage.packNum = 'dpForCons' and "+
+"  ps.begins between :stDate and :edDate and  "+
+"  ps.status.code = 'forRaspred' and  "+
+"  var.definitionId = 'Service' and     "+
+"  ce.id = var.stringValue  and " +
+"  cef.cardElement.id = ce.id and "+
+"  cef.cardField.fieldName ='catService' "+
+"  and ps.owner in (:listOwner) "
+ ).setParameter("stDate", stDate)
+ .setParameter("edDate", edDate)
+ .setParameter("listOwner", listOrgUnitForSearch)
+ .getResultList();
+ 
+ 
+result.addAll(result2);  
+for ( i=0; i<listCat.size(); i++){
+	result.add([listCat.get(i),null]); 
+}
+
+ 
+ 
+  currentrow=0;
+  totalrows = result.size();]]></method>
+            <method name="fetch"><![CDATA[function getNameById(categId){
+   categServ = clazzShark.getEntityManagerLod().createQuery
+	(
+		" select "+
+			" ce.name	"+
+		" from "+
+			" CardElement ce "+
+		" where "+
+			" ce.id = :categId "
+	).setParameter("categId", categId)
+	.getResultList();
+	
+	if (categServ.size()>0)
+		{categServ1 = categServ.get(0);}
+	else {
+	  categServ1 = "Другие вопросы";
+	}
+	return categServ1; 
+}
+
+function getPriorityById(categId){
+   categServ = clazzShark.getEntityManagerLod().createQuery
+	(
+		" select "+
+			" cef.fieldIntegerValue	"+
+		" from "+
+			" CardElementFieldValue cef "+
+		" where "+
+			" cef.cardElement.id = :categId and "+
+			" cef.cardField.fieldName ='priority' "
+	).setParameter("categId", categId)
+	.getResultList();
+	
+	if (categServ.size()>0)
+		{categServ1 = categServ.get(0);}
+	else {
+	  categServ1 = null;
+	}
+	return categServ1; 
+}
+
+if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+
+row["categ_Uslugi"] =rowValue[0]; 
+row["dateRecord"] = rowValue[1];
+
+
+if (rowValue[0]==null) {
+	row["categ_Uslugi_name"]="Другие вопросы";
+} else {
+    row["categ_Uslugi_name"] = getNameById(rowValue[0]);
+
+}
+
+row["priority"] = getPriorityById(rowValue[0]);
+if (row["priority"] == null) row["priority"]=1000; 
+
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="Data Set2" id="379">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">0</property>
+                    <property name="name">code_Cat</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code_Cat</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code_Cat</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+stDate = clazzConvert.getOutDate(params["startDate"]);
+edDate = clazzConvert.getOutDate(params["endDate"]);
+
+ listCat = clazzShark.getEntityManagerLod().createQuery(
+      " select ce.id, ce.name from CardElement ce where ce.card.cardCode = 'SCatServ'"
+).getResultList();
+
+ currentrow=0;
+  totalrows = listCat.size();]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+var rowValue = listCat.get(currentrow);
+
+row["code_Cat"] = rowValue[0];
+Packages.java.lang.System.out.println("2222222~~~~~~~~"+rowValue[0]);
+
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetData2" id="594">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name_ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">name_ogv</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">name_ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+
+
+orgUnCode = params["orgUnitCode"];
+
+result = clazzShark.getEntityManagerShark().createQuery(
+" select orgun.name from  OrgUnit orgun " + 
+" where orgun.owner =:orgUnCode ")
+.setParameter("orgUnCode", orgUnCode)
+.getResultList();
+
+
+
+currentrow = 0;
+totalrows = result.size();]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["name_ogv"] = rowValue !=null ? rowValue : "Сводная" ;
+
+
+
+currentrow++;
+return true;]]></method>
+        </script-data-set>
+        <script-data-set name="DataSetOrgUnit" id="200">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">0</property>
+                    <property name="name">code</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">name</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code</property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+
+userLogin = params["user"];
+
+result = clazzShark.getEntityManagerShark().createQuery(
+" select orgUn.owner, orgUn.name from  OrgUnit orgun , User us " + 
+" where "+
+" (us.owner = orgun.owner and us.owner is not null and us.login = :usLogin) or "+
+" (us.owner is null and us.login = :usLogin) ")
+.setParameter("usLogin", userLogin)
+.getResultList();
+
+if (result.size()>1){
+	result.add(["all","[Общее]"])
+}
+
+currentrow = 0;
+totalrows = result.size();]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["code"] = rowValue[0];
+row["name"] = rowValue[1];
+
+
+currentrow++;
+return true;]]></method>
+        </script-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Data Cube" id="467">
+            <property name="dimensions">
+                <tabular-dimension name="Group" id="468">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="469">
+                            <property name="levels">
+                                <tabular-level name="categ_Uslugi" id="471">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">categ_Uslugi</property>
+                                </tabular-level>
+                                <tabular-level name="test" id="470">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">test</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group1" id="497">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="498">
+                            <property name="levels">
+                                <tabular-level name="Day Of Year" id="499">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">day-of-year</property>
+                                    <property name="dateTimeFormat">MMMM dd, yyyy</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">dateRecord</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="475">
+                    <property name="measures">
+                        <tabular-measure name="categ_Uslugi" id="476">
+                            <property name="function">count</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["categ_Uslugi"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                        <tabular-measure name="test" id="516">
+                            <property name="function">count</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["test"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">DataSetForCube</property>
+        </tabular-cube>
+        <tabular-cube name="Data Cube1" id="517">
+            <property name="dimensions">
+                <tabular-dimension name="Group2" id="520">
+                    <property name="defaultHierarchy">NewTabularHierarchy2</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy2" id="521">
+                            <property name="levels">
+                                <tabular-level name="priority" id="522">
+                                    <property name="dataType">integer</property>
+                                    <property name="columnName">priority</property>
+                                </tabular-level>
+                                <tabular-level name="categ_Uslugi_name" id="523">
+                                    <property name="dataType">string</property>
+                                    <property name="columnName">categ_Uslugi_name</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="Group3" id="524">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy3</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy3" id="525">
+                            <property name="levels">
+                                <tabular-level name="Day Of Year" id="526">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">day-of-year</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">dateRecord</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field1" id="527">
+                    <property name="measures">
+                        <tabular-measure name="categ_Uslugi_name" id="528">
+                            <property name="function">count</property>
+                            <expression name="measureExpression" type="javascript">dataSetRow["categ_Uslugi_name"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">DataSetForCube</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">custom</property>
+            <property name="height">210mm</property>
+            <property name="width">900mm</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">5mm</property>
+            <property name="bottomMargin">1mm</property>
+            <property name="rightMargin">5mm</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="9">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="height">0.4583333333333333in</property>
+            <property name="dataSet">DataSetData2</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">name_ogv</property>
+                    <text-property name="displayName">name_ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name_ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="10"/>
+            <row id="11">
+                <cell id="12">
+                    <text id="595">
+                        <property name="fontSize">16pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Статистика по приему документов РГАУ МФЦ <VALUE-OF>row["name_ogv"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <extended-item extensionName="Crosstab" extensionVersion="2.5.0" id="529">
+            <property name="cube">Data Cube1</property>
+            <property name="measures">
+                <extended-item extensionName="MeasureView" id="544">
+                    <property name="measure">categ_Uslugi_name</property>
+                    <property name="detail">
+                        <extended-item extensionName="AggregationCell" id="545">
+                            <property name="aggregationOnRow">Group3/Day Of Year</property>
+                            <property name="aggregationOnColumn">Group2/categ_Uslugi_name</property>
+                            <property name="textAlign">center</property>
+                            <property name="paddingTop">0pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">0pt</property>
+                            <property name="paddingRight">0pt</property>
+                            <list-property name="highlightRules">
+                                <structure>
+                                    <property name="operator">eq</property>
+                                    <expression name="testExpr" type="javascript">data["Day Of Year"]</expression>
+                                    <simple-property-list name="value1">
+                                        <value type="javascript">0</value>
+                                    </simple-property-list>
+                                    <property name="fontWeight">bold</property>
+                                </structure>
+                            </list-property>
+                            <property name="content">
+                                <data id="546">
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">data["Day Of Year"]==0</expression>
+                                        </structure>
+                                    </list-property>
+                                    <structure name="toc"/>
+                                    <property name="resultSetColumn">categ_Uslugi_name_Group3/Day Of Year_Group2/categ_Uslugi_name</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="aggregations">
+                        <extended-item extensionName="AggregationCell" id="588">
+                            <property name="aggregationOnRow">Group3/Day Of Year</property>
+                            <property name="paddingTop">0pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">0pt</property>
+                            <property name="paddingRight">0pt</property>
+                            <property name="content">
+                                <data id="589">
+                                    <property name="fontWeight">bold</property>
+                                    <property name="textAlign">center</property>
+                                    <list-property name="visibility">
+                                        <structure>
+                                            <property name="format">all</property>
+                                            <expression name="valueExpr" type="javascript">data["Day Of Year"]==0</expression>
+                                        </structure>
+                                    </list-property>
+                                    <property name="resultSetColumn">categ_Uslugi_name_Group3/Day Of Year</property>
+                                </data>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="header">
+                        <extended-item extensionName="CrosstabCell" id="547">
+                            <property name="paddingTop">0pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">0pt</property>
+                            <property name="paddingRight">0pt</property>
+                        </extended-item>
+                        <extended-item extensionName="CrosstabCell" id="590">
+                            <property name="paddingTop">0pt</property>
+                            <property name="paddingLeft">0pt</property>
+                            <property name="paddingBottom">0pt</property>
+                            <property name="paddingRight">0pt</property>
+                        </extended-item>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="rows">
+                <extended-item extensionName="CrosstabView" id="531">
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="549">
+                            <property name="dimension">Group3</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View" id="550">
+                                    <property name="level">Group3/Day Of Year</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="551">
+                                            <property name="content">
+                                                <data name="DateTime" id="553">
+                                                    <property name="paddingTop">0pt</property>
+                                                    <property name="paddingLeft">0pt</property>
+                                                    <property name="paddingBottom">0pt</property>
+                                                    <property name="paddingRight">0pt</property>
+                                                    <structure name="dateTimeFormat">
+                                                        <property name="category">Custom</property>
+                                                        <property name="pattern">d MMMM</property>
+                                                    </structure>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr" type="javascript">data["Day Of Year"]==0</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">DateTime</property>
+                                                </data>
+                                            </property>
+                                            <property name="paddingTop">0pt</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="columns">
+                <extended-item extensionName="CrosstabView" id="536">
+                    <property name="grandTotal">
+                        <extended-item extensionName="CrosstabCell" id="587">
+                            <property name="content">
+                                <label id="592">
+                                    <property name="fontWeight">bold</property>
+                                    <text-property name="text">Итого: </text-property>
+                                </label>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="views">
+                        <extended-item extensionName="DimensionView" id="537">
+                            <property name="dimension">Group2</property>
+                            <property name="levels">
+                                <extended-item extensionName="LevelView" name="NewLevel View1" id="538">
+                                    <property name="level">Group2/priority</property>
+                                    <property name="sort">
+                                        <sort-element>
+                                            <expression name="key" type="javascript">data["priority"]</expression>
+                                            <property name="direction">asc</property>
+                                            <property name="strength">-1</property>
+                                        </sort-element>
+                                    </property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="539">
+                                            <property name="paddingTop">0pt</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingBottom">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="height">0in</property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                                <extended-item extensionName="LevelView" name="NewLevel View2" id="541">
+                                    <property name="level">Group2/categ_Uslugi_name</property>
+                                    <property name="member">
+                                        <extended-item extensionName="CrosstabCell" id="542">
+                                            <property name="content">
+                                                <data name="categ_Uslugi_name" id="543">
+                                                    <property name="resultSetColumn">categ_Uslugi_name</property>
+                                                </data>
+                                            </property>
+                                        </extended-item>
+                                    </property>
+                                </extended-item>
+                            </property>
+                        </extended-item>
+                    </property>
+                    <property name="grandTotalLocation">after</property>
+                </extended-item>
+            </property>
+            <property name="header">
+                <extended-item extensionName="CrosstabCell" id="530">
+                    <property name="content">
+                        <label id="555">
+                            <text-property name="text">Дата</text-property>
+                        </label>
+                    </property>
+                </extended-item>
+            </property>
+            <property name="emptyCellValue">0</property>
+            <property name="fontFamily">"Linux Libertine"</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">priority</property>
+                    <expression name="expression">dimension["Group2"]["priority"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">categ_Uslugi_name</property>
+                    <expression name="expression">dimension["Group2"]["categ_Uslugi_name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">categ_Uslugi_name_Group2/categ_Uslugi_name</property>
+                    <expression name="expression">measure["categ_Uslugi_name"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group2/categ_Uslugi_name</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">Day Of Year</property>
+                    <expression name="expression">dimension["Group3"]["Day Of Year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">categ_Uslugi_name_Group3/Day Of Year_Group2/categ_Uslugi_name</property>
+                    <expression name="expression">measure["categ_Uslugi_name"]</expression>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/Day Of Year</value>
+                        <value>Group2/categ_Uslugi_name</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+                <structure>
+                    <property name="name">DateTime</property>
+                    <expression name="expression">dimension["Group3"]["Day Of Year"]["DateTime"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">categ_Uslugi_name_Group3/Day Of Year</property>
+                    <expression name="expression">measure["categ_Uslugi_name"]</expression>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>Group3/Day Of Year</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                </structure>
+            </list-property>
+        </extended-item>
+    </body>
+</report>

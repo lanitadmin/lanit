@@ -1,0 +1,72 @@
+<pageflow-definition xmlns="http://jboss.org/schema/seam/pageflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://jboss.org/schema/seam/pageflow 
+                            http://jboss.org/schema/seam/pageflow-2.3.xsd"
+	name="esiaService">
+
+	<start-state name="start">
+        <transition to="esia_selectOperation"/>
+    </start-state>
+
+	<page name="esia_selectOperation" view-id="/esia/selectOperation.xhtml">
+		<redirect />
+		<transition name="next" to="evaluateNext">
+			<action></action>
+		</transition>
+	</page>
+	
+	<decision name="evaluateNext" expression="#{esiaOperation.type.name}">
+      <transition name="registration" to="esia_register_declarant">
+      	<!-- <action expression="#{esiaRegistrationAction.initPersonList}"></action> -->
+      </transition>
+      
+      <transition name="check" to="esia_register_declarant"/>
+      <transition name="confirmation" to="esia_register_declarant"/>
+      <transition name="recovering" to="esia_register_declarant"/>
+   </decision>
+
+	<page name="esia_register_declarant" view-id="/esia/register/declarant.xhtml">
+		<redirect />
+		<transition name="back" to="esia_selectOperation"></transition>
+		<transition name="cancel" to="complete"></transition>
+		<transition name="next" to="esia_register_confirm"></transition>
+		<transition name="selectDeclarant" to="esia_selectDeclarant">
+			<action expression="#{esiaRegistrationAction.selectDeclarant}"></action>
+		</transition>
+	</page>
+	
+	<page name="esia_selectDeclarant" view-id="/member/personList.xhtml">
+	</page>
+	
+	<page name="esia_register_confirm" view-id="/esia/register/confirm.xhtml">
+		<redirect />
+		<transition name="back" to="esia_register_declarant"></transition>
+		<transition name="cancel" to="complete"></transition>
+		<transition name="edit" to="esia_register_confirm"></transition>
+		<transition name="next" to="esia_register_deliveryType"></transition>
+	</page>
+	<page name="esia_register_deliveryType" view-id="/esia/register/deliveryType.xhtml">
+		<redirect />
+		<transition name="back" to="esia_register_confirm"></transition>
+		<transition name="cancel" to="complete"></transition>
+		<transition name="next" to="esia_register_result"></transition>
+	</page>
+	<page name="esia_register_result" view-id="/esia/register/result.xhtml">
+		<redirect />
+		<transition name="back" to="esia_register_deliveryType"></transition>
+		<transition name="cancel" to="complete"></transition>
+		<transition name="repeat" to="esia_register_result"></transition>
+		<transition name="next" to="esia_register_status"></transition>
+	</page>
+	<page name="esia_register_status" view-id="/esia/register/status.xhtml">
+		<redirect />
+		<transition name="repeat" to="esia_selectOperation"></transition>
+		<transition name="complete" to="complete">
+			<action expression="#{esiaRegistrationAction.save}"></action>
+		</transition>
+	</page>
+	<page name="complete" view-id="/member/myActions.xhtml">
+        <end-conversation/>
+        <redirect/>
+    </page>
+</pageflow-definition>

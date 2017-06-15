@@ -1,0 +1,100 @@
+select 
+		license.id as licenseId,
+		license.licenseSerie as licenseSerie,
+		license.licenseNumber as licenseNumber,
+		license.licenseDate as licenseDate,
+		license.licenseDocDate as licenseDocDate,
+		license.licenseDocNo as licenseDocNo,
+		license.licenseEndDate as licenseEndDate,
+		license.prolongDate as prolongDate,
+		license.prolongDocDate as prolongDocDate,
+		license.prolongDocNo as prolongDocNo,
+		license.state.name as stateName,
+		license.activityAddress as activityAddress,
+		license.activityTypeId as activityTypeId,
+		license.activityTypeName as activityTypeName,
+		license.agentName as agentName,
+		license.agentInn as agentInn,
+		license.agentAddress as agentAddress,
+		license.agentOgrn as agentOgrn,
+		license.agent.id as agentId,
+		license.agent.kpp as agentKpp,
+		license.agent.taxRegDoc as agentTaxRegDoc,
+		license.agent.govRegDoc as agentGovRegDoc,
+		license.agent.phone as agentPhone,
+		license.agent.email as agentEmail,
+		license.agent.postAddress as agentPostAddress,
+		license.agent.agentType as agentType,
+		'Лицензия №' || license.licenseNumber || 
+		', выданная лицензионным управлением Аппарата Губернатора и администрации Орловской области ' ||
+		license.licenseDate ||
+		', переоформлена'
+		as MainText
+	from License license
+	where
+		license.id = {LICENSE_ID}
+/
+licenseId,
+licenseSerie,
+licenseNumber,
+licenseDate,
+licenseDocDate,
+licenseDocNo,
+licenseEndDate,
+prolongDate,
+prolongDocDate,
+prolongDocNo,
+stateName,
+activityAddress,
+activityTypeId,
+activityTypeName,
+agentId,
+agentInn,
+agentAddress,
+RegDocNo,
+agentId_,
+agentKpp,
+agentTaxRegDoc,
+agentGovRegDoc,
+agentPhone,
+agentEmail,
+agentPostAddress,
+agentType,
+MainText
+/
+		--(select dateValue from agentCaseVariables acv where acv.) as
+		--(select acv.agentCase from AgentCaseVariable acv where acv.variableName = 'licenseId')
+
+
+licenseId,
+licenseSerie,
+licenseNumber,
+licenseDate,
+licenseDocDate,
+licenseDocNo,
+licenseEndDate,
+prolongDate,
+prolongDocDate,
+prolongDocNo,
+stateName,
+activityAddress,
+activityTypeId,
+activityTypeName,
+agentName,
+agentInn,
+agentAddress,
+agentOgrn,
+agentId,
+agentKpp,
+agentTaxRegDoc,
+agentGovRegDoc,
+agentPhone,
+agentEmail,
+agentPostAddress,
+agentType
+/
+12670
+12823
+12414
+12426
+

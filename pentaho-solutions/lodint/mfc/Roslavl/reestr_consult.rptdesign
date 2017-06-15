@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.20" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.1.v20090903 Build &lt;2.5.1.v20090917-1447></property>
+    <property name="units">in</property>
+    <list-property name="userProperties">
+        <structure>
+            <property name="name">Data Cube.U_S_DataSet.x</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+        <structure>
+            <property name="name">Data Cube.U_S_DataSet.y</property>
+            <property name="type">integer</property>
+            <property name="isVisible">false</property>
+        </structure>
+    </list-property>
+    <property name="Data Cube.U_S_DataSet.x">135</property>
+    <property name="Data Cube.U_S_DataSet.y">80</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="StartDate" id="63">
+            <text-property name="promptText">Дата "С"</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="EndDate" id="64">
+            <text-property name="promptText">Дата "По"</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="U_S_DataSource" id="27"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="U_S_DataSet" id="28">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ServiceName</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">period</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">aaa</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ServiceName</property>
+                </structure>
+                <structure>
+                    <property name="columnName">period</property>
+                </structure>
+                <structure>
+                    <property name="columnName">aaa</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ServiceName</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">period</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">aaa</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">U_S_DataSource</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+clazzMillisec = new Packages.org.cp.birt.plugins.Converter();
+
+SDate = clazzConvert.getStringFormat(params["StartDate"]);
+EDate = clazzConvert.getStringFormat(params["EndDate"]);
+
+dStart = clazzMillisec.getLongDate(params["StartDate"]);
+dEnd = clazzMillisec.getLongDate(params["EndDate"]);
+
+result = clazz.getEntityManagerShark().createQuery
+(
+" select "+
+		" pv.stringValue as service, "+
+		" p.lastStateTime "+
+	" from "+ 
+		" ProcessEntity p, "+
+		" ProcessVariableEntity pv "+
+	" where "+ 
+    	" p.state = 'closed.completed' and "+
+    	" p.id like '%MFC_plus_Konsult' and "+
+    	" p.id = pv.processId and "+
+    	" pv.definitionId = 'Service' and "+
+		" pv.stringValue != null and "+
+    	" pv.stringValue != '' and "+
+    	" p.lastStateTime >='"+dStart+"' and p.lastStateTime <'"+dEnd+"' and "+
+    " order by pv.stringValue "
+)
+
+.getResultList();
+
+totalrows = result.size();
+
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[function getServName(servId){
+	try{
+		servName = clazz.getEntityManagerLod().createQuery
+		(
+		" select "+
+			" ce.name "+ 
+		" from "+ 
+			" CardElement ce "+
+		" where "+ 
+	       	" ce.id = :servId "+
+       	" order by ce.id "
+    	)
+   		.setParameter("servId", servId)
+    	.getSingleResult();
+	}
+	catch (e){
+		servName = "[не определено]";
+	}
+	return servName;
+}
+
+if (currentrow >= totalrows) 
+{
+	return(false);
+}
+
+	var rowValue = result.get(currentrow);
+	var datePeriod = new Date();
+	datePeriod.setTime(rowValue[1]);
+	row["period"] = datePeriod; 
+
+ServiceName = getServName(rowValue[0]);
+
+if (!"[не определено]".equals(ServiceName))
+	row["ServiceName"] = ServiceName;
+else
+	row["ServiceName"] = "Услуга удалена";
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;]]></method>
+        </script-data-set>
+        <script-data-set name="Date_DataSet" id="121">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">StartDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">EndDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">StartDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">EndDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">StartDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">EndDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">U_S_DataSource</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Converter();
+
+resultDate = clazz.dateIsValid(params["StartDate"],params["EndDate"]);
+
+totalrows = 1;
+
+currentrow = 0;
+]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["StartDate"] = params["StartDate"];
+row["EndDate"] = params["EndDate"];
+row["valid"] = 1;
+
+}
+else{
+row["StartDate"] = "(Неправильно определен формат даты)";
+row["EndDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+}
+
+currentrow = currentrow + 1;
+
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <cubes>
+        <tabular-cube name="Data Cube" id="493">
+            <property name="dimensions">
+                <tabular-dimension name="SERVICE" id="494">
+                    <property name="defaultHierarchy">NewTabularHierarchy</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy" id="495">
+                            <property name="levels">
+                                <tabular-level name="ServiceName" id="496">
+                                    <property name="dataType">string</property>
+                                    <property name="levelType">dynamic</property>
+                                    <property name="columnName">ServiceName</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+                <tabular-dimension name="PERIOD" id="524">
+                    <property name="isTimeType">true</property>
+                    <property name="defaultHierarchy">NewTabularHierarchy1</property>
+                    <property name="hierarchies">
+                        <tabular-hierarchy name="NewTabularHierarchy1" id="525">
+                            <property name="levels">
+                                <tabular-level name="year" id="526">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">year</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date-time</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">period</property>
+                                </tabular-level>
+                                <tabular-level name="month" id="527">
+                                    <property name="dataType">integer</property>
+                                    <property name="dateTimeLevelType">month</property>
+                                    <property name="dateTimeFormat">MMM yyyy</property>
+                                    <list-property name="attributes">
+                                        <structure>
+                                            <property name="name">DateTime</property>
+                                            <property name="dataType">date-time</property>
+                                        </structure>
+                                    </list-property>
+                                    <property name="columnName">period</property>
+                                </tabular-level>
+                            </property>
+                        </tabular-hierarchy>
+                    </property>
+                </tabular-dimension>
+            </property>
+            <property name="measureGroups">
+                <tabular-measure-group name="Summary Field" id="497">
+                    <property name="measures">
+                        <tabular-measure name="ServiceName" id="498">
+                            <property name="function">count</property>
+                            <expression name="measureExpression">dataSetRow["ServiceName"]</expression>
+                            <property name="dataType">integer</property>
+                        </tabular-measure>
+                    </property>
+                </tabular-measure-group>
+            </property>
+            <property name="dataSet">U_S_DataSet</property>
+        </tabular-cube>
+    </cubes>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6"/>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="topMargin">1cm</property>
+            <property name="leftMargin">1cm</property>
+            <property name="bottomMargin">1cm</property>
+            <property name="rightMargin">0.5cm</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="7">
+            <property name="newHandlerOnEachEvent">true</property>
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">normal</property>
+            <property name="textAlign">center</property>
+            <property name="verticalAlign">middle</property>
+            <property name="dataSet">U_S_DataSet</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ServiceName</property>
+                    <expression name="expression">dataSetRow["ServiceName"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">period</property>
+                    <expression name="expression">dataSetRow["period"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+            </list-property>
+            <column id="8"/>
+            <row id="12">
+                <cell id="13">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                    <label id="30">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Реестр консультаций</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="17">
+                <cell id="18">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">1</property>
+                    <text id="462">
+                        <property name="newHandlerOnEachEvent">true</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="dataSet">Date_DataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">StartDate</property>
+                                <expression name="expression">dataSetRow["StartDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">EndDate</property>
+                                <expression name="expression">dataSetRow["EndDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">valid</property>
+                                <expression name="expression">dataSetRow["valid"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[информация подготовлена за период с <VALUE-OF>row["StartDate"]</VALUE-OF> по <VALUE-OF>row["EndDate"]</VALUE-OF>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="469">
+                <cell id="470">
+                    <property name="verticalAlign">middle</property>
+                    <property name="display">block</property>
+                    <label id="471">
+                        <text-property name="text">        </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="22">
+                <cell id="23">
+                    <property name="verticalAlign">middle</property>
+                    <property name="display">block</property>
+                    <extended-item extensionName="Crosstab" extensionVersion="2.5.0" id="499">
+                        <property name="measureDirection">vertical</property>
+                        <property name="measures">
+                            <extended-item extensionName="MeasureView" id="506">
+                                <property name="measure">ServiceName</property>
+                                <property name="detail">
+                                    <extended-item extensionName="AggregationCell" id="507">
+                                        <property name="aggregationOnRow">PERIOD/month</property>
+                                        <property name="aggregationOnColumn">SERVICE/ServiceName</property>
+                                        <property name="borderTopStyle">solid</property>
+                                        <property name="borderTopWidth">thin</property>
+                                        <property name="borderTopColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="content">
+                                            <data id="508">
+                                                <property name="resultSetColumn">ServiceName_PERIOD/month_SERVICE/ServiceName</property>
+                                            </data>
+                                        </property>
+                                    </extended-item>
+                                </property>
+                                <property name="header">
+                                    <extended-item extensionName="CrosstabCell" id="509"/>
+                                </property>
+                            </extended-item>
+                        </property>
+                        <property name="rows">
+                            <extended-item extensionName="CrosstabView" id="514">
+                                <property name="views">
+                                    <extended-item extensionName="DimensionView" id="593">
+                                        <property name="dimension">PERIOD</property>
+                                        <property name="levels">
+                                            <extended-item extensionName="LevelView" name="NewLevel View1" id="594">
+                                                <property name="level">PERIOD/year</property>
+                                                <property name="member">
+                                                    <extended-item extensionName="CrosstabCell" id="595">
+                                                        <property name="content">
+                                                            <data name="year" id="596">
+                                                                <property name="resultSetColumn">year</property>
+                                                            </data>
+                                                        </property>
+                                                        <property name="borderTopStyle">solid</property>
+                                                        <property name="borderTopWidth">thin</property>
+                                                        <property name="borderTopColor">#000000</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <property name="borderLeftColor">#000000</property>
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderBottomColor">#000000</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                        <property name="borderRightColor">#000000</property>
+                                                        <property name="width">2cm</property>
+                                                    </extended-item>
+                                                </property>
+                                            </extended-item>
+                                            <extended-item extensionName="LevelView" name="NewLevel View2" id="597">
+                                                <property name="level">PERIOD/month</property>
+                                                <property name="member">
+                                                    <extended-item extensionName="CrosstabCell" id="598">
+                                                        <property name="content">
+                                                            <data name="month" id="599">
+                                                                <list-property name="mapRules">
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>1</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">январь</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>2</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">февраль</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>3</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">март</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>4</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">апрель</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>5</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">май</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>6</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">июнь</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>7</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">июль</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>8</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">август</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>9</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">сентябрь</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>10</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">октябрь</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>11</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">ноябрь</text-property>
+                                                                    </structure>
+                                                                    <structure>
+                                                                        <expression name="testExpr" type="javascript">data["month"]</expression>
+                                                                        <property name="operator">eq</property>
+                                                                        <simple-property-list name="value1">
+                                                                            <value>12</value>
+                                                                        </simple-property-list>
+                                                                        <text-property name="display">декабрь</text-property>
+                                                                    </structure>
+                                                                </list-property>
+                                                                <property name="resultSetColumn">month</property>
+                                                            </data>
+                                                        </property>
+                                                        <property name="borderTopStyle">solid</property>
+                                                        <property name="borderTopWidth">thin</property>
+                                                        <property name="borderTopColor">#000000</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <property name="borderLeftColor">#000000</property>
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderBottomColor">#000000</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                        <property name="borderRightColor">#000000</property>
+                                                        <property name="width">2cm</property>
+                                                    </extended-item>
+                                                </property>
+                                            </extended-item>
+                                        </property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                        </property>
+                        <property name="columns">
+                            <extended-item extensionName="CrosstabView" id="501">
+                                <property name="views">
+                                    <extended-item extensionName="DimensionView" id="502">
+                                        <property name="dimension">SERVICE</property>
+                                        <property name="levels">
+                                            <extended-item extensionName="LevelView" name="NewLevel View" id="503">
+                                                <property name="level">SERVICE/ServiceName</property>
+                                                <property name="member">
+                                                    <extended-item extensionName="CrosstabCell" id="504">
+                                                        <property name="content">
+                                                            <data name="ServiceName" id="505">
+                                                                <property name="fontSize">7pt</property>
+                                                                <property name="textTransform">none</property>
+                                                                <property name="resultSetColumn">ServiceName</property>
+                                                            </data>
+                                                        </property>
+                                                        <property name="borderTopStyle">solid</property>
+                                                        <property name="borderTopWidth">thin</property>
+                                                        <property name="borderTopColor">#000000</property>
+                                                        <property name="borderLeftStyle">solid</property>
+                                                        <property name="borderLeftWidth">thin</property>
+                                                        <property name="borderLeftColor">#000000</property>
+                                                        <property name="borderBottomStyle">solid</property>
+                                                        <property name="borderBottomWidth">thin</property>
+                                                        <property name="borderBottomColor">#000000</property>
+                                                        <property name="borderRightStyle">solid</property>
+                                                        <property name="borderRightWidth">thin</property>
+                                                        <property name="borderRightColor">#000000</property>
+                                                    </extended-item>
+                                                </property>
+                                            </extended-item>
+                                        </property>
+                                    </extended-item>
+                                </property>
+                            </extended-item>
+                        </property>
+                        <property name="hideMeasureHeader">true</property>
+                        <property name="header">
+                            <extended-item extensionName="CrosstabCell" id="500">
+                                <property name="content">
+                                    <text id="603"/>
+                                    <label id="602">
+                                        <text-property name="text">Период</text-property>
+                                    </label>
+                                </property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                            </extended-item>
+                        </property>
+                        <property name="backgroundPositionX">0%</property>
+                        <property name="cube">Data Cube</property>
+                        <property name="height">100%</property>
+                        <property name="width">100%</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">ServiceName</property>
+                                <expression name="expression">dimension["SERVICE"]["ServiceName"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ServiceName_SERVICE/ServiceName</property>
+                                <expression name="expression">measure["ServiceName"]</expression>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>SERVICE/ServiceName</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                            </structure>
+                            <structure>
+                                <property name="name">year</property>
+                                <expression name="expression">dimension["PERIOD"]["year"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ServiceName_PERIOD/year_SERVICE/ServiceName</property>
+                                <expression name="expression">measure["ServiceName"]</expression>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>PERIOD/year</value>
+                                    <value>SERVICE/ServiceName</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                            </structure>
+                            <structure>
+                                <property name="name">month</property>
+                                <expression name="expression" type="javascript">dimension["PERIOD"]["month"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">ServiceName_PERIOD/month_SERVICE/ServiceName</property>
+                                <expression name="expression">measure["ServiceName"]</expression>
+                                <property name="dataType">integer</property>
+                                <simple-property-list name="aggregateOn">
+                                    <value>PERIOD/month</value>
+                                    <value>SERVICE/ServiceName</value>
+                                </simple-property-list>
+                                <property name="aggregateFunction">SUM</property>
+                            </structure>
+                        </list-property>
+                    </extended-item>
+                </cell>
+            </row>
+            <row id="600">
+                <cell id="601">
+                    <property name="verticalAlign">middle</property>
+                    <property name="display">block</property>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

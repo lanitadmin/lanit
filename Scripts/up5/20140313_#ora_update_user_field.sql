@@ -1,0 +1,1 @@
+update user_ref set availabletoallkontrolers=1;

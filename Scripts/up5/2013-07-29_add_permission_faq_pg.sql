@@ -1,0 +1,1 @@
+INSERT INTO permission_ref (id,aaction,add_check,aobject) VALUES (nextval('hibernate_sequence'),'modify',null,'FAQ');

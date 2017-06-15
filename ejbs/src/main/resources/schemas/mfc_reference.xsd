@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!-- XML Schema. Список справочников. -->
+
+	<xs:element name="references" type="References">
+		<xs:annotation>
+			<xs:documentation>Сведения о первичном наполнени справочников.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+
+	<xs:complexType name="References">
+		<xs:sequence>
+			<xs:element name="docTypeTemplate" type="ReferenceDocTypeTemplate"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Соответствие шаблона типу печатного документа
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ogvTemplate" type="ReferenceOgvTemplate"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Соответствие шаблона госоргану
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceDoc" type="ReferenceServiceDoc"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Эталонный перечень документов для получения
+						положительного результата по услуге
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceIntegration" type="ReferenceServiceIntegration"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Настройка интеграции
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceTemplate" type="ReferenceServiceTemplate"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Соответствие шаблона услуге
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="simpleReference" type="SimpleReference"
+				minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Простые справочники
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceDocTypeTemplate">
+		<xs:sequence>
+			<xs:element name="item" type="ReferenceDocTypeTemplateItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceDocTypeTemplateItem">
+		<xs:attribute name="docTypeId" type="xs:string" use="required" />
+		<xs:attribute name="templateId" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceOgvTemplate">
+		<xs:sequence>
+			<xs:element name="item" type="ReferenceOgvTemplateItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceOgvTemplateItem">
+		<xs:attribute name="ogvId" type="xs:string" use="required" />
+		<xs:attribute name="templateId" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceServiceDoc">
+		<xs:sequence>
+			<xs:element name="item" type="ReferenceServiceDocItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceServiceDocItem">
+		<xs:sequence>
+			<xs:element name="document" type="ReferenceOgvDoc"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="serviceId" type="xs:string" use="required" />
+		<xs:attribute name="docTypeId" type="xs:string" use="required" />
+		<xs:attribute name="docClassId" type="xs:string" />
+		<xs:attribute name="required" type="xs:boolean" />
+		<xs:attribute name="autoInsert" type="xs:boolean" />
+		<xs:attribute name="isResult" type="xs:boolean" />
+		<xs:attribute name="resultDocDeadline" type="xs:string" />
+		<xs:attribute name="ogvId" type="xs:string" />
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceOgvDoc">
+		<xs:attribute name="docTypeId" type="xs:string" use="required" />
+		<xs:attribute name="docClassId" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceServiceIntegration">
+		<xs:sequence>
+			<xs:element name="item" type="ReferenceServiceIntegrationItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceServiceIntegrationItem">
+		<xs:attribute name="serviceId" type="xs:string" use="required" />
+		<xs:attribute name="ogvId" type="xs:string" />
+		<xs:attribute name="processId" type="xs:string" />
+		<xs:attribute name="activityId" type="xs:string" />
+		<xs:attribute name="eventNum" type="xs:string" />
+		<xs:attribute name="eventType" type="xs:string" />
+		<xs:attribute name="callCreate" type="xs:boolean" />
+		<xs:attribute name="callStart" type="xs:boolean" />
+		<xs:attribute name="callComplete" type="xs:boolean" />
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceServiceTemplate">
+		<xs:sequence>
+			<xs:element name="item" type="ReferenceServiceTemplateItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ReferenceServiceTemplateItem">
+		<xs:attribute name="serviceId" type="xs:string" use="required" />
+		<xs:attribute name="templateId" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="SimpleReference">
+		<xs:sequence>
+			<xs:element name="reference" type="SimpleReferenceReference"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SimpleReferenceReference">
+		<xs:sequence>
+			<xs:element name="fields" type="SimpleReferenceFields"
+				minOccurs="0" maxOccurs="1" />
+			<xs:element name="item" type="SimpleReferenceItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="SimpleReferenceItem">
+		<xs:sequence>
+			<xs:element name="value" type="SimpleReferenceItemFieldValue"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="code" type="xs:string" use="required" />
+		<xs:attribute name="name" type="xs:string" use="required" />
+	</xs:complexType>
+
+	<xs:complexType name="SimpleReferenceFields">
+		<xs:sequence>
+			<xs:element name="field" type="SimpleReferenceFieldItem"
+				minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="SimpleReferenceFieldItem">
+		<xs:attribute name="name" type="xs:string" use="required" />
+		<xs:attribute name="caption" type="xs:string" use="required" />
+		<xs:attribute name="type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="string" />
+					<xs:enumeration value="integer" />
+					<xs:enumeration value="date" />
+					<xs:enumeration value="attachment" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:complexType name="SimpleReferenceItemFieldValue">
+		<xs:attribute name="field" type="xs:string" use="required" />
+		<xs:attribute name="stringValue" type="xs:string" />
+		<xs:attribute name="instagerValue" type="xs:integer" />
+		<xs:attribute name="dateValue" type="xs:date" />
+	</xs:complexType>
+
+</xs:schema>

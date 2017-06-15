@@ -1,0 +1,15 @@
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'insert', null, 'entity.PersonCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'update', null, 'entity.PersonCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'delete', null, 'entity.PersonCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'insert', null, 'entity.ApartmentCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'update', null, 'entity.ApartmentCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'delete', null, 'entity.ApartmentCard');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'insert', null, 'entity.PersonLiveApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'update', null, 'entity.PersonLiveApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'delete', null, 'entity.PersonLiveApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'insert', null, 'entity.PersonOwnApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'update', null, 'entity.PersonOwnApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'delete', null, 'entity.PersonOwnApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'insert', null, 'entity.DocumentOrderApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'update', null, 'entity.DocumentOrderApartment');
+insert into permission_ref (id,aaction,add_check,aobject) values (hibernate_sequence.nextval, 'delete', null, 'entity.DocumentOrderApartment');

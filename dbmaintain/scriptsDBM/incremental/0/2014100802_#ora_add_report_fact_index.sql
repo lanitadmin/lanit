@@ -1,0 +1,10 @@
+CREATE INDEX "report_fact_param_idx" ON report_fact_param(param_id);
+CREATE INDEX "report_fact_time_idx" ON report_fact_param(time_id);
+CREATE INDEX "report_fact_orgunit_idx" ON report_fact_param(org_unit_id);
+CREATE INDEX "report_fact_service_idx" ON report_fact_param(service_id);
+CREATE INDEX "report_fact_ogv_idx" ON report_fact_param(ogv_id);
+CREATE INDEX "report_fact_category_idx" ON report_fact_param(category_id);
+CREATE INDEX "report_fact_kontroler_idx" ON report_fact_param(kontroler_id);
+CREATE INDEX "report_fact_operator_idx" ON report_fact_param(operator_id);
+CREATE INDEX "report_fact_custom_idx" ON report_fact_param(custom_id);
+CREATE INDEX "report_time_year_idx" ON report_dimension_time(year_id);

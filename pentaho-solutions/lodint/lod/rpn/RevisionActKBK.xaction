@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Акт сверки</title>
+  <version>1</version>
+  <documentation> 
+    <author>Хренов А.В.</author>  
+    <description>Акт сверка. Фин. контроль</description>  
+    <icon>PentahoReporting.png</icon>  
+    <help>Акт сверки по КБК</help>  
+    <result-type>report</result-type> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">PDF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Excel</entry>  
+          <entry key="report-output-type-id">xls</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Word</entry>  
+          <entry key="report-output-type-id">rtf</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Web Page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">Comma Separated Value</entry>  
+          <entry key="report-output-type-id">csv</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <date_begin type="string"> 
+      <sources> 
+        <request>date_begin</request> 
+      </sources>  
+      <default-value/> 
+    </date_begin>  
+    <sql type="string-list"> 
+      <default-value type="string-list"/> 
+    </sql>  
+    <params type="property-map"> 
+      <default-value/> 
+    </params>  
+    <FinPeriodTypeList type="property-map-list"> 
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="FinPeriodName">Год/9 месяцев</entry>  
+          <entry key="FinPeriodId">year</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="FinPeriodName">Полугодие</entry>  
+          <entry key="FinPeriodId">halfyear</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="FinPeriodName">Квартал</entry>  
+          <entry key="FinPeriodId">quartal</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="FinPeriodName">Месяц</entry>  
+          <entry key="FinPeriodId">month</entry> 
+        </property-map> 
+      </default-value>  
+      <sources> 
+        <runtime>FinPeriodTypeList</runtime> 
+      </sources> 
+    </FinPeriodTypeList>  
+    <FinPeriodType type="string"> 
+      <sources> 
+        <request>FinPeriodType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[year]]></default-value> 
+    </FinPeriodType> 
+  </inputs>
+
+  <outputs> 
+    <content type="content"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </content> 
+  </outputs>
+
+  <resources> 
+    <parameter-template> 
+      <solution-file> 
+        <location>RevisionActKBK_par.html</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </parameter-template>  
+    <report-definition> 
+      <solution-file> 
+        <location>RevisionActKBK.xml</location>  
+        <mime-type>text/plain</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Promt params for Report</action-type>
+      <action-inputs> 
+        <outputTypeList type="property-map-list"/>  
+        <outputType type="string"/>  
+        <FinPeriodType type="string"/>  
+        <FinPeriodTypeList type="property-map-list"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <outputType style="select"> 
+            <title>Формат вывода:</title>  
+            <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter> 
+          </outputType>  
+          <FinPeriodType style="radio"> 
+            <filter value-col-name="FinPeriodId" display-col-name="FinPeriodName">FinPeriodTypeList</filter> 
+          </FinPeriodType> 
+        </selections>  
+        <target><![CDATA[Report_Window]]></target>  
+        <xsl>parameter-template</xsl> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>OGV_script</action-type>
+      <action-inputs> 
+        <sql type="string-list"/> 
+      </action-inputs>
+      <action-outputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <sql type="string"/>  
+        <fields type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[beenName="CORE_PROCESS_FACTORY_FOR_PENTAHO";
+
+method="getEJBQLTest";
+
+sql.add("select "+
+" as1.value, "+
+" as2.value, "+
+" as3.value, "+
+" as4.value, "+
+" as5.value, "+
+" as6.value, "+
+" as7.value "+
+" from "+
+" AppSetting as1, AppSetting as2, "+
+" AppSetting as3, AppSetting as4, "+
+" AppSetting as5, AppSetting as6, "+
+" AppSetting as7 "+
+" where "+
+" as1.code='ogv_country' and "+
+" as2.code='ogv_address' and "+
+" as3.code='ogv_index' and "+
+" as4.code='ogv_phones' and "+
+" as5.code='ogv_name' and "+
+" as6.code='ogv_region' and "+
+" as7.code='ogv_fax' ");
+
+fields="OGV_COUNTRY,"+
+"OGV_ADDRESS,"+
+"OGV_INDEX,"+
+"OGV_PHONES,"+
+"OGV_NAME,"+
+"OGV_REGION,"+
+"OGV_FAX";]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+      <action-type>Custom</action-type>
+      <action-inputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <sql type="string"/>  
+        <fields type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <dsResult type="result-set"/>  
+        <dsMetaColumn type="string"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>CorrectDate</action-type>
+      <action-inputs> 
+        <date_begin type="string"/>  
+        <FinPeriodType type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <date1 type="string"/>  
+        <date_pbegin type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[var date_template=/(\d\d)\.(\d\d)\.(\d{4})/;
+var res1=date_begin.match(date_template);
+date1=res1[3]+'-'+res1[2]+'-'+res1[1];
+
+if (FinPeriodType=='year') date_pbegin=res1[3]+'-01-01';
+if (FinPeriodType=='month') date_pbegin=res1[3]+'-'+res1[2]+'-01';
+if (FinPeriodType=='halfyear') {
+  if ((res1[2]=='01')||(res1[2]=='02')||(res1[2]=='03')||(res1[2]=='04')||(res1[2]=='05')||(res1[2]=='06')) {
+       date_pbegin=res1[3]+'-01-01'
+     }
+  else {
+       date_pbegin=res1[3]+'-07-01'
+     }
+}
+if (FinPeriodType=='quartal') {
+  if ((res1[2]=='01')||(res1[2]=='02')||(res1[2]=='03')) {
+       date_pbegin=res1[3]+'-01-01'
+     }
+  else {
+    if ((res1[2]=='04')||(res1[2]=='05')||(res1[2]=='06')) {
+       date_pbegin=res1[3]+'-04-01'
+    }
+    else {
+     if ((res1[2]=='07')||(res1[2]=='08')||(res1[2]=='09')) {
+       date_pbegin=res1[3]+'-07-01'
+     }
+      else {
+           date_pbegin=res1[3]+'-10-01'
+         }
+    }
+  }
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript - Get AppSetting Propertise</action-type>
+      <action-inputs> 
+        <dsResult type="result-set"/> 
+      </action-inputs>
+      <action-outputs> 
+        <OGV_COUNTRY type="string"/>  
+        <OGV_ADDRESS type="string"/>  
+        <OGV_INDEX type="string"/>  
+        <OGV_PHONES type="string"/>  
+        <OGV_NAME type="string"/>  
+        <OGV_REGION type="string"/>  
+        <OGV_FAX type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[rcount=dsResult.getRowCount();
+
+if (rcount!=0){
+if(dsResult.getValueAt(0,0) == null)OGV_COUNTRY=" ";
+else OGV_COUNTRY=dsResult.getValueAt(0,0);;
+if(dsResult.getValueAt(0,1) == null)OGV_ADDRESS=" ";
+else OGV_ADDRESS=dsResult.getValueAt(0,1);
+if(dsResult.getValueAt(0,2) == null)OGV_INDEX=" ";
+else OGV_INDEX=dsResult.getValueAt(0,2);
+if(dsResult.getValueAt(0,3) == null)OGV_PHONES=" ";
+else OGV_PHONES=dsResult.getValueAt(0,3);
+if(dsResult.getValueAt(0,4) == null)OGV_NAME=" ";
+else OGV_NAME=dsResult.getValueAt(0,4);
+if(dsResult.getValueAt(0,5) == null)OGV_REGION=" ";
+else OGV_REGION=dsResult.getValueAt(0,5);
+if(dsResult.getValueAt(0,6) == null)OGV_FAX=" ";
+else OGV_FAX=dsResult.getValueAt(0,6);
+}]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JavascriptRule</component-name>
+      <action-type>JavaScript-Create EJBQL</action-type>
+      <action-inputs> 
+        <sql type="string-list"/>  
+        <params type="property-map"/>  
+        <date1 type="string"/>  
+        <date_pbegin type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <sql type="string-list"/>  
+        <fields type="string"/> 
+      </action-outputs>
+      <component-definition> 
+        <script><![CDATA[beenName="CORE_PROCESS_FACTORY_FOR_PENTAHO";
+method="getEJBQLTest";
+
+
+sql.clear();
+sql.add(
+	"select CE.id,  "+
+"(select sum(POS1.summa) from PaymentOrderSpec POS1 where POS1.code=CE.id and POS1.head.summa>0), "+
+"(select sum(POS2.summa) from PaymentOrderSpec POS2 where POS2.code=CE.id and POS2.head.date between '{date_pbegin}' and '{date1}' and POS2.summa>0), "+
+"(select sum(POS1.summa) from PaymentOrderSpec POS1 where POS1.code=CE.id and POS1.head.summa<0), "+
+"(select sum(POS2.summa) from PaymentOrderSpec POS2 where POS2.code=CE.id and POS2.head.date between '{date_pbegin}' and '{date1}' and POS2.summa<0), "+
+"(select sum(CR1.creditSize) from CreditRegistry CR1 where CR1.kbkId=CE.id), "+
+"(select sum(CR2.creditSize) from CreditRegistry CR2 where CR2.kbkId=CE.id and CR2.createDate between '{date_pbegin}' and '{date1}') "+
+"from CardElement as CE where CE.card.cardCode='KBK'"
+);
+
+
+fields="KBK,IN_AMOUNT,IN_AMOUNT_PERIOD,BACK_AMOUNT,BACK_AMOUNT_PERIOD,ALL_AMOUNT,ALL_AMOUNT_PERIOD";]]></script> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>org.pentaho.plugin.comsoft.DataSeamEJB</component-name>
+      <action-type>Custom</action-type>
+      <action-inputs> 
+        <beenName type="string"/>  
+        <method type="string"/>  
+        <sql type="string"/>  
+        <fields type="string"/> 
+      </action-inputs>
+      <action-outputs> 
+        <dsResult type="result-set"/>  
+        <dsMetaColumn type="string"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+  
+    <action-definition> 
+      <component-name>JFreeReportComponent</component-name>
+      <action-type>Pentaho Report</action-type>
+      <action-inputs> 
+        <data type="result-set" mapping="dsResult"/>  
+        <date_pbegin type="string"/>  
+        <date1 type="string"/>  
+        <OGV_NAME type="string"/> 
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <action-outputs> 
+        <report-output type="content" mapping="content"/> 
+      </action-outputs>
+      <component-definition> 
+        <output-type>html</output-type> 
+      </component-definition> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

@@ -1,0 +1,1 @@
+insert into app_setting (id, owner,setting_id,setting_name, setting_value,is_pass) values(nextval('hibernate_sequence'), null,'attachments_doc_type_id','Идентификатор документа, получаемого от ФОИВ', 'AttachmentsFromFOIV', null);

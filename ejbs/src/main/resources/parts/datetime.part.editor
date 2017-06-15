@@ -1,0 +1,8 @@
+						<rich:calendar value="#{var.value}" rendered="#{var.writable}"
+							datePattern="dd.MM.yyyy HH:MM" enableManualInput="true" id="#{var.getId()}DateTimeCalVal"/>
+						<h:inputText value="#{var.value}" readonly="true" id="#{var.getId()}DateTimeVal"
+							styleClass="#{var.writable?'writable':'readonly'}"
+							rendered="#{!var.writable}">
+							<f:convertDateTime type="both" pattern="dd.MM.yyyy HH:MM"
+								timeZone="#{userPrefs.timeZone}" />
+						</h:inputText>

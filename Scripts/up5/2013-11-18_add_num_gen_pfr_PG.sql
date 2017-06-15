@@ -1,0 +1,2 @@
+INSERT INTO DOC_NUM_GEN(id,doc_name,doc_no_format,doc_no_value, doc_type, version,owner) VALUES (nextval('hibernate_sequence'),'Номер пачки для ПФР', '[COUNTER]', 0,'packNumFromPFR',0,null);
+INSERT INTO DOC_NUM_GEN(id,doc_name,doc_no_format,doc_no_value, doc_type, version,owner) SELECT  nextval('hibernate_sequence'),'Номер пачки для ПФР', '[COUNTER]', 0,'packNumFromPFR',0, ou.owner from org_unit ou;

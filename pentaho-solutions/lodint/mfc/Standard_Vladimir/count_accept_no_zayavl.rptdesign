@@ -1,0 +1,1658 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="startDate" id="49">
+            <text-property name="helpText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата начала (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="endDate" id="50">
+            <text-property name="helpText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <text-property name="promptText">Дата окончания, не включительно (в фомате dd.MM.yyyy)</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="42"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="43">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">SERVICE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">SERVICE_CLASS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">SERVICE_CLASS_1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">OPERATOR</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">ACCEPTED</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">NOT_ACCEPTED</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">SERVICE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">SERVICE_CLASS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">SERVICE_CLASS_1</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OPERATOR</property>
+                </structure>
+                <structure>
+                    <property name="columnName">ACCEPTED</property>
+                </structure>
+                <structure>
+                    <property name="columnName">NOT_ACCEPTED</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">SERVICE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">SERVICE_CLASS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">SERVICE_CLASS_1</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">OPERATOR</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">ACCEPTED</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">NOT_ACCEPTED</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazz = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+//stDate = clazzConvert.getStringFormat(params["startDate"]);
+//edDate = clazzConvert.getStringFormat(params["endDate"]);
+
+stDate = clazzConvert.getOutDate(params["startDate"]);
+edDate = clazzConvert.getOutDate(params["endDate"]);
+
+//Packages.java.lang.System.out.println("---1---"+new Date()); 
+
+
+result=reportContext.getPersistentGlobalVariable("result");
+
+if (result==null){
+  //  Packages.java.lang.System.out.println("init result!!!"); 
+    
+    result = clazz.getEntityManagerLod().createQuery
+    (
+
+"  select  "+
+"  gdp0.serviceId,  "+
+"   u.id , "+
+"  count(ps0.id),1 "+
+
+"  from PackStatus ps0, PackStatusCode psc0, GossrvcDocPackage gdp0, User u "+ 
+"  where ps0.status.id = psc0.id and "+  
+"  psc0.code = 'regKomplDoc' and "+   
+"  gdp0.registrator=u.id and   "+
+"  gdp0.id = ps0.gossrvcDocPackage.id and  "+
+"  ps0.ends != null and  "+
+" ps0.begins between :stDate  and  :edDate  and  "+
+" ps0.ends between :stDate  and  :edDate  group by gdp0.serviceId,  "+
+"   u.id"
+
+).setParameter("stDate", stDate)
+	.setParameter("edDate", edDate)
+	.getResultList();
+ 
+Packages.java.lang.System.out.println("---result.size()--1--"+result.size());
+
+ss= "  select  "+
+"  gdp0.serviceId,  "+
+"  u.id, "+
+"  count(ps0.id),0 "+
+
+"  from PackStatus ps0, PackStatusCode psc0, GossrvcDocPackage gdp0, User u "+ 
+"  where ps0.status.id = psc0.id and "+  
+"  psc0.code = 'regKomplDoc' and "+   
+"  gdp0.registrator=u.id and   "+
+"  gdp0.id = ps0.gossrvcDocPackage.id and  "+
+"  ps0.ends is null and "+
+" ps0.begins between :stDate  and  :edDate "+
+//" and ps0.ends between '"+ stDate +"' and  '"+ edDate +"'
+" group by gdp0.serviceId,  "+
+"   u.id";
+
+//Packages.java.lang.System.out.println("---ss----"+ss);
+
+result2 = clazz.getEntityManagerLod().createQuery(ss).setParameter("stDate", stDate).setParameter("edDate", edDate).getResultList();
+
+Packages.java.lang.System.out.println("---result2.size()--1--"+result2.size());
+
+result.addAll(result2);
+    
+    Packages.java.lang.System.out.println("---result.size()--2--"+result.size());
+    
+    reportContext.setPersistentGlobalVariable("result", result);
+}    
+
+
+nameMap = reportContext.getPersistentGlobalVariable("nameMap");
+
+if (nameMap==null){
+   // Packages.java.lang.System.out.println("init nameMap!!!");
+    
+    nameList = clazz.getEntityManagerLod().createQuery
+	("select u.id,u.lastName || ' ' || u.firstName || ' ' || u.middleName  from User u ").getResultList();
+     
+   //  Packages.java.lang.System.out.println("---nameMap--1--"+nameMap);
+    nameMap = new Packages.java.util.HashMap();
+    
+    for (i = 0; i < nameList.size(); i++)
+    {
+		nameMap.put(nameList.get(i)[0],nameList.get(i)[1]);
+    } 
+     
+     //Packages.java.lang.System.out.println("---nameMap--2--"+nameMap);
+     
+    reportContext.setPersistentGlobalVariable("nameMap", nameMap);
+}    
+
+
+//Packages.java.lang.System.out.println("---2---"+new Date()); 
+
+totalrows = result.size();
+
+currentrow = 0; 
+
+]]></method>
+            <method name="fetch"><![CDATA[function getCategServ(servId){
+	
+	categServ = clazz.getEntityManagerLod().createQuery
+	(
+		" select "+
+			" ced.parentCardElement.name	"+
+		" from "+
+			" CardElementDependence as ced "+
+		" where "+
+			" ced.cardElement.id = :servId "
+	).setParameter("servId", servId)
+	.getResultList();
+	
+	if (categServ.size()>0)
+		{categServ.get(0);}
+	else {
+	categServ = "не выбрано";
+	}
+	
+return categServ;
+}
+
+function getNameServ(servId){
+	
+	nameServ = clazz.getEntityManagerLod().createQuery
+	(
+		" select "+
+			" ce.name	"+
+		" from "+
+			" CardElement as ce "+
+		" where "+
+			" ce.id = :servId "
+	).setParameter("servId", servId)
+	.getResultList();
+	
+	if (nameServ.size()>0)
+		{nameServ.get(0);}
+	else {
+	nameServ = "не выбрано";
+	}
+	
+return nameServ;
+}
+
+if (currentrow >= totalrows) {
+row["rows"] = totalrows ;
+        return(false);
+}
+
+var rowValue = result.get(currentrow);
+
+//row["SERVICE"] = rowValue[0];
+row["OPERATOR"] = nameMap.get(rowValue[1]);
+
+//Packages.java.lang.System.out.println("---rowValue[3]--currentrow--"+currentrow+" || "+rowValue[3]);
+
+if(rowValue[3]==1){
+	row["ACCEPTED"] = rowValue[2];
+	row["NOT_ACCEPTED"] =  0}
+else {row["ACCEPTED"] = 0;
+row["NOT_ACCEPTED"] =  rowValue[2];}
+
+//Packages.java.lang.System.out.println("---ACCEPTED--NOT_ACCEPTED--"+row["ACCEPTED"]+" || "+row["NOT_ACCEPTED"]);
+
+service_class=getCategServ(rowValue[0]);
+
+if (rowValue[1]==null || "".equals(rowValue[0]))
+	service_class="[не назначено]";
+row["SERVICE_CLASS"] = service_class;
+row["SERVICE_CLASS_1"] = service_class;  
+row["SERVICE"] = getNameServ(rowValue[0]);             //Для линейных графиков
+
+currentrow = currentrow + 1; 
+
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+result = null;
+clazzFetch = null;]]></method>
+        </script-data-set>
+        <script-data-set name="DateData" id="54">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">startDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">endDate</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">valid</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">MFC_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">MFC_ADDRESS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">MFC_INDEX</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">MFC_MAIL</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">MFC_PHONES</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">MFC_BOSS_POST</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">MFC_BOSS_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">startDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">endDate</property>
+                </structure>
+                <structure>
+                    <property name="columnName">valid</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_ADDRESS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_INDEX</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_MAIL</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_PHONES</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_BOSS_POST</property>
+                </structure>
+                <structure>
+                    <property name="columnName">MFC_BOSS_NAME</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">startDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">endDate</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">valid</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">MFC_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">MFC_ADDRESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">MFC_INDEX</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">MFC_MAIL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">MFC_PHONES</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">MFC_BOSS_POST</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">MFC_BOSS_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+clazz = new Packages.org.cp.birt.plugins.Shark();
+
+resultDate = clazzConvert.dateIsValid(params["startDate"],params["endDate"]);
+
+result2 = clazz.getEntityManagerLod().createQuery
+(
+" select aps1.value as MFC_NAME, "+
+" aps2.value as MFC_ADDRESS, "+
+" aps3.value as MFC_INDEX, "+
+" aps4.value as MFC_MAIL, "+
+" aps5.value as MFC_PHONES, "+
+" aps6.value as MFC_BOSS_POST, "+
+" aps7.value as MFC_BOSS_NAME "+  
+" from AppSetting aps1,    "+
+" AppSetting aps2,    "+
+" AppSetting aps3,    "+
+" AppSetting aps4,    "+
+" AppSetting aps5,    "+
+" AppSetting aps6,    "+
+" AppSetting aps7    "+
+" where aps1.code = 'ogv_name' "+
+" and aps2.code = 'ogv_address' "+
+" and aps3.code = 'ogv_index' "+
+" and aps4.code = 'ogv_mail' "+
+" and aps5.code = 'ogv_phones' "+
+" and aps6.code = 'ogv_boss_post' "+
+" and aps7.code = 'ogv_boss_name' ")
+.getResultList();
+
+totalrows = result2.size();
+
+currentrow = 0;
+
+]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+
+if(resultDate==1){
+row["startDate"] = params["startDate"];
+row["endDate"] = params["endDate"];
+row["valid"] = 1;
+
+var rowValue = result2.get(currentrow);
+
+row["MFC_NAME"] = rowValue[0];
+row["MFC_ADDRESS"] = rowValue[1];
+row["MFC_INDEX"] = rowValue[2];
+row["MFC_MAIL"] = rowValue[3];
+row["MFC_PHONES"] = rowValue[4];
+row["MFC_BOSS_POST"] = rowValue[5];
+row["MFC_BOSS_NAME"] = rowValue[6];
+}
+
+else
+{
+row["startDate"] = "(Неправильно определен формат даты)";
+row["endDate"] = "(Неправильно определен формат даты)";
+row["valid"] = 0;
+
+Packages.java.lang.System.out.println("Неправильно определен формат даты!!!");
+}
+
+currentrow = currentrow + 1;
+return(true);]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">1.5cm</property>
+            <property name="leftMargin">2cm</property>
+            <property name="bottomMargin">1.27cm</property>
+            <property name="rightMargin">1.5cm</property>
+            <property name="headerHeight">0in</property>
+            <property name="footerHeight">0in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="211">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="color">#000000</property>
+            <property name="textAlign">center</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression" type="javascript">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression" type="javascript">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression" type="javascript">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ADDRESS</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_INDEX</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_MAIL</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_PHONES</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_POST</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[МКУ МФЦ администрации г. Владимира]]></text-property>
+        </text>
+        <text id="212">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression" type="javascript">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression" type="javascript">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression" type="javascript">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ADDRESS</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_INDEX</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_MAIL</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_PHONES</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_POST</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<DIV><VALUE-OF>row["MFC_ADDRESS"]</VALUE-OF>, <VALUE-OF>row["MFC_INDEX"]</VALUE-OF></DIV>]]></text-property>
+        </text>
+        <text id="213">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ADDRESS</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_INDEX</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_MAIL</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_PHONES</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_POST</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<DIV>e-mail:<VALUE-OF>row["MFC_MAIL"]</VALUE-OF></DIV>]]></text-property>
+        </text>
+        <text id="214">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ADDRESS</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_INDEX</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_MAIL</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_PHONES</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_POST</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<DIV>тел.:<VALUE-OF>row["MFC_PHONES"]</VALUE-OF></DIV>]]></text-property>
+        </text>
+        <label id="225">
+            <property name="fontSize">10pt</property>
+            <property name="borderBottomColor">#000000</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <text-property name="text">        </text-property>
+        </label>
+        <label id="12">
+            <property name="fontSize">24pt</property>
+            <text-property name="text">      </text-property>
+        </label>
+        <label id="438">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">14pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textAlign">center</property>
+            <text-property name="text">Количество принятых и непринятых заявлений</text-property>
+        </label>
+        <label id="465">
+            <property name="fontSize">24pt</property>
+            <text-property name="text">      </text-property>
+        </label>
+        <text id="11">
+            <property name="fontFamily">"Linux Libertine"</property>
+            <property name="fontSize">14pt</property>
+            <property name="dataSet">DateData</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">startDate</property>
+                    <expression name="expression">dataSetRow["startDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">endDate</property>
+                    <expression name="expression">dataSetRow["endDate"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">valid</property>
+                    <expression name="expression">dataSetRow["valid"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_ADDRESS</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_INDEX</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_MAIL</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_PHONES</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_POST</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">MFC_BOSS_NAME</property>
+                    <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[<DIV>Информация подготовлена за период с <U><B><VALUE-OF>row["startDate"]</VALUE-OF> г.</B></U> по <U><B><VALUE-OF>row["endDate"]</VALUE-OF> г.</B></U> </DIV>]]></text-property>
+        </text>
+        <label id="8">
+            <property name="fontSize">24pt</property>
+            <text-property name="text">        </text-property>
+        </label>
+        <table id="13">
+            <property name="width">100%</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">SERVICE</property>
+                    <expression name="expression" type="javascript">dataSetRow["SERVICE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SERVICE_CLASS</property>
+                    <expression name="expression" type="javascript">dataSetRow["SERVICE_CLASS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SERVICE_CLASS_1</property>
+                    <expression name="expression" type="javascript">dataSetRow["SERVICE_CLASS_1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OPERATOR</property>
+                    <expression name="expression" type="javascript">dataSetRow["OPERATOR"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ACCEPTED</property>
+                    <expression name="expression" type="javascript">dataSetRow["ACCEPTED"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">NOT_ACCEPTED</property>
+                    <expression name="expression" type="javascript">dataSetRow["NOT_ACCEPTED"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceClass</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["ACCEPTED"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_1</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>serviceClass</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["NOT_ACCEPTED"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_2</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["ACCEPTED"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_3</property>
+                    <property name="dataType">float</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["NOT_ACCEPTED"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_4</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>operator</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["ACCEPTED"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation_5</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>operator</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["NOT_ACCEPTED"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <property name="repeatHeader">false</property>
+            <list-property name="sort">
+                <structure>
+                    <expression name="key" type="javascript">row["SERVICE"]</expression>
+                    <property name="direction">asc</property>
+                </structure>
+            </list-property>
+            <column id="32">
+                <property name="width">38%</property>
+            </column>
+            <column id="33">
+                <property name="width">30%</property>
+            </column>
+            <column id="34">
+                <property name="width">16%</property>
+            </column>
+            <column id="35">
+                <property name="width">16%</property>
+            </column>
+            <header>
+                <row id="14">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <property name="verticalAlign">middle</property>
+                    <cell id="15">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="verticalAlign">top</property>
+                        <label id="37">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Категория услуг/Услуга</text-property>
+                        </label>
+                    </cell>
+                    <cell id="16">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="verticalAlign">top</property>
+                        <label id="38">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Ф.И.О. оператора</text-property>
+                        </label>
+                    </cell>
+                    <cell id="17">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="verticalAlign">top</property>
+                        <text id="56">
+                            <property name="backgroundAttachment">scroll</property>
+                            <property name="backgroundPositionX">0%</property>
+                            <property name="backgroundPositionY">0%</property>
+                            <property name="backgroundRepeat">repeat</property>
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="fontStyle">normal</property>
+                            <property name="fontVariant">normal</property>
+                            <property name="color">black</property>
+                            <property name="textLineThrough">none</property>
+                            <property name="textOverline">none</property>
+                            <property name="textUnderline">none</property>
+                            <property name="borderBottomColor">black</property>
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderLeftColor">black</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderRightColor">black</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="borderTopColor">black</property>
+                            <property name="borderTopStyle">none</property>
+                            <property name="borderTopWidth">medium</property>
+                            <property name="marginTop">0pt</property>
+                            <property name="marginLeft">0pt</property>
+                            <property name="marginBottom">0pt</property>
+                            <property name="marginRight">0pt</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="letterSpacing">normal</property>
+                            <property name="lineHeight">normal</property>
+                            <property name="orphans">2</property>
+                            <property name="textTransform">none</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="widows">2</property>
+                            <property name="wordSpacing">normal</property>
+                            <property name="display">block</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <property name="pageBreakInside">auto</property>
+                            <property name="showIfBlank">false</property>
+                            <property name="canShrink">false</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Количество
+принятых
+заявлений]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="18">
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="verticalAlign">top</property>
+                        <property name="whiteSpace">normal</property>
+                        <label id="40">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">13pt</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">Количество непринятых заявлений</text-property>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <group id="326">
+                <property name="groupName">serviceClass</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["SERVICE_CLASS"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["SERVICE_CLASS"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="327">
+                        <cell id="328">
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="337">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="fontStyle">italic</property>
+                                <property name="resultSetColumn">SERVICE_CLASS</property>
+                            </data>
+                        </cell>
+                        <cell id="329">
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                        </cell>
+                        <cell id="330">
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                        </cell>
+                        <cell id="331">
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                        </cell>
+                    </row>
+                </header>
+                <footer>
+                    <row id="332">
+                        <cell id="333">
+                            <property name="colSpan">2</property>
+                            <property name="rowSpan">1</property>
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <text id="353">
+                                <property name="backgroundAttachment">scroll</property>
+                                <property name="backgroundPositionX">0%</property>
+                                <property name="backgroundPositionY">0%</property>
+                                <property name="backgroundRepeat">repeat</property>
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">12pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="fontStyle">italic</property>
+                                <property name="fontVariant">normal</property>
+                                <property name="color">black</property>
+                                <property name="textLineThrough">none</property>
+                                <property name="textOverline">none</property>
+                                <property name="textUnderline">none</property>
+                                <property name="borderBottomColor">black</property>
+                                <property name="borderBottomStyle">none</property>
+                                <property name="borderBottomWidth">medium</property>
+                                <property name="borderLeftColor">black</property>
+                                <property name="borderLeftStyle">none</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightColor">black</property>
+                                <property name="borderRightStyle">none</property>
+                                <property name="borderRightWidth">medium</property>
+                                <property name="borderTopColor">black</property>
+                                <property name="borderTopStyle">none</property>
+                                <property name="borderTopWidth">medium</property>
+                                <property name="marginTop">0pt</property>
+                                <property name="marginLeft">0pt</property>
+                                <property name="marginBottom">0pt</property>
+                                <property name="marginRight">0pt</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">1pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">1pt</property>
+                                <property name="letterSpacing">normal</property>
+                                <property name="lineHeight">normal</property>
+                                <property name="orphans">2</property>
+                                <property name="textTransform">none</property>
+                                <property name="whiteSpace">normal</property>
+                                <property name="widows">2</property>
+                                <property name="wordSpacing">normal</property>
+                                <property name="display">block</property>
+                                <property name="pageBreakAfter">auto</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <property name="showIfBlank">false</property>
+                                <property name="canShrink">false</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[Всего по категории <VALUE-OF>row["SERVICE_CLASS"]</VALUE-OF>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="335">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="416">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="resultSetColumn">Aggregation</property>
+                            </data>
+                        </cell>
+                        <cell id="336">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="417">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="resultSetColumn">Aggregation_1</property>
+                            </data>
+                        </cell>
+                    </row>
+                </footer>
+            </group>
+            <group id="338">
+                <property name="groupName">operator</property>
+                <property name="interval">none</property>
+                <property name="sortDirection">asc</property>
+                <expression name="keyExpr" type="javascript">row["OPERATOR"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["OPERATOR"]</expression>
+                </structure>
+                <property name="repeatHeader">true</property>
+                <property name="hideDetail">false</property>
+                <property name="pageBreakAfter">auto</property>
+                <property name="pageBreakBefore">auto</property>
+                <property name="pageBreakInside">auto</property>
+                <header>
+                    <row id="339">
+                        <cell id="340">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="466">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="resultSetColumn">SERVICE</property>
+                            </data>
+                        </cell>
+                        <cell id="341">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="349">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="resultSetColumn">OPERATOR</property>
+                            </data>
+                        </cell>
+                        <cell id="342">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="420">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="resultSetColumn">Aggregation_4</property>
+                            </data>
+                        </cell>
+                        <cell id="343">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <property name="verticalAlign">middle</property>
+                            <data id="421">
+                                <property name="fontFamily">"Linux Libertine"</property>
+                                <property name="fontSize">13pt</property>
+                                <property name="resultSetColumn">Aggregation_5</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
+            <footer>
+                <row id="81">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <cell id="82">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <text id="87">
+                            <property name="backgroundAttachment">scroll</property>
+                            <property name="backgroundPositionX">0%</property>
+                            <property name="backgroundPositionY">0%</property>
+                            <property name="backgroundRepeat">repeat</property>
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">12pt</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="fontStyle">italic</property>
+                            <property name="fontVariant">normal</property>
+                            <property name="color">black</property>
+                            <property name="textLineThrough">none</property>
+                            <property name="textOverline">none</property>
+                            <property name="textUnderline">none</property>
+                            <property name="borderBottomColor">black</property>
+                            <property name="borderBottomStyle">none</property>
+                            <property name="borderBottomWidth">medium</property>
+                            <property name="borderLeftColor">black</property>
+                            <property name="borderLeftStyle">none</property>
+                            <property name="borderLeftWidth">medium</property>
+                            <property name="borderRightColor">black</property>
+                            <property name="borderRightStyle">none</property>
+                            <property name="borderRightWidth">medium</property>
+                            <property name="borderTopColor">black</property>
+                            <property name="borderTopStyle">none</property>
+                            <property name="borderTopWidth">medium</property>
+                            <property name="marginTop">0pt</property>
+                            <property name="marginLeft">0pt</property>
+                            <property name="marginBottom">0pt</property>
+                            <property name="marginRight">0pt</property>
+                            <property name="paddingTop">1pt</property>
+                            <property name="paddingLeft">1pt</property>
+                            <property name="paddingBottom">1pt</property>
+                            <property name="paddingRight">1pt</property>
+                            <property name="letterSpacing">normal</property>
+                            <property name="lineHeight">normal</property>
+                            <property name="orphans">2</property>
+                            <property name="textTransform">none</property>
+                            <property name="whiteSpace">normal</property>
+                            <property name="widows">2</property>
+                            <property name="wordSpacing">normal</property>
+                            <property name="display">block</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <property name="pageBreakInside">auto</property>
+                            <property name="showIfBlank">false</property>
+                            <property name="canShrink">false</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Всего по заявлениям]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="84">
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">1px</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">1px</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="418">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">13pt</property>
+                            <property name="resultSetColumn">Aggregation_2</property>
+                        </data>
+                    </cell>
+                    <cell id="85">
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">1px</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="419">
+                            <property name="fontFamily">"Linux Libertine"</property>
+                            <property name="fontSize">13pt</property>
+                            <property name="resultSetColumn">Aggregation_3</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="434">
+                    <property name="borderBottomColor">#000000</property>
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">1px</property>
+                    <property name="borderLeftColor">#000000</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">1px</property>
+                    <property name="borderRightColor">#000000</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">1px</property>
+                    <property name="borderTopColor">#000000</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">1px</property>
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">all</property>
+                            <expression name="valueExpr" type="javascript">true</expression>
+                        </structure>
+                    </list-property>
+                    <cell id="435">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+        <label id="190">
+            <property name="fontSize">36pt</property>
+        </label>
+        <grid id="191">
+            <column id="192"/>
+            <column id="193"/>
+            <column id="194"/>
+            <row id="195">
+                <cell id="219">
+                    <text id="220">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="fontSize">14pt</property>
+                        <property name="textAlign">left</property>
+                        <property name="dataSet">DateData</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">startDate</property>
+                                <expression name="expression" type="javascript">dataSetRow["startDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">endDate</property>
+                                <expression name="expression" type="javascript">dataSetRow["endDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">valid</property>
+                                <expression name="expression" type="javascript">dataSetRow["valid"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_NAME</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_ADDRESS</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_INDEX</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_MAIL</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_PHONES</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_BOSS_POST</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_BOSS_NAME</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV><VALUE-OF>row["MFC_BOSS_POST"]</VALUE-OF></DIV>]]></text-property>
+                    </text>
+                </cell>
+                <cell id="221"/>
+                <cell id="222">
+                    <property name="fontSize">14pt</property>
+                    <text id="200">
+                        <property name="fontFamily">"Linux Libertine"</property>
+                        <property name="textAlign">right</property>
+                        <property name="dataSet">DateData</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">startDate</property>
+                                <expression name="expression" type="javascript">dataSetRow["startDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">endDate</property>
+                                <expression name="expression" type="javascript">dataSetRow["endDate"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">valid</property>
+                                <expression name="expression" type="javascript">dataSetRow["valid"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_NAME</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_NAME"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_ADDRESS</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_ADDRESS"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_INDEX</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_INDEX"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_MAIL</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_MAIL"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_PHONES</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_PHONES"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_BOSS_POST</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_POST"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">MFC_BOSS_NAME</property>
+                                <expression name="expression" type="javascript">dataSetRow["MFC_BOSS_NAME"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<DIV><VALUE-OF>row["MFC_BOSS_NAME"]</VALUE-OF></DIV>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

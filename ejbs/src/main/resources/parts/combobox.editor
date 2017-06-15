@@ -1,0 +1,11 @@
+
+						<h:selectOneMenu style="width:500px" value="#{var.value}" readonly="#{!var.writable}"
+							id="#{var.getId()}OneMenuVal"
+							disabled="#{!var.writable}"
+							styleClass="#{var.writable?'writable':'readonly'}">
+							<f:selectItem itemLabel="[не выбрано]" itemValue="" />
+							<c:forEach var="item" items="#{controller.getVarSelectList(var.id)}">
+								<f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+							</c:forEach>
+							
+						</h:selectOneMenu>

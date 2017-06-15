@@ -1,0 +1,2 @@
+INSERT INTO SETTING_ROW_STYLE (DAYS, CSS_STYLE, INFINITY_AFTER, ID, OWNER)
+SELECT 0,'COLOR:FF0A12;FONT-WEIGHT:bold;', 1 , hibernate_sequence.nextval, owner FROM org_unit;

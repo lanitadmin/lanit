@@ -1,0 +1,960 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Package xmlns="http://www.wfmc.org/2002/XPDL1.0" xmlns:xpdl="http://www.wfmc.org/2002/XPDL1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="FisdoPack" Name="Обработка жалоб населения" xsi:schemaLocation="http://www.wfmc.org/2002/XPDL1.0 http://wfmc.org/standards/docs/TC-1025_schema_10_xpdl.xsd">
+    <PackageHeader>
+        <XPDLVersion>1.0</XPDLVersion>
+        <Vendor>LANIT-Samara</Vendor>
+        <Created>2008-09-27 19:47:47</Created>
+    </PackageHeader>
+    <RedefinableHeader>
+        <Author>Zhnyakin</Author>
+    </RedefinableHeader>
+    <ConformanceClass GraphConformance="NON_BLOCKED"/>
+    <Script Type="text/javascript"/>
+    <Participants>
+        <Participant Id="Registrator" Name="Ответственный за прием">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Director" Name="Руководитель МФЦ">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Informator" Name="Сотрудник, ответственный за информирование и консультирование">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Kontroler" Name="Ответственный за контроль">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Vidavatel" Name="Ответственный за выдачу">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Vnutr_Kurier" Name="Внутренний курьер">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Specialist_arh" Name="Специалист отдела архитектуры и градостроительства района">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="Specialist_UMI" Name="Специалист управления муниципального имущества">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="OGV_part1" Name="Специалист ОГВ1">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+        <Participant Id="OGV_part2" Name="Специалист ОГВ2">
+            <ParticipantType Type="ROLE"/>
+        </Participant>
+    </Participants>
+    <Applications>
+        <Application Id="assignVariable" Name="assignVariable">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createDocPackage" Name="createDocPackage">
+            <FormalParameters>
+                <FormalParameter Id="Service" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="Komplekt_doc" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcDocPackagePlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeEntityMethod" Name="invokeEntityMethod">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodArgs" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="methodResult" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeObjectMethodAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createApplication" Name="createApplication">
+            <FormalParameters>
+                <FormalParameter Id="Service" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="appNumb" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdApplication" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcApplicationPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createRequest" Name="createRequest">
+            <FormalParameters>
+                <FormalParameter Id="ogvId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdRequest" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="reqNumb" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsFromOgv" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.GossrvcRequestPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="createReject" Name="createReject">
+            <FormalParameters>
+                <FormalParameter Id="serviceid" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="createdReject" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+        </Application>
+        <Application Id="getEntityPropertiesByLong" Name="Получить свойства объекта (long)">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="propertiesList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="variableList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetObjectPropsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="completeActivity" Name="Завершитть действие">
+            <FormalParameters>
+                <FormalParameter Id="activityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CSCompleteActivity"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="assignVariableInt" Name="Задать целочисленную переменную">
+            <FormalParameters>
+                <FormalParameter Id="param" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.enhydra.shark.toolagent.JavaScriptToolAgent"/>
+                <ExtendedAttribute Name="Script" Value="result = param"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="setEntityPropertiesByLong" Name="Задать свойства объекта (long)">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="entityId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="propertiesList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="variableList" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSetObjectPropsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="printDocTemplate">
+            <FormalParameters>
+                <FormalParameter Id="docTypeId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackageId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="zayavitelId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="printDocCounter" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="printDocId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.PrintDocPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="getRefPropAgent" Name="Получить дополнительное поле справочника">
+            <FormalParameters>
+                <FormalParameter Id="element" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="field" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsGetRefPropAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="SetupForkProcessesForOgvRequest" Name="SetupForkProcessesForOgvRequest">
+            <FormalParameters>
+                <FormalParameter Id="komplektVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="forkSetupVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ogvVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ddlVarName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeSumVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeValidateVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="mergeMaxVars" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SetupForkProcessesForOgvRequest"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="ForkProcessesBySetup" Name="ForkProcessesBySetup">
+            <FormalParameters>
+                <FormalParameter Id="setupId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ForkProcessesBySetup"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="ProcessRequestTerminate" Name="Завершение экземпляров процессов">
+            <FormalParameters>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ProcessRequestTerminate"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="loginPart">
+            <FormalParameters>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.SetLoggedUser"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="activityTerminate" Name="Завершение шагов процессов">
+            <FormalParameters>
+                <FormalParameter Id="procId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="actId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docPackId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varValue" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.ActivityTerminatePlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="WSTransferRequest2Ogv" Name="Вызов Веб-сервиса передачи запроса в ОГВ">
+            <FormalParameters>
+                <FormalParameter Id="Event" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="packId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="reqId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="ogvId" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="docsExpected" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="kontrPart" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.RaiseEventPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryResultInt" Name="Выполнение sql запроса (рез-т: число)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsEjbqlResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryVarParamsIntResult" Name="Выполнение параметризованного запроса(INTEGER)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params_variable" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsVarParamsEjbResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryVarParamsStringResult" Name="Выполнение параметризованного запроса(STRING)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="params_variable" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsVarParamsEjbResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="invokeWithParams" Name="Вызов метода с параметрами">
+            <FormalParameters>
+                <FormalParameter Id="entityClass" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="object" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="method" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="args" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsInvokeObjectMethodWithParamsAgent"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="queryResultStr" Name="Выполнение sql запроса (рез-т: строка)">
+            <FormalParameters>
+                <FormalParameter Id="query" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="result" Mode="OUT">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsEjbqlResult"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="savePackStatus" Name="Запись статуса пакет документов">
+            <Description>Запись статуса пакет документов</Description>
+            <FormalParameters>
+                <FormalParameter Id="id" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                    <Description>id пакета документов</Description>
+                </FormalParameter>
+                <FormalParameter Id="status" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>код статуса</Description>
+                </FormalParameter>
+                <FormalParameter Id="mode" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>1-Начало,2-Конец,пусто - время не меняем</Description>
+                </FormalParameter>
+                <FormalParameter Id="ddl" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="varsName" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <Description>Список переменных через запятую</Description>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.CsSavePackStatus"/>
+            </ExtendedAttributes>
+        </Application>
+        <Application Id="sendResponseFisdo" Name="Посылка сообщения ФИЗ ДО">
+            <FormalParameters>
+                <FormalParameter Id="Event" Mode="IN">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                </FormalParameter>
+                <FormalParameter Id="id" Mode="IN">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                </FormalParameter>
+            </FormalParameters>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="ToolAgentClass" Value="org.cp.shark.plugins.RaiseEventPlugin"/>
+            </ExtendedAttributes>
+        </Application>
+    </Applications>
+    <DataFields>
+        <DataField Id="togo" IsArray="FALSE" Name="Селектор">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="switchVariable" Value="1"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="Where_go" IsArray="FALSE" Name="Определитель ветки процесса">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="komment" IsArray="FALSE" Name="Комментарий">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="length" Value="1024"/>
+            </ExtendedAttributes>
+        </DataField>
+        <DataField Id="tmp" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="INTEGER"/>
+            </DataType>
+        </DataField>
+        <DataField Id="userId" IsArray="FALSE">
+            <DataType>
+                <BasicType Type="STRING"/>
+            </DataType>
+        </DataField>
+    </DataFields>
+    <WorkflowProcesses>
+        <WorkflowProcess AccessLevel="PUBLIC" Id="fisdoService" Name="Прием жалобы">
+            <ProcessHeader>
+                <Created>2008-09-03 11:16:27</Created>
+                <Description>Для старта процесса необходимо определить следующие значения:
+- Способ обращения заявителя
+	- лично, по почте
+	- в электронной форме
+- Заявитель (Если заявитель уже обращался, необходимо найти и выбрать его из справочника. Если заявитель обратился в первый раз, необходима регистрация в справочнике заявителей)
+- Услуга (Выбор из справочника услуг)</Description>
+            </ProcessHeader>
+            <DataFields>
+                <DataField Id="complaint" IsArray="FALSE" Name="Жалоба">
+                    <DataType>
+                        <BasicType Type="INTEGER"/>
+                    </DataType>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="entityClass" Value="org.cp.fisdo.models.Complaint"/>
+                        <ExtendedAttribute Name="embedded" Value="1"/>
+                    </ExtendedAttributes>
+                </DataField>
+                <DataField Id="TestIspoln" IsArray="FALSE" Name="Исполнитель рассмотрения">
+                    <DataType>
+                        <BasicType Type="STRING"/>
+                    </DataType>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="participantSource" Value="TestServiceIspoln"/>
+                    </ExtendedAttributes>
+                </DataField>
+            </DataFields>
+            <Participants>
+                <Participant Id="TestService_par1">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="TestServiceIspoln" Name="Исполнитель рассмотрения">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+                <Participant Id="TestServiceDirector" Name="Распределитель рассмотрения">
+                    <ParticipantType Type="ROLE"/>
+                </Participant>
+            </Participants>
+            <Activities>
+                <Activity Id="chState" Name="Рассмотрение жалобы">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>TestServiceIspoln</Performer>
+                    <StartMode>
+                        <Manual/>
+                    </StartMode>
+                    <FinishMode>
+                        <Manual/>
+                    </FinishMode>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Split Type="XOR">
+                                <TransitionRefs>
+                                    <TransitionRef Id="TestService_tra3"/>
+                                    <TransitionRef Id="TestService_tra4"/>
+                                </TransitionRefs>
+                            </Split>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="173,61"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="TestServiceIspoln"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="76,10"/>
+                        <ExtendedAttribute Name="readable" Value="complaint,togo"/>
+                        <ExtendedAttribute Name="writable" Value="complaint,togo"/>
+                        <ExtendedAttribute Name="required"/>
+                        <ExtendedAttribute Name="noSaveAcceptButton"/>
+                        <ExtendedAttribute Name="union" Value="start"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Priem_act713" Name="Проставление переменной и сообщение">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"org.cp.fisdo.models.Complaint"</ActualParameter>
+                                <ActualParameter>complaint</ActualParameter>
+                                <ActualParameter>"stateId"</ActualParameter>
+                                <ActualParameter>"1"</ActualParameter>
+                                <ActualParameter>tmp</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="sendResponseFisdo" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"fisdo.response.send"</ActualParameter>
+                                <ActualParameter>complaint</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>TestServiceDirector</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="159,74"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="TestServiceDirector"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="386,27"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="accept" Name="Передать на рассмотрение">
+                    <Implementation>
+                        <No/>
+                    </Implementation>
+                    <Performer>TestServiceDirector</Performer>
+                    <StartMode>
+                        <Manual/>
+                    </StartMode>
+                    <FinishMode>
+                        <Manual/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="116,60"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="TestServiceDirector"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="171,10"/>
+                        <ExtendedAttribute Name="readable" Value="TestIspoln,complaint,togo"/>
+                        <ExtendedAttribute Name="writable" Value="TestIspoln,togo"/>
+                        <ExtendedAttribute Name="noSaveAcceptButton"/>
+                        <ExtendedAttribute Name="union" Value="start"/>
+                        <ExtendedAttribute Name="required" Value="TestIspoln"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="TestService_act1" Name="и">
+                    <Route/>
+                    <TransitionRestrictions>
+                        <TransitionRestriction>
+                            <Join Type="XOR"/>
+                        </TransitionRestriction>
+                    </TransitionRestrictions>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="43,28"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="TestServiceIspoln"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="381,105"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Priem_act7132" Name="Удовлетворить">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"org.cp.fisdo.models.Complaint"</ActualParameter>
+                                <ActualParameter>complaint</ActualParameter>
+                                <ActualParameter>"stateId"</ActualParameter>
+                                <ActualParameter>"2"</ActualParameter>
+                                <ActualParameter>tmp</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="sendResponseFisdo" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"fisdo.response.send"</ActualParameter>
+                                <ActualParameter>complaint</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>TestServiceIspoln</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="159,74"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="TestServiceIspoln"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="173,102"/>
+                    </ExtendedAttributes>
+                </Activity>
+                <Activity Id="Priem_act7133" Name="Отказать">
+                    <Implementation>
+                        <Tool Id="setEntityPropertiesByLong" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"org.cp.fisdo.models.Complaint"</ActualParameter>
+                                <ActualParameter>complaint</ActualParameter>
+                                <ActualParameter>"stateId"</ActualParameter>
+                                <ActualParameter>"3"</ActualParameter>
+                                <ActualParameter>tmp</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                        <Tool Id="sendResponseFisdo" Type="PROCEDURE">
+                            <ActualParameters>
+                                <ActualParameter>"fisdo.response.send"</ActualParameter>
+                                <ActualParameter>complaint</ActualParameter>
+                            </ActualParameters>
+                        </Tool>
+                    </Implementation>
+                    <Performer>TestServiceIspoln</Performer>
+                    <StartMode>
+                        <Automatic/>
+                    </StartMode>
+                    <FinishMode>
+                        <Automatic/>
+                    </FinishMode>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_SIZE" Value="159,74"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_PARTICIPANT_ID" Value="TestServiceIspoln"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_OFFSET" Value="303,13"/>
+                    </ExtendedAttributes>
+                </Activity>
+            </Activities>
+            <Transitions>
+                <Transition From="accept" Id="TestService_tra1" Name="Передать на рассмотрение" To="Priem_act713">
+                    <Condition Type="CONDITION">togo==0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="302,243"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Priem_act713" Id="TestService_tra2" To="chState">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="404,177-130,177"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="chState" Id="TestService_tra3" Name="Удовлетворить" To="Priem_act7132">
+                    <Condition Type="CONDITION">togo==0</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="204,82"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="chState" Id="TestService_tra4" Name="Отказать" To="Priem_act7133">
+                    <Condition Type="CONDITION">togo==1</Condition>
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="272,46"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Priem_act7132" Id="fisdoService_tra1" To="TestService_act1">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="400,153"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+                <Transition From="Priem_act7133" Id="fisdoService_tra2" To="TestService_act1">
+                    <ExtendedAttributes>
+                        <ExtendedAttribute Name="JaWE_GRAPH_BREAK_POINTS" Value="394,95"/>
+                        <ExtendedAttribute Name="JaWE_GRAPH_TRANSITION_STYLE" Value="NO_ROUTING_ORTHOGONAL"/>
+                    </ExtendedAttributes>
+                </Transition>
+            </Transitions>
+            <ExtendedAttributes>
+                <ExtendedAttribute Name="JaWE_GRAPH_START_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=TestServiceDirector,CONNECTING_ACTIVITY_ID=accept,X_OFFSET=62,Y_OFFSET=22,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=START_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_END_OF_WORKFLOW" Value="JaWE_GRAPH_PARTICIPANT_ID=TestServiceIspoln,CONNECTING_ACTIVITY_ID=TestService_act1,X_OFFSET=501,Y_OFFSET=101,JaWE_GRAPH_TRANSITION_STYLE=SIMPLE_ROUTING_BEZIER,TYPE=END_DEFAULT"/>
+                <ExtendedAttribute Name="JaWE_GRAPH_WORKFLOW_PARTICIPANT_ORDER" Value="TestServiceIspoln;TestServiceDirector"/>
+            </ExtendedAttributes>
+        </WorkflowProcess>
+    </WorkflowProcesses>
+    <ExtendedAttributes>
+        <ExtendedAttribute Name="EDITING_TOOL" Value="OpenIcar Modeler"/>
+        <ExtendedAttribute Name="EDITING_TOOL_VERSION" Value="1.0-1-C-20071102-1425"/>
+        <ExtendedAttribute Name="JaWE_CONFIGURATION" Value="default"/>
+    </ExtendedAttributes>
+</Package>

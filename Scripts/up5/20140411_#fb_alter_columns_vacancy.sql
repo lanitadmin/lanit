@@ -1,0 +1,3 @@
+ALTER TABLE vacancy ALTER COLUMN USL_WORK TYPE varchar(1024);
+ALTER TABLE vacancy ALTER COLUMN treb TYPE varchar(1024);
+ALTER TABLE vacancy ALTER COLUMN works TYPE varchar(1024);

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	targetNamespace="http://samara.lanit.ru/gossrvc/schemas/VvodVExplRequest" 
+	xmlns:tns="http://samara.lanit.ru/gossrvc/schemas/VvodVExplRequest" elementFormDefault="qualified" xmlns:Q1="http://samara.lanit.ru/gossrvc/schemas/ServiceRequest">
+
+    <xs:import schemaLocation="ServiceRequest.xsd" namespace="http://samara.lanit.ru/gossrvc/schemas/ServiceRequest"></xs:import>
+    <xs:element name="request" type="tns:VvodVExplRequest"></xs:element>
+
+    <xs:complexType name="VvodVExplRequest">
+    	<xs:complexContent>
+    		<xs:extension base="Q1:ServiceRequest">
+    			<xs:sequence>
+    				<xs:element minOccurs="1" name="serviceAttributes"
+    					type="tns:ServiceVvodVExplAttributes">
+    					<xs:annotation>
+    						<xs:documentation>
+    							Дополнительные параметры по услуге
+    						</xs:documentation>
+    					</xs:annotation>
+    				</xs:element>
+					  				
+    				
+    			</xs:sequence>
+			<xs:attribute name="callid" type="xs:string"/>
+
+    		</xs:extension>
+    	</xs:complexContent>
+    </xs:complexType>
+
+   <xs:complexType name="ServiceVvodVExplAttributes">
+    <xs:sequence>
+     <xs:element name="objType" type="tns:ObjectType" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Тип вводимого объекта</xs:documentation>
+     	</xs:annotation>
+     </xs:element>
+     	
+     <xs:element name="location" type="xs:string" minOccurs="1">
+     	<xs:annotation>
+     		<xs:documentation>Местонахождение объекта</xs:documentation>
+     	</xs:annotation></xs:element>     
+    </xs:sequence>
+   </xs:complexType>
+
+    
+
+    <xs:simpleType name="ObjectType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="построенного"/>
+			<xs:enumeration value="реконструированного"/>
+			<xs:enumeration value="отремонтированного"/>
+		</xs:restriction>
+	</xs:simpleType>
+    
+    
+    
+</xs:schema>

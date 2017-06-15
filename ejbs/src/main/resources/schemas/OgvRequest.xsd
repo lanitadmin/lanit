@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+	targetNamespace="http://samara.lanit.org/soa/esb/webservice/ogv/ogvrequest"
+	elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://samara.lanit.org/soa/esb/webservice/ogv/ogvrequest" xmlns:pref="http://samara.lanit.org/soa/esb/webservice/transferchanges/cardchange">
+
+	<element name="ogvRequest" type="tns:OgvRequest">
+		<annotation>
+			<documentation>Запрос</documentation>
+		</annotation></element>
+
+	<complexType name="OgvRequest">
+        <annotation>
+        	<documentation>Запрос</documentation></annotation>
+        <sequence>
+        	<element name="reqId" type="long" maxOccurs="1"
+        		minOccurs="1">
+        	</element>
+        	<element name="number" type="string" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>Номер запроса</documentation>
+        		</annotation>
+        	</element>
+        	<element name="date" type="date" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>Дата запроса</documentation>
+        		</annotation>
+        	</element>
+        	<element name="service" type="tns:Service" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>Услуга</documentation>
+        		</annotation>
+        	</element>
+        	<element name="applicantsGroup" type="tns:ApplicantsGroup"
+        		maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>Группа заявителей</documentation>
+        		</annotation>
+        	</element>
+        	<element name="documents" type="tns:DocPackageItem"
+        		maxOccurs="unbounded" minOccurs="0">
+        		<annotation>
+        			<documentation>
+        				Документы передаваемые с запросом
+        			</documentation>
+        		</annotation>
+        	</element>
+        	<element name="documentsExpected" type="tns:DocPackageItem"
+        		maxOccurs="unbounded" minOccurs="0">
+        		<annotation>
+        			<documentation>
+        				Документы ожидаемые с ответом на запрос
+        			</documentation>
+        		</annotation>
+        	</element>
+        	<element name="AttributeValues" type="tns:AttributeValue" maxOccurs="unbounded" minOccurs="0"></element>
+        </sequence>
+	</complexType>
+
+	<complexType name="DocPackageItem">
+        <annotation>
+        	<documentation>Документ</documentation>
+        </annotation>
+        <sequence>
+        	<element name="docTypeId" type="string" maxOccurs="1"
+        		minOccurs="1">
+        		<annotation>
+        			<documentation>
+        				ID типа документа по справочнику
+        			</documentation>
+        		</annotation>
+        	</element>
+            <element name="docClassId" type="string" maxOccurs="1" minOccurs="1">
+            	<annotation>
+            		<documentation>ID класса документа по справочнику</documentation>
+            	</annotation></element>
+            <element name="docClassName" type="string" maxOccurs="1" minOccurs="1">
+            	<annotation>
+            		<documentation>Наименование класса документа по справочнику</documentation>
+            	</annotation></element>
+            <element name="title" type="string" maxOccurs="1" minOccurs="1">
+        		<annotation>
+        			<documentation>
+        				Наименование документа
+        			</documentation>
+        		</annotation>
+        	</element>
+            <element name="attachs" type="tns:Attach"
+        		maxOccurs="unbounded" minOccurs="0">
+        		<annotation>
+        			<documentation>Приложенные файлы</documentation>
+        		</annotation>
+        	</element>
+        </sequence>
+	</complexType>
+
+	<complexType name="Person">
+        <annotation>
+        	<documentation>Физическое лицо</documentation>
+        </annotation>
+        <sequence>
+            <element name="id" type="string" maxOccurs="1" minOccurs="0">
+            	<annotation>
+            		<documentation>ID физического лица</documentation>
+            	</annotation></element>
+            <element name="lastName" type="string" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Фамилия</documentation>
+                </annotation>
+            </element>
+			<element name="firstName" type="string" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Имя</documentation>
+                </annotation>
+			</element>
+			<element name="middleName" type="string" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Отчество</documentation>
+                </annotation>
+			</element>
+			<element name="address" type="string" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>Адрес</documentation>
+                </annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+	<complexType name="Attach">
+        <annotation>
+        	<documentation>Приложенный файл</documentation>
+        </annotation>
+        <sequence>
+            <element name="name" type="string" maxOccurs="1" minOccurs="1">
+            	<annotation>
+            		<documentation>Наименование файла</documentation>
+            	</annotation></element>
+            <element name="type" type="string" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Тип файла</documentation>
+                </annotation>
+            </element>
+            <element name="attachment" type="base64Binary" maxOccurs="1" minOccurs="1">
+                <annotation>
+                	<documentation>Контент файла</documentation>
+                </annotation>
+            </element>
+        </sequence>
+	</complexType>
+
+	<complexType name="Service">
+        <annotation>
+        	<documentation>Услуга</documentation></annotation>
+        <sequence>
+			<element name="id" type="string" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>ID услуги по справочнику</documentation>
+                </annotation>
+			</element>
+			<element name="name" type="string" maxOccurs="1" minOccurs="1">
+				<annotation>
+					<documentation>Наименование услуги</documentation>
+				</annotation></element>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="ApplicantsGroup">
+        <annotation>
+        	<documentation>Группа заявителей</documentation></annotation>
+        <sequence>
+			<element name="persons" type="tns:Person"
+				maxOccurs="unbounded" minOccurs="0">
+                <annotation>
+                	<documentation>Физические лица</documentation>
+                </annotation>
+			</element>
+			<element name="agents" type="tns:Agent" maxOccurs="unbounded" minOccurs="0">
+				<annotation>
+					<documentation>Юридические лица</documentation>
+				</annotation></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="AttributeValue">
+		<annotation>
+			<documentation>Значение учетного атрибута</documentation>
+		</annotation>
+		<sequence>
+			<element name="id" type="string">
+				<annotation>
+					<documentation>ID определения атрибута из формализованного описания</documentation>
+				</annotation>
+			</element>
+			<choice>
+				<element name="floatValue" type="double" nillable="true" minOccurs="0"/>
+				<element name="timestampValue" type="dateTime" minOccurs="0"/>
+				<element name="textValue" type="string" nillable="true" minOccurs="0"/>
+				<element name="longValue" type="long" nillable="true" minOccurs="0"/>
+			</choice>
+		</sequence>
+	</complexType>
+
+
+	<complexType name="Agent">
+        <annotation>
+        	<documentation>Юридическое лицо</documentation>
+        </annotation>
+        <sequence>
+            <element name="id" type="string" maxOccurs="1" minOccurs="0">
+            	<annotation>
+            		<documentation>ID юридического лица</documentation>
+            	</annotation></element>
+            <element name="name" type="string" maxOccurs="1"
+				minOccurs="1">
+                <annotation>
+                	<documentation>Наименование юридического лица</documentation>
+                </annotation>
+            </element>
+			<element name="address" type="string" maxOccurs="1"
+				minOccurs="0">
+                <annotation>
+                	<documentation>Адрес</documentation>
+                </annotation>
+			</element>
+		</sequence>
+	</complexType>
+
+</schema>

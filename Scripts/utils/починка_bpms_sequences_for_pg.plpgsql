@@ -1,0 +1,192 @@
+create or replace function test() returns int as '
+declare n int;
+	m int;
+	diff int;
+begin
+
+select max(oid) into n from BPMS_PROCESS;
+select nextval(''gen_bpms_process'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_process'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_activity_variable;
+select nextval(''gen_bpms_activity_variable'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_activity_variable'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+--
+select max(oid) into n from bpms_assignment;
+select nextval(''gen_bpms_assignment'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_assignment'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_deadline;
+select nextval(''gen_bpms_deadline'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_deadline'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_global_data;
+select nextval(''gen_bpms_global_data'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_global_data'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_participant_map;
+select nextval(''gen_bpms_participant_map'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_participant_map'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_process;
+select nextval(''gen_bpms_process'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_process'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_process_mgr;
+select nextval(''gen_bpms_process_mgr'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_process_mgr'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_process_variable;
+select nextval(''gen_bpms_process_variable'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_process_variable'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_resource;
+select nextval(''gen_bpms_resource'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_resource'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_xpdl;
+select nextval(''gen_bpms_xpdl'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_xpdl'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from bpms_activity;
+select nextval(''gen_bpms_activity'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''gen_bpms_activity'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+select max(oid) into n from soap_context_var;
+select nextval(''hibernate_sequence'') into m;
+diff := n - m;
+if (diff > 0) then
+	loop
+
+		select nextval(''hibernate_sequence'') into m;
+		diff := diff - 1;
+		if (diff <= 0) then
+			exit;
+		end if;
+	end loop;
+end if;
+
+return diff;
+end;'
+language plpgsql;

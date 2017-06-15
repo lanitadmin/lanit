@@ -1,0 +1,9 @@
+ALTER TABLE SOAP_OPTIONS_VAR ALTER COLUMN RESTRICTLIST TYPE varchar(512);
+update SOAP_OPTIONS set readyForUse=0 where readyForUse is null;
+alter table SOAP_CONTEXT drop testrun;
+update SOAP_OPTIONS set realWork=0 where realWork is null;
+update RDB$RELATION_FIELDS set
+RDB$NULL_FLAG = NULL
+where (RDB$FIELD_NAME = 'PARENT_ID') and
+(RDB$RELATION_NAME = 'SOAP_OPTIONS_VAR');
+ALTER TABLE SOAP_OPTIONS DROP FROMPROCESS;

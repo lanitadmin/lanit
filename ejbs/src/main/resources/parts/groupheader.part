@@ -1,0 +1,6 @@
+<rich:collapsiblePanel rendered ="#{![group].props['hidden']}" id="#{[group].props['vars'].get(0).getId()}"
+	header="#{([group].obj.length() > 0 and [group].obj.substring(0,1) == '*') ? (empty [group].obj.substring(1) ? 'Дополнительно' :  [group].obj.substring(1)) : (empty [group].obj ? 'Дополнительно' : [group].obj)}"
+	switchType="client" expanded="#{[group].props['groupOpened']}" onclick="resizeTextAreas()" 
+	styleClass="workitem-var-group workitem-var-group-header"
+	>
+

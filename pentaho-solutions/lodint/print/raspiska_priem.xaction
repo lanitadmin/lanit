@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<action-sequence> 
+  <title>Report rasspiska o prieme documentov</title>
+  <version>1</version>
+  <logging-level>ERROR</logging-level>
+  <documentation> 
+    <author>Ланит-самара</author>  
+    <description>Рассписка о приеме документов</description>  
+    <help>Рассписка о приеме документов</help>  
+    <result-type>report</result-type>  
+    <icon/> 
+  </documentation>
+
+  <inputs> 
+    <outputType type="string"> 
+      <sources> 
+        <request>outputType</request>  
+        <request>type</request> 
+      </sources>  
+      <default-value><![CDATA[html]]></default-value> 
+    </outputType>  
+    <outputTypeList type="property-map-list"> 
+      <sources> 
+        <runtime>outputTypeList</runtime> 
+      </sources>  
+      <default-value type="property-map-list"> 
+        <property-map> 
+          <entry key="report-output-desc">Web page</entry>  
+          <entry key="report-output-type-id">html</entry> 
+        </property-map>  
+        <property-map> 
+          <entry key="report-output-desc">DPF</entry>  
+          <entry key="report-output-type-id">pdf</entry> 
+        </property-map> 
+      </default-value> 
+    </outputTypeList>  
+    <processId type="string"> 
+      <sources> 
+        <request>processId</request> 
+      </sources> 
+    </processId>  
+    <activityId type="string"> 
+      <sources> 
+        <request>activityId</request> 
+      </sources> 
+    </activityId> 
+  </inputs>
+
+  <outputs> 
+    <content type="content"> 
+      <destinations> 
+        <response>content</response> 
+      </destinations> 
+    </content> 
+  </outputs>
+
+  <resources> 
+    <report-definition> 
+      <solution-file> 
+        <location>report_raspiska.xml</location>  
+        <mime-type>text/xml</mime-type> 
+      </solution-file> 
+    </report-definition> 
+  </resources>
+  
+  <actions> 
+    <action-definition> 
+      <component-name>SecureFilterComponent</component-name>
+      <action-type>Prompt for Report Export Type</action-type>
+      <action-inputs> 
+        <outputTypeList type="property-map-list"/>  
+        <outputType type="string"/> 
+      </action-inputs>
+      <component-definition> 
+        <selections> 
+          <outputType style="radio"> 
+            <title>Формат вывода:</title>  
+            <filter value-col-name="report-output-type-id" display-col-name="report-output-desc">outputTypeList</filter> 
+          </outputType> 
+        </selections>  
+        <target><![CDATA[Report_Window]]></target> 
+      </component-definition> 
+    </action-definition>
+  
+    <action-definition>
+      <component-name>SQLLookupRule</component-name>
+      <action-type>Relational</action-type>
+      <action-inputs>
+        <activityId type="string"/>
+        <processId type="string"/>
+      </action-inputs>
+      <action-outputs>
+        <query-result type="result-set" mapping="query_result"/>
+        <DOC_TYPE_NAME type="string"/>
+        <ORIGINALS type="string"/>
+        <COPIES type="string"/>
+        <NUMBER type="string"/>
+        <FIRST_NAME type="string"/>
+        <MIDDLE_NAME type="string"/>
+        <LAST_NAME type="string"/>
+        <R_FIRST_NAME type="string"/>
+        <R_MIDDLE_NAME type="string"/>
+        <R_LAST_NAME type="string"/>
+        <R_DOLZHNOST type="string"/>
+        <REQ_DATE type="object"/>
+        <NOW_DATE type="object"/>
+      </action-outputs>
+      <component-definition>
+        <query><![CDATA[select b.docName as DOC_TYPE_NAME, 1 as ORIGINALS, 0 as COPIES, b.zayavlenieNomer as NUMBER,
+ p.first_name as FIRST_NAME, p.middle_name as MIDDLE_NAME, p.last_name as LAST_NAME, 
+     u.first_name as R_FIRST_NAME, u.middle_name as R_MIDDLE_NAME, u.last_name as R_LAST_NAME,
+ ur.role_code as R_DOLZHNOST, zayavlenieDate as REQ_DATE, cast('TODAY' as date) as NOW_DATE
+  from  
+ (select  
+     (select name from card_element where card_code = 'SDocType' and id = var) as docName, 
+     1 as docOrigs, 0 as docCopies, 
+     (select bpms_value_date from bpms_activity_variable where bpms_process_id = '{processId}' and  
+         bpms_activity_id = '{activityId}' and bpms_definition_id = 'Zayavlenie_date') as zayavlenieDate, 
+     (select bpms_value_long from bpms_activity_variable where bpms_process_id = '{processId}' and  
+         bpms_activity_id = '{activityId}' and bpms_definition_id = 'Zayavlenie_nomer') as zayavlenieNomer, 
+     (select bpms_value_string from bpms_activity_variable where bpms_process_id = '{processId}' and  
+         bpms_activity_id = '{activityId}' and bpms_definition_id = 'Zayavitel') as zayavitel, 
+     (select bpms_resource_username from bpms_activity where bpms_id = '{activityId}'  
+        and bpms_process_id = '{processId}') as userName    
+ from  
+ (select bpms_definition_id as var, bpms_value_bool as boolval, bpms_value_date as dateval, bpms_value_string as stringval,  
+ bpms_value_long as longval 
+  from bpms_activity_variable  where bpms_process_id = '{processId}' and  
+         bpms_activity_id = '{activityId}' and  
+         bpms_value_bool> 0 and bpms_definition_id in (select id from card_element where card_code = 'SDocType')) a) 
+ b, person p, user_ref u, user_role_ref ur where  
+     b.zayavitel = p.id and 
+     b.userName = u.login and  
+     ur.user_id = u.id]]></query>
+        <live><![CDATA[true]]></live>
+        <driver><![CDATA[org.firebirdsql.jdbc.FBDriver]]></driver>
+        <connection><![CDATA[jdbc:firebirdsql://localhost:3050/lod?charSet=Cp1251]]></connection>
+        <user-id><![CDATA[sysdba]]></user-id>
+        <password><![CDATA[masterkey]]></password>
+      </component-definition>
+    </action-definition>
+
+    <action-definition> 
+      <component-name>JFreeReportComponent</component-name>
+      <action-type>report</action-type>
+      <action-inputs> 
+        <output-type type="string" mapping="outputType"/>  
+        <data type="result-set" mapping="query_result"/>
+      </action-inputs>
+      <action-resources> 
+        <report-definition type="resource"/> 
+      </action-resources>
+      <action-outputs> 
+        <report-output type="content" mapping="content"/> 
+      </action-outputs>
+      <component-definition/> 
+    </action-definition>
+ 
+  </actions> 
+</action-sequence>

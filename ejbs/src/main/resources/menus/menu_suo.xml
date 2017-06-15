@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appMenuItem name="main" messageName="mainMenu" selectClass="mfc-menu-selected" viewId="/member/myActions.xhtml">
+	<items>
+		<item name="bpms_myProcesses" messageName="bpms_myProcesses" viewId="/member/myActions.xhtml" iconClass="template-menu-item-img" selectClass="template-menu-item-selected" styleClass="template-menu-item"/>
+				
+		<item name="Администрирование" messageName="menu_admin">
+			<items>
+				<item name="Справочники"
+					messageName="menu_admin_cardsystem">
+					<items>
+						<item name="OrgUnits" messageName="menu_orgunits_tree" viewId="/sed/orgunitList.xhtml"/>
+						<item name="sep" messageName="menu_separator" viewId=""/>							
+							
+						<item name="CardGroupList" messageName="menu_admin_cardsystem_structure" viewId="/cardsystem/CardGroupList.xhtml"/>
+						<item name="CardGroupContent" messageName="menu_admin_cardsystem_content" viewId="/cardsystem/CardTree.xhtml"/>
+						<item name="xmlExport" messageName="xmlExport" viewId="/admin/xmlExport.xhtml"/>
+						<item name="xmlImport" messageName="xmlImport" viewId="/admin/xmlImport.xhtml"/>
+						<item name="sep" messageName="menu_separator" viewId=""/>
+					</items>
+				</item>
+				
+				<item name="Электронная очередь" messageName="electronic_queue" >
+					<items>
+						<item name="Настройки"
+							messageName="electronic_queue_head_settings" viewId="/eq/adminPanel.xhtml"/>
+						
+						<item name="Реестр предварительной записи"
+							messageName="electronic_queue_book_time_list" viewId="/eq/eqBookTimeList.xhtml"/>
+					</items>
+				</item>									
+								
+				
+					
+				<item name="Пользователи" messageName="menu_admin_users"
+					viewId="/member/userList.xhtml" />
+				<item name="Роли" messageName="menu_admin_roles"
+					viewId="/member/roleList.xhtml" />
+				<item name="Настройки" viewId="/admin/settings.xhtml"
+					messageName="menu_settings" />
+
+   				<item name="Консолидированная отчетность" messageName="consolid_rep_settings">
+					<items>
+						<item name="Сбор данных" messageName="menu_consolid_rep_active"
+							viewId="/admin/consolidReportSettings.xhtml" />
+						<item name="Ввод показателей заполняемых вручную" messageName="menu_consolid_rep_input"
+							viewId="/member/consolidInputData.xhtml" />
+						<item name="Аналитическая подсистема"
+							messageName="menu_admin_bi_system" viewId="/admin/consolidGoBiSystem.xhtml"/>
+						<item name="Аналитическая подсистема Сайку" rendered="#{appSettings.getSetting('integration_saiku') == '1' and identity.loggedIn}"
+                              messageName="menu_admin_bi_system_saiku" viewId="/admin/consolidGoBiSystemSaiku.xhtml"/>		
+					</items>
+				</item>	   				
+
+				<item name="Журналирование" messageName="menu_logging">
+					<items>
+						<item name="Справочник событий и атрибутов" messageName="menu_logging_config" viewId="/ev/EvsList.xhtml"/>
+						<item name="Профили журнала" messageName="menu_logging_profiles" viewId="/ev/EvListingProfileList.xhtml"/>
+						<item name="Просмотр журнала" messageName="menu_logging_view" viewId="/ev/SetupSearch.xhtml"/>
+						<!-- <item name="Архивация журнала" messageName="menu_logging_archive" viewId="/ev/SetupArchivingEvLog.xhtml"/> -->
+					</items>
+				</item>
+			</items>
+		</item>
+    </items>
+</appMenuItem>

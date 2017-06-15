@@ -1,0 +1,126 @@
+<definitions name="SharkTasks" targetNamespace="http://webservices.gossrvc.samara.lanit.org" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:jaxws="http://java.sun.com/xml/ns/jaxws" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://webservices.gossrvc.samara.lanit.org" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ <types>
+  <xs:schema targetNamespace="http://webservices.gossrvc.samara.lanit.org" version="1.0" xmlns:tns="http://webservices.gossrvc.samara.lanit.org" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="Task" type="tns:task"/>
+	<xs:annotation>
+		<xs:documentation>Описание шага</xs:documentation>
+	</xs:annotation>
+   <xs:complexType name="task">
+    <xs:sequence>
+     <xs:element name="TaskId" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Порядковый номер</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element name="TaskProcessName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование процесса</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element name="TaskName" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Наименование шага</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element name="TaskCreateDate" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Дата создания шага</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element minOccurs="0" name="TaskStartDate" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Дата начала исполнения шага</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element minOccurs="0" name="TaskFinishDate" type="xs:dateTime">
+		<xs:annotation>
+			<xs:documentation>Дата завершения исполнения шага</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element minOccurs="0" name="TaskExecutor" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Исполнитель шага</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element minOccurs="0" name="TaskComment" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Комментарий</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+     <xs:element name="TaskStatus" type="xs:string">
+		<xs:annotation>
+			<xs:documentation>Статус шага</xs:documentation>
+		</xs:annotation>     
+     </xs:element>
+    </xs:sequence>
+   </xs:complexType>
+   <xs:complexType final="#all" name="taskArray">
+    <xs:sequence>
+     <xs:element maxOccurs="unbounded" minOccurs="0" name="item" nillable="true" type="tns:task"/>
+    </xs:sequence>
+   </xs:complexType>
+  </xs:schema>
+ </types>
+ <message name="SharkTasksInterface_activeTasks">
+  <part name="username" type="xsd:string"/>
+  <part name="password" type="xsd:string"/>
+ </message>
+ <message name="SharkTasksInterface_serviceStateResponse">
+  <part name="return" type="tns:taskArray"/>
+ </message>
+ <message name="SharkTasksInterface_activeTasksResponse">
+  <part name="return" type="tns:taskArray"/>
+ </message>
+ <message name="SharkTasksInterface_serviceState">
+  <part name="deloNum" type="xsd:string"/>
+  <part name="authCode" type="xsd:string"/>
+ </message>
+ <portType name="SharkTasksInterface">
+  <operation name="activeTasks" parameterOrder="username password">
+   <documentation>Сервис получения текущих заданий для пользователя</documentation>
+   <input message="tns:SharkTasksInterface_activeTasks"/>
+   <output message="tns:SharkTasksInterface_activeTasksResponse"/>
+   <jaxws:bindings>
+    <jaxws:method name="activeTasks">
+     <jaxws:javadoc>Сервис получения текущих заданий для пользователя</jaxws:javadoc>
+    </jaxws:method>
+   </jaxws:bindings>
+  </operation>
+  <operation name="serviceState" parameterOrder="deloNum authCode">
+   <documentation>Сервис получения информации о состоянии дела</documentation>
+   <input message="tns:SharkTasksInterface_serviceState"/>
+   <output message="tns:SharkTasksInterface_serviceStateResponse"/>
+   <jaxws:bindings>
+    <jaxws:method name="serviceState">
+     <jaxws:javadoc>Сервис получения информации о состоянии дела</jaxws:javadoc>
+    </jaxws:method>
+   </jaxws:bindings>
+  </operation>
+ </portType>
+ <binding name="SharkTasksInterfaceBinding" type="tns:SharkTasksInterface">
+  <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+  <operation name="activeTasks">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </input>
+   <output>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </output>
+  </operation>
+  <operation name="serviceState">
+   <soap:operation soapAction=""/>
+   <input>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </input>
+   <output>
+    <soap:body namespace="http://webservices.gossrvc.samara.lanit.org" use="literal"/>
+   </output>
+  </operation>
+ </binding>
+ <service name="SharkTasks">
+  <port binding="tns:SharkTasksInterfaceBinding" name="SharkTasksInterfacePort">
+   <soap:address location="http://127.0.0.1:8080/lodint-lodint/SharkTasks"/>
+  </port>
+ </service>
+</definitions>

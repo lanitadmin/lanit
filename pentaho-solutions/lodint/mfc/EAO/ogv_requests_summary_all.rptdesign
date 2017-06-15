@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.22" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 3.7.0.v20110602 Build &lt;3.7.0.v20110607-1526></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="dateStart" id="87">
+            <text-property name="promptText">Введите дату начала</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new Date()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">dd.MM.yyyy</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="dateEnd" id="88">
+            <text-property name="promptText">Введите дату окончания</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Custom</property>
+                <property name="pattern">dd.MM.yyyy</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="7"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="Data Set" id="8">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ogv</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">req_paper</property>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">req_smev</property>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ogv</property>
+                </structure>
+                <structure>
+                    <property name="columnName">req_paper</property>
+                </structure>
+                <structure>
+                    <property name="columnName">req_smev</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ogv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">req_paper</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">req_smev</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[clazzShark = new Packages.org.cp.birt.plugins.Shark();
+clazzConvert = new Packages.org.cp.birt.plugins.Converter();
+
+startDate = params["dateStart"];
+endDate = params["dateEnd"];
+
+var c = Packages.java.util.Calendar.getInstance(); 
+c.setTime(endDate); 
+c.add(Packages.java.util.Calendar.DATE, 1);
+endDate = c.getTime();
+
+paper = clazzShark.getEntityManagerShark().createQuery(
+	"select " +
+		"ogv.name AS OGV, " +
+		"count(gr.id) AS REQ_ON_PAPER, " +
+		"0 AS REQ_VIA_SMEV " +
+	
+	"from " +
+		"PackStatus ps, " +
+		"PackStatusCode psc, " +
+		"PackVariable pvZapr, " +
+		"CardElement ogv, " +
+		"GossrvcRequest gr, " +
+		"GossrvcDocPackage gdp, " +
+		"OrgUnit owner " +
+	
+	"where " +
+		"ps.status = psc and  " +
+		"psc.code = 'OGVrquestExec' and " +
+		"pvZapr.packStatus = ps and " +
+		"pvZapr.definitionId = 'Zapros' and " +
+		" ps.begins between :startDate and :endDate and " +
+		" ps.ends between :startDate and :endDate and " +
+	
+		"ogv.id = gr.ogvId and " +
+		"gr.id = pvZapr.longValue and  " +
+		"gdp = ps.gossrvcDocPackage and  " +
+		"gdp.owner = owner.owner and " +
+		"owner.typeUnit = 'mfc' and " +
+	
+		"((select count(tree.id) from GossrvcServiceDocTree tree where  " +
+		"tree.serviceId.id = gdp.serviceId and  " +
+		"tree.parent is null and  " +
+		"lower(gr.docsFromOgv) like concat('%',lower(tree.docTypeId.id),'%')) > 0) " +
+	
+	"group by " +
+		"ogv.name " 
+).setParameter("startDate",startDate)
+.setParameter("endDate",endDate)
+.getResultList();
+
+smev = clazzShark.getEntityManagerShark().createQuery(
+	"select " +
+		"ogv.name AS OGV, " +
+		"0 AS REQ_ON_PAPER, " +
+		"count(gr.id) AS REQ_VIA_SMEV " +
+	
+	"from " +
+		"PackStatus ps, " +
+		"PackStatusCode psc, " +
+		"PackVariable pvZapr, " +
+		"CardElement ogv, " +
+		"GossrvcRequest gr, " +
+		"GossrvcDocPackage gdp, " +
+		"OrgUnit owner " +
+	
+	"where " +
+		"ps.status = psc and " +
+		"psc.code = 'electroTransfer' and   " +
+		"pvZapr.packStatus = ps and   " +
+		"pvZapr.definitionId = 'Zapros' and  " +
+		" ps.begins between :startDate and :endDate and " +
+		" ps.ends between :startDate and :endDate and " +
+	
+		"ogv.id = gr.ogvId and   " +
+		"gr.id = pvZapr.longValue and   " +
+		"gdp = ps.gossrvcDocPackage and   " +
+		"gdp.owner = owner.owner and " +
+		"owner.typeUnit = 'mfc' and " +
+		"((select count(pss.id) from PackStatus pss, PackStatusCode pscc where pss.status = pscc and   " +
+		"pscc.code = 'electroTransfer' and   " +
+		"pss.gossrvcDocPackage.id = gdp.id   " +
+		") > 0) and  " +
+		"((select count(tree.id) from GossrvcServiceDocTree tree where   " +
+		"tree.serviceId.id = gdp.serviceId and   " +
+		"(lower(tree.soapOptionsCode) like 'sid%' or lower(tree.soapOptionsCode) like '%smev%') and   " +
+		"tree.integration is true and   " +
+		"lower(gr.docsFromOgv) like concat('%',lower(tree.docTypeId.id),'%')  " +
+		") > 0) " +
+	
+	"group by " +
+		"ogv.name "
+).setParameter("startDate",startDate)
+.setParameter("endDate",endDate)
+.getResultList();
+
+
+result = paper;
+	result.addAll(smev);
+
+totalrow = result.size();
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrow) {
+	return (false);
+}
+
+var rowValue = result.get(currentrow);
+
+row["ogv"] = rowValue[0];
+row["req_paper"] = rowValue[1];
+row["req_smev"] = rowValue[2];
+
+currentrow = currentrow + 1;
+return(true)]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">Linux Libertine</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="9">
+            <property name="width">7.947916666666667in</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ogv</property>
+                    <text-property name="displayName">ogv</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ogv"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">req_paper</property>
+                    <text-property name="displayName">req_paper</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["req_paper"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">req_smev</property>
+                    <text-property name="displayName">req_smev</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["req_smev"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">C_PAPER_OGV</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>OGV</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["req_paper"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">C_SMEV_OGV</property>
+                    <property name="dataType">integer</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>OGV</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["req_smev"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">SUM_OGV</property>
+                    <property name="dataType">float</property>
+                    <simple-property-list name="aggregateOn">
+                        <value>OGV</value>
+                    </simple-property-list>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">dataSetRow["req_paper"] + dataSetRow["req_smev"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">C_PAPER_ALL</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["C_PAPER_OGV"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">C_SMEV_ALL</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["C_SMEV_OGV"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+                <structure>
+                    <property name="name">SUM_ALL</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">SUM</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">row["SUM_OGV"]</expression>
+                        </structure>
+                    </list-property>
+                </structure>
+            </list-property>
+            <column id="25">
+                <property name="width">2.625in</property>
+            </column>
+            <column id="26">
+                <property name="width">1.8645833333333333in</property>
+            </column>
+            <column id="27">
+                <property name="width">1.7291666666666667in</property>
+            </column>
+            <column id="28">
+                <property name="width">1.7291666666666667in</property>
+            </column>
+            <header>
+                <row id="111">
+                    <cell id="112">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <grid id="228">
+                            <property name="width">7.947916666666667in</property>
+                            <column id="229">
+                                <property name="width">1.1354166666666667in</property>
+                            </column>
+                            <column id="230">
+                                <property name="width">2.84375in</property>
+                            </column>
+                            <column id="231">
+                                <property name="width">2.8125in</property>
+                            </column>
+                            <column id="181">
+                                <property name="width">1.15625in</property>
+                            </column>
+                            <row id="232">
+                                <cell id="233">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                    <text id="234">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[Межведомственное взаимодействие в ОГКУ «МФЦ»]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                            <row id="242">
+                                <cell id="243">
+                                    <property name="colSpan">4</property>
+                                    <property name="rowSpan">1</property>
+                                    <text id="203">
+                                        <property name="textAlign">center</property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Отчет сформирован за период: <VALUE-OF format="dd.MM.yyyy">params["dateStart"].value</VALUE-OF> - <VALUE-OF format="dd.MM.yyyy">params["dateEnd"].value</VALUE-OF>]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+                <row id="89">
+                    <cell id="90">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="68">
+                            <property name="fontStyle">italic</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Наименование органа получателя запросов]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="91">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="70">
+                            <property name="fontStyle">italic</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Отправлено межведомственных запросов]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="93">
+                        <property name="colSpan">1</property>
+                        <property name="rowSpan">2</property>
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="73">
+                            <property name="fontStyle">italic</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[ИТОГО запросов в орган]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="94">
+                    <cell id="96">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="71">
+                            <property name="fontStyle">italic</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[На бумажных носителях]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="97">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="72">
+                            <property name="fontStyle">italic</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Посредством СМЭВ]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </header>
+            <group id="41">
+                <property name="groupName">OGV</property>
+                <expression name="keyExpr" type="javascript">row["ogv"]</expression>
+                <structure name="toc">
+                    <expression name="expressionValue" type="javascript">row["ogv"]</expression>
+                </structure>
+                <property name="hideDetail">false</property>
+                <header>
+                    <row id="42">
+                        <cell id="43">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="52">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">ogv</property>
+                            </data>
+                        </cell>
+                        <cell id="44">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="74">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">C_PAPER_OGV</property>
+                            </data>
+                        </cell>
+                        <cell id="45">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <data id="75">
+                                <property name="textAlign">center</property>
+                                <property name="resultSetColumn">C_SMEV_OGV</property>
+                            </data>
+                        </cell>
+                        <cell id="46">
+                            <property name="borderBottomColor">#000000</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftColor">#000000</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightColor">#000000</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopColor">#000000</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="textAlign">center</property>
+                            <data id="76">
+                                <property name="resultSetColumn">SUM_OGV</property>
+                            </data>
+                        </cell>
+                    </row>
+                </header>
+            </group>
+            <footer>
+                <row id="99">
+                    <cell id="100">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <text id="104">
+                            <property name="fontWeight">bold</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[ИТОГО]]></text-property>
+                        </text>
+                    </cell>
+                    <cell id="101">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="108">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">C_PAPER_ALL</property>
+                        </data>
+                    </cell>
+                    <cell id="102">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="109">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">C_SMEV_ALL</property>
+                        </data>
+                    </cell>
+                    <cell id="103">
+                        <property name="borderBottomColor">#000000</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftColor">#000000</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">thin</property>
+                        <property name="borderRightColor">#000000</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopColor">#000000</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">thin</property>
+                        <data id="110">
+                            <property name="textAlign">center</property>
+                            <property name="resultSetColumn">SUM_ALL</property>
+                        </data>
+                    </cell>
+                </row>
+            </footer>
+        </table>
+    </body>
+</report>

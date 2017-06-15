@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appMenuItem name="main" messageName="mainMenu">
+	<items>
+		<item name="Открытые ресурсы" messageName="menu_open_objects">
+			<items>
+				<item name="Портал" messageName="menu_infoportal"
+					viewId="/public/infoportal.xhtml" />
+				<item name="КЛАДР" messageName="menu_kladr"
+					viewId="/public/kladr.xhtml" />
+				<item name="WS" messageName="menu_ws"
+					viewId="/public/wstest.xhtml" />
+				<item name="Проверить ЭЦП" messageName="menu_test_sign" viewId="/public/cryptoTest.xhtml"/>							
+			</items>
+		</item>		
+		<item name="Реестры объектов" messageName="menu_objects">
+			<items>
+				<item name="Соискатели и лицензиаты"
+					messageName="menu_agents" viewId="/member/agentList.xhtml" rendered="#{orgunitHome.showULandFL() and identity.loggedIn}"/>
+				<item name="Получатели услуг"
+					messageName="menu_person" viewId="/member/personList.xhtml" rendered="#{orgunitHome.showULandFL() and identity.loggedIn}"/>
+				<item name="Получатели услуг"
+					messageName="menu_person">
+				</item>				
+				<item name="Аналитические формы" messageName="menu_analisys">
+					<items>
+						<item name="Сводный отчет" messageName="menu_analisys_allabout"
+							viewId="/gossrvc/analisys/allAboutReport.xhtml" />
+						<item name="Исполнитель-Дело" messageName="menu_analisys_ispolniteldelo"
+							viewId="/gossrvc/analisys/ispolnitelDelo.xhtml" />
+                        <item name="sep" messageName="menu_separator" viewId="" />
+                        <item name="Контроль исполнения услуг" messageName="Контроль исполнения услуг" viewId="/gossrvc/analisys/serviceControlProcess.xhtml"/>
+                        <item name="Межведомственные запросы" messageName="Межведомственные запросы" viewId="/gossrvc/analisys/requestControlProcess.xhtml"/>
+					</items>
+				</item>			
+						
+				<!--item name="Документы"
+					messageName="Документы" viewId="/doc/jcrDocumentList.xhtml" /-->
+
+
+				<!--  				<item name="Реестр лицензий" messageName="menu_licenses"
+					viewId="/public/licenseList.xhtml" />
+				<item name="Корреспонденция"
+					messageName="menu_mail_documents">
+					<items>
+						<item name="Входящие документы"
+							messageName="menu_in_doc_list" viewId="/member/indoclist.xhtml" />
+					</items>
+				</item>
+				-->
+			</items>
+		</item>
+
+		<item name="Администрирование" messageName="menu_admin">
+			<items>
+				<item name="Портал" messageName="menu_admin_portal"
+					viewId="/admin/sections.xhtml" />
+				<item name="Пользователи" messageName="menu_admin_users"
+					viewId="/member/userList.xhtml" />
+				<item name="Роли" messageName="menu_admin_roles"
+					viewId="/member/roleList.xhtml" />
+				<item name="Настройки" viewId="/admin/settings.xhtml"
+					messageName="menu_settings" />
+				<item name="Справочники"
+					messageName="menu_admin_cardsystem">
+					<items>
+						<item name="CardGroupList"
+							messageName="menu_admin_cardsystem_structure"
+							viewId="/cardsystem/CardGroupList.xhtml" />
+						<item name="CardGroupContent"
+							messageName="menu_admin_cardsystem_content"
+							viewId="/cardsystem/CardTree.xhtml" />
+
+						<item name="sep"
+							messageName="menu_separator"
+							viewId="" />
+
+						<item name="Соответствие входящих исходящим документам ОГВ"
+							messageName="menu_reference_ogv_doc"
+							viewId="/gossrvc/ogvDocList.xhtml" />
+
+						<!--item name="Соответствие услуг госорганам"
+							messageName="menu_reference_ogv_service"
+							viewId="/gossrvc/ogvServiceList.xhtml" /-->
+
+						<item name="Эталонный перечень документов для получения положительного результата по услуге"
+							messageName="menu_reference_service_doctype"
+							viewId="/gossrvc/serviceDocList.xhtml" />
+						<item name="Перечень видов документов получаемых при завершения услуги"
+							messageName="menu_reference_service_result"
+							viewId="/gossrvc/serviceResultList.xhtml" />
+
+						<item name="sep"
+							messageName="menu_separator"
+							viewId="" />
+
+					<!--	<item name="Соответствие шаблона услуге"
+							messageName="menu_reference_service_template"
+							viewId="/gossrvc/serviceTemplateList.xhtml" />
+						<item name="Соответствие шаблона госоргану"
+							messageName="menu_reference_ogv_template"
+							viewId="/gossrvc/ogvTemplateList.xhtml" /> -->
+						<item name="Соответствие шаблона отказа услуге"
+							messageName="menu_reference_service_reject_template"
+							viewId="/gossrvc/serviceRejectTemplateList.xhtml" />
+						<item name="Соответствие шаблона результату услуги"
+							messageName="menu_reference_service_result_template"
+							viewId="/gossrvc/serviceResultTemplateList.xhtml" />
+					<!--	<item name="Соответствие шаблона типу печатного документа"
+							messageName="menu_reference_print_doc_type_template"
+							viewId="/member/printDocTypeTemplateList.xhtml" /> -->
+						<!--item name="Виды исходящих из ОГВ документов по различным услугам"
+							messageName="menu_reference_ogv_result"
+							viewId="/gossrvc/ogvResultList.xhtml" /-->
+
+					</items>
+
+				</item>
+				<item name="Отчетная система"
+					messageName="menu_reports">
+					<items>
+					<item name="Регистрация и просмотр отчетов"
+					messageName="menu_reports_register"
+					viewId="/report/RepListActionList.xhtml" />
+					<item name="Панель администратора"
+					messageName="menu_reports_adminpanel"
+					viewId="/report/runActionAdmin.xhtml" />
+					<item name="Печатные формы шагов процессов"
+					messageName="menu_reports_bpms_reports"
+					viewId="/admin/activityReportList.xhtml" />
+					</items>
+				</item>
+
+
+				<item name="Журналирование"
+					messageName="menu_logging">
+					<items>
+						<item name="Справочник событий и атрибутов"
+							messageName="menu_logging_config" viewId="/ev/EvsList.xhtml" />
+						<item name="Профили журнала"
+							messageName="menu_logging_profiles"
+							viewId="/ev/EvListingProfileList.xhtml" />
+						<item name="Просмотр журнала"
+							messageName="menu_logging_view" viewId="/ev/SetupSearch.xhtml" />
+						<!-- <item name="Архивация журнала"
+							messageName="menu_logging_archive"
+							viewId="/ev/SetupArchivingEvLog.xhtml" />-->
+					</items>
+				</item>
+
+				<!--  				<item name="Импорт и экспорт"
+					messageName="menu_import_export">
+					<items>
+					<item name="Импорт и экспорт реестра лицензий"
+					messageName="menu_import_export_license"
+					viewId="/impexp/ImExLicenseList.xhtml" />
+					</items>
+					</item>
+				-->
+                <item name="Проверка корректности настройки интеграции с криптопровайдером" viewId="/member/checkSignDetails.xhtml"
+                      messageName="menu_check_sign_details" />
+			</items>
+		</item>
+		<!--item name="Документооборот"
+			messageName="menu_docflow">
+			<items>
+				<item name="Документы"
+					messageName="menu_docflow_repo"
+					viewId="/doc/repository.xhtml" />
+			</items>
+		</item-->
+
+		<item name="Управление регламентами"
+			messageName="menu_admin_bpms">
+			<items>
+				<item name="Пакеты регламентов"
+					messageName="menu_admin_bpms_packages"
+					viewId="/bpms/packages.xhtml" />
+				<item name="Мониторинг регламентов"
+					messageName="menu_admin_bpms_processes"
+					viewId="/bpms/process.xhtml" />
+				<item name="Участники"
+					messageName="menu_admin_bpms_participants"
+					viewId="/bpms/partmap.xhtml" />
+			</items>
+		</item>
+
+        <item name="Электронная очередь" messageName="menu_admin_eq">
+            <items>
+                <item name="Детский сад" messageName="menu_admin_eq_kindergarten" viewId="/electronicqueue/kindergarten.xhtml"/>
+                <item name="Школа" messageName="menu_admin_eq_school" viewId="/electronicqueue/school.xhtml"/>
+            </items>
+        </item>
+	</items>
+</appMenuItem>

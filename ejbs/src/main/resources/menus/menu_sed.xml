@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appMenuItem name="main" messageName="mainMenu">
+	<items>
+	
+		<item name="Портал" messageName="menu_infoportal"
+			viewId="/public/infoportal.xhtml" />
+			
+		<item name="Реестры" messageName="menu_darchive">
+			<items>
+				<item name="Поиск" messageName="menu_archive_card_search"
+					viewId="/darchive/archiveCardList.xhtml" />
+				<item name="JCR репозитарии" viewId="/admin/repositoriesController.xhtml"
+					messageName="admin_repositoriesController" />
+			</items>
+		</item>
+		<item name="Администрирование" messageName="menu_admin">
+			<items>
+			<!-- 
+				<item name="Тест" messageName="menu_admin_portal"
+					viewId="/admin/process.xhtml" />  -->
+				<item name="Портал" messageName="menu_admin_portal"
+					viewId="/admin/sections.xhtml" />
+				<item name="Пользователи" messageName="menu_admin_users"
+					viewId="/member/userList.xhtml" />
+				<item name="Роли" messageName="menu_admin_roles"
+					viewId="/member/roleList.xhtml" />
+				<item name="Назначение ролей" messageName="menu_admin_assignRoles"
+					viewId="/admin/assignRoleList.xhtml" />
+				<item name="Настройки" viewId="/admin/settings.xhtml"
+					messageName="menu_settings" />
+				<item name="Настройки таблицы" viewId="/admin/tableSettingChoose.xhtml"
+					messageName="menu_public.tableSetting" />
+				<item name="Периоды" viewId="/admin/periods.xhtml"
+					messageName="menu_periods" />
+				<item name="Физические лица" viewId="/member/personList.xhtml"
+					messageName="menu_reference_person" rendered="#{orgunitHome.showULandFL() and identity.loggedIn}"/>
+				<item name="Справочники"
+					messageName="menu_admin_cardsystem">
+					<items>
+						<item name="OrgUnits" messageName="menu_orgunits_tree"
+							viewId="/sed/orgunitList.xhtml" />
+						<item name="Departments" messageName="menu_departments_tree"
+							viewId="/sed/departmentList.xhtml" />
+						<item name="CardGroupList"
+							messageName="menu_admin_cardsystem_structure"
+							viewId="/cardsystem/CardGroupList.xhtml" />
+						<item name="CardGroupContent"
+							messageName="menu_admin_cardsystem_content"
+							viewId="/cardsystem/CardElementList.xhtml" />
+						<item name="AdditionalField"
+							messageName="menu_admin_additional"
+							viewId="/additional/additionalFieldList.xhtml" />
+						<item name="sep"
+							messageName="menu_separator"
+							viewId="" />							
+							
+						<item name="Разделы"
+							messageName="menu_reference_archivecollection"
+							viewId="/darchive/archiveCollectionList.xhtml" />
+						<item name="Юридические лица"
+							messageName="menu_agents" viewId="/member/agentList.xhtml" rendered="#{orgunitHome.showULandFL() and identity.loggedIn}"/>
+							
+							
+					</items>
+				</item>
+				<item name="Отчетная система"
+					messageName="menu_reports">
+					<items>
+						<item name="Регистрация и просмотр отчетов"
+							messageName="menu_reports_register"
+							viewId="/report/RepListActionList.xhtml" />
+						<item name="Панель администратора"
+							messageName="menu_reports_adminpanel"
+							viewId="/report/runActionAdmin.xhtml" />
+						<item name="Печатные формы шагов процессов"
+							messageName="menu_reports_bpms_reports"
+							viewId="/admin/activityReportList.xhtml" />
+					</items>
+				</item>
+
+				<item name="Журналирование"
+					messageName="menu_logging">
+					<items>
+						<item name="Справочник событий и атрибутов"
+							messageName="menu_logging_config" viewId="/ev/EvsList.xhtml" />
+						<item name="Профили журнала"
+							messageName="menu_logging_profiles"
+							viewId="/ev/EvListingProfileList.xhtml" />
+						<item name="Просмотр журнала"
+							messageName="menu_logging_view"
+							viewId="/ev/SetupSearch.xhtml" />
+						<!-- <item name="Архивация журнала"
+							messageName="menu_logging_archive"
+							viewId="/ev/SetupArchivingEvLog.xhtml" /> -->
+					</items>
+				</item>
+
+                <item name="Проверка корректности настройки интеграции с криптопровайдером" viewId="/member/checkSignDetails.xhtml"
+                      messageName="menu_check_sign_details" />
+
+                <item name="Управление регламентами"
+                    messageName="menu_admin_bpms">
+                    <items>
+                        <item name="Пакеты регламентов"
+                            messageName="menu_admin_bpms_packages"
+                            viewId="/bpms/packages.xhtml" />
+                        <item name="Мониторинг регламентов"
+                            messageName="menu_admin_bpms_processes"
+                            viewId="/bpms/process.xhtml" />
+                        <item name="Участники"
+                            messageName="menu_admin_bpms_participants"
+                            viewId="/bpms/partmap.xhtml" />
+                    </items>
+                </item>
+				
+			</items>
+		</item>			
+</items>
+</appMenuItem>

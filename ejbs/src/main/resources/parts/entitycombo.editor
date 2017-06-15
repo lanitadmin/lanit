@@ -1,0 +1,86 @@
+<!--
+<h:inputTextarea id="comboRO#{var.id}"
+	value="#{var.value==null ? '[не выбрано]' : var.caption}"
+	readonly="true" rendered="#{!var.writable}" 
+	styleClass="readonly" style="width:500px"/>
+-->
+
+<c:if test="#{!var.writable}">
+	<div class="suggestion-readonly">
+		<span>
+			#{var.value==null ? '[не выбрано]' : var.caption}
+		</span> 
+	</div>
+</c:if>	
+
+
+
+<c:if test="#{appSettMap.get('searchable_combo') != '1' and var.writable}">
+	<h:selectOneMenu style="width:500px" value="#{var.value}" rendered="#{var.writable}"
+		id="combo#{var.id}"
+		styleClass="#{var.writable?'writable':'readonly'}">
+		<f:selectItem itemLabel="[не выбрано]" itemValue="" />
+		<c:forEach var="item" items="#{controller.getVarSelectList(var.id)}">
+			<f:selectItem itemValue="#{item.key}" itemLabel="#{item.value}"/>
+		</c:forEach>
+	</h:selectOneMenu>
+</c:if>
+
+
+<c:if test="#{appSettMap.get('searchable_combo') == '1' and var.writable}">
+
+	<util:autoComplete key="#{var.value}" label="#{var.caption}" id="suggest#{var.id}"
+		entityHome="#{controller.getEntityVarController(var.id, false)}"
+		search2="#{entity.getSuggestion}" 
+		var="item" itemValue="#{item.id}" itemLabel="#{entity.getEntityLabel(item)}"
+		filter="#{controller.getEntityVarFilter(var.id)}"
+		filterData="#{controller.getEntityVarFilterData(var.id)}"
+		maxResults="50">
+	</util:autoComplete>
+
+<!--
+	<a4j:region rendered="#{var.writable}">
+		<div>
+		<a4j:support ajaxSingle="true" event="onmouseover">
+			<f:setPropertyActionListener value="#{controller.currentVarForSuggest}" target="#{var.id}" />
+		</a4j:support>	
+		
+		<h:inputText id="searchVarText#{var.id}" value="#{var.caption}" style="width:500px;vertical-align: middle">
+			<a4j:support ajaxSingle="true" event="onfocus">
+				<f:setPropertyActionListener value="#{var.id}" target="#{controller.currentVarForSuggest}" />
+			</a4j:support>		
+		</h:inputText>
+		
+		<h:graphicImage value="/img/arrowdown.png" 
+				onclick="#{rich:component(var.id)}.callSuggestion(true)"						
+				style="cursor:pointer; height:100%; vertical-align: middle;" >
+			<a4j:support ajaxSingle="true" event="onmouseover">
+				<f:setPropertyActionListener value="#{var.id}" target="#{controller.currentVarForSuggest}" />
+			</a4j:support>			
+		</h:graphicImage>
+		
+		<rich:suggestionbox for="searchVarText#{var.id}" 
+				suggestionAction="#{controller.autoComplete}"
+				fetchValue="#{result.label}" 
+				var="result" first="0" minChars="1" id="#{var.id}"
+				nothingLabel="не найдено" tokens=",[" rules="all"
+				shadowOpacity="4" border="1" width="500" height="200"
+				frequency="0" shadowDepth="4" cellpadding="2" cellspacing="2" >				 
+					
+		    <a4j:support ajaxSingle="true" event="onselect">
+		        <f:setPropertyActionListener value="#{result.value}" target="#{var.value}" />
+		        <f:setPropertyActionListener value="#{result.label}" target="#{var.caption}" />	   	        
+		    </a4j:support>
+		    
+			<h:column>
+				<h:outputText value="#{result.label}" />
+			</h:column>
+					
+		</rich:suggestionbox>
+		</div>
+		
+		
+	</a4j:region>
+-->	
+</c:if>
+

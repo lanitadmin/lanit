@@ -1,0 +1,2144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.20" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 2.5.1.v20090903 Build &lt;2.5.1.v20090917-1447></property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="layoutPreference">fixed layout</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <parameters>
+        <scalar-parameter name="processId" id="128">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="activityId" id="129">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <property name="paramType">simple</property>
+            <property name="concealValue">false</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="docType" id="203">
+            <text-property name="promptText">Вывести на печать -</text-property>
+            <property name="valueType">static</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">lic</value>
+            </simple-property-list>
+            <list-property name="selectionList">
+                <structure>
+                    <property name="value">lic</property>
+                    <property name="label">Лицензию</property>
+                </structure>
+                <structure>
+                    <property name="value">attach</property>
+                    <property name="label">Приложения к лицензии</property>
+                </structure>
+            </list-property>
+            <property name="paramType">simple</property>
+            <property name="controlType">list-box</property>
+            <property name="mustMatch">true</property>
+            <property name="fixedOrder">true</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="pages" id="3278">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">0</value>
+            </simple-property-list>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="Data Source" id="7">
+            <method name="open"><![CDATA[clazz = new Packages.org.lanit.samara.birt.plugins.Shark();
+result2 = clazz.getActivityVariableValue
+	(
+		"licenseId,govServiceType,Komplekt_Doc,activityType,reGetReason",
+		params["processId"],
+		params["activityId"]
+	);	
+licenceId = result2[0];
+serviceType = result2[1];
+KomplDoc = result2[2];
+actType = result2[3];
+reasonReget = result2[4];
+]]></method>
+        </script-data-source>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="DataSet" id="564">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">ACTIVITY_TYPE_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">AGENT_ADDRESS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">AGENT_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">AGENT_SHORT_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">AGENT_INN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">AGENT_OGRN</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">LICENCE_NUMBER</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">LICENCE_DATE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">LICENCE_END_DATE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">LICENSE_PROL_DATE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">OBJECT_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">OBJECT_ADDRESS</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">OGV_SIGNATURE_LICENSE_NAME</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">OGV_SIGNATURE_LICENCE_POST_PROL</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">OGV_SIGNATURE_LICENCE_NAME_PROL</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">AGENT_OPF</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">PRIKAZ_NUM</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">PRIKAZ_DATE</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">OGV_SIGNATURE_LICENCE_POST</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">REASON_REGET</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">CLASS_OTHOD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">TYPE_OTHOD</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">CODE_FKKO</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">NATURE_DANGER</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">HUMAN_DANGER</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">LIC_JOB</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">OGV</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">ACTIVITY_TYPE_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGENT_ADDRESS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGENT_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGENT_SHORT_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGENT_INN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGENT_OGRN</property>
+                </structure>
+                <structure>
+                    <property name="columnName">LICENCE_NUMBER</property>
+                </structure>
+                <structure>
+                    <property name="columnName">LICENCE_DATE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">LICENCE_END_DATE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">LICENSE_PROL_DATE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OBJECT_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OBJECT_ADDRESS</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OGV_SIGNATURE_LICENSE_NAME</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OGV_SIGNATURE_LICENCE_POST_PROL</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OGV_SIGNATURE_LICENCE_NAME_PROL</property>
+                </structure>
+                <structure>
+                    <property name="columnName">AGENT_OPF</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRIKAZ_NUM</property>
+                </structure>
+                <structure>
+                    <property name="columnName">PRIKAZ_DATE</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OGV_SIGNATURE_LICENCE_POST</property>
+                </structure>
+                <structure>
+                    <property name="columnName">REASON_REGET</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CLASS_OTHOD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">TYPE_OTHOD</property>
+                </structure>
+                <structure>
+                    <property name="columnName">CODE_FKKO</property>
+                </structure>
+                <structure>
+                    <property name="columnName">NATURE_DANGER</property>
+                </structure>
+                <structure>
+                    <property name="columnName">HUMAN_DANGER</property>
+                </structure>
+                <structure>
+                    <property name="columnName">LIC_JOB</property>
+                </structure>
+                <structure>
+                    <property name="columnName">OGV</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">ACTIVITY_TYPE_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">AGENT_ADDRESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">AGENT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">AGENT_SHORT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">AGENT_INN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">AGENT_OGRN</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">LICENCE_NUMBER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">LICENCE_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">LICENCE_END_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">LICENSE_PROL_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">OBJECT_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">OBJECT_ADDRESS</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">OGV_SIGNATURE_LICENSE_NAME</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">OGV_SIGNATURE_LICENCE_POST_PROL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">OGV_SIGNATURE_LICENCE_NAME_PROL</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">AGENT_OPF</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">PRIKAZ_NUM</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">PRIKAZ_DATE</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">OGV_SIGNATURE_LICENCE_POST</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">REASON_REGET</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">CLASS_OTHOD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">TYPE_OTHOD</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">CODE_FKKO</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">NATURE_DANGER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">HUMAN_DANGER</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">LIC_JOB</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">OGV</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <method name="open"><![CDATA[//***Для других разработчиков - получение значения 
+//***переменных шага в событии Open у Data Source
+
+clazz = new Packages.org.lanit.samara.birt.plugins.Shark();
+
+//***Получение данных о лицензии
+resultLicense = clazz.getEntityManagerLod().createQuery
+(
+" select "+
+	" as1.value as OGV, "+
+	" as2.value as OGV_SIGNATURE_LICENCE_NAME, "+
+	" as3.value as OGV_SIGNATURE_LICENCE_POST, "+
+	" l.licenseNumber as LICENCE_NUMBER, "+
+	" l.licenseDate as LICENSE_DATE, "+
+	" ce.name as ACTIVITY_TYPE_NAME, "+
+	" l.agentName as AGENT_NAME, "+
+	" l.agentInn as AGENT_INN, "+
+	" l.agentAddress as AGENT_ADDRESS, "+
+	" l.agent.ogrn as AGENT_OGRN, "+
+	" l.agent.opf as AGENT_OPF, "+
+	" l.agent.nameShort, "+
+	" l.licenseEndDate as LICENSE_END_DATE, "+
+	" pd.docNum as PRIKAZ_NUM, "+
+	" pd.docDate as PRIKAZ_DATE "+
+" from "+
+	" License l, "+
+	" AppSetting as1, "+
+	" AppSetting as2, "+
+	" AppSetting as3, "+
+	" CardElement ce, "+
+	" PrintDoc pd "+
+" where "+
+	" l.id= :licenceId and "+
+	" as1.code='ogv_name' and "+
+	" as2.code='ogv_signature_licence_name' and "+
+	" as3.code='ogv_signature_licence_post' and "+
+	" ce.id=l.activityTypeId and "+
+	" pd.docPackageId= :KomplDoc and "+
+	" pd.docTypeId like '1_Resh%' and "+
+	" pd.docNum = (select max(pd1.docNum) from PrintDoc pd1 where pd1.docPackageId= :KomplDoc and pd1.docTypeId like '1_Resh%') "
+)
+.setParameter("licenceId", licenceId)
+.setParameter("KomplDoc", KomplDoc)
+.getSingleResult();
+
+//***Для таблицы видов отходов в приложении
+resultOthod = clazz.getEntityManagerLod().createQuery
+(
+" select "+
+	" lew.id, "+
+	" lew.typeWaste.name, "+
+	" cefv1.fieldIntegerValue as FKKO, "+
+    " cefv2.fieldIntegerValue as CODE_FKKO, "+
+    " cefv3.fieldIntegerValue as NATURE, "+
+    " cefv4.fieldIntegerValue as HUMAN "+
+" from "+
+	" LicExtWaste lew, "+
+	" CardElementFieldValue cefv1, "+ 
+    " CardElementFieldValue cefv2, "+
+    " CardElementFieldValue cefv3, "+
+    " CardElementFieldValue cefv4 "+
+" where "+
+	" lew.licExt.license.id = :licenceId and "+
+	" lew.typeWaste.card.cardCode = 'SKatalog' and "+
+	" cefv1.cardField.fieldName = 'FKKO' and "+
+	" cefv2.cardField.fieldName = 'code_FKKO' and "+
+	" cefv3.cardField.fieldName = 'class_nature_danger' and "+
+	" cefv4.cardField.fieldName = 'class_human_danger' and "+
+    " cefv1.cardElement = lew.typeWaste and "+
+    " cefv2.cardElement = lew.typeWaste and "+
+    " cefv3.cardElement = lew.typeWaste and "+
+    " cefv4.cardElement = lew.typeWaste "
+)
+.setParameter("licenceId", licenceId)
+.getResultList();
+
+if (resultOthod.size() == 0) {
+	varForPages = 0;
+	totalrows = 1;
+}
+else {
+	varForPages = 1;
+	totalrows = resultOthod.size();
+}
+currentrow = 0;]]></method>
+            <method name="fetch"><![CDATA[if (currentrow >= totalrows) {
+	return(false);
+}
+//********************************************************/
+if (resultOthod.size() != 0) {
+	var rowValueOthod = resultOthod.get(currentrow);
+}
+var rowValueLicense = resultLicense;
+var licDate = BirtDateTime.day(rowValueLicense[4])+"         "+BirtDateTime.month(rowValueLicense[4],2)+" "+BirtDateTime.year(rowValueLicense[4])+" г."; 
+var licEndDate = BirtDateTime.day(rowValueLicense[12])+"         "+BirtDateTime.month(rowValueLicense[12],2)+" "+BirtDateTime.year(rowValueLicense[12])+" г."; 
+var PrikazDate = BirtDateTime.day(rowValueLicense[14])+"         "+BirtDateTime.month(rowValueLicense[14],2)+" "+BirtDateTime.year(rowValueLicense[14])+" г.";
+var jobNameStr = "";
+var licObjstr = "";
+
+//***Получение объектов лицензирования
+resultLicObj = clazz.getEntityManagerLod().createQuery
+(
+	" select "+
+		" lo.kladr as OBJECT_ADDRESS "+
+	" from "+
+		" LicObject lo "+
+	" where "+
+		" lo.license.id = :licenceId "
+)
+.setParameter("licenceId", licenceId)
+.getResultList();
+
+//***Получение видов работ для отхода
+if (resultOthod.size() != 0) {
+	jobName = clazz.getEntityManagerLod().createQuery
+	(
+		" select "+
+			" lej.job.name "+
+		" from "+
+			" LicExtJobs lej"+
+		" where "+
+			" lej.licExtWaste.id = "+ rowValueOthod[0] 
+	)
+	.getResultList();
+}
+else 
+	jobName = null;
+	
+//********************************************************/
+//Приводим список объектов лицензирования в нормальный вид 
+if (resultLicObj != null) {
+	for (i = 0; i < resultLicObj.size(); i++){
+		if (i == 0)
+			licObjstr = licObjstr + resultLicObj[i];
+		else
+			licObjstr = licObjstr + ", " + resultLicObj[i];
+		}
+	row["OBJECT_ADDRESS"] = licObjstr;
+}
+else
+	row["OBJECT_ADDRESS"] = '-'; 
+//********************************************************/
+
+//Приводим список видов работ в нормальный вид
+if (jobName != null) {
+	for (i = 0; i < jobName.size(); i++){
+		if (i == 0)
+			jobNameStr = jobNameStr + jobName[i];
+		else
+			jobNameStr = jobNameStr + ", " + jobName[i];
+	}
+//	row["LIC_JOB"] = jobNameStr;
+}
+else
+	jobNameStr = '-';;
+	//row["LIC_JOB"] = '-'; 
+//********************************************************/
+//Заполнение полей бланка при получении новой лицензии
+if (serviceType=="ST_Get"){
+	if (params["docType"].value == "lic"){ 
+		//************************************************/
+		//Заполнение лицевой стороны
+		row["OGV"] = rowValueLicense[0];
+		row["LICENCE_NUMBER"] = rowValueLicense[3];
+		row["LICENCE_DATE"] = licDate;
+		row["ACTIVITY_TYPE_NAME"] = rowValueLicense[5];
+		row["AGENT_NAME"] = rowValueLicense[6];
+		row["AGENT_SHORT_NAME"] = rowValueLicense[11];
+		row["AGENT_OPF"] = rowValueLicense[10];
+		row["AGENT_OGRN"] = rowValueLicense[9];
+		//************************************************/
+		//Заполнение оборотной стороны	
+		row["AGENT_INN"] = rowValueLicense[7];
+		row["AGENT_ADDRESS"] = rowValueLicense[8];
+		row["LICENCE_END_DATE"] = licEndDate;
+		row["PRIKAZ_DATE"] = PrikazDate;
+		row["PRIKAZ_NUM"] = rowValueLicense[13];	
+		row["OGV_SIGNATURE_LICENSE_NAME"] = rowValueLicense[1];
+		row["OGV_SIGNATURE_LICENCE_POST"] = rowValueLicense[2];
+	}	
+	if (params["docType"].value == "attach"){ 
+		//************************************************/
+		//Заполнение приложения
+		if (resultOthod.size() != 0) {
+			row["LICENCE_NUMBER"] = rowValueLicense[3];
+			row["LICENCE_DATE"] = licDate;
+			row["OGV_SIGNATURE_LICENSE_NAME"] = rowValueLicense[1];
+			row["OGV_SIGNATURE_LICENCE_POST"] = rowValueLicense[2];
+			//************************************************/
+			//Заполнение таблицы в приложении
+			if (rowValueOthod[2] == 1) 
+				row["CLASS_OTHOD"] = 'Отходы, внесенные в ФККО';
+			else 
+				row["CLASS_OTHOD"] = 'Отходы, не внесенные в ФККО';
+				row["TYPE_OTHOD"] = rowValueOthod[1];
+			if (rowValueOthod[3] == null)
+				row["CODE_FKKO"] = '-';
+			else	
+				row["CODE_FKKO"] = rowValueOthod[3];
+			if (rowValueOthod[4] == null)
+				row["NATURE_DANGER"] = '-';
+			else
+				row["NATURE_DANGER"] = rowValueOthod[4];
+			if (rowValueOthod[5] == null)
+				row["HUMAN_DANGER"] = '-';
+			else
+				row["HUMAN_DANGER"] = rowValueOthod[5];
+			row["LIC_JOB"] = jobNameStr;
+		}
+	}
+}
+else
+//********************************************************/
+//**Заполнение полей бланка при переоформлении лицензии
+if (serviceType=="ST_ReGet"){
+	if (params["docType"].value == "lic"){ 
+		//************************************************/
+		//Заполнение оборотной стороны
+		row["LICENCE_NUMBER"] = rowValueLicense[3];
+		row["LICENCE_DATE"] = licDate;
+		row["PRIKAZ_DATE"] = PrikazDate;
+		row["LICENCE_END_DATE"] = licEndDate;
+		row["PRIKAZ_NUM"] = rowValueLicense[13];	
+		row["REASON_REGET"] = reasonReget;
+		row["OGV_SIGNATURE_LICENSE_NAME"] = rowValueLicense[1];
+		row["OGV_SIGNATURE_LICENCE_POST"] = rowValueLicense[2];
+	}
+}
+else
+//********************************************************/
+//Заполнение полей бланка при продлении лицензии
+if (serviceType=="ST_ProLong"){
+	if (params["docType"].value == "lic"){ 
+		//************************************************/
+		//Заполнение оборотной стороны
+		row["PRIKAZ_NUM"] = rowValueLicense[13];
+		row["PRIKAZ_DATE"] = PrikazDate;
+		row["LICENSE_PROL_DATE"] = licEndDate;
+		row["OGV_SIGNATURE_LICENSE_NAME"] = rowValueLicense[1];
+		row["OGV_SIGNATURE_LICENCE_POST"] = rowValueLicense[2];
+	}
+}
+currentrow = currentrow + 1;
+return(true);]]></method>
+            <method name="close"><![CDATA[clazz = null;
+resultLicense = null;
+resultOthod = null;
+jobName = null;]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="4">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="5">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="6">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="data" id="1246">
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">12px</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">portrait</property>
+            <property name="topMargin">0mm</property>
+            <property name="leftMargin">35mm</property>
+            <property name="bottomMargin">0in</property>
+            <property name="rightMargin">35mm</property>
+            <property name="backgroundAttachment">scroll</property>
+            <property name="textTransform">none</property>
+            <property name="display">block</property>
+            <property name="headerHeight">35mm</property>
+            <property name="footerHeight">35mm</property>
+            <page-header>
+                <grid id="2906">
+                    <property name="fontFamily">"Roman Unicode"</property>
+                    <property name="fontSize">12px</property>
+                    <property name="fontStyle">italic</property>
+                    <property name="textAlign">right</property>
+                    <property name="width">100%</property>
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">all</property>
+                            <expression name="valueExpr">params["docType"].value != "attach"</expression>
+                        </structure>
+                    </list-property>
+                    <column id="2918"/>
+                    <column id="2907">
+                        <property name="width">15mm</property>
+                    </column>
+                    <column id="2908">
+                        <property name="width">4mm</property>
+                    </column>
+                    <column id="2909">
+                        <property name="width">15mm</property>
+                    </column>
+                    <row id="2920">
+                        <property name="height">25mm</property>
+                        <cell id="2921"/>
+                        <cell id="2922"/>
+                        <cell id="2923"/>
+                        <cell id="2924"/>
+                    </row>
+                    <row id="2910">
+                        <cell id="2917">
+                            <text id="2919">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Лист]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="2911">
+                            <auto-text id="2912">
+                                <property name="textAlign">center</property>
+                                <property name="type">page-number</property>
+                            </auto-text>
+                        </cell>
+                        <cell id="2913">
+                            <text id="2914">
+                                <property name="contentType">plain</property>
+                                <text-property name="content"><![CDATA[из]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="2915">
+                            <auto-text id="2916">
+                                <property name="textAlign">center</property>
+                                <property name="type">total-page</property>
+                            </auto-text>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+            <page-footer>
+                <grid id="1228">
+                    <property name="fontFamily">"Roman Unicode"</property>
+                    <property name="fontSize">12px</property>
+                    <property name="height">100%</property>
+                    <property name="width">140mm</property>
+                    <property name="dataSet">DataSet</property>
+                    <list-property name="visibility">
+                        <structure>
+                            <property name="format">all</property>
+                            <expression name="valueExpr">params["docType"].value != "attach"</expression>
+                        </structure>
+                    </list-property>
+                    <list-property name="boundDataColumns">
+                        <structure>
+                            <property name="name">OGV_SIGNATURE_LICENSE_NAME</property>
+                            <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENSE_NAME"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                        <structure>
+                            <property name="name">OGV_SIGNATURE_LICENCE_POST</property>
+                            <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENCE_POST"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                    </list-property>
+                    <column id="1229"/>
+                    <column id="1230"/>
+                    <row id="3218">
+                        <property name="height">10mm</property>
+                        <cell id="3219"/>
+                        <cell id="3220"/>
+                    </row>
+                    <row id="1231">
+                        <property name="height">10mm</property>
+                        <cell id="1232">
+                            <data id="1234">
+                                <property name="fontSize">12px</property>
+                                <property name="resultSetColumn">OGV_SIGNATURE_LICENCE_POST</property>
+                            </data>
+                        </cell>
+                        <cell id="1233">
+                            <data id="3091">
+                                <property name="resultSetColumn">OGV_SIGNATURE_LICENSE_NAME</property>
+                            </data>
+                        </cell>
+                    </row>
+                    <row id="3088">
+                        <property name="height">25mm</property>
+                        <cell id="3089"/>
+                        <cell id="3090"/>
+                    </row>
+                </grid>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid name="Face" id="1071">
+            <property name="fontFamily">"Roman Unicode"</property>
+            <property name="fontSize">12px</property>
+            <property name="fontWeight">normal</property>
+            <property name="fontStyle">italic</property>
+            <property name="pageBreakAfter">always</property>
+            <property name="width">140mm</property>
+            <property name="dataSet">DataSet</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">params["docType"].value != "lic" || serviceType!="ST_Get"</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">ACTIVITY_TYPE_NAME</property>
+                    <expression name="expression">dataSetRow["ACTIVITY_TYPE_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AGENT_NAME</property>
+                    <expression name="expression">dataSetRow["AGENT_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AGENT_SHORT_NAME</property>
+                    <expression name="expression">dataSetRow["AGENT_SHORT_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AGENT_OGRN</property>
+                    <expression name="expression">dataSetRow["AGENT_OGRN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LICENCE_NUMBER</property>
+                    <expression name="expression">dataSetRow["LICENCE_NUMBER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LICENCE_DATE</property>
+                    <expression name="expression">dataSetRow["LICENCE_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENSE_NAME</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENSE_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENCE_POST</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENCE_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TYPE_OTHOD</property>
+                    <expression name="expression">dataSetRow["TYPE_OTHOD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV</property>
+                    <expression name="expression">dataSetRow["OGV"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Aggregation</property>
+                    <property name="dataType">integer</property>
+                    <property name="aggregateFunction">COUNT</property>
+                    <list-property name="arguments">
+                        <structure>
+                            <property name="name">Expression</property>
+                            <expression name="value" type="javascript">params["pages"].value</expression>
+                        </structure>
+                    </list-property>
+                    <expression name="filterExpr" type="javascript">BirtMath.mod((row.__rownum),5)==0</expression>
+                </structure>
+            </list-property>
+            <column id="1072"/>
+            <row id="1075">
+                <property name="height">32mm</property>
+                <cell id="1076">
+                    <data id="2770">
+                        <property name="textAlign">center</property>
+                        <property name="resultSetColumn">OGV</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="1077">
+                <property name="height">12mm</property>
+                <cell id="1078">
+                    <grid id="1083">
+                        <property name="width">100%</property>
+                        <property name="dataSet">DataSet</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">LICENCE_NUMBER</property>
+                                <expression name="expression">dataSetRow["LICENCE_NUMBER"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                            <structure>
+                                <property name="name">LICENCE_DATE</property>
+                                <expression name="expression">dataSetRow["LICENCE_DATE"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <column id="1084">
+                            <property name="width">28mm</property>
+                        </column>
+                        <column id="1085">
+                            <property name="width">45mm</property>
+                        </column>
+                        <column id="1086"/>
+                        <row id="1087">
+                            <cell id="1088"/>
+                            <cell id="1089">
+                                <data id="2771">
+                                    <property name="resultSetColumn">LICENCE_NUMBER</property>
+                                </data>
+                            </cell>
+                            <cell id="1090">
+                                <text id="3132">
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[от <VALUE-OF>row["LICENCE_DATE"]</VALUE-OF>]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="1079">
+                <property name="height">78mm</property>
+                <cell id="1080">
+                    <grid id="1094">
+                        <property name="width">100%</property>
+                        <column id="1095">
+                            <property name="width">40mm</property>
+                        </column>
+                        <column id="1096"/>
+                        <row id="1097">
+                            <cell id="1098"/>
+                            <cell id="1099">
+                                <data id="1100">
+                                    <property name="fontSize">12px</property>
+                                    <property name="resultSetColumn">ACTIVITY_TYPE_NAME</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                    <grid id="1297">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="textAlign">justify</property>
+                        <property name="verticalAlign">middle</property>
+                        <property name="display">inline</property>
+                        <property name="width">100%</property>
+                        <column id="3285"/>
+                        <row id="3292">
+                            <property name="height">10mm</property>
+                            <cell id="3295"/>
+                        </row>
+                        <row id="1302">
+                            <cell id="1303">
+                                <property name="colSpan">1</property>
+                                <property name="rowSpan">1</property>
+                                <text id="1301">
+                                    <property name="textLineThrough">none</property>
+                                    <property name="textTransform">none</property>
+                                    <property name="verticalAlign">middle</property>
+                                    <property name="whiteSpace">normal</property>
+                                    <property name="contentType">html</property>
+                                    <text-property name="content"><![CDATA[<VALUE-OF>row["ACTIVITY_TYPE_NAME"]</VALUE-OF>  в соответствии с приложением к настоящей лицензии на <VALUE-OF>if (varForPages == 0) params["pages"].value; else row["Aggregation"]</VALUE-OF> листах]]></text-property>
+                                </text>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="1081">
+                <property name="height">62mm</property>
+                <cell id="1082">
+                    <grid id="1288">
+                        <property name="width">100%</property>
+                        <column id="1289"/>
+                        <row id="1290">
+                            <property name="height">10mm</property>
+                            <cell id="1291">
+                                <data id="1105">
+                                    <property name="fontSize">12px</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">AGENT_NAME</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1292">
+                            <property name="height">10mm</property>
+                            <cell id="1293">
+                                <data id="1106">
+                                    <property name="fontSize">12px</property>
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">AGENT_SHORT_NAME</property>
+                                </data>
+                            </cell>
+                        </row>
+                        <row id="1294">
+                            <property name="height">10mm</property>
+                            <cell id="1295">
+                                <data id="2568">
+                                    <property name="textAlign">center</property>
+                                    <property name="resultSetColumn">AGENT_NAME</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="1103">
+                <cell id="1104">
+                    <grid id="1108">
+                        <property name="width">100%</property>
+                        <column id="1109">
+                            <property name="width">40mm</property>
+                        </column>
+                        <column id="1110"/>
+                        <row id="1111">
+                            <cell id="1112"/>
+                            <cell id="1113">
+                                <data id="1114">
+                                    <property name="fontSize">12px</property>
+                                    <property name="fontWeight">normal</property>
+                                    <property name="textAlign">right</property>
+                                    <property name="resultSetColumn">AGENT_OGRN</property>
+                                </data>
+                            </cell>
+                        </row>
+                    </grid>
+                </cell>
+            </row>
+            <row id="1101">
+                <cell id="1102"/>
+            </row>
+        </grid>
+        <grid name="Grid_Back" id="1941">
+            <property name="pageBreakAfter">always</property>
+            <property name="pageBreakBefore">always</property>
+            <property name="width">140mm</property>
+            <property name="dataSet">DataSet</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr">params["docType"].value != "lic"</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">AGENT_ADDRESS</property>
+                    <expression name="expression">dataSetRow["AGENT_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">AGENT_INN</property>
+                    <expression name="expression">dataSetRow["AGENT_INN"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LICENCE_END_DATE</property>
+                    <expression name="expression">dataSetRow["LICENCE_END_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LICENSE_PROL_DATE</property>
+                    <expression name="expression">dataSetRow["LICENSE_PROL_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OBJECT_ADDRESS</property>
+                    <expression name="expression">dataSetRow["OBJECT_ADDRESS"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENSE_NAME</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENSE_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENCE_POST_PROL</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENCE_POST_PROL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENCE_NAME_PROL</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENCE_NAME_PROL"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PRIKAZ_NUM</property>
+                    <expression name="expression">dataSetRow["PRIKAZ_NUM"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">PRIKAZ_DATE</property>
+                    <expression name="expression">dataSetRow["PRIKAZ_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENCE_POST</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENCE_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">REASON_REGET</property>
+                    <expression name="expression">dataSetRow["REASON_REGET"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LICENCE_DATE</property>
+                    <expression name="expression" type="javascript">dataSetRow["LICENCE_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1942"/>
+            <row id="1943">
+                <cell id="1944">
+                    <table id="3221">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="fontStyle">italic</property>
+                        <property name="pageBreakInterval">40</property>
+                        <column id="3228"/>
+                        <header>
+                            <row id="3222">
+                                <property name="fontWeight">normal</property>
+                                <cell id="3223">
+                                    <label id="3131">
+                                        <property name="fontFamily">"Roman Unicode"</property>
+                                        <property name="fontSize">10px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">italic</property>
+                                        <property name="textAlign">right</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr">serviceType != "ST_Get"</expression>
+                                            </structure>
+                                        </list-property>
+                                        <text-property name="text">Оборотная сторона</text-property>
+                                    </label>
+                                    <grid id="794">
+                                        <property name="fontFamily">"Roman Unicode"</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="height">100%</property>
+                                        <column id="795">
+                                            <property name="width">89mm</property>
+                                        </column>
+                                        <column id="796">
+                                            <property name="width">1.9058823529411764in</property>
+                                        </column>
+                                        <row id="797">
+                                            <cell id="798"/>
+                                            <cell id="799">
+                                                <data id="800">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="resultSetColumn">AGENT_INN</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3229">
+                                <cell id="3230">
+                                    <grid name="GridBack1" id="787">
+                                        <property name="fontFamily">"Roman Unicode"</property>
+                                        <property name="fontSize">12pt</property>
+                                        <property name="pageBreakAfter">auto</property>
+                                        <property name="pageBreakBefore">auto</property>
+                                        <property name="width">140mm</property>
+                                        <column id="788"/>
+                                        <column id="789">
+                                            <property name="width">2.623529411764706in</property>
+                                        </column>
+                                        <row id="792">
+                                            <property name="height">20mm</property>
+                                            <cell id="793">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                            </cell>
+                                        </row>
+                                        <row id="801">
+                                            <property name="height">10mm</property>
+                                            <cell id="802">
+                                                <property name="colSpan">2</property>
+                                                <property name="rowSpan">1</property>
+                                                <data id="1068">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="fontWeight">normal</property>
+                                                    <property name="textAlign">center</property>
+                                                    <property name="resultSetColumn">AGENT_ADDRESS</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3296">
+                                <cell id="3297">
+                                    <data id="1069">
+                                        <property name="fontSize">12px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="textAlign">left</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">serviceType!="ST_Get"</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">OBJECT_ADDRESS</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </header>
+                        <footer>
+                            <row id="3226">
+                                <cell id="3227">
+                                    <grid id="930">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="931">
+                                            <property name="width">93mm</property>
+                                        </column>
+                                        <column id="932">
+                                            <property name="width">1.6in</property>
+                                        </column>
+                                        <row id="3270">
+                                            <property name="height">10mm</property>
+                                            <cell id="3271"/>
+                                            <cell id="3272"/>
+                                        </row>
+                                        <row id="933">
+                                            <cell id="934"/>
+                                            <cell id="935">
+                                                <text id="3134">
+                                                    <property name="fontSize">12px</property>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr" type="javascript">serviceType!="ST_Get"</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[до <VALUE-OF>row["LICENCE_END_DATE"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3231">
+                                <cell id="3232">
+                                    <grid id="939">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="940">
+                                            <property name="width">93mm</property>
+                                        </column>
+                                        <column id="941">
+                                            <property name="width">1.6in</property>
+                                        </column>
+                                        <row id="942">
+                                            <cell id="943"/>
+                                            <cell id="944">
+                                                <text id="3135">
+                                                    <property name="fontSize">12px</property>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr" type="javascript">serviceType!="ST_Get"</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[от <VALUE-OF>row["PRIKAZ_DATE"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3233">
+                                <cell id="3234">
+                                    <grid id="948">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="949">
+                                            <property name="width">12mm</property>
+                                        </column>
+                                        <column id="950">
+                                            <property name="width">4.91764705882353in</property>
+                                        </column>
+                                        <row id="951">
+                                            <cell id="952"/>
+                                            <cell id="953">
+                                                <data id="954">
+                                                    <property name="fontSize">12px</property>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr">serviceType != "ST_Get"</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">PRIKAZ_NUM</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3235">
+                                <cell id="3236">
+                                    <grid id="957">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="958">
+                                            <property name="width">103mm</property>
+                                            <property name="textAlign">left</property>
+                                        </column>
+                                        <column id="959">
+                                            <property name="width">1.1764705882352942in</property>
+                                        </column>
+                                        <row id="3267">
+                                            <property name="height">10mm</property>
+                                            <cell id="3268"/>
+                                            <cell id="3269"/>
+                                        </row>
+                                        <row id="960">
+                                            <cell id="961">
+                                                <data id="962">
+                                                    <property name="fontSize">12px</property>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr">serviceType != "ST_Get"</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">OGV_SIGNATURE_LICENCE_POST</property>
+                                                </data>
+                                            </cell>
+                                            <cell id="963">
+                                                <data id="964">
+                                                    <property name="fontSize">12px</property>
+                                                    <list-property name="visibility">
+                                                        <structure>
+                                                            <property name="format">all</property>
+                                                            <expression name="valueExpr">serviceType != "ST_Get"</expression>
+                                                        </structure>
+                                                    </list-property>
+                                                    <property name="resultSetColumn">OGV_SIGNATURE_LICENSE_NAME</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3237">
+                                <cell id="3238">
+                                    <grid id="1118">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="1119">
+                                            <property name="width">93mm</property>
+                                        </column>
+                                        <column id="1120"/>
+                                        <row id="3243">
+                                            <property name="height">10mm</property>
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">serviceType!="ST_ProLong"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="3244"/>
+                                            <cell id="3245"/>
+                                        </row>
+                                        <row id="1121">
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">serviceType!="ST_ProLong"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="1122">
+                                                <text id="2761">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[Действие настоящей лицензии продлено на срок]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1123">
+                                                <text id="3136">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[до <VALUE-OF>row["LICENSE_PROL_DATE"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                    <grid id="1134">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="1135">
+                                            <property name="width">93mm</property>
+                                        </column>
+                                        <column id="1136"/>
+                                        <row id="3246">
+                                            <property name="height">5mm</property>
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">serviceType!="ST_ProLong"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="3247"/>
+                                            <cell id="3248"/>
+                                        </row>
+                                        <row id="1137">
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">serviceType!="ST_ProLong"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="1138">
+                                                <text id="2763">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[На основании решения лицензирующего органа]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1139">
+                                                <text id="3137">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[от <VALUE-OF>row["PRIKAZ_DATE"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                    <grid id="1141">
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="1142">
+                                            <property name="width">12mm</property>
+                                        </column>
+                                        <column id="1143">
+                                            <property name="width">4.929411764705883in</property>
+                                        </column>
+                                        <row id="3249">
+                                            <property name="height">5mm</property>
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr">serviceType!="ST_ProLong"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="3250"/>
+                                            <cell id="3251"/>
+                                        </row>
+                                        <row id="1144">
+                                            <property name="height">10mm</property>
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr">serviceType!="ST_ProLong"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="1145">
+                                                <text id="2764">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[№]]></text-property>
+                                                </text>
+                                            </cell>
+                                            <cell id="1146">
+                                                <data id="1147">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="resultSetColumn">PRIKAZ_NUM</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="3239">
+                                <cell id="3240">
+                                    <text id="1211">
+                                        <property name="fontSize">12px</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr">serviceType!="ST_ReGet"</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Лицензия переоформлена с <VALUE-OF>row["PRIKAZ_DATE"]</VALUE-OF><B>
+ </B> <VALUE-OF>row["REASON_REGET"]</VALUE-OF> ]]></text-property>
+                                    </text>
+                                    <text id="1214">
+                                        <property name="fontSize">12px</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr">serviceType!="ST_ReGet"</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[На основании решения лицензирующего органа № <VALUE-OF>row["PRIKAZ_NUM"]</VALUE-OF> от <VALUE-OF>row["PRIKAZ_DATE"]</VALUE-OF>]]></text-property>
+                                    </text>
+                                    <text id="1213">
+                                        <property name="fontSize">12px</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr">serviceType!="ST_ReGet"</expression>
+                                            </structure>
+                                        </list-property>
+                                        <property name="contentType">html</property>
+                                        <text-property name="content"><![CDATA[Срок действия: с <VALUE-OF>row["LICENCE_DATE"]</VALUE-OF> по <VALUE-OF>row["LICENCE_END_DATE"]</VALUE-OF>]]></text-property>
+                                    </text>
+                                </cell>
+                            </row>
+                            <row id="3241">
+                                <cell id="3242">
+                                    <grid id="1148">
+                                        <property name="fontSize">12pc</property>
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <column id="1149">
+                                            <property name="width">103mm</property>
+                                            <property name="textAlign">left</property>
+                                        </column>
+                                        <column id="1150">
+                                            <property name="width">1.3529411764705883in</property>
+                                        </column>
+                                        <row id="3273">
+                                            <property name="height">10mm</property>
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">serviceType!="ST_ProLong" &amp;&amp; serviceType!="ST_ReGet"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="3274"/>
+                                            <cell id="3275"/>
+                                        </row>
+                                        <row id="1151">
+                                            <list-property name="visibility">
+                                                <structure>
+                                                    <property name="format">all</property>
+                                                    <expression name="valueExpr" type="javascript">serviceType!="ST_ProLong" &amp;&amp; serviceType!="ST_ReGet"</expression>
+                                                </structure>
+                                            </list-property>
+                                            <cell id="1152">
+                                                <data id="1153">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="resultSetColumn">OGV_SIGNATURE_LICENCE_POST</property>
+                                                </data>
+                                            </cell>
+                                            <cell id="1154">
+                                                <data id="1155">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="resultSetColumn">OGV_SIGNATURE_LICENSE_NAME</property>
+                                                </data>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+        <grid name="Grid_Attach" id="1945">
+            <property name="marginTop">0pt</property>
+            <property name="pageBreakAfter">always</property>
+            <property name="pageBreakBefore">always</property>
+            <property name="width">140mm</property>
+            <property name="dataSet">DataSet</property>
+            <list-property name="visibility">
+                <structure>
+                    <property name="format">all</property>
+                    <expression name="valueExpr" type="javascript">params["docType"].value != "attach" || serviceType != "ST_Get" || varForPages == 0</expression>
+                </structure>
+            </list-property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">LICENCE_NUMBER</property>
+                    <expression name="expression">dataSetRow["LICENCE_NUMBER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LICENCE_DATE</property>
+                    <expression name="expression">dataSetRow["LICENCE_DATE"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENSE_NAME</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENSE_NAME"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">OGV_SIGNATURE_LICENCE_POST</property>
+                    <expression name="expression">dataSetRow["OGV_SIGNATURE_LICENCE_POST"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CLASS_OTHOD</property>
+                    <expression name="expression">dataSetRow["CLASS_OTHOD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">TYPE_OTHOD</property>
+                    <expression name="expression">dataSetRow["TYPE_OTHOD"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CODE_FKKO</property>
+                    <expression name="expression">dataSetRow["CODE_FKKO"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">NATURE_DANGER</property>
+                    <expression name="expression">dataSetRow["NATURE_DANGER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">HUMAN_DANGER</property>
+                    <expression name="expression">dataSetRow["HUMAN_DANGER"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LIC_JOB</property>
+                    <expression name="expression">dataSetRow["LIC_JOB"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="1946"/>
+            <row id="1947">
+                <cell id="1948">
+                    <table id="1346">
+                        <property name="fontFamily">"Roman Unicode"</property>
+                        <property name="fontSize">12px</property>
+                        <property name="fontStyle">normal</property>
+                        <property name="borderBottomStyle">none</property>
+                        <property name="textAlign">center</property>
+                        <property name="verticalAlign">middle</property>
+                        <property name="whiteSpace">normal</property>
+                        <property name="widows">0</property>
+                        <property name="wordSpacing">normal</property>
+                        <property name="display">block</property>
+                        <property name="pageBreakAfter">auto</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <property name="pageBreakInside">auto</property>
+                        <property name="canShrink">true</property>
+                        <property name="width">138mm</property>
+                        <property name="allowExport">true</property>
+                        <property name="repeatHeader">true</property>
+                        <property name="pageBreakInterval">5</property>
+                        <property name="sortByGroups">true</property>
+                        <column id="1365"/>
+                        <column id="1366"/>
+                        <column id="1367"/>
+                        <column id="1368"/>
+                        <column id="1369"/>
+                        <header>
+                            <row id="3212">
+                                <property name="verticalAlign">middle</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <cell id="3213">
+                                    <property name="colSpan">5</property>
+                                    <property name="rowSpan">1</property>
+                                    <grid id="1308">
+                                        <property name="fontSize">12px</property>
+                                        <property name="fontWeight">normal</property>
+                                        <property name="fontStyle">italic</property>
+                                        <property name="height">100%</property>
+                                        <property name="width">100%</property>
+                                        <property name="dataSet">DataSet</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">LICENCE_NUMBER</property>
+                                                <expression name="expression">dataSetRow["LICENCE_NUMBER"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">LICENCE_DATE</property>
+                                                <expression name="expression">dataSetRow["LICENCE_DATE"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                        </list-property>
+                                        <column id="1309"/>
+                                        <row id="1312">
+                                            <property name="height">10mm</property>
+                                            <cell id="1313">
+                                                <label id="1341">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="textAlign">right</property>
+                                                    <text-property name="text">Без лицензии недействительно</text-property>
+                                                </label>
+                                            </cell>
+                                        </row>
+                                        <row id="1316">
+                                            <property name="height">5mm</property>
+                                            <cell id="1317">
+                                                <text id="1343">
+                                                    <property name="fontSize">12px</property>
+                                                    <property name="textAlign">center</property>
+                                                    <property name="contentType">html</property>
+                                                    <text-property name="content"><![CDATA[К лицензии № <VALUE-OF>row["LICENCE_NUMBER"]</VALUE-OF> от <VALUE-OF>row["LICENCE_DATE"]</VALUE-OF>]]></text-property>
+                                                </text>
+                                            </cell>
+                                        </row>
+                                    </grid>
+                                </cell>
+                            </row>
+                            <row id="1347">
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="verticalAlign">middle</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <cell id="1348">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1370">
+                                        <text-property name="text">Вид опасного отхода</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1349">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1371">
+                                        <text-property name="text">Код опасного отхода по классификационному каталогу отходов</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1350">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1372">
+                                        <text-property name="text">Класс опасности для окружающей природной  среды</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1351">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1373">
+                                        <text-property name="text">Класс опасности для здоровья человека</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1352">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1374">
+                                        <text-property name="text">Выди  работ, выполняемых в составе лицензируемого вида деятельности</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="1375">
+                                <cell id="1376">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1382">
+                                        <text-property name="text">1</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1377">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1383">
+                                        <text-property name="text">2</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1378">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1384">
+                                        <text-property name="text">3</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1379">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1385">
+                                        <text-property name="text">4</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="1380">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <label id="1386">
+                                        <text-property name="text">5</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </header>
+                        <group id="2991">
+                            <property name="groupName">NewTableGroup1</property>
+                            <property name="interval">none</property>
+                            <property name="sortDirection">asc</property>
+                            <expression name="keyExpr">row["CLASS_OTHOD"]</expression>
+                            <structure name="toc">
+                                <expression name="expressionValue">row["CLASS_OTHOD"]</expression>
+                            </structure>
+                            <property name="repeatHeader">true</property>
+                            <property name="hideDetail">false</property>
+                            <property name="pageBreakAfter">auto</property>
+                            <property name="pageBreakBefore">auto</property>
+                            <property name="pageBreakInside">auto</property>
+                            <header>
+                                <row id="2992">
+                                    <cell id="2993">
+                                        <property name="colSpan">5</property>
+                                        <property name="rowSpan">1</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="borderBottomColor">#000000</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <property name="borderLeftColor">#000000</property>
+                                        <property name="borderLeftStyle">solid</property>
+                                        <property name="borderLeftWidth">thin</property>
+                                        <property name="borderRightColor">#000000</property>
+                                        <property name="borderRightStyle">solid</property>
+                                        <property name="borderRightWidth">thin</property>
+                                        <property name="textAlign">left</property>
+                                        <data id="3006">
+                                            <property name="resultSetColumn">CLASS_OTHOD</property>
+                                        </data>
+                                    </cell>
+                                </row>
+                            </header>
+                        </group>
+                        <detail>
+                            <row id="1353">
+                                <property name="suppressDuplicates">false</property>
+                                <property name="borderBottomColor">#000000</property>
+                                <property name="borderBottomStyle">solid</property>
+                                <property name="borderBottomWidth">thin</property>
+                                <property name="borderLeftColor">#000000</property>
+                                <property name="borderLeftStyle">solid</property>
+                                <property name="borderLeftWidth">thin</property>
+                                <property name="borderRightColor">#000000</property>
+                                <property name="borderRightStyle">solid</property>
+                                <property name="borderRightWidth">thin</property>
+                                <property name="borderTopColor">#000000</property>
+                                <property name="borderTopStyle">solid</property>
+                                <property name="borderTopWidth">thin</property>
+                                <property name="verticalAlign">middle</property>
+                                <cell id="1354">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="2866">
+                                        <property name="resultSetColumn">TYPE_OTHOD</property>
+                                    </data>
+                                </cell>
+                                <cell id="1355">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="2867">
+                                        <property name="resultSetColumn">CODE_FKKO</property>
+                                    </data>
+                                </cell>
+                                <cell id="1356">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="2868">
+                                        <property name="resultSetColumn">NATURE_DANGER</property>
+                                    </data>
+                                </cell>
+                                <cell id="1357">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="2869">
+                                        <property name="resultSetColumn">HUMAN_DANGER</property>
+                                    </data>
+                                </cell>
+                                <cell id="1358">
+                                    <property name="borderBottomColor">#000000</property>
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftColor">#000000</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightColor">#000000</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <property name="borderTopColor">#000000</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <data id="2870">
+                                        <property name="resultSetColumn">LIC_JOB</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </detail>
+                        <footer>
+                            <row id="3096">
+                                <cell id="3097">
+                                    <property name="colSpan">5</property>
+                                    <property name="rowSpan">1</property>
+                                    <label id="1389">
+                                        <property name="fontSize">12px</property>
+                                        <property name="fontStyle">normal</property>
+                                        <property name="textAlign">justify</property>
+                                        <text-property name="text">н/к* - не классифицируются согласно СП 2.1.7.1386-03 "Определение классов опасности токсичных отходов производства и потребления" (утв. Постановлением главного государственного санитарного врача РФ от 6 июня 2003 г. № 144)</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                        </footer>
+                    </table>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

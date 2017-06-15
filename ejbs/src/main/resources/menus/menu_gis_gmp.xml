@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<appMenuItem name="main" messageName="mainMenu" selectClass="mfc-menu-selected" viewId="/member/myActions.xhtml">
+	<items>
+		<item name="bpms_myProcesses" messageName="bpms_myProcesses" viewId="/member/myActions.xhtml" iconClass="template-menu-item-img" selectClass="template-menu-item-selected" styleClass="template-menu-item"/>
+		<item name="bpms_myWorkList" messageName="bpms_myWorkList" viewId="/member/myTasks.xhtml" iconClass="template-menu-item-img" selectClass="template-menu-item-selected" styleClass="template-menu-item"/>
+		<item name="bpms_openProcess" messageName="bpms_openProcess">
+			<items>
+				<item name="bpms_myReportList" messageName="bpms_myReportList" viewId="/member/myReports.xhtml"/>
+            </items>
+		</item>		
+		
+		<item name="Реестры объектов" messageName="menu_objects">
+			<items>
+				<item name="Соискатели и лицензиаты"
+					messageName="menu_agents" viewId="/member/agentList.xhtml" rendered="#{orgunitHome.showULandFL() and identity.loggedIn}"/>
+				<item name="Получатели услуг"
+					messageName="menu_person" viewId="/member/personList.xhtml" rendered="#{orgunitHome.showULandFL() and identity.loggedIn}"/>
+												
+				<item name="Реестр начислений"
+					messageName="menu_reestr_chargetemplate"
+					viewId="/gisgmp/chargeTemplateList.xhtml"/>				
+				<item name="Импорт начислений из XML файла"
+                      	messageName="menu_upload_xml_gisgmp"
+                      	viewId="/gisgmp/uploadXml.xhtml" />
+				<item name="Реестр начислений ГИСГМП"
+					messageName="menu_reestr_charge_gisgmp"
+					viewId="/gisgmp/chargeList.xhtml"/>
+				<item name="Реестр платежей ГИСГМП"
+					messageName="menu_reestr_payment_gisgmp"
+					viewId="/gisgmp/paymentList.xhtml"/>
+			</items>
+		</item>
+
+        <item name="Архив" messageName="Архив">
+            <items>
+                <item name="Архив начислений"
+                      messageName="Архив начислений"
+                      viewId="/gisgmp/archive/chargeArchiveList.xhtml" />
+
+                <item name="Архив платежей"
+                      messageName="Архив платежей"
+                      viewId="/gisgmp/archive/paymentArchiveList.xhtml" />
+
+                <item name="Архив запросов платежей"
+                      messageName="Архив запросов платежей"
+                      viewId="/gisgmp/archive/requestPaymentArchiveList.xhtml" />
+            </items>
+        </item>
+<item name="Открытые ресурсы" messageName="menu_open_objects">
+			<items>
+				<item name="Портал" messageName="menu_infoportal" viewId="/public/infoportal.xhtml"/>
+				</items>
+				</item>
+		<item name="Администрирование" messageName="menu_admin">
+			<items>
+				<item name="Справочники"
+					messageName="menu_admin_cardsystem">
+					<items>
+						<item name="OrgUnits" messageName="Участники"
+							viewId="/sed/orgunitList.xhtml" />
+						<item name="Departments" messageName="menu_departments_tree"
+							viewId="/sed/departmentList.xhtml" />
+                        <item name="PersonalAccountList" messageName="Лицевые счета"
+                              viewId="/gisgmp/dictionary/personalaccount/personalAccountList.xhtml" />
+                              <item name="OrgUnits" messageName="Органы ФК и финансовые организации"
+							viewId="/gisgmp/dictionary/financeorganization/financeOrganizationList.xhtml" />
+                        <item name="Kgbk" messageName="Главные администраторы дохода бюджета"
+                              viewId="/gisgmp/dictionary/kgbk/kgbkList.xhtml" />
+                        <item name="Сертификаты" messageName="Сертификаты"
+                              viewId="/member/certList.xhtml" />
+						<item name="sep"
+							messageName="menu_separator"
+							viewId="" />
+
+							
+						<item name="CardGroupList"
+							messageName="menu_admin_cardsystem_structure"
+							viewId="/cardsystem/CardGroupList.xhtml" />
+						<item name="CardGroupContent"
+							messageName="menu_admin_cardsystem_content"
+							viewId="/cardsystem/CardTree.xhtml" />
+						<item name="xmlExport"
+							messageName="xmlExport"
+							viewId="/admin/xmlExport.xhtml" />
+						<item name="xmlImport"
+							messageName="xmlImport"
+							viewId="/admin/xmlImport.xhtml" />
+						<item name="sep"
+							messageName="menu_separator"
+							viewId="" />
+														
+						<item name="AdditionalField"
+							messageName="menu_admin_additional"
+							viewId="/additional/additionalFieldList.xhtml" />
+							
+					</items>
+				</item>
+
+				<item name="Портал" messageName="menu_admin_portal"
+					viewId="/admin/sections.xhtml" />						
+				<item name="Пользователи" messageName="menu_admin_users"
+					viewId="/member/userList.xhtml" />
+				<item name="Роли" messageName="menu_admin_roles"
+					viewId="/member/roleList.xhtml" />
+				<item name="Назначение ролей" messageName="menu_admin_assignRoles"
+					viewId="/admin/assignRoleList.xhtml" />
+				<item name="Настройки" viewId="/admin/settings.xhtml"
+					messageName="menu_settings" />
+				<item name="Настройки таблицы" viewId="/admin/tableSettingChoose.xhtml"
+					messageName="menu_public.tableSetting" />
+				<item name="Интеграция"
+					messageName="menu_admin_integ">
+					<items>
+						<item name="Настройка Soap запросов" viewId="/admin/soapOptionsList.xhtml"
+							messageName="menu_soap_options" />
+						<item name="Внешние системы" viewId="/admin/externalSystem.xhtml"
+							messageName="menu_external_system" />
+                        <item name="Федеральная информационная система(ФИАС)" viewId="/admin/fiasManagement.xhtml"
+                              messageName="menu_fias_management"/>
+					</items>
+				</item>
+				<item name="Сервера идентификации"
+					messageName="menu_admin_idp">
+					<items>
+						<item name="IdP Shibboleth" messageName="menu_idp_shibboleth"
+							viewId="/admin/idpShibbolethSet.xhtml" />
+					</items>
+				</item>
+				<item name="Отчетная система"
+					messageName="menu_reports">
+					<items>
+					<item name="Регистрация и просмотр отчетов"
+					messageName="menu_reports_register"
+					viewId="/report/RepListActionList.xhtml" />
+					<item name="Панель администратора"
+					messageName="menu_reports_adminpanel"
+					viewId="/report/runActionAdmin.xhtml" />
+					<item name="Печатные формы шагов процессов"
+					messageName="menu_reports_bpms_reports"
+					viewId="/admin/activityReportList.xhtml" />
+					</items>
+				</item>
+
+				<item name="Консолидированная отчетность" messageName="consolid_rep_settings">
+					<items>
+						<item name="Сбор данных" messageName="menu_consolid_rep_active"
+							viewId="/admin/consolidReportSettings.xhtml" />
+<!-- 								<item name="Ввод показателей заполняемых вручную" messageName="menu_consolid_rep_input"
+									viewId="/member/consolidInputData.xhtml" />  -->
+						<item name="Аналитическая подсистема" messageName="menu_admin_bi_system"
+							viewId="/admin/consolidGoBiSystem.xhtml" />
+						<item name="Аналитическая подсистема Сайку" rendered="#{appSettings.getSetting('integration_saiku') == '1' and identity.loggedIn}"
+                              messageName="menu_admin_bi_system_saiku" viewId="/admin/consolidGoBiSystemSaiku.xhtml"/>	
+					</items>
+				</item>	   				
+
+				<item name="Журналирование"
+					messageName="menu_logging">
+					<items>
+						<item name="Справочник событий и атрибутов"
+							messageName="menu_logging_config" viewId="/ev/EvsList.xhtml" />
+						<item name="Профили журнала"
+							messageName="menu_logging_profiles"
+							viewId="/ev/EvListingProfileList.xhtml" />
+						<item name="Просмотр журнала"
+							messageName="menu_logging_view" viewId="/ev/SetupSearch.xhtml" />
+						<!--  <item name="Архивация журнала"
+							messageName="menu_logging_archive"
+							viewId="/ev/SetupArchivingEvLog.xhtml" />-->
+					</items>
+				</item>
+				<item name="Импорт"
+					messageName="menu_import">
+					<items>
+				<!-- <item name="Импорт начислений из XML файла"
+                      messageName="menu_upload_xml_gisgmp"
+                      viewId="/gisgmp/uploadXml.xhtml" /> -->
+                      <item name="Импорт Участника"
+                      messageName="menu_upload_orgunit_gisgmp"
+                      viewId="/gisgmp/importOrgunitHome.xhtml" />
+					</items>
+				</item>
+                <item name="Notification"
+                      messageName="Оповещение пользователей"
+                      viewId="/gisgmp/notification.xhtml" />
+                      
+                 <item name="Настройка автоматических запросов"
+					messageName="menu_autorequest"
+                      viewId="/gisgmp/paymentRequestSetting.xhtml" />
+
+                <item name="Проверка корректности настройки интеграции с криптопровайдером" viewId="/member/checkSignDetails.xhtml"
+                      messageName="menu_check_sign_details" />
+                <item name="Help" messageName="Помощь" viewId="/help/helpHome.xhtml"/>
+			</items>
+		</item>
+
+		<item name="Управление регламентами"
+			messageName="menu_admin_bpms">
+			<items>
+				<item name="Пакеты регламентов"
+					messageName="menu_admin_bpms_packages"
+					viewId="/bpms/packages.xhtml" />
+				<item name="Мониторинг регламентов"
+					messageName="menu_admin_bpms_processes"
+					viewId="/bpms/process.xhtml" />
+				<item name="Участники"
+					messageName="menu_admin_bpms_participants"
+					viewId="/bpms/partmap.xhtml" />
+				<item name="Делегирование"
+					messageName="menu_admin_bpms_delegation"
+					viewId="/bpms/userDelegation.xhtml" />						
+			</items>
+		</item>
+
+	</items>
+</appMenuItem>

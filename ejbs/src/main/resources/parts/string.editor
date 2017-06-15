@@ -1,0 +1,21 @@
+						<h:inputText value="#{var.value}" id="#{var.getId()}StrVal"
+							style="width:#{var.dataLength>50?50:var.dataLength}em;"
+							styleClass="#{var.writable?'writable':'readonly'}"
+							rendered="#{var.dataLength &lt; 257 and var.writable}" 
+							onkeydown="limitText(this,#{var.dataLength});" onkeyup="limitText(this,#{var.dataLength});"
+                            alt="#{var.attributes['editMask']}"
+							/>
+							
+							
+						<h:inputTextarea value="#{var.value}" cols="80" id="#{var.getId()}TextVal" 
+							rows="#{(var.attributes['rows']==null) ? 10:var.attributes['rows']}"
+							rendered="#{var.dataLength >= 257 and var.writable}"
+							styleClass="#{var.writable?'writable':'readonly'}"
+							readonly="#{!var.writable}" 
+							onkeydown="limitText(this,#{var.dataLength});" onkeyup="limitText(this,#{var.dataLength});"
+							/>
+
+						<h:inputTextarea id="stringRO#{var.id}" 
+							value="#{var.caption}" rendered="#{!var.writable}" 
+							readonly="true" style="width:500px; height:30px"/>
+							

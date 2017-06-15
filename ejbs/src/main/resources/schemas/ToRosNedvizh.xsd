@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2006 sp2 U (http://www.altova.com) by Maxim (home) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="Case_Record">
+		<xs:annotation>
+			<xs:documentation>Описание объекта передаваемого в АИС ГКУ при заведении дела</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Case_Meta">
+					<xs:annotation>
+						<xs:documentation>Описание дела</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Reg_Date" type="xs:date">
+								<xs:annotation>
+									<xs:documentation>Дата регистрации дела</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Service_ID">
+								<xs:annotation>
+									<xs:documentation>Код предоставляемой услуги</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Request_Type">
+								<xs:annotation>
+									<xs:documentation>Код типа заявки</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Operator_ID">
+								<xs:annotation>
+									<xs:documentation>Код оператора</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Department_ID">
+								<xs:annotation>
+									<xs:documentation>Код подразделения</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Area_ID">
+								<xs:annotation>
+									<xs:documentation>Код района</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="Region_ID">
+								<xs:annotation>
+									<xs:documentation>Код региона</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="User_Info">
+								<xs:annotation>
+									<xs:documentation>Информация о получателе услуги</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:choice>
+										<xs:element name="Citizen">
+											<xs:annotation>
+												<xs:documentation>Выбор физического лица</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Citizen_FirstName" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Имя</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Citizen_MiddleName" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Отчество</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Citizen_LastName" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Фамилия</xs:documentation>
+														</xs:annotation>
+													</xs:element>																										
+													<xs:element name="Rep" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Представитель пользователя гос услуги</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Rep_name" type="xs:string">
+																	<xs:annotation>
+																		<xs:documentation>ФИО представителя</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Rep_doc" type="xs:string">
+																	<xs:annotation>
+																		<xs:documentation>Документы представителя</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="Citizen_Doc">
+														<xs:annotation>
+															<xs:documentation>Тип документа</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Doc_serial">
+														<xs:annotation>
+															<xs:documentation>Серия документа</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Doc_number">
+														<xs:annotation>
+															<xs:documentation>Номер документа</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Doc_issued">
+														<xs:annotation>
+															<xs:documentation>Кем выдан документ</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="Company">
+											<xs:annotation>
+												<xs:documentation>Юридическое лицо</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Company_name" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Название компании</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="Rep" minOccurs="0">
+														<xs:annotation>
+															<xs:documentation>Представитель компании</xs:documentation>
+														</xs:annotation>
+														<xs:complexType>
+															<xs:sequence>
+																<xs:element name="Rep_name" type="xs:string">
+																	<xs:annotation>
+																		<xs:documentation>ФИО представилтеля</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+																<xs:element name="Rep_doc" type="xs:string">
+																	<xs:annotation>
+																		<xs:documentation>Документы представителя</xs:documentation>
+																	</xs:annotation>
+																</xs:element>
+															</xs:sequence>
+														</xs:complexType>
+													</xs:element>
+													<xs:element name="INN">
+														<xs:annotation>
+															<xs:documentation>ИНН</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Realty_Object">
+								<xs:annotation>
+									<xs:documentation>Объект недвижимости</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Realty_ID">
+											<xs:annotation>
+												<xs:documentation>Идентификатор объекта недвижимости</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Address">
+											<xs:annotation>
+												<xs:documentation>Адресс объекта недвижимости</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Case_ID">
+								<xs:annotation>
+									<xs:documentation>Номер дела в АИС МФЦ</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Docs_List">
+					<xs:annotation>
+						<xs:documentation>Опись документов</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Document" minOccurs="0" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>Описание передаваемого документа</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="Case_ID">
+											<xs:annotation>
+												<xs:documentation>Номер дела</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Doc_ID">
+											<xs:annotation>
+												<xs:documentation>Идентификатор документа / относительный URL документа в хранилище</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Doc_Name">
+											<xs:annotation>
+												<xs:documentation>Название документа</xs:documentation>
+											</xs:annotation>
+										</xs:element>
+										<xs:element name="Comment">
+											<xs:annotation>
+												<xs:documentation>Коментарий</xs:documentation>
+											</xs:annotation>
+										
+										</xs:element>
+										<xs:element name="Attach" minOccurs="0">
+											<xs:annotation>
+												<xs:documentation>Сканкопия</xs:documentation>
+											</xs:annotation>
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="Mime_type" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Тип данных</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+													<xs:element name="File_name" type="xs:string">
+														<xs:annotation>
+															<xs:documentation>Имя файла</xs:documentation>
+														</xs:annotation>
+													</xs:element>													
+													<xs:element name="Attach_data" type="xs:base64Binary">
+														<xs:annotation>
+															<xs:documentation>Данные</xs:documentation>
+														</xs:annotation>
+													</xs:element>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>										
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
